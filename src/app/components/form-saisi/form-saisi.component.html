@@ -1,0 +1,65 @@
+<div [formGroup]="parent_FG">
+    <div class="row">
+        <ng-container [ngSwitch]="type">
+    
+            <mat-form-field>
+                <ng-container *ngSwitchCase="'text1'">
+                    <mat-label>
+                        {{label}}
+                        <span aria-hidden="true" class="placeholder-required"> *</span>
+                    </mat-label>
+                    <input matInput [formControlName]="control_name" [attr.maxlength]="50" [type]="type">
+                </ng-container>
+                <ng-container *ngSwitchCase="'number'">
+                    <mat-label>
+                        {{label}}
+                        <span aria-hidden="true" class="placeholder-required"> *</span>
+                    </mat-label>
+                    <input matInput [formControlName]="control_name" [attr.maxlength]="20" [type]="type">
+                </ng-container>
+                <ng-container *ngSwitchCase="'select'">
+                    <mat-label>
+                        {{label}}
+                    </mat-label>
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                    <mat-select [formControlName]="control_name" (selectionChange)="selectChange($event.value)">
+                        <mat-option *ngFor="let row of tableau" [value]="row.id">
+                            {{row.valeur}}</mat-option>
+                    </mat-select>
+                </ng-container>
+                <!-- For date picker -->
+                <ng-container *ngSwitchCase="'date'">
+                    <mat-label>
+                        {{label}}
+                    </mat-label>
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                    <input matInput [matDatepicker]="datepicker" [formControlName]="control_name"
+                        placeholder="{{placeholder}}">
+                </ng-container>
+                <!-- For date range picker -->
+                <ng-container *ngSwitchCase="'daterange'">
+                    <mat-date-range-input [rangePicker]="daterangepicker">
+                        <input matStartDate placeholder="Start Date" formControlName="debut_date">
+                        <input matEndDate placeholder="End Date" formControlName="fin_date">
+                    </mat-date-range-input>
+                </ng-container>
+             
+                
+                <mat-datepicker-toggle matSuffix [for]="datepicker" *ngIf="type=='date'"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker></mat-datepicker>
+                <mat-datepicker-toggle matIconSuffix [for]="daterangepicker"
+                    *ngIf="type=='daterange'"></mat-datepicker-toggle>
+                <mat-date-range-picker #daterangepicker></mat-date-range-picker>
+                <mat-error>
+                    {{control.hasError('required')?
+                    (required_error || 'Ce champ ne peut pas être vide.')
+                    : (control.hasError('message')?
+                    control.getError('message')
+                    : invalid_error)}}
+                </mat-error>
+            </mat-form-field>
+        </ng-container>
+
+    </div>
+
+</div>

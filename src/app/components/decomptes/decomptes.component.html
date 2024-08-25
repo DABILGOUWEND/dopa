@@ -1,0 +1,35 @@
+<mat-drawer-container class="wen-table-drawer-container">
+    <mat-drawer mode="over" position="end" #table_update_drawer id="decomptes" [opened]="is_table_opened()">
+
+    </mat-drawer>
+    <mat-drawer-content id="decomptes">
+        <div class="content_head">
+            <h2>DECOMPTES</h2>
+        </div>
+        <div class="content_soushead">
+            <div class="table-col1">
+                <mat-form-field>
+                    <mat-label>
+                        Liste des devis
+                    </mat-label>
+                    <mat-select [(value)]="selected_devis" (selectionChange)="selectChangeDevis($event.value)">
+                        <mat-option *ngFor="let row of _devisStore.donnees_devis()" [value]="row.id ">
+                            {{(row.entreprise_id|entreprises:_sstrce_Store.donnees_sstraitant()|async)+ ' ---
+                            '+row.code}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>
+                        Liste des attachements
+                    </mat-label>
+                    <mat-select [(value)]="selected_attach" (selectionChange)="selectChangeAttachement($event.value)">
+                        <mat-option *ngFor="let row of _attachements_Store.donnees_attachement()" [value]="row.id">
+                            {{row.devis_id}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

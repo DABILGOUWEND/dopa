@@ -1,0 +1,6207 @@
+{
+    "devis":[
+ {
+  "code": "CGEBTPPJT001DEV001",
+  "entreprise_id": "T2cUO3uBcfCGKQpI7wNf",
+  "client_id": "g8KRpicZLCaPzjdlV9Mh",
+  "projet_id": "NUTRkByqv07atqv6aLVy",
+  "objet": "Réalisation d'ouvrages d'assainissement de la tranche 03",
+  "reference": "TR03-001",
+  "montant": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV002",
+  "entreprise_id": "b8qu1J5QdroVGDKvPwrk",
+  "client_id": "g8KRpicZLCaPzjdlV9Mh",
+  "projet_id": "NUTRkByqv07atqv6aLVy",
+  "objet": "Réalisation d'ouvrages d'assainissement de la tranche 03",
+  "reference": "TR03-002",
+  "montant": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV003",
+  "entreprise_id": "wXnaOUSiqVYIyVe5iYq7",
+  "client_id": "g8KRpicZLCaPzjdlV9Mh",
+  "projet_id": "NUTRkByqv07atqv6aLVy",
+  "objet": "Réalisation d'ouvrages d'assainissement de la tranche 03",
+  "reference": "TR03-003",
+  "montant": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV004",
+  "entreprise_id": "QF7qxJuteujPbBCrvlNN",
+  "client_id": "g8KRpicZLCaPzjdlV9Mh",
+  "projet_id": "NUTRkByqv07atqv6aLVy",
+  "objet": "Réalisation d'ouvrages d'assainissement de la tranche 03",
+  "reference": "TR03-004",
+  "montant": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV005",
+  "entreprise_id": "eW8rEc7LJ7AImECtiuTz",
+  "client_id": "g8KRpicZLCaPzjdlV9Mh",
+  "projet_id": "NUTRkByqv07atqv6aLVy",
+  "objet": "Réalisation d'ouvrages d'assainissement de la tranche 03",
+  "reference": "TR03-005",
+  "montant": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV006",
+  "entreprise_id": "RB7nORKzvG6tX3p1yg7E",
+  "client_id": "g8KRpicZLCaPzjdlV9Mh",
+  "projet_id": "NUTRkByqv07atqv6aLVy",
+  "objet": "Réalisation d'ouvrages d'assainissement de la tranche 03",
+  "reference": "TR03-006",
+  "montant": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV007",
+  "entreprise_id": "kwJyw4Oe31HcqKAZw1KK",
+  "client_id": "g8KRpicZLCaPzjdlV9Mh",
+  "projet_id": "NUTRkByqv07atqv6aLVy",
+  "objet": "Réalisation d'ouvrages d'assainissement de la tranche 03",
+  "reference": "TR03-007",
+  "montant": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV008",
+  "entreprise_id": "665CvoAeguSDGamcw02V",
+  "client_id": "g8KRpicZLCaPzjdlV9Mh",
+  "projet_id": "NUTRkByqv07atqv6aLVy",
+  "objet": "Réalisation d'ouvrages d'assainissement de la tranche 03",
+  "reference": "TR03-008",
+  "montant": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV009",
+  "entreprise_id": "JQZkvWDHvX8dxhfsrvNq",
+  "client_id": "g8KRpicZLCaPzjdlV9Mh",
+  "projet_id": "NUTRkByqv07atqv6aLVy",
+  "objet": "Réalisation d'ouvrages d'assainissement de la tranche 03",
+  "reference": "TR03-009",
+  "montant": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV010",
+  "entreprise_id": "EIXnKZY1aomCPOtDlAHp",
+  "client_id": "g8KRpicZLCaPzjdlV9Mh",
+  "projet_id": "NUTRkByqv07atqv6aLVy",
+  "objet": "Réalisation d'ouvrages d'assainissement de la tranche 03",
+  "reference": "TR03-010",
+  "montant": 0
+
+ }
+],
+"lignedev":[
+ {
+  "code": "CGEBTPPJT001DEV001LN001",
+  "devis_id": "QKegRajj2teW34xzQRFF",
+  "parent_code": "",
+  "poste": 100,
+  "designation": "Réalisation de caniveaux maçonnés en moellons (fouilles, fourniture et pose de moellons, remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV001LN002",
+  "devis_id": "QKegRajj2teW34xzQRFF",
+  "parent_code": "CGEBTPPJT001DEV001LN001",
+  "poste": "100-1",
+  "designation": "section 60x60",
+  "prix_u": 23600,
+  "unite": "ml",
+  "quantite": 800
+ },
+ {
+  "code": "CGEBTPPJT001DEV001LN003",
+  "devis_id": "QKegRajj2teW34xzQRFF",
+  "parent_code": "CGEBTPPJT001DEV001LN001",
+  "poste": "100-2",
+  "designation": "section 80x80",
+  "prix_u": 30675,
+  "unite": "ml",
+  "quantite": 200
+ },
+ {
+  "code": "CGEBTPPJT001DEV001LN004",
+  "devis_id": "QKegRajj2teW34xzQRFF",
+  "parent_code": "",
+  "poste": 200,
+  "designation": "DALOTS",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV001LN005",
+  "devis_id": "QKegRajj2teW34xzQRFF",
+  "parent_code": "CGEBTPPJT001DEV001LN004",
+  "poste": "200-1",
+  "designation": "Réalisation de dalots de traversés en béton armé avec voiles préfabriqués (fouilles, BP, pose de voiles, ferraillage et coulage de radier et tablier , remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV001LN006",
+  "devis_id": "QKegRajj2teW34xzQRFF",
+  "parent_code": "CGEBTPPJT001DEV001LN005",
+  "poste": "200-1-1",
+  "designation": "Dalot de 80x60 (voiles préfabriqués)",
+  "prix_u": 18500,
+  "unite": "ml",
+  "quantite": 100
+ },
+ {
+  "code": "CGEBTPPJT001DEV001LN007",
+  "devis_id": "QKegRajj2teW34xzQRFF",
+  "parent_code": "CGEBTPPJT001DEV001LN004",
+  "poste": "200-2",
+  "designation": "Pose de dalots de traversé en béton armé préfabriqué",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV001LN008",
+  "devis_id": "QKegRajj2teW34xzQRFF",
+  "parent_code": "CGEBTPPJT001DEV001LN007",
+  "poste": "200-2-1",
+  "designation": "Dalot  de 80x80 (préfabriqué complètement)",
+  "prix_u": 10000,
+  "unite": "ml",
+  "quantite": 100
+ },
+ {
+  "code": "CGEBTPPJT001DEV002LN001",
+  "devis_id": "1X3Fa1MMLntbX28Tx7Da",
+  "parent_code": "",
+  "poste": 100,
+  "designation": "Réalisation de caniveaux maçonnés en moellons (fouilles, fourniture et pose de moellons, remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV002LN002",
+  "devis_id": "1X3Fa1MMLntbX28Tx7Da",
+  "parent_code": "CGEBTPPJT001DEV002LN001",
+  "poste": "100-1",
+  "designation": "section 60x60",
+  "prix_u": 23600,
+  "unite": "ml",
+  "quantite": 800
+ },
+ {
+  "code": "CGEBTPPJT001DEV002LN003",
+  "devis_id": "1X3Fa1MMLntbX28Tx7Da",
+  "parent_code": "CGEBTPPJT001DEV002LN001",
+  "poste": "100-2",
+  "designation": "section 80x80",
+  "prix_u": 30675,
+  "unite": "ml",
+  "quantite": 200
+ },
+ {
+  "code": "CGEBTPPJT001DEV002LN004",
+  "devis_id": "1X3Fa1MMLntbX28Tx7Da",
+  "parent_code": "",
+  "poste": 200,
+  "designation": "DALOTS",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV002LN005",
+  "devis_id": "1X3Fa1MMLntbX28Tx7Da",
+  "parent_code": "CGEBTPPJT001DEV002LN004",
+  "poste": "200-1",
+  "designation": "Réalisation de dalots de traversés en béton armé avec voiles préfabriqués (fouilles, BP, pose de voiles, ferraillage et coulage de radier et tablier , remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV002LN006",
+  "devis_id": "1X3Fa1MMLntbX28Tx7Da",
+  "parent_code": "CGEBTPPJT001DEV002LN005",
+  "poste": "200-1-1",
+  "designation": "Dalot de 80x60 (voiles préfabriqués)",
+  "prix_u": 18500,
+  "unite": "ml",
+  "quantite": 60
+ },
+ {
+  "code": "CGEBTPPJT001DEV002LN007",
+  "devis_id": "1X3Fa1MMLntbX28Tx7Da",
+  "parent_code": "CGEBTPPJT001DEV002LN004",
+  "poste": "200-2",
+  "designation": "Pose de dalots de traversé en béton armé préfabriqué",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV002LN008",
+  "devis_id": "1X3Fa1MMLntbX28Tx7Da",
+  "parent_code": "CGEBTPPJT001DEV002LN007",
+  "poste": "200-2-1",
+  "designation": "Dalot  de 80x80 (préfabriqué complètement)",
+  "prix_u": 10000,
+  "unite": "ml",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV003LN001",
+  "devis_id": "oTrzR6pJ6tVLxZ4z804q",
+  "parent_code": "",
+  "poste": 100,
+  "designation": "Réalisation de caniveaux maçonnés en moellons (fouilles, fourniture et pose de moellons, remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV003LN002",
+  "devis_id": "oTrzR6pJ6tVLxZ4z804q",
+  "parent_code": "CGEBTPPJT001DEV003LN001",
+  "poste": "100-1",
+  "designation": "section 60x60",
+  "prix_u": 23600,
+  "unite": "ml",
+  "quantite": 800
+ },
+ {
+  "code": "CGEBTPPJT001DEV003LN003",
+  "devis_id": "oTrzR6pJ6tVLxZ4z804q",
+  "parent_code": "CGEBTPPJT001DEV003LN001",
+  "poste": "100-2",
+  "designation": "section 80x80",
+  "prix_u": 30675,
+  "unite": "ml",
+  "quantite": 200
+ },
+ {
+  "code": "CGEBTPPJT001DEV003LN004",
+  "devis_id": "oTrzR6pJ6tVLxZ4z804q",
+  "parent_code": "",
+  "poste": 200,
+  "designation": "DALOTS",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV003LN005",
+  "devis_id": "oTrzR6pJ6tVLxZ4z804q",
+  "parent_code": "CGEBTPPJT001DEV003LN004",
+  "poste": "200-1",
+  "designation": "Réalisation de dalots de traversés en béton armé avec voiles préfabriqués (fouilles, BP, pose de voiles, ferraillage et coulage de radier et tablier , remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV003LN006",
+  "devis_id": "oTrzR6pJ6tVLxZ4z804q",
+  "parent_code": "CGEBTPPJT001DEV003LN005",
+  "poste": "200-1-1",
+  "designation": "Dalot de 80x60 (voiles préfabriqués)",
+  "prix_u": 18500,
+  "unite": "ml",
+  "quantite": 60
+ },
+ {
+  "code": "CGEBTPPJT001DEV003LN007",
+  "devis_id": "oTrzR6pJ6tVLxZ4z804q",
+  "parent_code": "CGEBTPPJT001DEV003LN004",
+  "poste": "200-2",
+  "designation": "Pose de dalots de traversé en béton armé préfabriqué",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV003LN008",
+  "devis_id": "oTrzR6pJ6tVLxZ4z804q",
+  "parent_code": "CGEBTPPJT001DEV003LN007",
+  "poste": "200-2-1",
+  "designation": "Dalot  de 80x80 (préfabriqué complètement)",
+  "prix_u": 10000,
+  "unite": "ml",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV004LN001",
+  "devis_id": "TDpGdqfGSALrHrjR19Im",
+  "parent_code": "",
+  "poste": 100,
+  "designation": "Réalisation de caniveaux maçonnés en moellons (fouilles, fourniture et pose de moellons, remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV004LN002",
+  "devis_id": "TDpGdqfGSALrHrjR19Im",
+  "parent_code": "CGEBTPPJT001DEV004LN001",
+  "poste": "100-1",
+  "designation": "section 60x60",
+  "prix_u": 23600,
+  "unite": "ml",
+  "quantite": 800
+ },
+ {
+  "code": "CGEBTPPJT001DEV004LN003",
+  "devis_id": "TDpGdqfGSALrHrjR19Im",
+  "parent_code": "CGEBTPPJT001DEV004LN001",
+  "poste": "100-2",
+  "designation": "section 80x80",
+  "prix_u": 30675,
+  "unite": "ml",
+  "quantite": 200
+ },
+ {
+  "code": "CGEBTPPJT001DEV004LN004",
+  "devis_id": "TDpGdqfGSALrHrjR19Im",
+  "parent_code": "",
+  "poste": 200,
+  "designation": "DALOTS",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV004LN005",
+  "devis_id": "TDpGdqfGSALrHrjR19Im",
+  "parent_code": "CGEBTPPJT001DEV004LN004",
+  "poste": "200-1",
+  "designation": "Réalisation de dalots de traversés en béton armé avec voiles préfabriqués (fouilles, BP, pose de voiles, ferraillage et coulage de radier et tablier , remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV004LN006",
+  "devis_id": "TDpGdqfGSALrHrjR19Im",
+  "parent_code": "CGEBTPPJT001DEV004LN005",
+  "poste": "200-1-1",
+  "designation": "Dalot de 80x60 (voiles préfabriqués)",
+  "prix_u": 18500,
+  "unite": "ml",
+  "quantite": 60
+ },
+ {
+  "code": "CGEBTPPJT001DEV004LN007",
+  "devis_id": "TDpGdqfGSALrHrjR19Im",
+  "parent_code": "CGEBTPPJT001DEV004LN004",
+  "poste": "200-2",
+  "designation": "Pose de dalots de traversé en béton armé préfabriqué",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV004LN008",
+  "devis_id": "TDpGdqfGSALrHrjR19Im",
+  "parent_code": "CGEBTPPJT001DEV004LN007",
+  "poste": "200-2-1",
+  "designation": "Dalot  de 80x80 (préfabriqué complètement)",
+  "prix_u": 10000,
+  "unite": "ml",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV005LN001",
+  "devis_id": "Janh7Ef8S1oEAEsWRrJc",
+  "parent_code": "",
+  "poste": 100,
+  "designation": "Réalisation de caniveaux maçonnés en moellons (fouilles, fourniture et pose de moellons, remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV005LN002",
+  "devis_id": "Janh7Ef8S1oEAEsWRrJc",
+  "parent_code": "CGEBTPPJT001DEV005LN001",
+  "poste": "100-1",
+  "designation": "section 60x60",
+  "prix_u": 23600,
+  "unite": "ml",
+  "quantite": 700
+ },
+ {
+  "code": "CGEBTPPJT001DEV005LN003",
+  "devis_id": "Janh7Ef8S1oEAEsWRrJc",
+  "parent_code": "CGEBTPPJT001DEV005LN001",
+  "poste": "100-2",
+  "designation": "section 80x80",
+  "prix_u": 30675,
+  "unite": "ml",
+  "quantite": 100
+ },
+ {
+  "code": "CGEBTPPJT001DEV005LN004",
+  "devis_id": "Janh7Ef8S1oEAEsWRrJc",
+  "parent_code": "",
+  "poste": 200,
+  "designation": "DALOTS",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV005LN005",
+  "devis_id": "Janh7Ef8S1oEAEsWRrJc",
+  "parent_code": "CGEBTPPJT001DEV005LN004",
+  "poste": "200-1",
+  "designation": "Réalisation de dalots de traversés en béton armé avec voiles préfabriqués (fouilles, BP, pose de voiles, ferraillage et coulage de radier et tablier , remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV005LN006",
+  "devis_id": "Janh7Ef8S1oEAEsWRrJc",
+  "parent_code": "CGEBTPPJT001DEV005LN005",
+  "poste": "200-1-1",
+  "designation": "Dalot de 80x60 (voiles préfabriqués)",
+  "prix_u": 18500,
+  "unite": "ml",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV005LN007",
+  "devis_id": "Janh7Ef8S1oEAEsWRrJc",
+  "parent_code": "CGEBTPPJT001DEV005LN004",
+  "poste": "200-2",
+  "designation": "Pose de dalots de traversé en béton armé préfabriqué",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV005LN008",
+  "devis_id": "Janh7Ef8S1oEAEsWRrJc",
+  "parent_code": "CGEBTPPJT001DEV005LN007",
+  "poste": "200-2-1",
+  "designation": "Dalot  de 80x80 (préfabriqué complètement)",
+  "prix_u": 10000,
+  "unite": "ml",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV006LN001",
+  "devis_id": "tIYLAux53MznSbS8Kvso",
+  "parent_code": "",
+  "poste": 100,
+  "designation": "Réalisation de caniveaux maçonnés en moellons (fouilles, fourniture et pose de moellons, remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV006LN002",
+  "devis_id": "tIYLAux53MznSbS8Kvso",
+  "parent_code": "CGEBTPPJT001DEV006LN001",
+  "poste": "100-1",
+  "designation": "section 60x60",
+  "prix_u": 23600,
+  "unite": "ml",
+  "quantite": 800
+ },
+ {
+  "code": "CGEBTPPJT001DEV006LN003",
+  "devis_id": "tIYLAux53MznSbS8Kvso",
+  "parent_code": "CGEBTPPJT001DEV006LN001",
+  "poste": "100-2",
+  "designation": "section 80x80",
+  "prix_u": 30675,
+  "unite": "ml",
+  "quantite": 200
+ },
+ {
+  "code": "CGEBTPPJT001DEV006LN004",
+  "devis_id": "tIYLAux53MznSbS8Kvso",
+  "parent_code": "",
+  "poste": 200,
+  "designation": "DALOTS",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV006LN005",
+  "devis_id": "tIYLAux53MznSbS8Kvso",
+  "parent_code": "CGEBTPPJT001DEV006LN004",
+  "poste": "200-1",
+  "designation": "Réalisation de dalots de traversés en béton armé avec voiles préfabriqués (fouilles, BP, pose de voiles, ferraillage et coulage de radier et tablier , remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV006LN006",
+  "devis_id": "tIYLAux53MznSbS8Kvso",
+  "parent_code": "CGEBTPPJT001DEV006LN005",
+  "poste": "200-1-1",
+  "designation": "Dalot de 80x60 (voiles préfabriqués)",
+  "prix_u": 18500,
+  "unite": "ml",
+  "quantite": 60
+ },
+ {
+  "code": "CGEBTPPJT001DEV006LN007",
+  "devis_id": "tIYLAux53MznSbS8Kvso",
+  "parent_code": "CGEBTPPJT001DEV006LN004",
+  "poste": "200-2",
+  "designation": "Pose de dalots de traversé en béton armé préfabriqué",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV006LN008",
+  "devis_id": "tIYLAux53MznSbS8Kvso",
+  "parent_code": "CGEBTPPJT001DEV006LN007",
+  "poste": "200-2-1",
+  "designation": "Dalot  de 80x80 (préfabriqué complètement)",
+  "prix_u": 10000,
+  "unite": "ml",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV007LN001",
+  "devis_id": "TrujALT4jpmluhit99ia",
+  "parent_code": "",
+  "poste": 100,
+  "designation": "Réalisation de caniveaux maçonnés en moellons (fouilles, fourniture et pose de moellons, remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV007LN002",
+  "devis_id": "TrujALT4jpmluhit99ia",
+  "parent_code": "CGEBTPPJT001DEV007LN001",
+  "poste": "100-1",
+  "designation": "section 60x60",
+  "prix_u": 23600,
+  "unite": "ml",
+  "quantite": 700
+ },
+ {
+  "code": "CGEBTPPJT001DEV007LN003",
+  "devis_id": "TrujALT4jpmluhit99ia",
+  "parent_code": "CGEBTPPJT001DEV007LN001",
+  "poste": "100-2",
+  "designation": "section 80x80",
+  "prix_u": 30675,
+  "unite": "ml",
+  "quantite": 100
+ },
+ {
+  "code": "CGEBTPPJT001DEV007LN004",
+  "devis_id": "TrujALT4jpmluhit99ia",
+  "parent_code": "",
+  "poste": 200,
+  "designation": "DALOTS",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV007LN005",
+  "devis_id": "TrujALT4jpmluhit99ia",
+  "parent_code": "CGEBTPPJT001DEV007LN004",
+  "poste": "200-1",
+  "designation": "Réalisation de dalots de traversés en béton armé avec voiles préfabriqués (fouilles, BP, pose de voiles, ferraillage et coulage de radier et tablier , remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV007LN006",
+  "devis_id": "TrujALT4jpmluhit99ia",
+  "parent_code": "CGEBTPPJT001DEV007LN005",
+  "poste": "200-1-1",
+  "designation": "Dalot de 80x60 (voiles préfabriqués)",
+  "prix_u": 18500,
+  "unite": "ml",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV007LN007",
+  "devis_id": "TrujALT4jpmluhit99ia",
+  "parent_code": "CGEBTPPJT001DEV007LN004",
+  "poste": "200-2",
+  "designation": "Pose de dalots de traversé en béton armé préfabriqué",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV007LN008",
+  "devis_id": "TrujALT4jpmluhit99ia",
+  "parent_code": "CGEBTPPJT001DEV007LN007",
+  "poste": "200-2-1",
+  "designation": "Dalot  de 80x80 (préfabriqué complètement)",
+  "prix_u": 10000,
+  "unite": "ml",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV008LN001",
+  "devis_id": "KarDcAZs7prJVKMmEuND",
+  "parent_code": "",
+  "poste": 100,
+  "designation": "Réalisation de caniveaux maçonnés en moellons (fouilles, fourniture et pose de moellons, remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV008LN002",
+  "devis_id": "KarDcAZs7prJVKMmEuND",
+  "parent_code": "CGEBTPPJT001DEV008LN001",
+  "poste": "100-1",
+  "designation": "section 60x60",
+  "prix_u": 23600,
+  "unite": "ml",
+  "quantite": 700
+ },
+ {
+  "code": "CGEBTPPJT001DEV008LN003",
+  "devis_id": "KarDcAZs7prJVKMmEuND",
+  "parent_code": "CGEBTPPJT001DEV008LN001",
+  "poste": "100-2",
+  "designation": "section 80x80",
+  "prix_u": 30675,
+  "unite": "ml",
+  "quantite": 100
+ },
+ {
+  "code": "CGEBTPPJT001DEV008LN004",
+  "devis_id": "KarDcAZs7prJVKMmEuND",
+  "parent_code": "",
+  "poste": 200,
+  "designation": "DALOTS",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV008LN005",
+  "devis_id": "KarDcAZs7prJVKMmEuND",
+  "parent_code": "CGEBTPPJT001DEV008LN004",
+  "poste": "200-1",
+  "designation": "Réalisation de dalots de traversés en béton armé avec voiles préfabriqués (fouilles, BP, pose de voiles, ferraillage et coulage de radier et tablier , remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV008LN006",
+  "devis_id": "KarDcAZs7prJVKMmEuND",
+  "parent_code": "CGEBTPPJT001DEV008LN005",
+  "poste": "200-1-1",
+  "designation": "Dalot de 80x60 (voiles préfabriqués)",
+  "prix_u": 18500,
+  "unite": "ml",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV008LN007",
+  "devis_id": "KarDcAZs7prJVKMmEuND",
+  "parent_code": "CGEBTPPJT001DEV008LN004",
+  "poste": "200-2",
+  "designation": "Pose de dalots de traversé en béton armé préfabriqué",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV008LN008",
+  "devis_id": "KarDcAZs7prJVKMmEuND",
+  "parent_code": "CGEBTPPJT001DEV008LN007",
+  "poste": "200-2-1",
+  "designation": "Dalot  de 80x80 (préfabriqué complètement)",
+  "prix_u": 10000,
+  "unite": "ml",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV009LN001",
+  "devis_id": "ifxomv2kIu0r6qbOsKxS",
+  "parent_code": "",
+  "poste": 100,
+  "designation": "Réalisation de caniveaux maçonnés en moellons (fouilles, fourniture et pose de moellons, remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV009LN002",
+  "devis_id": "ifxomv2kIu0r6qbOsKxS",
+  "parent_code": "CGEBTPPJT001DEV009LN001",
+  "poste": "100-1",
+  "designation": "section 60x60",
+  "prix_u": 23600,
+  "unite": "ml",
+  "quantite": 700
+ },
+ {
+  "code": "CGEBTPPJT001DEV009LN003",
+  "devis_id": "ifxomv2kIu0r6qbOsKxS",
+  "parent_code": "CGEBTPPJT001DEV009LN001",
+  "poste": "100-2",
+  "designation": "section 80x80",
+  "prix_u": 30675,
+  "unite": "ml",
+  "quantite": 100
+ },
+ {
+  "code": "CGEBTPPJT001DEV009LN004",
+  "devis_id": "ifxomv2kIu0r6qbOsKxS",
+  "parent_code": "",
+  "poste": 200,
+  "designation": "DALOTS",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV009LN005",
+  "devis_id": "ifxomv2kIu0r6qbOsKxS",
+  "parent_code": "CGEBTPPJT001DEV009LN004",
+  "poste": "200-1",
+  "designation": "Réalisation de dalots de traversés en béton armé avec voiles préfabriqués (fouilles, BP, pose de voiles, ferraillage et coulage de radier et tablier , remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV009LN006",
+  "devis_id": "ifxomv2kIu0r6qbOsKxS",
+  "parent_code": "CGEBTPPJT001DEV009LN005",
+  "poste": "200-1-1",
+  "designation": "Dalot de 80x60 (voiles préfabriqués)",
+  "prix_u": 18500,
+  "unite": "ml",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV009LN007",
+  "devis_id": "ifxomv2kIu0r6qbOsKxS",
+  "parent_code": "CGEBTPPJT001DEV009LN004",
+  "poste": "200-2",
+  "designation": "Pose de dalots de traversé en béton armé préfabriqué",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV009LN008",
+  "devis_id": "ifxomv2kIu0r6qbOsKxS",
+  "parent_code": "CGEBTPPJT001DEV009LN007",
+  "poste": "200-2-1",
+  "designation": "Dalot  de 80x80 (préfabriqué complètement)",
+  "prix_u": 10000,
+  "unite": "ml",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV010LN001",
+  "devis_id": "xrSdtiq1HpDWqoLKnPXW",
+  "parent_code": "",
+  "poste": 100,
+  "designation": "Réalisation de caniveaux maçonnés en moellons (fouilles, fourniture et pose de moellons, remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV010LN002",
+  "devis_id": "xrSdtiq1HpDWqoLKnPXW",
+  "parent_code": "CGEBTPPJT001DEV010LN001",
+  "poste": "100-1",
+  "designation": "section 60x60",
+  "prix_u": 23600,
+  "unite": "ml",
+  "quantite": 700
+ },
+ {
+  "code": "CGEBTPPJT001DEV010LN003",
+  "devis_id": "xrSdtiq1HpDWqoLKnPXW",
+  "parent_code": "CGEBTPPJT001DEV010LN001",
+  "poste": "100-2",
+  "designation": "section 80x80",
+  "prix_u": 30675,
+  "unite": "ml",
+  "quantite": 200
+ },
+ {
+  "code": "CGEBTPPJT001DEV010LN004",
+  "devis_id": "xrSdtiq1HpDWqoLKnPXW",
+  "parent_code": "",
+  "poste": 200,
+  "designation": "DALOTS",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV010LN005",
+  "devis_id": "xrSdtiq1HpDWqoLKnPXW",
+  "parent_code": "CGEBTPPJT001DEV010LN004",
+  "poste": "200-1",
+  "designation": "Réalisation de dalots de traversés en béton armé avec voiles préfabriqués (fouilles, BP, pose de voiles, ferraillage et coulage de radier et tablier , remblais)",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV010LN006",
+  "devis_id": "xrSdtiq1HpDWqoLKnPXW",
+  "parent_code": "CGEBTPPJT001DEV010LN005",
+  "poste": "200-1-1",
+  "designation": "Dalot de 80x60 (voiles préfabriqués)",
+  "prix_u": 18500,
+  "unite": "ml",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV010LN007",
+  "devis_id": "xrSdtiq1HpDWqoLKnPXW",
+  "parent_code": "CGEBTPPJT001DEV010LN004",
+  "poste": "200-2",
+  "designation": "Pose de dalots de traversé en béton armé préfabriqué",
+  "prix_u": 0,
+  "unite": "",
+  "quantite": 0
+ },
+ {
+  "code": "CGEBTPPJT001DEV010LN008",
+  "devis_id": "xrSdtiq1HpDWqoLKnPXW",
+  "parent_code": "CGEBTPPJT001DEV010LN007",
+  "poste": "200-2-1",
+  "designation": "Dalot  de 80x80 (préfabriqué complètement)",
+  "prix_u": 10000,
+  "unite": "ml",
+  "quantite": 0
+ }
+],
+"unite":[
+ {
+  "unite": "  m3   "
+ },
+ {
+  "unite": " km "
+ },
+ {
+  "unite": " ml "
+ },
+ {
+  "unite": "dm3   "
+ },
+ {
+  "unite": "ens"
+ },
+ {
+  "unite": "fft"
+ },
+ {
+  "unite": "kg"
+ },
+ {
+  "unite": "m"
+ },
+ {
+  "unite": "m2"
+ },
+ {
+  "unite": "m3\/km"
+ },
+ {
+  "unite": "prov"
+ },
+ {
+  "unite": "tonne"
+ },
+ {
+  "unite": "litre"
+ },
+ {
+  "unite": "cm2"
+ },
+ {
+  "unite": "u"
+ },
+ {
+  "unite": "ha"
+ },
+ {
+  "unite": "ca"
+ },
+ {
+  "unite": "km2"
+ },
+ {
+  "unite": "cm"
+ },
+ {
+  "unite": "tonne\/km"
+ }
+],
+"taches":[
+ {
+  "designation": "Installation de chantier ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Amenée et repli du matériel ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Bureau de chantier ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Laboratoire de chantier ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Véhicule station wagon 9 places 4x4 y compris frais de fonctionnement ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Véhicule double cabine 4x4 y compris frais de fonctionnement ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Matériel de topographie ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Aménagement et entretien des déviations ",
+  "uniteid": "9O8xJnhq3zN9EDLLKKyd",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Etablissement du Plan d'Assurance Qualité (PAQ)",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Etablissement du dossier de récolement",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Remise en état des emprunts",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Environnement",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Etablissement des projets d'exécution",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Déplacement des réseaux électriques SBEE",
+  "uniteid": "raE7xSjdbA74vfAamFZQ",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Déplacement des réseaux d'eau Potable SONEB",
+  "uniteid": "raE7xSjdbA74vfAamFZQ",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Déplacement des réseaux de Téléphone Bénin Télécom",
+  "uniteid": "raE7xSjdbA74vfAamFZQ",
+  "type": "INSTALLATION DE CHANTIER",
+  "classe": "INSTA"
+ },
+ {
+  "designation": "Débroussaillage et nettoyage de l'emprise ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Démolition d'ouvrages en maçonnerie ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Démolition de caniveaux et dalots longitudinaux existant de toute section ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Démolition partielle de dalot transversal de 4 x 4.00 x 4.00 y compris les ouvrages de tête ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Dépose de bordures existantes de tous types ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Réparation de bordures existantes déchaussées ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Déplacement de feux tricolores existants ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Traitement des dégradations du revêtement existant ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Abattage d'arbres de circonférence supérieure à 1 m ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Travaux de purges ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Débroussement et dégagement d'emprise",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Abattage d'arbre de circonference comprise entre 1,00 et 3,00 m.",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Abattage d'arbre de circonference supérieur à 3,00 m",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Démolition des terrasses et forme de dallage",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Démolition des buses existantes",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Démolition des dalots existantes",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Démolition de caniveaux existants",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Démolition de mur de cloture existant",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Démolition de bordures existantes",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Démolition d'habitations en dur simple",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Démolition d'habitations en bancos",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Recalibrage du lit du pont",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Recalibrage du lit du des dalots",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Destruction de dépotoir sauvage",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " PRÉPARATION DU TERRAIN ",
+  "classe": "PREPA"
+ },
+ {
+  "designation": "Décapage de terre végétale ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Déblai meuble mis en dépôt définitif ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Déblais rocheux mis en dépôt définitif ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Déblais meubles mis en dépôt provisoire ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Remblai  ordinaire provenant de dépôt provisoire ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Remblai  ordinaire provenant d'emprunt ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Finition de la plateforme ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Reprofilage des espaces située entre les caniveaux et les concessions ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Traitement des traversées des grandes conduites d’amené d’eau de ZIGA ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Décapage de la terre végétale sur 0,20 m",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Purges des terres de mauvaise tenue",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Déblais mis en dépôt",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Déblais mis en remblais",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Couche de forme en graveleux latéritique",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Création de fossés latéraux et divergents",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Déroctage",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " TERRASSEMENTS GÉNÉRAUX ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Traitement des zones dégradées ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Couche de fondation en graveleux latéritique naturel ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Couche de base en graveleux latéritique naturel ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Couche de base en graveleux amélioré aux concassés ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Bordures T1 arasées ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Bordures hautes T2 continues ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Bordures hautes T2 discontinues ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Bordures couloir bus discontinues ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Bordures T2+CS2 continues ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Bordures GS2 continues ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Bordures  Tspéc pour abris bus ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Bordures  Tspéc+CS2 pour abris bus ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Bordures DBA ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Remblai de terre végétale pour terre-pleins ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Couche de fondation en graveleux latéritique naturel",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Couche de base en graveleux latéritique amélioré au ciment",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Mise en œuvre de la couche de roulement",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": " CHAUSSÉE ",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Fourniture et mise en œuvre des pavés en béton y compris lit de pose en sable 3 cm",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "REVÊTEMENTS ",
+  "classe": "REVET"
+ },
+ {
+  "designation": "Fourniture et mise en œuvre des pavés en béton de 8 cm y compris lit de pose en sable 3 cm",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "REVÊTEMENTS ",
+  "classe": "REVET"
+ },
+ {
+  "designation": "Fourniture et mise en œuvre des pavés en béton de 11 cm y compris lit de pose en sable 3 cm",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "REVÊTEMENTS ",
+  "classe": "REVET"
+ },
+ {
+  "designation": "Imprégnation au cut-back 0\/1 ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "REVÊTEMENTS ",
+  "classe": "REVET"
+ },
+ {
+  "designation": "Couche d'accrochage ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "REVÊTEMENTS ",
+  "classe": "REVET"
+ },
+ {
+  "designation": "Revêtement BB 0\/10 pour travaux neufs (épaisseur 5 cm)  ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "REVÊTEMENTS ",
+  "classe": "REVET"
+ },
+ {
+  "designation": "Revêtement BB 0\/10 pour ressurfaçage (épaisseur 4 cm)  ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "REVÊTEMENTS ",
+  "classe": "REVET"
+ },
+ {
+  "designation": "Revêtement en béton court avec un ratio d'acier de 60kg\/ m3  (épaisseur 20cm) ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "REVÊTEMENTS ",
+  "classe": "REVET"
+ },
+ {
+  "designation": "Revêtement en pavé d'épaisseur 6cm ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "REVÊTEMENTS ",
+  "classe": "REVET"
+ },
+ {
+  "designation": "Revêtement en pavé d'épaisseur 10cm ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "REVÊTEMENTS ",
+  "classe": "REVET"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   80 x 60 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   80 x 80 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   100 x 80 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   100 x 100 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   120 x 100 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   120 x 120 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   140 x 120 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   140 x 140 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   150 x 120 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   150 x 150 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   160 x 150 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   160 x 160 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   180 x 150 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   180 x 180 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   200 x 100 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   200 x 180 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   250 x 180 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   250 x 200 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en béton armé de section rectangulaire   300 x 200 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   80 x 60 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   80 x 80 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   100 x 80 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   100 x 100 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   120 x 100 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   120 x 120 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   140 x 120 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   140 x 140 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   150 x 120 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   150 x 150 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   160 x 150 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   160 x 160 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   180 x 150 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   180 x 180 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   200 x 100 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   200 x 180 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   250 x 180 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   250 x 200 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   300 x 200 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   2X200x200 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   2x300x200 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Traversées de chaussée en béton armé :   4x400x400 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   80 x 60 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   80 x 80 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   100 x 80 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   100 x 100 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   120 x 100 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   120 x 120 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   140 x 120 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   140 x 140 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   150 x 120 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   150 x 150 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   160 x 150 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   160 x 160 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   180 x 150 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   180 x 180 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   200 x 100 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   200 x 180 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   250 x 180 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   250 x 200 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallette pour caniveau en béton armé  de section :   300 x 200 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Ouvrages de tête   2X200x200 ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Ouvrages de tête   2x300x200 ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Ouvrages de tête   4x400x400 ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Fossé maçonné (550+250)x150 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Curage de caniveaux et dalot de toutes sections",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Recalibrage de lit des ouvrages",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Perré maçonné ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Gabion ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Enrochement ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Descente d'eau ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "D500",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dalot 1.25x0.7",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Regards avaloir",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Regard sur conduite",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Fossé",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dalot 150x70",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dalot M07H 250x160",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveau en pérré maçonné de dimension 0,80 x 0,70",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Caniveaux en bétion armé de dimension 0,80 x 0,70",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallettes amovibles de rues",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Dallettes amovibles de trotoirs en béton armé",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "OUVRAGES D'ASSAINISSEMENT ",
+  "classe": "ASSAIN"
+ },
+ {
+  "designation": "Marquage de la chaussée continue et discontinue ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Marquage spécial ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Panneaux de signalisation du type A, B, AB, ou C ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Panneaux de signalisation du type D, ou E ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Panneaux de signalisation du type J ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Pannoceaux de signalisation type M ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Panneaux de signalisation du type D sur support potance ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Glissières métallique de sécurité de type GS2 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Fourniture d'équipement, installations et branchement au reseau SONABEL de feux tricolores ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Feux tricolores sur support court en acier chromé ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Feux tricolores sur support haut acier galvanisé en console ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Ralentisseur type trapézoïdal ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Coussin berlinois ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Garde-corps S8 ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Panneau de Type AB",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Panneau de Type A",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Panneau de Type B",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Panneau de Type C&J",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Panneau de Type EB",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Panneau de Type D42",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Marquage axe central",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Zébra",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Marquage place de parking",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Handicapé",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Cédez-le-passage",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Passage Piéton",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": "Clôture",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " SIGNALISATION-SÉCURITÉ ",
+  "classe": "SECU"
+ },
+ {
+  "designation": " Fourniture d'équipement et installation de Candélabre simple cross y compris fileterie et branchement à la SONABEL ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " ÉCLAIRAGE PUBLIC ",
+  "classe": "ELECT"
+ },
+ {
+  "designation": " Fourniture d'équipement et installation de Candélabre double cross y compris fileterie et branchement à la SONABEL ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " ÉCLAIRAGE PUBLIC ",
+  "classe": "ELECT"
+ },
+ {
+  "designation": " Fourniture d'équipement et installation de Candelabre triple cross y compris filleterie et branchement à la SONABEL ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " ÉCLAIRAGE PUBLIC ",
+  "classe": "ELECT"
+ },
+ {
+  "designation": " Réservations des réseaux d'eau ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " RÉSERVATIONS, DÉPLACEMENTS ET CONFORTATIONS DE RÉSEAUX DES CONCESSIONNAIRES ",
+  "classe": "DEPLA"
+ },
+ {
+  "designation": " Déplacements et confortations des réseaux d'eau ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " RÉSERVATIONS, DÉPLACEMENTS ET CONFORTATIONS DE RÉSEAUX DES CONCESSIONNAIRES ",
+  "classe": "DEPLA"
+ },
+ {
+  "designation": " Réservations  des réseaux  d'électricité ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " RÉSERVATIONS, DÉPLACEMENTS ET CONFORTATIONS DE RÉSEAUX DES CONCESSIONNAIRES ",
+  "classe": "DEPLA"
+ },
+ {
+  "designation": " Déplacements et confortations des réseaux  d'électricité ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " RÉSERVATIONS, DÉPLACEMENTS ET CONFORTATIONS DE RÉSEAUX DES CONCESSIONNAIRES ",
+  "classe": "DEPLA"
+ },
+ {
+  "designation": " Réservations des réseaux de télécommunication ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " RÉSERVATIONS, DÉPLACEMENTS ET CONFORTATIONS DE RÉSEAUX DES CONCESSIONNAIRES ",
+  "classe": "DEPLA"
+ },
+ {
+  "designation": " Déplacements et confortations des réseaux de télécommunication ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " RÉSERVATIONS, DÉPLACEMENTS ET CONFORTATIONS DE RÉSEAUX DES CONCESSIONNAIRES ",
+  "classe": "DEPLA"
+ },
+ {
+  "designation": " Fonctionnement de la Commission chargée de conduire les opérations d’expropriation pour cause d’utilité publique pour la libération des emprises ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Élaboration et la mise en œuvre d’un Plan de Communication afin d’informer les populations locales ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Information et implication des Responsables du Camp Général Baba SY lors des travaux dans le prolongement du Camp ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Élaboration et mise en œuvre  par les Entreprises de PAPES prenant en compte la protection environnementale et sociale ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Règlementation de la circulation par des porteurs de drapeaux pendant les travaux à proximité des zones sensibles (Écoles, Mosquées, Églises, Pharmacies, Intersections de routes, Stations Services, etc.) en collaboration avec la Police  ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Réalisation d’inventaires des arbres situés dans les emprises du projet par la DPEEVCC et autorisation avant abattage  ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Réalisation de plantations d’arbres le long des tronçons de voiries aménagés ou dans les espaces disponibles dans la zone du projet ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Sensibilisation et interdiction formelle à la main d’œuvre de prélever la faune au niveau des zones d’emprunt de matériaux et des carrières et de transporter de la viande ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Sensibilisation du personnel de chantier et des populations riveraines contre les IST, le VIH\/SIDA et les grossesses non désirées ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Distribution de préservatifs au personnel de chantier  ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Sensibilisation du personnel de chantier et des populations riveraines des tronçons de voiries au respect des consignes de sécurité routière  ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Sensibilisation du personnel de chantier au respect des us et coutumes locaux ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Réalisation de sacrifices par les coutumiers de la zone du projet pour le bon déroulement des travaux ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Déplacement d’une tombe dans l’emprise du tronçon reliant la RN4 à la RN5  ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Aménagement de clôture de part et autre du tronçon de la voirie connectant la RN4 à la RN5 à la traversée du Camp Général Baba SY ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Aménagement de portail d'accès au Campa Général Baba Sy y compris deux guérites ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Réalisation d'une clôture pour l'école Primaire Publique Trame d'Accueil de Dassasgho ",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": " Mise en œuvre d’une éducation environnementale et sociale des populations riveraines des caniveaux aménagés à travers des séances de sensibilisations pour éviter que ces caniveaux deviennent des dépotoirs d’ordures ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": " MESURES ENVIRONNEMENTALES ET SOCIALES ",
+  "classe": "ENV"
+ },
+ {
+  "designation": "Béton de propreté dosé à 150 kg\/ m3                                               sous semelles e=5 cm",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "BETON ET MACONNERIE EN FONDATION",
+  "classe": "BET"
+ },
+ {
+  "designation": "Maçonnerie en parpaings pleins de 20                                          pour le soubassement",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "BETON ET MACONNERIE EN FONDATION",
+  "classe": "BET"
+ },
+ {
+  "designation": "Béton armé dosé 350 kg\/ m3  pour fondations                              (semelles, poteaux d'attente,voiles et longrines)",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "BETON ET MACONNERIE EN FONDATION",
+  "classe": "BET"
+ },
+ {
+  "designation": "Béton armé pour perrons d'accès                                             avec cornière de protection dosé à 250 Kg\/ m3 ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "BETON ET MACONNERIE EN FONDATION",
+  "classe": "BET"
+ },
+ {
+  "designation": "Béton de forme pour aire de dallage                                                 dosé à 250 Kg\/m³  e=8 cm ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "BETON ET MACONNERIE EN FONDATION",
+  "classe": "BET"
+ },
+ {
+  "designation": "Béton armé dosé à 300 kg\/ m3  pour dallage",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "BETON ET MACONNERIE EN FONDATION",
+  "classe": "BET"
+ },
+ {
+  "designation": "Maçonnerie en agglomérés creux 20 x 20 x 40",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "BETON ET MACONNERIE EN ELEVATION",
+  "classe": "BET"
+ },
+ {
+  "designation": "Maçonnerie en agglomérés creux 15 x 20 x 40",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "BETON ET MACONNERIE EN ELEVATION",
+  "classe": "BET"
+ },
+ {
+  "designation": "Béton armé pour élévation (poteaux, chainages,                          auvents, escaliers, ...) dosé à 350 Kg\/ m3 ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "BETON ET MACONNERIE EN ELEVATION",
+  "classe": "BET"
+ },
+ {
+  "designation": "Claustras",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "BETON ET MACONNERIE EN ELEVATION",
+  "classe": "BET"
+ },
+ {
+  "designation": "Maçonnerie en agglomérés creux 10 x 20 x 40",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "BETON ET MACONNERIE EN ELEVATION",
+  "classe": "BET"
+ },
+ {
+  "designation": "Couverture en corps creux (20+4)                                                             avec nervure en béton armé dosé à 350 Kg\/m³",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUVERTURE",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Couverture en dalle pleine e:20cm                                                               en béton armé dosé à 350 Kg\/m³",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "COUVERTURE",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Couverture en corps creux (16+4)                                                  avec nervure en béton armé dosé à 350 Kg\/m³",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUVERTURE",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "FP paradienne dans les toilettes au 1ier étage",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ETANCHEITE",
+  "classe": "ETANCH"
+ },
+ {
+  "designation": "FP double couche de paradiennne sur les toitures",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ETANCHEITE",
+  "classe": "ETANCH"
+ },
+ {
+  "designation": "FP relévé d'étanchéité en paxalumen sur la toiture",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "ETANCHEITE",
+  "classe": "ETANCH"
+ },
+ {
+  "designation": "FP béton dosé à 300 kg\/ m3  pour forme de pente",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ETANCHEITE",
+  "classe": "ETANCH"
+ },
+ {
+  "designation": "Faux plafonds en Staff Lisse (autres pièces)",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PLAFONDS SUSPENDUS",
+  "classe": "PLAF"
+ },
+ {
+  "designation": "Faux plafonds en Staff Décoratif (Salle de réunion, salons)",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PLAFONDS SUSPENDUS",
+  "classe": "PLAF"
+ },
+ {
+  "designation": "Enduits horizontaux au mortier de ciment",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUIT AU MORTIER DE CIMENT",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "Enduits verticaux intérieurs au mortier de ciment",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUIT AU MORTIER DE CIMENT",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "Enduits verticaux extérieurs au mortier de ciment",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUIT AU MORTIER DE CIMENT",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "FP carreaux grès cérame de 60 X 60 pour sol (salons)",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "FP carreaux granito local de 30x30 pour autres salles y compris paillasse",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "FP carreaux de plinthe assorti de 60 X 10 (salles réunions, salons)",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "FP carreaux de plinthe en granito pour autres salles",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "FP carreaux de faïence de 40x10 sur une hauteur de 2,00 m",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "FP Ens porte 240 X 220 y compris partie ouvrante de 120 X 220",
+  "uniteid": "CWnIjpRIlNaL1m6wJWkm",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "FP porte 160x220",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "FP porte va et vient de 160x220",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "FP porte 120 X 220",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "FP porte 80 X 220",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "FP Fenêtre 200 X 120 ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "FP fenêtre 135 X 120 ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "FP fenêtre 150X120",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "FP fenêtre 60X60",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "FP fenêtre fixe 85X200 pour cage escalier",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "FP fenêtre fixe 60X200 pour cage escalier",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Ens parois vitrée de 3,65X220 y comp porte de 80x220 et partie supérieure vitrée de 1,20 m de hauteur",
+  "uniteid": "CWnIjpRIlNaL1m6wJWkm",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Ens parois vitrée de 3,40X220 y comp porte de 80x220 et partie supérieure vitrée de 1,20 m de hauteur",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "FP fenêtre de 50X50 pour guichet y comp passe document",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "FP couvre joint en aluminium sur joint de dilatation",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Alu",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "FP porte isoplane à âme pleine de  80 X 220 ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Bois",
+  "classe": "BOIS"
+ },
+ {
+  "designation": "FP ensemble placard mixte (bois et BA) de 350 X 320 X 60",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Bois",
+  "classe": "BOIS"
+ },
+ {
+  "designation": "FP ensemble placard mixte (bois et BA) de 270 X 320 X 60",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Bois",
+  "classe": "BOIS"
+ },
+ {
+  "designation": "FP ensemble placard mixte (bois et BA) de 220 X 320 X 60",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Bois",
+  "classe": "BOIS"
+ },
+ {
+  "designation": "FP ensemble placard mixte (bois et BA) de 200 X 320 X 60",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Bois",
+  "classe": "BOIS"
+ },
+ {
+  "designation": "FP ensemble placard mixte (bois et BA) de 170 X 320 X 60",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Menuiserie Bois",
+  "classe": "BOIS"
+ },
+ {
+  "designation": "FP Ens porte 240 X 220 y compris partie ouvrante de 120 X 220",
+  "uniteid": "CWnIjpRIlNaL1m6wJWkm",
+  "type": "Grille",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "FP porte 160x220",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Grille",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "FP fenêtre 85 X 200 (à l'intérieur des cages)",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Grille",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "FP fenêtre 60 X 200 (à l'intérieur des cages)",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Grille",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "FP fenêtre 200 X 120 ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Grille",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "FP fenêtre 150 X 120",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Grille",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "FP fenêtre 135 X 120",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Grille",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "FP fenêtre 60x60 ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Grille",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "FP fenêtre 50 X 50 ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Grille",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "P9 (HEB200)",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "Charpente métallique",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Profilés 2L90",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "Charpente métallique",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Cornières 2L60 (y compris tout sujétions)",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "Charpente métallique",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Pannes en IPE 80",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "Charpente métallique",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Couverture en tôle bacs autoportants (45\/100ème)",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "Charpente métallique",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Cornières L45 (y compris toutes sujétions)",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "Charpente métallique",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "IPE 140",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "Charpente métallique",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Couverture en tôle bacs autoportants (70\/100ème)",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "Charpente métallique",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "FP ensemble branchement sur le réseau du site Type 1",
+  "uniteid": "CWnIjpRIlNaL1m6wJWkm",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP ensemble branchement sur le réseau du site Type 2",
+  "uniteid": "CWnIjpRIlNaL1m6wJWkm",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP ensemble canalisation d'alimentation et tuyauterie d'évacuation Type 1",
+  "uniteid": "CWnIjpRIlNaL1m6wJWkm",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP ensemble canalisation d'alimentation et tuyauterie d'évacuation Type 2",
+  "uniteid": "CWnIjpRIlNaL1m6wJWkm",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP ensemble canalisation d'alimentation et tuyauterie d'évacuation Type 3",
+  "uniteid": "CWnIjpRIlNaL1m6wJWkm",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP WC anglais avec chasse basse en porcelaine vitrifiée y compris toutes sujétions",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP WC turc avec chasse haute y compris toutes sujétions",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP colonne de douche y compris toutes sujétions",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP Lavabo sur pied y compris glace biseautée, tablette et luminaires y compris toutes sujétions",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP fosse septique pour  30 usagers y compris toutes sujétions",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP fosse septique pour  25 usagers y compris toutes sujétions",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP fosse septique pour  20 usagers y compris toutes sujétions",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP fosse septique pour  10 usagers y compris toutes sujétions",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP puisard correspondant à 30 usagers",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP puisard correspondant à 25 usagers",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP puisard correspondant à 20 usagers",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP puisard correspondant à 10 usagers",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP puits perdus y compris regard de décantation",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP regards de visite 50 X 50",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP bidet y compris toutes sujétions",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP porte savon",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP porte papier hygiènique",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP porte serviette",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP porte habit",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP siphon de sol",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP pot à balai",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Camouflage des canalisations en PVC y compris toutes sujétions",
+  "uniteid": "CWnIjpRIlNaL1m6wJWkm",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP evier double en inox y compris paillasse en BA",
+  "uniteid": "CWnIjpRIlNaL1m6wJWkm",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP descente d'eau en PVC 110 y compris coudes et toutes sujétions",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP Robinet de puisage",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLOMBERIE SANITAIRE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "FP enduit peintre intérieur sur murs horizontaux (toilettes, circulations) ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "FP enduit peintre intérieur sur murs verticaux intérieurs",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "FP enduit peintre sur murs verticaux extérieurs",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "FP fom intérieur sur murs intérieurs horizontaux",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "FP fom intérieur sur murs verticaux intérieurs ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "FP fom intérieur sur murs verticaux extérieurs ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "FP peinture à huile sur les menuiseries métalliques et bois ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Préparation du terrain: labour dessouchage, extration des matériaux impropres",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ESPACES VERTS",
+  "classe": "ENV"
+ },
+ {
+  "designation": "Epandage de la terre végétale et terreau y compris désinfection et engrais chimique",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "ESPACES VERTS",
+  "classe": "ENV"
+ },
+ {
+  "designation": "Gazon de chine",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ESPACES VERTS",
+  "classe": "ENV"
+ },
+ {
+  "designation": "Plants palmier",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "ESPACES VERTS",
+  "classe": "ENV"
+ },
+ {
+  "designation": "Plants ficus",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "ESPACES VERTS",
+  "classe": "ENV"
+ },
+ {
+  "designation": "FP de bordures en briques pleines de 10",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "ESPACES VERTS",
+  "classe": "ENV"
+ },
+ {
+  "designation": "Travaux d'entretien du jardin pendant 6 mois",
+  "uniteid": "CWnIjpRIlNaL1m6wJWkm",
+  "type": "ESPACES VERTS",
+  "classe": "ENV"
+ },
+ {
+  "designation": "Tranchée simple circuit",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Tranchée normale multi-circuit éclairage public",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "tranchée traversée 1 circuit",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Tranchée traversée multi circuit",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Tube annelé à double parois D 110 mm",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Buse en béton comprimé 200 mm",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Poste PTB 3-4",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Candélabres et luminaires FURYO 3 - 10 m",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Candélabres et luminaires FURYO 2 - 8 m",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Câble d'alimentation U1000 RVFV cuivre 4 x 50 mm²",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Câble d'alimentation U1000 RVFV cuivre 4 x 35 mm²",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Câble d'alimentation U1000 RVFV cuivre 4 x 25 mm²",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Câble d'alimentation U1000 RVFV cuivre 4 x 16 mm²",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Câble de mise à la terre cuivre 28 mm²",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Massif pour candélabres de 10 m de haut",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Massif pour candélabres de 8 m de haut",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Borne de signalisation BT",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Terre des masses et neutre",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Eclairage SOLAIRE",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "ECLAIRAGE",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Tranchée",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "Electrcité Courant faible",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Canalisations Type CPS2L",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "Electrcité Courant faible",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Canalisations Type CPS2",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "Electrcité Courant faible",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Canalisations Type CPS2C",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "Electrcité Courant faible",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Tube supplémentaire PVC 45\/48",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "Electrcité Courant faible",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Chambre Type PNS1",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Electrcité Courant faible",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Chambre Type PNS2",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Electrcité Courant faible",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Cadre simple et plaque en fonte ductile",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Electrcité Courant faible",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Cadre double et deux plaques en fonte ductile",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Electrcité Courant faible",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Support à scellement",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Electrcité Courant faible",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Echelon",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Electrcité Courant faible",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Tranchée",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "Electrcité Courant fort",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Fourniture et pose de fourreaux PVC Ø 96\/100",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "Electrcité Courant fort",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Fourniture et pose de chambre de tirage",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "Electrcité Courant fort",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Tranchée EU DN 200",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "ASSAINISSEMENT EAUS USEES",
+  "classe": "EU"
+ },
+ {
+  "designation": "Tranchée EU DN 315",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "ASSAINISSEMENT EAUS USEES",
+  "classe": "EU"
+ },
+ {
+  "designation": "Canalisation EU DN 200",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "ASSAINISSEMENT EAUS USEES",
+  "classe": "EU"
+ },
+ {
+  "designation": "Canalisation EU DN 315",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "ASSAINISSEMENT EAUS USEES",
+  "classe": "EU"
+ },
+ {
+  "designation": "Regard de visite EU",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "ASSAINISSEMENT EAUS USEES",
+  "classe": "EU"
+ },
+ {
+  "designation": "Tampon Fonte pour regard de visite",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "ASSAINISSEMENT EAUS USEES",
+  "classe": "EU"
+ },
+ {
+  "designation": "Tranchée réseaux eaux froides",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "RESEAUX EAUX FROIDES",
+  "classe": "EF"
+ },
+ {
+  "designation": "Tube acier pré-isolé DN 80",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "RESEAUX EAUX FROIDES",
+  "classe": "EF"
+ },
+ {
+  "designation": "Tube acier pré-isolé DN 160",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "RESEAUX EAUX FROIDES",
+  "classe": "EF"
+ },
+ {
+  "designation": "Tube acier pré-isolé DN 200 à 250",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "RESEAUX EAUX FROIDES",
+  "classe": "EF"
+ },
+ {
+  "designation": "Tube acier pré-isolé DN 325",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "RESEAUX EAUX FROIDES",
+  "classe": "EF"
+ },
+ {
+  "designation": "Regard",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "RESEAUX EAUX FROIDES",
+  "classe": "EF"
+ },
+ {
+  "designation": "F\/P canalisation PEHD 10bars DE90",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "CANALISATIONS ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "F\/P canalisation PEHD 10bars DE110",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "CANALISATIONS ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "F\/P canalisation PEHD 10bars DE125",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "CANALISATIONS ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "F\/P canalisation PEHD 10bars DE160",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "CANALISATIONS ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "F\/P canalisation PEHD 10bars DE200",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "CANALISATIONS ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "F\/P canalisation PEHD 10bars DE250",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "CANALISATIONS ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "F\/P canalisation PEHD 10bars DE315",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "CANALISATIONS ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "F\/P canalisation PEHD 10bars DE400",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "CANALISATIONS ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "ruban indicateur de protection au-dessus",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "CANALISATIONS ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "robinet-vanne fonte Classe 10 Bars Ø400mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "robinet-vanne fonte Classe 10 Bars Ø300mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "robinet-vanne fonte Classe 10 Bars Ø250mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "robinet-vanne fonte Classe 10 Bars Ø200mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "robinet-vanne fonte Classe 10 Bars Ø150mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "robinet-vanne fonte Classe 10 Bars Ø125mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "robinet-vanne fonte Classe 10 Bars Ø100mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "robinet-vanne fonte Classe 10 Bars Ø80mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Coude 45° Ø125mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Coude 45° Ø160mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Coude 45° Ø200mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Coude 45° Ø250mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Coude 45° Ø315mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Coude 45° Ø400mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Té Ø90mm x Ø90mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Té Ø110mm x Ø≤110mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Té Ø125mm x Ø≤125mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Té Ø160mm x Ø≤160mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Té Ø200mm x Ø≤200mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Té Ø250mm x Ø≤250mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Té Ø315mm x Ø≤315mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Té Ø400mm x Ø≤400mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Réducteur de diamètre Ø110mm x Ø90mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Réducteur de diamètre Ø125mm x Ø110mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Réducteur de diamètre Ø160mm x Ø125mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Réducteur de diamètre Ø200mm x Ø160mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Réducteur de diamètre Ø250mm x Ø200mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Réducteur de diamètre Ø315mm x Ø250mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Réducteur de diamètre Ø400mm x Ø315mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Chambre pour ventouse conduite moins de 200 ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Chambre pour vidange conduite moins de 200",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Chambre pour Vanne conduite moins de 200 ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Chambre pour ventouse conduite 200 à 250",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Chambre pour vidange conduite 200 à 250",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Chambre pour Vanne conduite 200 à 250",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Chambre pour ventouse conduite 300 et plus",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Chambre pour vidange conduite 300 et plus",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Chambre pour Vanne conduite 300 et plus",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "F\/P ventouse pour DN moins de 250",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "F\/P ventouse pour DN 300 et 400",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "F\/P système de vidange 80mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "F\/P poteau incendie DN100",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "F\/P poteau incendie DN150",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Protection conduite \/enrobage (hyp: total lot 50m)",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Branchement  standard DN25 tout compris",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Branchement standard DN32 tout compris",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Branchement spécifique tout compris",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "EQUIPEMENTS HYDRAULIQUES RESEAUX",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Béton non armé B250 pour revêtement trottoir du pont",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "- Béton de qualité Q350 au ciment CPA 350 pour ouvrages",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Béton armé de qualité Q350 pour dalle de trnasition",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Béton armé de qualité Q 400 pour semelle sous piles et sous culée et pour longrine de libage",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Béton armé de qualité Q 450 pour pour fûts colonnes",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Béton arméde qualité Q 450 pour culées",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Béton armé de qualité Q 450 pour chevêtres et bossages",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Béton armé de qualité Q 450 pour entretoises",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Béton armé de qualité Q 450 pour poutres",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Béton armé de qualité Q 450 pour hourdi de pont",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Béton armé de qualité Q 450 pour mur garde grève et corbeau",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Appareils d'appuis",
+  "uniteid": "tp1dOjV86SH1rFPbZ5Hy",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Barbacanes",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Gargouilles",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Joints de chaussées de type lourds",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Joints de trottoir de type legers",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Préfalification et pose de corniche au niveau du pont",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Garde corps metallique de type S8",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Fourniture et pose de tube galvanisé de section ¤ 70 mm",
+  "uniteid": "4N1Yyb9qTupC76rbIAmK",
+  "type": "PONT",
+  "classe": "PONT"
+ },
+ {
+  "designation": "Fouille de tranchées pour semelles filantes sur une profondeur de 0 à 1 500 mm à partir du niveau de la plateforme (terrain naturel)",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "FOUILLES",
+  "classe": "FONDA"
+ },
+ {
+  "designation": "Fouille de tranchées pour semelles filantes  pour une profondeur supérieure à 1 500 mm et mais n'excédant pas 3 000 mm  ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "FOUILLES",
+  "classe": "FONDA"
+ },
+ {
+  "designation": "Fouille en trou pour poteaux sur un profendeur n’excédant pas 1 500 mm ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "FOUILLES",
+  "classe": "FONDA"
+ },
+ {
+  "designation": "Fouille de tranchées pour semelles filantes  sur une profondeur supérieure à 1 500 mm et mais n'excédant pas 3 000 mm  ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "FOUILLES",
+  "classe": "FONDA"
+ },
+ {
+  "designation": "Plus-value pour fouilles en sol rocheux",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "FOUILLES",
+  "classe": "FONDA"
+ },
+ {
+  "designation": "Plus-value pour fouilles en sol sableux",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "FOUILLES",
+  "classe": "FONDA"
+ },
+ {
+  "designation": "Constitution de remblai avec des matériaux de déblais sélectionnés, mis en place et compactés par couches de 150 mm d’épaisseur autour des fondations",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "REMBLAIS",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Constitution de couche de 150 mm de matériau dur bien arrosé, éperonné et consolidé pour nivellement sous dalles",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "REMBLAIS",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "couche de 50 mm de sable bien nivelée ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "REMBLAIS",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Chargement et transport des matériaux de déblai  à une décharge temporaire sur un site à fournir par l'entrepreneur. ",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "MISE EN DEPÔT",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Application d’une solution insectifuge sur la surface du bâtiment, y compris les dessus des murs de fondation",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAITEMENT DE TERMITIERES",
+  "classe": "FONDA"
+ },
+ {
+  "designation": "Mise en place de membranes plastiques de 250 microns sur couche de matériau dur et sous dalle (mesurée nette; sans plus-value pour le recouvrement) ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "IMPERMEABILISATION",
+  "classe": "ETANCH"
+ },
+ {
+  "designation": "Dispositif de protection des parois des fouilles ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "FOUILLES",
+  "classe": "FONDA"
+ },
+ {
+  "designation": "Dispositif de protection des fouilles contre les eaux de ruissellment",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "FOUILLES",
+  "classe": "FONDA"
+ },
+ {
+  "designation": "Dispositif de protection des fouilles contre l’éboulement des parois et la remontée des eaux souterraine (Rabat-nappe) ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "FOUILLES",
+  "classe": "FONDA"
+ },
+ {
+  "designation": "Coulage en place de béton  de Classe C15\/20mm pour : Béton de propreté de 50 mm d'épaisseur sous semelles filantes",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Coulage en place de béton  de Classe C15\/20mm pour : Béton sous semelles de poteaux",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Coulage en place de beton armé vibré de Classe C25\/20mm pour : Fondation de poteaux",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Coulage en place de beton armé vibré de Classe C25\/20mm pour : Poteaux",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Coulage en place de beton armé vibré de Classe C25\/20mm pour : Dalle mince",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Coulage en place de beton armé vibré de Classe C25\/20mm pour : Murs de 200 mm d'épaisseur. ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Coulage en place de beton armé vibré de Classe C25\/20mm pour : Dalle en béton armé de 125 mm d'épaisseur coulée dans les baies avec notamment des joints de construction entre baies, et lissée à la truelle en une seule opération (armatures en treillis prise en compte séparément) ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Faces des fondations sous poteaux",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COFFRAGE ",
+  "classe": "COFF"
+ },
+ {
+  "designation": "Armatures en Acier doux : Diamètre de 8 mm (O8) ",
+  "uniteid": "D20A1OizPauV3UeP3AAL",
+  "type": "ARMATURES",
+  "classe": "ARMA"
+ },
+ {
+  "designation": "Treillis soudé de référence A142 pesant 2,22 kg par mètre carré incorporé dans le béton de dalle (mesurée net; sans plus-value pour le recouvrement) ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ARMATURES",
+  "classe": "ARMA"
+ },
+ {
+  "designation": "Eléménts creux préfabriqués en mortier de ciment\/ sable (1:4) remplis de béton (Classe C 15\/10)  pour : Murs de 200 mm d’épaisseur, à l’anglaise",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "FABRICATION DE PARPAINGS",
+  "classe": "MACON"
+ },
+ {
+  "designation": "Eléménts creux préfabriqués en mortier de ciment\/ sable (1:4) remplis de béton (Classe C 15\/10)  pour : Mur de 400 mm d’épaisseur à deux éléments de 200 mm; avec un joint de 20 mm d'épaisseur ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "FABRICATION DE PARPAINGS",
+  "classe": "MACON"
+ },
+ {
+  "designation": "Joints ordinaires intégrant 13 mm de mastic; 230 mm de profondeur ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "JOINTS",
+  "classe": "JOINT"
+ },
+ {
+  "designation": "Mastics d'étanchéité; 20 x 20 mm de profondeur, liquide polysulfure, mastic d'étanchéité polymère appliqué au pistolet; amorcages; anti-adhérent en polyéthylène; ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "JOINTS",
+  "classe": "ETANCH"
+ },
+ {
+  "designation": "Enduit de15 mm en mortier ciment\/sable (1:3) nivelé à la règle en bois pour  Mur",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUITS",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "Préparation et application de deux couches de peinture noire bitumineuse sur Murs enterrés",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE ET DECORATION",
+  "classe": "ETANCH"
+ },
+ {
+  "designation": "Coulage en place de beton armé vibré de Classe C25\/20 mm pour : Poutres",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Coulage en place de beton armé vibré de Classe C25\/20 mm pour : Dalle en béton armé de 150 mm d'épaisseur coulée dans les baies avec notamment des joints de construction entre baies, et lissée à la truelle en une seule opération (armatures en treillis prise en compte séparément) ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Coulage en place de beton armé vibré de Classe C25\/20 mm pour : Dalle en béton armé de 225 mm d'épaisseur coulée dans les baies avec notamment des joints de construction entre baies, et lissée à la truelle en une seule opération (armatures en treillis prise en compte séparément) ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Eléments préfabriqués en béton; Classe C25\/10 mm finition soignée sur toutes les surfaces exposées ; posés et jointoyés avec du  mortier de ciment (1:3) sur maçonnerie pour éléments de 320 mm de large, 100 mm d'épaisseur globalement patiné; engorgé une fois",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Armatures en Acier doux Diamètre de 6mm  (O6) ",
+  "uniteid": "D20A1OizPauV3UeP3AAL",
+  "type": "ARMATURES",
+  "classe": "ARMA"
+ },
+ {
+  "designation": "Armatures en acier Haute adhérance  Diamètre de 10 mm (HA10) ",
+  "uniteid": "D20A1OizPauV3UeP3AAL",
+  "type": "ARMATURES",
+  "classe": "ARMA"
+ },
+ {
+  "designation": "Armatures en acier Haute adhérance  Diamètre de 12 mm (HA12) ",
+  "uniteid": "D20A1OizPauV3UeP3AAL",
+  "type": "ARMATURES",
+  "classe": "ARMA"
+ },
+ {
+  "designation": "Armatures en acier Haute adhérance  Diamètre de 16 mm (HA16) ",
+  "uniteid": "D20A1OizPauV3UeP3AAL",
+  "type": "ARMATURES",
+  "classe": "ARMA"
+ },
+ {
+  "designation": "Armatures en acier Haute adhérance  Diamètre de 20 mm (HA20) ",
+  "uniteid": "D20A1OizPauV3UeP3AAL",
+  "type": "ARMATURES",
+  "classe": "ARMA"
+ },
+ {
+  "designation": "Joints ordinaires intégrant 13 mm de mastic; 230 mm de profondeur",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "JOINTS",
+  "classe": "JOINT"
+ },
+ {
+  "designation": "Faces et soffite de poutres ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COFFRAGE ",
+  "classe": "COFF"
+ },
+ {
+  "designation": "Faces des poteaux",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COFFRAGE ",
+  "classe": "COFF"
+ },
+ {
+  "designation": "Faces des poteaux circulaires, 300 mm de diamètre",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COFFRAGE ",
+  "classe": "COFF"
+ },
+ {
+  "designation": "Echelle constituée de fers plats 65 x 10 mm, d’assises métalliques, de traverses, de boulons d'ancrage. préparation et application d’une première couche de peinture rouge à base de plomb (70 microns) avant l'assemblage, ensuite d’une couche de peinture rouge de 80 microns d'oxyde de fer micacé comme indiqué sur le plan n° B1\/S\/17 Fixée sur élément en maçonnerie\/ en béton",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "ÉCHELLE D'ACCÈS AU TOIT",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Coulage en place de beton armé vibré de Classe C25\/20mm pour : Escaliers",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Coulage en place de beton armé vibré de Classe C25\/20mm pour : Palier 175 mm d'épaisseur",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Soffite de palier",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COFFRAGE",
+  "classe": "COFF"
+ },
+ {
+  "designation": "Soffite de rampes",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COFFRAGE",
+  "classe": "COFF"
+ },
+ {
+  "designation": "Bords des contre-marches 75 - 150 mm de large",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "COFFRAGE",
+  "classe": "COFF"
+ },
+ {
+  "designation": "Arrêtes; coupées au profil des marches et contremarches; de 350 mm de large maximum",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "COFFRAGE",
+  "classe": "COFF"
+ },
+ {
+  "designation": "Tube de 60 mm de diamètre pour main courante",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "CADRES EN ACIER DOUX GALVANISE A JOINTS SOUDES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Tube de 50 mm de diamètre pour balustrade",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "CADRES EN ACIER DOUX GALVANISE A JOINTS SOUDES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Tube de 30 mm de diamètre pour éléments intermédiaires",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "CADRES EN ACIER DOUX GALVANISE A JOINTS SOUDES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Eléments de réservation 160 x 50 x 300 mm fixés dans le béton y compris remplissage au béton ordinaire Classe 25\/20mm ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES EN ACIER DOUX GALVANISE A JOINTS SOUDES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Plaque de 6 mm d’épaisseur pour boulons de 12 mm de diamètre",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES EN ACIER DOUX GALVANISE A JOINTS SOUDES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Boulons de 12 mm de diamètre x 70 mm de long",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES EN ACIER DOUX GALVANISE A JOINTS SOUDES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Boulons de 12 mm de diamètre x 110 mm de long",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES EN ACIER DOUX GALVANISE A JOINTS SOUDES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Boulons  de12 mm de diamètre x 140 mm de long",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES EN ACIER DOUX GALVANISE A JOINTS SOUDES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Prépararation et application d’une sous couche d’apprêt de chromate de zinc et de deux couches de finition en émail éclatant sur : les surfaces métalliques de 0 à 100 mm de pourtour",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "PEINTURE ET DECORATION.",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Coulage en place de beton armé vibré (Classe C25\/20mm) pour : Dalle en béton armé de 150 mm d'épaisseur coulée dans les baies avec notamment des joints de construction entre baies, et lissée à la truelle en une seule opération (armatures en treillis prise en compte séparément) ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Coulage en place de beton armé vibré (Classe C25\/20mm) pour : Dalle en béton armé de 225 mm d'épaisseur coulée dans les baies avec notamment des joints de construction entre baies, et lissée à la truelle en une seule opération (armatures en treillis prise en compte séparément) ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Coulage en place de beton armé vibré (Classe C25\/20mm) pour : Dalle en béton armé de 300 mm d'épaisseur coulée dans les baies avec notamment des joints de construction entre baies, et lissée à la truelle en une seule opération (armatures en treillis prise en compte séparément) ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Enduit de 50 mm d'épaisseur sur béton",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Coffrage scié pour : Soffite de dalle-plancher",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COFFRAGE ",
+  "classe": "COFF"
+ },
+ {
+  "designation": "Eléments multi-couche pour isolation phonique et thermique ; tôle galvanisée de 0,60 mm d'épaisseur comme spécifié suivant référence ref PS-Arch2.1 et strictement fixés conformément aux instructions des fabricants sur des de pannes métalliques Couverture de toit",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUVERTURE DE TOIT (Ondulit coverib 100 ou similaire agréé)",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Elément d’imperméabilisation de 4 mm d'épaisseur, (réf. PS-ARCH 2.9) protégé par une une couche de peinture aluminium strictement posé conformément aux spécifications des fabricants pour : Chape de fondation",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "IMPERMEABILISATION",
+  "classe": "ETANCH"
+ },
+ {
+  "designation": "Elément d’imperméabilisation de 4 mm d'épaisseur, (réf. PS-ARCH 2.9) protégé par une une couche de peinture aluminium strictement posé conformément aux spécifications des fabricants pour : relevés et parpets",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "IMPERMEABILISATION",
+  "classe": "ETANCH"
+ },
+ {
+  "designation": "Tube métallique de section 76 x 3 mm pour les éléments supérieurs pesant 5,4 kg\/m",
+  "uniteid": "D20A1OizPauV3UeP3AAL",
+  "type": "CHARPENTE ",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Ditto tube 76,1 x 3,2 mm pour les éléments inférieurs",
+  "uniteid": "D20A1OizPauV3UeP3AAL",
+  "type": "CHARPENTE ",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Ditto tube 42,4 X 3,2 mm pour les diagonales pesant 3,09 kg\/m",
+  "uniteid": "D20A1OizPauV3UeP3AAL",
+  "type": "CHARPENTE ",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Tuyau 125 x 50 x 20 x 2,5 mm formé à froid lèvres Zed (CFLZ); poids 10.42 kg\/m",
+  "uniteid": "D20A1OizPauV3UeP3AAL",
+  "type": "CHARPENTE ",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Poteaux 80 x 80 x 3mm CHS pesant 7.01 kg\/m",
+  "uniteid": "D20A1OizPauV3UeP3AAL",
+  "type": "CHARPENTE ",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Support de plafond  60 x 3,5 CHS accroché à de pannes pesant 4,51 kg\/m",
+  "uniteid": "D20A1OizPauV3UeP3AAL",
+  "type": "CHARPENTE ",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Accessoires ",
+  "uniteid": "D20A1OizPauV3UeP3AAL",
+  "type": "CHARPENTE ",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Gouttière en acier doux 170 x 400 x 170 (VHV); 2,5 mm d'épaisseur fixée à la charpente métallique y compris les éléments de fixation. ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "DISPOSITIF POUR EAUX PLUVIALES",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Bouche de sortie d’eau",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "DISPOSITIF POUR EAUX PLUVIALES",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Descente d’eau en tuyau PVC de 110 mm de diamètre fixée sur maçonnerie",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "DISPOSITIF POUR EAUX PLUVIALES",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Coude PVC",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "DISPOSITIF POUR EAUX PLUVIALES",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Coupe évasée (Sortie d’eau)",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "DISPOSITIF POUR EAUX PLUVIALES",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Bouche de sortie d'eau de pluieen PVC à 45 degrés raccordée au tuyau PVC",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "DISPOSITIF POUR EAUX PLUVIALES",
+  "classe": "TOIT"
+ },
+ {
+  "designation": "Préparation et appliaction d’une fine couche d’apprêt rouge, d’une couche d'oxyde de fer (80 microns) comme spécifié dans le PS-STR-11.6.03 et deux couches de finition de peinture à l'huile éclatante sur : les surfaces métalliques de 0 à 100 mm de pourtour",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "PEINTURE ET DE DECORATION.",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Ditto; tubes de plus de 300mm de pourtour",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE ET DE DECORATION.",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Préparation et appliction d’une fine couche d'apprêt rouge, d’une couche d'oxyde de fer (80 microns) et deux couches de finition de peinture bitumineuse sur : les surfaces métalliques (gouttière) de plus de 300mm de pourtour",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE ET DE DECORATION.",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Faces des murs",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COFFRAGE ",
+  "classe": "COFF"
+ },
+ {
+  "designation": "Eléménts creux préfabriqués en mortier de ciment\/sable (1 :4)  pour : Mur de 200mm d'épaisseur, à l’anglaise",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "MAÇONNERIE",
+  "classe": "MACON"
+ },
+ {
+  "designation": "Eléménts creux préfabriqués en mortier de ciment\/sable (1 :4)  pour : Mur de 150mm d'épaisseur, ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "MAÇONNERIE",
+  "classe": "MACON"
+ },
+ {
+  "designation": "Remplissage sur poutre de 200 mm d’épaisseur; 1 000 mm de haut (extreme) y compris la coupe et l'épinglage ou la construction des extrémités de chevrons notamment le haut de coupe ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "MAÇONNERIE",
+  "classe": "MACON"
+ },
+ {
+  "designation": "Elément de joint de 20 mm d'épaisseur, de 250 mm de large, fixée sur la maçonnerie avec un produit bitumineux",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "JOINT DE DILATATION",
+  "classe": "JOINT"
+ },
+ {
+  "designation": "Membranes d’étanchéité à 3 feuilles de 200 mm de large, posées sous maçonnerie",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "ETANCHEITE",
+  "classe": "ETANCH"
+ },
+ {
+  "designation": "Membranes d’étanchéité à 3 feuilles de 150 mm de large, posées sous maçonnerie",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "ETANCHEITE",
+  "classe": "ETANCH"
+ },
+ {
+  "designation": "Coulage en place de béton  de Classe C15\/20mm pour : Banquettes de fenêtres 75 x 115 mm, évasé, feuilluré, rainuré, chanfreiné sur  tous les bords, avec finition soignée sur toutes les surfaces exposées et intégré à la maçonnerie",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Carreaux grès cérame anti-dérapant 100 x 300 mm de 9,5 mm d’épaisseur ; posés suivant indications du fabricant  sur mur enduit",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Porte grillagée ref D1; 3400 x 2550 mm; avec cadre de porte, battants de porte et 3 paires de charnières; (vitrage et quincaillerie pris en compte ailleurs) ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Porte grillagée ref D2, 3400 x 2550 mm avec cadre de porte, battants de porte et 3 paires de charnières; (vitrage et quincaillerie pris en compte ailleurs) ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Porte grillagée ref D3, 2700 x 2550 mm avec cadre de porte, battants de porte et 3 paires de charnières; (vitrage et quincaillerie pris en compte ailleurs) ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Porte grillagée ref D4, 2700 x 2550 mm avec cadre de porte, battants de porte et 3 paires de charnières; (vitrage et quincaillerie pris en compte ailleurs) ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Porte grillagée ref D5, 1600 x 1200 mm avec cadre de porte, grilles et battants fixes de porte en aluminium et 3 paires de charnières; (vitrage et quincaillerie pris en compte ailleurs)",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Porte grillagée ref D7; 915 x 2550 mm avec cadre de porte, grilles et battants fixes de porte en aluminium et 3 paires de charnières; (vitrage et quincaillerie pris en compte ailleurs) ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W1; 1800 x 2800 mm de haut; avec barre antivol de type R12et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W2; 2700 x 1600 mm de haut, en forme de \"L\" comme indiqué sur le plan, avec quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W3; 2700 x 1600 mm de haut, en forme de \"L\" comme indiqué sur le plan, avec quincaillerie ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W4; 2900 x 1600 mm de haut; muni de barre antivol de type R12  et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W5; 1800 x 1600 mm de haut  muni de barres antivol de type R12  et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W5; taille globale 1800 x 1600 mm de haut et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W6; 3100 x 1600 mm de haut  muni de barres antivol de type R12 et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W7; 2067 x 1600mm muni de barre antivol de type R12  et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W8; 1033 x 1600 mm dehaut muni de barre antivol de type R12  et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W9; 3510 x 1200 mm de haut; complet avec tous les ustensiles pour cuisiner",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W10; 2550 x 1200 mm de haut muni de quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W11; 1660 x 1200 mm de haut muni de quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W12; 1660 x 1200 mm de haut et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W13; 900 x 1000 mm de haut muni de barre antivol de type R12  et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W13; 900 x 1000 mm de haut et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W14; 600 x 1000 mm de haut muni de barre antivol de type R12 et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W14; 600 x 1000 mm de haut muni de quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W15; 1800 x 800 mm de haut  muni de quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W16; 1800 x 400 mm de haut; muni  de trames d’aération, de barre antivol de type R12 et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W16; 1800 x 400 mm de haut muni  de trames d’aération, et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W17; 900 x 400 mm de haut  muni de lames persiennes, de barre antivol de type R12 et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W17; 900 x 400 mm de haut  muni  de lames persiennes, et quincaillerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W18; 1600 x 1200 mm de haut; muni de persiennes fixes",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "Châssis de fenêtre réf. W19; 1600 x 1200 mm de haut; muni de persiennes fixes",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE FENETRES ET DE PORTES EN ALUMINIUM",
+  "classe": "MENALLU"
+ },
+ {
+  "designation": "60 X 15 mm x 1,5 mm d'épaisseur RHS; fixé à la maçonnerie",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "SOUS-CADRES DE FENETRES ",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Cadre de Porte ref D6; dim 1600 x 2550 mm de haut, muni de cadre imposte, avec débordement de 30mm de part et d’autre du mur ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE PORTE METALLIQUES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Cadre de Porte ref D8; dim 935 x 2550 mm de haut, muni de cadre imposte, avec débordement de 30mm de part et d’autre du mur  avec cadre persienne à l’imposte. ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE PORTE METALLIQUES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Cadre de Porte ref D9; dim 935 x 2550 mm de haut, muni de cadre imposte, avec débordement de 30mm de part et d’autre du mur ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE PORTE METALLIQUES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Cadre de Porte ref D10; dim 835 x 2550  mm de haut, muni de cadre imposte, avec débordement de 100 mm de part et d’autre du mur  avec cadre persienne à l’imposte",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE PORTE METALLIQUES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Cadre de Porte ref D13; dim 835 x 2150 mm de haut avec débordement de 100 mm de part et d’autre du mur ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE PORTE METALLIQUES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Cadre de Porte ref D14; dim 935 x 2550 mm de haut, muni de cadre imposte, avec débordement de 100 mm de part et d’autre du mur  avec cadre persienne à l’imposte",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE PORTE METALLIQUES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Cadre de Porte ref D16; dim 900 x 1500 mm de haut adapté à l’épaisseur du mur de 200 mm, avec débordement de 30 mm de part et d’autre du mur ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE PORTE METALLIQUES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Cadre de Porte ref D17; dim 900 x 2150 mm de haut adapté à l’épaisseur du mur de 200 mm, avec débordement de 30 mm de part et d’autre du mur ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES DE PORTE METALLIQUES",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Porte ref. D18 de 1000 x 2100 mm; cadre RHS 50 x 50 mm ; grille centrale RHS 150 x 50 mm; éléments verticaux RHS 20 x 20mm à 100 d’axe en axe",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PORTE GRILLE ",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Portes intérieures solides en bois massif dur double face avec alèse sur les bord Dim 750 x 2100 mm de haut ; épaisseur 44mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PORTES BOIS",
+  "classe": "BOIS"
+ },
+ {
+  "designation": "Panneau d’affichage  dessus porte ; dim 400 x 400 mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PORTES BOIS",
+  "classe": "BOIS"
+ },
+ {
+  "designation": "Portes intérieures solides en bois massif dur double face avec alèse sur les bord Dim 815 x 2100 mm de haut ; épaisseur 44 mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PORTES BOIS",
+  "classe": "BOIS"
+ },
+ {
+  "designation": "Portes intérieures solides en bois massif dur double face avec alèse sur les bord Dim 815 x 2000 mm de haut ; épaisseur 44 mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PORTES BOIS",
+  "classe": "BOIS"
+ },
+ {
+  "designation": "Portes persiennées en bois dur avec des rails supérieur et inférieur en élémentsde 150 x 44mm, et des persienns horizontales en chevron et alèse en bois dur tout autour Porte 815x 2100 mm de haut;épaisseur  44 mm, ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PORTES BOIS",
+  "classe": "BOIS"
+ },
+ {
+  "designation": "Porte ref D11; 1000 x 2150mm épaisseur 50 mm avec cadre en tube d’acier 100 x 50mm; 1½ paires de charnières robustes, poignées de tirage et verrou à 5 tenons",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES ET PORTES SPÉCIAUX",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Ditto Porte ref D12; ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES ET PORTES SPÉCIAUX",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Panneau d’affichage  dessus porte ; dim 400 x 400 mm; mnui de vitre blindée",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES ET PORTES SPÉCIAUX",
+  "classe": "BOIS"
+ },
+ {
+  "designation": "Porte réf. 15; 115mm d'épaisseur; avec cadre; boulons et un couche chromate de zinc comme sous-couche",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES ET PORTES SPÉCIAUX",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Porte et cadres d’armurerie en acier doux 900 x 2100 mm ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES ET PORTES SPÉCIAUX",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Cadre 700 X 2100 mm fixé tsur la mçonnerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CADRES ET PORTES SPÉCIAUX",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Verre armé de 6 mm d’épaisseur, fixé à l'aluminium avec des perles exclusives dans des volets 0,10 à 0,50 m²",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "VITRERIE",
+  "classe": "VITRE"
+ },
+ {
+  "designation": "Verre armé de 4 mm d’épaisseur, fixé à l'aluminium avec des perles exclusives dans des volets 0,10 à 0,50 m²",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "VITRERIE",
+  "classe": "VITRE"
+ },
+ {
+  "designation": "Presienne de verre de 6mm d'épaisseur, 100 mm de large, régulier sur les deux bords et inséré dans le châssis à prersienne",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "VITRERIE",
+  "classe": "VITRE"
+ },
+ {
+  "designation": "Feuilles de verre de 27 mm d’épaisseur, fixée à l'aluminium avec perles de valeur (exclusives) en plaques de 0,10 à 0,50 m²",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "VITRERIE",
+  "classe": "VITRE"
+ },
+ {
+  "designation": "Panneaux de 1700 mm de hauteur hors tout (à 12 panneaux); fixés sur des crochets en aluminium extrudé, lesquels crochets sont fixés entre crochets; supports de fixation à et y compris trame RHS 50 x 50 x 3,2 mm d'épaisseur (chaque trame d’environ 2100 mm de pourtour tournant verticalement à deux tours); éléments RHS espacés à 900 d’axe en axe horizontalement; fixation des éléments RHS à la maçonnerie avec et y compris les boulons d'ancrage. ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "VITRERIE",
+  "classe": "VITRE"
+ },
+ {
+  "designation": "Préparation et application d’une sous couche, et de deux couches de peinture éclatante sur; Portes à panneaux encastrés; de plus de 300 mm de pourtour",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE ET DECORATION.",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Préparation, et application  d’une sous couche d’apprêt et de deux couches de peinture émail éclatant sur : sous-trames métalliques ; 100 à 200 mm de pourtour",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "PEINTURE ET DECORATION.",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "cadre de porte en acier; de  plus de 300mm de pourtour",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE ET DECORATION.",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Préparation, apprêt et application de deux couches de peinture brillante sur : Surfaces des persiennes en bois; de plus de 300 mm pourtour",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE ET DECORATION.",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Montant étroit de profilé de type Euro avec loquet à rouleau cylindrique et boitier de verrouillage à pêne dormant",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Montant étroit de profilé de type Euro à rouleau vertical de verrouillage pour les portes en aluminium ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Montant étroit de profilé de type Euro avec loquet à rouleau de bille et boîtier de verrouillage à cylindre dormant ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Profil de type Euro Double cylindre avec bouton tournant à l'intérieur et à clé à l'extérieur",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Boîtier de verrouillage à mortaise fixé à moitié convenablement",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Boîtier de verrouilage vertical à mortaise ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "5-Levier de blocage à mortaise",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "7-Levier de sécurité à verrouillage à clé",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Cadenas robuste à cylindre de 50 mm avec anse en acier inoxydable",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Profilé de type Euro Double cylindre",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Profilé de type Euro Double cylindre GMK",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Profilé de type Euro écusson en acier inoxydable",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Profilé de type Euro cylindre pour salle d’eau\/WC ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Poignée de 400 mm en acier monté dos à dos",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Poignée lourd en Chrome satiné montée sur les deux côtés de la porte",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Boulon affleurant en aluminium  150 x 19 mm",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": " Paumelles lourdes",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Paumelles à roulement en acier inoxydable ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Paumelles levant en acier inoxydable ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Ressort robuste type EN3 90⁰ Da pour  fixation de  portes en ALU\/en bois",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Plaque de poussée 750 X 150 mm aluminium ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Plaque de coup de pied 750 X 150 mm en aluminium ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Jeu de poignées à leviers tubulaires Catégorie 304 brossés en acier inoxydable montés sur plaques d'appui en acier arrondies de 150 x 150 mm s\/ ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Butée de porte en Zinc - chrome satiné",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Dispositif arrêt-poussière - chrome satiné",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Embout caoutchouc & patère",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Dispositif robuste de porte « Œil de chat » ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Plaques portant inscription Homme\/Femme où autres panneaux de signalisation, le cas échéant",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "QUINCAILLERIE",
+  "classe": "QUINC"
+ },
+ {
+  "designation": "Enduit de 15 mm d'épaisseur au mortier ciment\/sable de dosage (1:4); lissé à la truelle sur : Murs en maçonnerie ou en béton; de plus de 300 mm de large",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUITS",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "Couche supplémentaire décorative en bande mosaïque d’enduit comme indiqué au plan  n° B1-ARCH 27 Elévations 26-26",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUITS",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "Enduit de 15 mm d'épaisseur au mortier ciment\/sable de dosage (1:4) destiné à recevoir du carrelage; Murs en maçonnerie ou en béton; de plus de 300 mm de large",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUITS",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "Carreaux blancs vitrifiés 6 x 300 x 300 mm; ref PS-ARCH 7.6, fixé avec un adhésif et jointoyé avec du ciment blanc sur murs enduits",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Ditto en éclaboussures",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Carreaux coupés et montés autour des robinets et bassins",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Préparation et application d’une couche d’apprêt et de deux couches de finition avec émulsion de peinture synthétique PVA sur murs enduits",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE ET DECORATION.",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Enduit de 15 mm d'épaisseur au mortier ciment\/sable de dosage (1:4); lissé à la truelle sur : Murs en maçonnerie ou en béton; de plus de 300 mm de large",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUITS",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "Enduit de 15 mm d'épaisseur au mortier ciment\/sable de dosage (1:4); lissé à la truelle sur : Murs en maçonnerie ou en béton; en largeurs étroites",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUITS",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "Préparation et application d’une sous couche et de deux couches de peinture acrylique en revêtement mural sur : Surfaces de maçonnerie\/béton",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE ET DECORATION.",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Perles d’angles (PS-ARCH 7.5 ), Provision",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "FERRONNERIE",
+  "classe": "MENUMETA"
+ },
+ {
+  "designation": "Chape de 50 mm de ciment et de sable (1:4) dressée avec une règle en bois",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "REVETEMENT DE SOL",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Mise en œuvre sur du béton pour du carrelage",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "REVETEMENT DE SOL",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Carreau 300x300x9 mm en porcelaine antidérapant  posé en motif avec du ciment agréée suivant instructions du fabricant  y compris joint de dilatation suivant spécificationsCarreau 300x300x9 mm en porcelaine antidérapant  posé en motif avec du ciment agréée suivant instructions du fabricant  y compris joint de dilatation suivant spécifications sur plancher ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Carreau 300x300x9 mm en porcelaine antidérapant  posé en motif avec du ciment agréée suivant instructions du fabricant  y compris joint de dilatation suivant spécifications sur marches de 300 mm de large",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Carreau 300x300x9 mm en porcelaine antidérapant  posé en motif avec du ciment agréée suivant instructions du fabricant  y compris joint de dilatation suivant spécificationssur les contre-marches de 150 mm de large",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Plinthe; 100 mm de haut",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Ditto pour les contours des marches et contre-marches sur une hauteur maximale de 350 mm de hauteur  ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "50 mm d'épaisseur sur sol apprêté (plancher apprêté) ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Mortier d'emballage, nez en aluminium et poignée de pieds réf. PS-ARCH 7.3 Sur les bords des contre-marches et des marches es de porte",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "ACCESSOIRES POUR CARRELAGE ",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Démontage et scellement  des carreaux de sol",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Lavage et nettoyage de carreaux de sol",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Revêtement sec; systèmes de plaques d’enduit au plafond; bords carrés, joints M-clip rempli de plâtre et papier collé, fixé sur acier selon les instructions du fabricant 9,5 mm d'épaisseur; de plus de 300 mm de large",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PLAFOND",
+  "classe": "PLAF"
+ },
+ {
+  "designation": "Systèmes de plafonds en Rhinoceil ou similaire approuvé ; avec brandesd’acier de 400 mm d’axe en axe dans une direction; fixés sur acier suivant les instructions du fabricant d’une manière générale",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PLAFOND",
+  "classe": "PLAF"
+ },
+ {
+  "designation": "Corniche à gorge 75 mm fixé sur mur",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "PLAFOND",
+  "classe": "PLAF"
+ },
+ {
+  "designation": "Enduit de 5 mm d'épaisseur fixé sur soffite de  placoplâtre",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUITS",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "Enduit de ciment\/ sable (1:4) de 15 mm d’épaisseur sur soffite en béton ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUITS",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "Enduit de ciment\/ sable (1:4) de 15 mm d’épaisseur sur palier",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUITS",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "Enduit de ciment\/ sable (1:4) de 15 mm d’épaisseur  sur surface inclinée; ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUITS",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "Préparation et appliaction d’une couche de peinture PVA diluée à l’eau et de deux couches de peinture PVA sur : des surfaces d’enduit en général; de plus de 300mm pourtour",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE ET DECORATION",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Préparation et appliaction d’une couche de peinture PVA diluée à l’eau et de deux couches de peinture PVA  pour palier",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE ET DECORATION",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Préparation et appliaction d’une couche de peinture PVA diluée à l’eau et de deux couches de peinture PVA sur surface inclinée; ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE ET DECORATION",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Coulage en place et vibrage de béton  de Classe C15\/20mm pour : Dalle de 75 mm d'épaisseur ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Coulage en place et vibrage de béton  de Classe C15\/20mm pour : Ditto; 150 mm d'épaisseur. ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Plus-value pour réalisation d’une ouverture 300x200x75 mm de profondeur pour plateau de transfert de document en acier inoxydable ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Eléments creux préfabriqués au mortier de ciment\/sable (1:4); Supports de 200 mm d'épaisseur ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Enduit de ciment\/sable (1:4) de 15 mm d'épaisseur lissé à la truelle  sur maçonnerie; de plus de 300 mm de large",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUITS",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "Treillis soudé de référence A98 pesant 1,54 kg par mètre carré incorporé dans le béton de dalle (mesuré net; sans plus-value pour recouvrement) ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ARMATURES",
+  "classe": "ARMA"
+ },
+ {
+  "designation": "Coffrage bords de dalle; 0 - 75 mm",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "COFFRAGE",
+  "classe": "COFF"
+ },
+ {
+  "designation": "Coffrage bords de dalle; 75 - 150 mm",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "COFFRAGE",
+  "classe": "COFF"
+ },
+ {
+  "designation": "Granito poli de15 mm d’épaisseur ref PS-ARCH 7.7 ; sur dalle béton",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Préparation et appliaction d’une couche de peinture PVA diluée à l’eau et de deux couches de peinture PVA sur murs",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE ET DECORATION",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Plateau de transfert de documents de 300x300x75 mm en acier inoxidable ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "COMPTOIR ET BANC",
+  "classe": "MEUB"
+ },
+ {
+  "designation": "Coulage en place de béton armé vibré (Classe C25\/20mm pour : Dalle de 75 mm d'épaisseur ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Face; 350 x 150 mm d'épaisseur; finition soignée sur toutes les surfaces exposées",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Eléments creux préfabriqués au mortier de ciment\/sable (1:4); Supports de 200 mm d'épaisseur",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Enduit de ciment\/sable (1:4) de 15 mm d'épaisseur, lissé à la truelle sur maçonnerie; de plus de 300 mm de large",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ENDUITS",
+  "classe": "ENDUIT"
+ },
+ {
+  "designation": "Coffrage de soffite de dalle",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COFFRAGE",
+  "classe": "COFF"
+ },
+ {
+  "designation": "Granito poli de15 mm d’épaisseur ref PS-ARCH 7.7 ; sur dalle béton",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Préparation et appliaction d’une couche de peinture PVA diluée à l’eau et de deux couches de peinture PVA sur murs",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "PEINTURE ET DECORATION",
+  "classe": "PEINT"
+ },
+ {
+  "designation": "Dalle de 75 mm d'épaisseur Dalle de 75 mm d'épaisseur",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Eléments creux préfabriqués au mortier de ciment\/sable (1:4); 100 mm d'épaisseur de plinthe",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "TRAVAUX DE BETON",
+  "classe": "BET"
+ },
+ {
+  "designation": "Granito poli de15 mm d’épaisseur  ref PS-ARCH 7.7; sur dalle béton",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "CARRELAGE",
+  "classe": "CAR"
+ },
+ {
+  "designation": "Placards métalliques spécifiques recouverts d'une poudre; avec cadres de porte et partitions, étagères, panneau arrière, panneau inférieur, socle, poignée et rail suivant plan n° B1-ARCH\/28 350 x 300 de profondeur x 1650 mm de hauteur hors tout",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PLACARDS",
+  "classe": "MEUB"
+ },
+ {
+  "designation": "Etagères de 4000 mm de haut x 600 mm de large; 5rayons; angles à 900 centres; fixés sur la maçonnerie",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "ETAGERES",
+  "classe": "MEUB"
+ },
+ {
+  "designation": "Dito; Archives",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "ETAGERES",
+  "classe": "MEUB"
+ },
+ {
+  "designation": "Préparation, apprêt et application d’une sous couche et de deux couches de vernis peinture sur des surfaces de bois; de plus de 300mm de pourtour",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "ETAGERES",
+  "classe": "MEUB"
+ },
+ {
+  "designation": "Provision d’une somme de deux millions (2 000 000) de francs CFA pour accessoires supplémentaires de menuiserie",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "ETAGERES",
+  "classe": "MEUB"
+ },
+ {
+  "designation": "Provision d’une somme de 125 € (cent vingt cinq Euros) pour un système de rangement des fusils dans l’armurerie",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "ETAGERES",
+  "classe": "MEUB"
+ },
+ {
+  "designation": "Lavabo mural, ref PS MECH8.3; 600 x 440 x 220 mm, avec trop-plein intégré, sortie de déchets plaqué chrome de 32 mm de diamètre, bouchon, chaîne d’accrochage, Pose du bassin sur et incluant une paire de supports de suspension cachés, fixé sur maçonnerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS SANITAIRES ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "WC à l’anglaise, comprenant un pot en porcelaine blanche émaillée vitrifiée, un réservoir bas en porcelaine vitrifiée de 9 litres, avec robinet et tuyau de chasse et couvercle solide. Fixé sur dalle de béton et maçonnerie ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS SANITAIRES ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Urinoir; réceptacle en porcelaine blanche, émaillée vitrifiée; 1réservoir en porcelaine blanche, émaillée vitrifiée de 9 litres avec dipcock, tuyau d’évacuation plaqué chrome de diamètre 12 mm; 1 grille en forme de dôme plaqué chrome. Fixation des pots y compris les supports ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS SANITAIRES ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Evier en acier inoxydable de 1100 mm de long, bac unique, double égouttoir; dim 460 x 345 x 220mm avec dosseret 150 mm et pieds en acier inoxydable ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS SANITAIRES ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Porte- papier hygiénique en porcelaine blanche, émaillée vitrifiée 150 x 150 mm fixé sur la maçonnerie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS SANITAIRES ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Ditto porte-savon 150 x 150mm ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS SANITAIRES ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Colonne de douche; mélanger de douche; modèle étoile y compris pomme de douche ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS SANITAIRES ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Rail de rideau plaqué chrome de 15mm de diamètre avec supports fixé au mur, 750mm de long",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS SANITAIRES ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Porte-serviettes chromé de 15mm de diamètre, 600mm de long, fixé à un mur carrelé ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS SANITAIRES ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Provision d’une somme de  six millions (6 000 000) de francs CFA pour plan de travail, des supports métalliques, sous les bancs, évier de laboratoire, tuyaux et accessoires vulcathene ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "INSTALLATIONS SANITAIRES ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Tête de robinet modèle étoilé de diamètre 1mm, avec indication chaud et froid",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "ROBINETTERIE ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Evier mural et bec mélangeur, modèle étoile",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "ROBINETTERIE ",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Tuyau galvanisé 20 mm en acier doux de qualité moyenne à la norme BS 1387 avec joints vissés en longueur et colliers standard de serrage fixées à la maçonnerie, y compris coudes, tés, raccords, etc, au besoin. ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "TUYAUX DE TROP-PLEIN DE CITERNE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Joint de tuyau en acier galvanisé 20 mm à citerne ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "TUYAUX DE TROP-PLEIN DE CITERNE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Miroir 450 x 450mm, percé quatre fois, monté et vissé à la maçonnerie finie avec vis à tête chromé ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "MIROIRS",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Tuyau de 160 mm de diamètre posé dans la tranchée",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Tuyau de 160 mm de diamètre posé dans la tranchée sous dalle",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Plus-value pour coude d'inspection",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Tuyau de 110 mm de diamètre sous dalle",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Ditto dans la tranchée",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Tuyau d'évent 110 mm ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Plus-value pour jonction en Y ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Plus-value pour jonction couvre - trame d’aération",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Plus-value pour jonction bord évent 110 mm ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Plus-value pour jonction  T 110mm ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Plus-value pour jonction 110mm de coude PVC",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Plus-value pour jonction  110mm de tuyau  PVC pour WC ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Plus-value pour jonction en T. ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "réducteur 100 x 50mm ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "raccords en T",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Tuyau de 50 mm de diamètre, fixé sous dalle",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Plus-value pour façonnage de tuyauterie de 50 mm de diamètre; ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Plus-value raccord en T",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES SOL, DECHETS ET EVENTS",
+  "classe": "EU"
+ },
+ {
+  "designation": "Regard, comprenant trappe en \" P \"; élément de rigole et caillebotis en 'acier inoxydable, mis en place, avec notamment l'excavation et la connection à des  tuyaux",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "RIGOLES EN PVC",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Tuyau de 32 mm de diamètre dans la tranchée",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "INSTALLATION POUR EAU FROIDE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Ditto; dans la dalle",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "INSTALLATION POUR EAU FROIDE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Idem; olonne montante",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "INSTALLATION POUR EAU FROIDE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Supplément pour réducteur de 32 x 25 mm ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATION POUR EAU FROIDE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Ditto pour T",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATION POUR EAU FROIDE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Ditto pour coude",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATION POUR EAU FROIDE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Tuyau de 25 mm de diamètre dans la  gaine ou sous toit",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "INSTALLATION POUR EAU FROIDE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Ditto pour T",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATION POUR EAU FROIDE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Supplément pour réducteur de 25 x 20 mm ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATION POUR EAU FROIDE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Ditto coude de 25 mm ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATION POUR EAU FROIDE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Tuyau de 25 mm de diamètre dans la maçonnerie ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "INSTALLATION POUR EAU FROIDE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Ditto 15 mm",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "INSTALLATION POUR EAU FROIDE",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Vanne à vis de diamètre de 32 mm en laiton ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "ROBINETS-VANNES",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Ditto 25 mm de diamètre",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "ROBINETS-VANNES",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Tuyau de d 15 mm de diamètre ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "ROBINETS-VANNES",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Tuyau de 20 mm de diamètre",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "ROBINETS-VANNES",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Tuyau de 25 mm de diamètre",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "ROBINETS-VANNES",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Chauffe-eau solaire de 100 litres monté sur le toit constitué d’éléments de 1,5 Kw, y compris tous les accessoires, supports et fixation de tuyauterie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CHAUFFE-EAU",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Réservoir d'eau de 1000x1000x1000 mm (1800 litres) avec bac, tuyau de trop plein de 25mm de diamètre, couvercle amovible et 3 éléments de fixation. posé sur dalle en béton (mesurée séparément) ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "RÉSERVOIR D'EAU",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Clapet d’admission d’assise équilibrée de 100 mm de diamètre de type à bille, avec tube silencieux spécial et flotteur en cuivre incluant le raccordement à la canalisation et au réservoir",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "RÉSERVOIR D'EAU",
+  "classe": "AEPPLOMB"
+ },
+ {
+  "designation": "Tuyau de 32 mm de diamètre posé dansla tranchée",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Ditto, tuyau posé dans des gaines dans la maçonnerie",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Plus-value pour coude",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Ditto pour raccords en T",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Tuyau de 25 mm de diamètre",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Plus-value pour coude",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Vanne à vis en laiton de 25 mm de diamètre à fermeture totale",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Vanne de sortie à colonne sèche de 32 mm de diamètre",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Ditto vanne de cours et d’essai de 32 mm de diamètre",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Tuyau de 25 mm de diamètre fixé à la maçonnerie",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Coffret d’entrée à colonne seche de 600x400x300 mm en acier, avec verre armé de 6mm verre et portant inscription   « Entrée principale à sec » sur la face intérieure du verre en lettres moulées de 75mm. la porte est à être montée avec verrou à ressort fixé du le mur en maçonnerie \/ béton y compris finition soignée du mur",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Dévidoir conforme à la spécification  ref PS-MECH2.24 avec 30 000 mm de flexible en caoutchoouc  de 20mm de diamètre avec embout chromé réglable, avec butée à vis chromé de 20 mm de diamètre avec soupape de tête de roue en fer et support",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Extincteur auto portant à dioxyde de carbonne de 4,5 kg et placé en position",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Ditto 9 kg de poudre; ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Couvertures anti-feu",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Fouilles en tranchées pour canalisation de petit diamètre, profondeur moyenne 500mm, remblayage et évacuationr de matériaux excédentaires",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Test sur l'ensemble des installations de la lutte contre incendie tel que spécifié dans les sections pendant la construction et à l'achèvement, par des moyens approuvés, y compris des nouveaux essais  jusqu'à la satisfaction du représentant du superviseur du projet est représentatif",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "SERVICES DE LUTTE CONTRE L’INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Point d'éclairage monté sur  mur\/plafond avec commutateurs",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Goulottes plastiques grises et blanches 200 x 50 mm à trois compartiments avec couvercles, bouchons, coudes, etc ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Prises de téléphone \"RJ 11\" ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Prises de données \"RJ 45\" ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "6 conduits en PVC de 25 mm diamètre avec accessoires comme indiqué sur le plan. ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Conduit en PVC de 3 x 6 pouces encastré dans le mur pour accès aux boîtes de tirage reliant les goulottes aux bornes de raccordement",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Boîte métallique de connexion 300 x 300 x 150 mm de profondeur avec couvercle fixée au mur, ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Fourniture de Manchons en PVC reliant rez-de-chaussée et premier étage, pour accès des câbles téléphoniques et de données ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Prise de courant à double sortie de13 Ampères",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Prise électrique pour goulotte de 13 Ampères ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Prise de courant 15\/16 Ampères pour goulottes et dédiée au commutateur UPS rouge",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Interrupteur bipolaire de 20 Ampères encastré avec indicateur de contrôle Sèche-mains au néon",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Interrupteur bipolaire de 20 Ampères encastré avec indicateur de contrôle de niveau de climatisation au néon",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Interrupteur triphasé de 20 Ampères encastré avec indicateur de contrôle de niveau de climatisation au néon",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Interrupteur bipolaire de 20 Ampères  encastré avec indicateur de contrôle Panneau d'alarme incendie au néon",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Lumiaire blanc E27 à incandescence de 60W  Radiant \"wwwradiant.co. za\" AA20 fixation de la lampe de type \"G\"  avec lampe ou équivalent approuvé ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Luminaire fluorescent 2 FT x 20\/18 type \"F\" avec lampe Radiant KA12 ou équivalent approuvé ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Applique murale type \"W\" avec lampe ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Séche-mains automatique comme spécifié",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Fourniture de climatiseur split mural ou sous plafond  de capacité de refroidissement de 320000 Btu (salles d’enregistrement & de navigation) ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CLIMATISATION ",
+  "classe": "CLIM"
+ },
+ {
+  "designation": "Fourniture de climatiseur split mural de capacité de refroidissement de 180000 Btu (salle de navigation) ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CLIMATISATION ",
+  "classe": "CLIM"
+ },
+ {
+  "designation": "Fourniture de climatiseur split mural de capacité de refroidissement de 120000 Btu (banque, bureau personnel auxiliaire, bureau officier et bureau des visas) ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CLIMATISATION ",
+  "classe": "CLIM"
+ },
+ {
+  "designation": "Points au plafond de Détecteur de fumée pour panneau d'alarme-incendie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE ",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Cloches\/sirènes du panneau d'alarme-incendie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE ",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Brise-verre pour accès à l’interrupteur du  panneau d'alarme incendie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE ",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Unités de détection multi-capteurs complets",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE ",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Unités de sonnerie électrique pour 'alarme-incendie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE ",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Brise-verre pour accès à l’interrupteur du  panneau d'alarme incendie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE ",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Panneau d'alarme-incendie à deux compartiments",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE ",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Enseignes lumineuses de sortie de secours avec batterie de secours",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE ",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Point d'éclairage monté sur  mur\/plafond avec commutateurs",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Goulottes plastiques grises et blanches 200 x 50 mm à trois compartiments avec couvercles, bouchons, coudes, etc ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Prises de téléphone \"RJ 11\" ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Prises de données \"RJ 45\" ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "6 conduits en PVC de 25 mm diamètre avec accessoires comme indiqué sur le plan. ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Conduit en PVC de 3 X 6 pouces encastré dans le mur pour accès aux boîtes de tirage reliant les goulottes aux bornes de raccordement",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Boîte métallique de connexion 300 x 300 x 150 mm de profondeur avec couvercle fixée au mur, ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Fourniture  de Manchons en PVC reliant rez-de-chaussée et premier étage, pour accès des câbles téléphoniques et de données ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Prise de courant à double sortie de13 Ampères",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Prise électrique pour goulotte de 13 Ampères ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Prise de courant 15\/16 Ampères  pour goulottes et dédiée au commutateur UPS rouge",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Interrupteur bipolaire de 20 Amp encastré avec indicateur de contrôle Sèche-mains au néon",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Interrupteur bipolaire de 20 Amp encastré avec indicateur de contrôle de niveau de climatisation au néon",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Interrupteur triphasé de 20 Ampères encastré avec indicateur de contrôle de niveau de climatisation au néon",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Interrupteur bipolaire de 20 Ampères  encastré avec indicateur de contrôle Panneau d'alarme incendie au néon",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Lumiaire blanc E27 à incandescence de 60W  Radiant \"wwwradiant.co. za\" AA20 fixation de la lampe de type \"G\"  avec lampe ou équivalent approuvé ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Luminaire fluorescent 2 FT x 20\/18 type \"F\" avec lampe Radiant KA12 ou équivalent approuvé ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Applique murale type \"W\" avec lampe ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Luminaire de type \"Q\" pour baie haute avec lampe",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Main automatique sécheur comme spécifié",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "INSTALLATIONS ELECTRIQUES",
+  "classe": "ELECT"
+ },
+ {
+  "designation": "Y compris tuyaux en cuivre, câbles, système de drainage, isolation  amaflex, supports de montage et tous les accessoires pour terminer l'installation",
+  "uniteid": "CWnIjpRIlNaL1m6wJWkm",
+  "type": "CLIMATISATION ",
+  "classe": "CLIM"
+ },
+ {
+  "designation": "Fourniture de climatiseur split mural ou sous plafond  de capacité de refroidissement de 320000 Btu (salles d’enregistrement & de navigation) ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CLIMATISATION ",
+  "classe": "CLIM"
+ },
+ {
+  "designation": "Fourniture de climatiseur split mural de capacité de refroidissement de 180000 Btu (salle de navigation) ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CLIMATISATION ",
+  "classe": "CLIM"
+ },
+ {
+  "designation": "Fourniture de climatiseur split mural de capacité de refroidissement de 120000 Btu (banque, bureau personnel auxiliaire, bureau officier et bureau des visas) ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "CLIMATISATION ",
+  "classe": "CLIM"
+ },
+ {
+  "designation": "Points au plafond de Détecteur de fumée pour panneau d'alarme-incendie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Cloches\/sirènes du panneau d'alarme-incendie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Brise-verre pour accès à l’interrupteur du panneau d'alarme incendie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Unités de détection multi-capteurs complets",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Unités de sonnerie électrique pour 'alarme-incendie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Brise-verre pour accès à l’interrupteur du  panneau d'alarme incendie",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Panneau d'alarme-incendie à deux compartiments",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "SYSTEME D'ALARME INCENDIE",
+  "classe": "INCEN"
+ },
+ {
+  "designation": "Fourniture, pose et branchement de bandes de cuivre 25mm x 3mm fixées sur le toit avec des selles en cuivre",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "PROTECTION CONTRE LA FOUDRE",
+  "classe": "FOUD"
+ },
+ {
+  "designation": "Fourniture, pose et branchement de prise de terre \"test link\" fixée au mur",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PROTECTION CONTRE LA FOUDRE",
+  "classe": "FOUD"
+ },
+ {
+  "designation": "Fourniture, pose et branchement de bandes de cuivre 25mm x 3mm fixées au mur avec selles en cuivre",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "PROTECTION CONTRE LA FOUDRE",
+  "classe": "FOUD"
+ },
+ {
+  "designation": "Fourniture, pose et branchement de câble de cuivre nu 95mm² connectés à la prise de terre et liés au tapis de terre \/ tige dans le sol  ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "PROTECTION CONTRE LA FOUDRE",
+  "classe": "FOUD"
+ },
+ {
+  "designation": "Fourniture, pose et branchement de piquet de terre en cuivre de 2400 mm de long enfouie dans le sol ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PROTECTION CONTRE LA FOUDRE",
+  "classe": "FOUD"
+ },
+ {
+  "designation": "Fourniture, pose et branchement d’une tige de cuivre avec pointes et plaque de base collée sur ruban de cuivre sur le toit comme indiqué sur le plan",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PROTECTION CONTRE LA FOUDRE",
+  "classe": "FOUD"
+ },
+ {
+  "designation": "Fourniture et installation dans le sol d’un tapis en cuivre de 4000mm² avec ruban cuivre \/ câble en cuivre nu de 95mm² ",
+  "uniteid": "v7QQBadWISgKRUyg7hoD",
+  "type": "PROTECTION CONTRE LA FOUDRE",
+  "classe": "FOUD"
+ },
+ {
+  "designation": "Préparation, réglage et compactage de la plateforme jusqu’à une compacité de  98%  deAASHTO modifié ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Mise en œuvre d’une couche de forme en sable silteux de 300 mm d’épaisseur  réglé et compacté à 95% AASHO MOD ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Plus-value pour transport de  silteux sur une distance de plus de 1 km (n’excédant 15 km) ",
+  "uniteid": "JCzP0bAlWMCM8TjzVhDY",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Mise en œuvre d’une couche de fondation en graveleux (approuvé) de 200 mm d’épaisseur amélioré à 4% de ciment, réglé et compacté à 98% AASHO MOD ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Mise en œuvre d’une couche de fondation en  silteux de 200 mm d’épaisseur amélioré à 4% de ciment, réglé et compacté à 95% AASHO MOD ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Plus-value pourtransport de graveleux  sur une distance de plus de 1 km (n’excédant 20 km) ",
+  "uniteid": "JCzP0bAlWMCM8TjzVhDY",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Plus-value pourtransport de silteux sur une distance de plus de 1 km (n’excédant 20 km) ",
+  "uniteid": "JCzP0bAlWMCM8TjzVhDY",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Mise en œuvre d’une couche de base en concassé de 150 mm d’épaisseur compacté ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Amélioration (stabilisation) de la couche de base à 4% de ciment",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Plus-value pour haoulage de rock de plus de 1km (n’excédant 169km) ",
+  "uniteid": "JCzP0bAlWMCM8TjzVhDY",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Mise en œuvre d’une couche d’imprégnation d’émulsion de bitume dosée à 1 litres\/m² avant la première couche d’enduit ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Mise en œuvre d’une première couche d’enduit constituée de bitume 80\/100 doséà 1,2 litres\/m2 et de gravillons 14 mm. ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Mise en œuvre d’une couche d’imprégnation d’émulsion de bitume dosée à 1 litre\/m2 avant la deuxième couche d’enduit ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Mise en œuvre d’une deuxième couche constituée de bitume 80\/100 de bitume 80\/100 dosé à 1,0 litres\/m2 et de gravillons 10mm ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Plus-value pour transport de gravillons pour la première et la deuxième couche d’enduit au-delà de 1 km d'une carrière proposée par entrepreneur et approuvée ",
+  "uniteid": "dj4FAOxc3rJMKlWOqEQM",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Fourniture et mise en œuvre d'une couche d'impregnation en cut back 0\/1, dosé à 1,1kg\/m2",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Fourniture et mise en œuvre d'une couche d'accrochage en emulsion de bitume ECR65, dosé à 0,35kg\/m2",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Fourniture et mise en œuvre d'une couche de liaison en grave bitumineux (bitume 35\/50) de 10 cm",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Fourniture et mise en œuvre d'une couche roulement en béton bitumineux de 6 cm",
+  "uniteid": "D0ikPWKv4EOyoypJaPOG",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Mise en place d’une feuille de polystirène  anticontaminante de 250 MICRONS sur l’assise avant la dalle de chaussée (mesurée net; sans aucune plus-value pour recouvrement) ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Réalisation d’une dalle de béton armé (Classe C25\/20) de 170 mm d’épaisseur y compris la construction de joints entre panneaux de dalle, talôchée à la truelle en une seule opération avec  finition brossée ",
+  "uniteid": "dCdeHa1H9hVZaEV59BIS",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Armature en acier Haute adhérance:",
+  "uniteid": "D20A1OizPauV3UeP3AAL",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Joint de construction de 20 mm d'épaisseur x 25 mm de profondeur, rempli de feuille de polystyrène compressible ;; étanchéité polysulfure; ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ },
+ {
+  "designation": "Joint de dilatation 20 mm d'épaisseur rempli de feuille de polystyrène compressible; avec chevilles, produit d'étanchéité et couvercle métallique. ",
+  "uniteid": "g8LrDrlSEXQRTeEuhyFw",
+  "type": "COUCHES DE CHAUSSEE",
+  "classe": "TERRACH"
+ }
+],
+"tachesmachines":[
+ {
+  "taches": "décapage de la terre végétale"
+ },
+ {
+  "taches": "débroussaillage"
+ },
+ {
+  "taches": "gerbage de matériaux d'emprunt"
+ },
+ {
+  "taches": "chargement matériaux d'emprunt"
+ },
+ {
+  "taches": "chargement matériaux de déblais"
+ },
+ {
+  "taches": "excavation de matériaux "
+ },
+ {
+  "taches": "décaissement de matériaux"
+ },
+ {
+  "taches": "transport de matériaux d'emprunt"
+ },
+ {
+  "taches": "transport de matériaux de déblais"
+ },
+ {
+  "taches": "malaxage de matériaux PST"
+ },
+ {
+  "taches": "malaxage de matériaux couche de fondation"
+ },
+ {
+  "taches": "malaxage de matériaux couche de base"
+ },
+ {
+  "taches": "purges"
+ },
+ {
+  "taches": "étalage de matériaux de remblais"
+ },
+ {
+  "taches": "étalage de matériaux de couche de fondation"
+ },
+ {
+  "taches": "étalage de matériaux couche de base"
+ },
+ {
+  "taches": "compactage de matériaux PST"
+ },
+ {
+  "taches": "compactage de matériaux couche de fondation"
+ },
+ {
+  "taches": "compactage de matériaux couche de base"
+ },
+ {
+  "taches": "arrosage de matériaux"
+ },
+ {
+  "taches": "pose de voile de caniveaux"
+ },
+ {
+  "taches": "pose de dalette de caniveaux"
+ },
+ {
+  "taches": "transport de dalettes de caniveaux"
+ },
+ {
+  "taches": "transport de voiles de caniveaux"
+ },
+ {
+  "taches": "transport de poteaux électriques"
+ },
+ {
+  "taches": "transport de candelabres"
+ },
+ {
+  "taches": "pose de candelabres "
+ },
+ {
+  "taches": "pose de poteaux électriques"
+ },
+ {
+  "taches": "finition de couche de base"
+ },
+ {
+  "taches": "nivellement de chaussée"
+ },
+ {
+  "taches": "transport de concassés"
+ },
+ {
+  "taches": "transport d'enrobés"
+ },
+ {
+  "taches": "transport de sable de rivière"
+ },
+ {
+  "taches": "épandage de cut back"
+ },
+ {
+  "taches": "épandage de couche d'accrochage"
+ },
+ {
+  "taches": "nettoyage de site"
+ },
+ {
+  "taches": "étalage d'enrobés"
+ },
+ {
+  "taches": "compactage d'enrobés"
+ },
+ {
+  "taches": "balayage de couche de base "
+ },
+ {
+  "taches": "soufflement de couche de base"
+ },
+ {
+  "taches": "démolition d'ouvrage"
+ },
+ {
+  "taches": "abbatage d'arbres"
+ },
+ {
+  "taches": "chargement de matériaux de débroussaillage"
+ },
+ {
+  "taches": "transport de matériaux de débroussaillage"
+ }
+]
+}

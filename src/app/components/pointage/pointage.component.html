@@ -1,0 +1,195 @@
+<mat-drawer-container class="wen-table-drawer-container">
+    <mat-drawer mode="over" position="end" #table_update_drawer [opened]="is_table_being_updated" disableClose="true">
+        <section class="table-update">
+            <div class="table-update__header">
+                <h3>{{'Date: '+current_date()}}</h3>
+                <h3>{{'Nom: '+ personnel_data().nom}}</h3>
+                <h3>{{'Prénom: '+ personnel_data().prenom}}</h3>
+                <h3> {{'Fonction: '+ personnel_data().fonction}}</h3>
+            </div>
+            <form [formGroup]="table_update_form" (ngSubmit)="updateTableData()">
+                <div class="table-update__body">
+                    <mat-form-field>
+                        <mat-label>
+                            Nombre d'heures travaillé
+                        </mat-label>
+                        <input matInput formControlName="heureNorm" type="number" placeholder="HEURES TRAVAILLEES">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>
+                            Nombre d'Heures sup
+                        </mat-label>
+                        <input matInput formControlName="heureSup" type="number" placeholder="HEURES SUP">
+                    </mat-form-field>
+                </div>
+                <div class="table-update__footer">
+                    <button mat-flat-button type="submit" color="primary" [disabled]="!table_update_form.valid">
+                        Enregistrer
+                    </button>
+                    <button mat-flat-button (click)="annuler()" color="warn" type="button"> Annuler
+                    </button>
+                </div>
+            </form>
+        </section>
+    </mat-drawer>
+    <mat-drawer mode="over" position="start" #table_update_drawer [opened]="is_table_list_open" disableClose="true">
+        <section class="table-update2">
+            <div class="table-update__header">
+                <h3>PERSONNES NON POINTEES</h3>
+            </div>
+            <div class="table-update__body">
+                <div *ngIf="datespointage().includes(madate())">
+                        <div *ngFor="let row of personnel_store.no_pointage();let i=index">
+                            <mat-checkbox [checked]="row.ischecked" (change)="is_checked2(i)">
+                                <h3> {{row.names.nom +' '+row.names.prenom}} </h3>
+                            </mat-checkbox>
+                        </div>
+                    <div class="actions">
+                        <button mat-flat-button color="primary" [disabled]="!personnel_store.ischecked().includes(true)"
+                            (click)="ajouter()"> Ajouter au
+                            pointage</button>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="table-update__footer">
+                <button mat-flat-button color="warn" (click)="Annuler2()"> Quitter</button>
+            </div>
+        </section>
+    </mat-drawer>
+    <mat-drawer-content>
+        <mat-sidenav-container class="example-container">
+            <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
+                <div class="panneau_lat">
+                    <div class="titre">
+                        <h2>POINTAGES EFFECTUES</h2>
+                    </div>
+                    <div class="row_pointage" *ngFor="let row of datespointageClass();let i=index"
+                        (click)="afficher(row)">
+                        {{row}}
+                        <span> </span> <button mat-icon-button
+                            (click)="deletedate(row)"><mat-icon>clear</mat-icon></button>
+                    </div>
+                </div>
+            </mat-sidenav>
+            <mat-sidenav-content class="example-sidenav-content">
+                <div class="example-header">
+                    <h2> {{'Pointage du '+madate()}} </h2>
+
+                </div>
+                <div class="content_soushead">
+                    <div class="table-col1">
+                        <mat-form-field class="example-form-field">
+                            <mat-label>Choisir une date</mat-label>
+                            <input matInput [matDatepicker]="datepicker" (dateInput)="addEvent( $event)"
+                                [ngModel]="default_date()" placeholder="DATE">
+                            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #datepicker>
+                                <mat-datepicker-actions>
+                                    <button mat-button matDatepickerCancel>Annuler</button>
+                                    <button mat-raised-button color="primary" matDatepickerApply>Appliquer</button>
+                                </mat-datepicker-actions>
+                            </mat-datepicker>
+                        </mat-form-field>
+                        <button mat-flat-button (click)="commencerPoint()" [disabled]="datespointage().includes(madate())"
+                            color="primary">Commencer
+                            pointage</button>
+                    </div>
+                    <div class="table-col2">
+                        <h2> Impression du pointage</h2>
+                        <form [formGroup]="formG">
+                            <mat-form-field class="example-form-field">
+                                <mat-label>Choisir intervale de dates</mat-label>
+                                <mat-date-range-input [rangePicker]="daterangepicker">
+                                    <input matInput matStartDate placeholder="Start Date" formControlName="date_debut">
+                                    <input matInput matEndDate placeholder="End Date" formControlName="date_fin"
+                                        (dateChange)="dateRangeChange()">
+                                </mat-date-range-input>
+                                <mat-datepicker-toggle matSuffix [for]="daterangepicker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #daterangepicker>
+                                </mat-date-range-picker>
+                            </mat-form-field>
+                        </form>
+                        <button mat-flat-button (click)="impression()" color="primary" [disabled]="!formG.valid">
+                            Imprimer pointage</button>
+                    </div>
+                    <div class="table-col3">
+                        <button mat-flat-button color="primary" (click)="ouvriliste()"> Ajouter personnel </button>
+                    </div>
+                </div>
+                <table mat-table [dataSource]="dataSource()" class="wen-table">
+                    <ng-container matColumnDef="nom">
+                        <th mat-header-cell *matHeaderCellDef> NOM
+
+                        </th>
+                        <td mat-cell *matCellDef="let element;let i=index">
+                            <a (click)="editperso(element,i)">{{element.nom}} </a>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="prenom">
+                        <th mat-header-cell *matHeaderCellDef> PRENOM
+
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.prenom}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fonction">
+                        <th mat-header-cell *matHeaderCellDef> FONCTION
+
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.fonction}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="presence">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <h3>PRESENCE</h3>
+                            <mat-checkbox [checked]="allComplete" [color]="task.color" [indeterminate]="someComplete()"
+                                (change)="setAll($event.checked)"> tout selectionner</mat-checkbox>
+                        </th>
+                        <td mat-cell *matCellDef="let row;index as i">
+                            <mat-checkbox [checked]="this.personnel_store.presence()[i]" (change)="is_checked(row,i)">
+                                {{personnel_store.is_present()[i]}}
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="nbre_heure">
+                        <th mat-header-cell *matHeaderCellDef> NBRE HEURES
+
+                        </th>
+                        <td mat-cell *matCellDef="let element;let i=index">
+                            {{this.personnel_store.heures_normale()[i]}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="heure_sup">
+                        <th mat-header-cell *matHeaderCellDef> HEURES SUP
+
+                        </th>
+                        <td mat-cell *matCellDef="let element;let i=index">
+                            {{this.personnel_store.heures_sup()[i]}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let row;let i=index">
+                            <div *ngIf="personnel_store.presence()[i]==true">
+                                <button mat-icon-button (click)="editperso(row,i)"><mat-icon>edit</mat-icon></button>
+                            </div>
+                            <button mat-icon-button (click)="exclure(row)"><mat-icon>clear</mat-icon></button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;let i=index;"
+                        [ngClass]="{'heuresup':personnel_store.heures_sup()[i]>0,'absent':personnel_store.presence()[i]==false}">
+                    </tr>
+                </table>
+            </mat-sidenav-content>
+
+        </mat-sidenav-container>
+    </mat-drawer-content>
+
+</mat-drawer-container>

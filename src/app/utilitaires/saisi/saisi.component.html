@@ -1,0 +1,85 @@
+<div class="table-update__body"  [formGroup]="parent_FG">
+    <mat-form-field >
+        <mat-label>
+            {{label}}
+            <span aria-hidden="true" class="placeholder-required"> *</span>
+        </mat-label>
+        <ng-container [ngSwitch]="type">
+            <!-- For select menus -->
+            <ng-container *ngSwitchCase="'select1'">
+                <mat-select [formControlName]="control_name" (selectionChange)="choix($event.value)">
+                    <mat-option *ngFor="let row of select_classe" [value]="row.id">
+                        {{row.designation}}</mat-option>
+                </mat-select>
+            </ng-container>
+            <ng-container *ngSwitchCase="'select2'">
+                <mat-select [formControlName]="control_name" (selectionChange)="choixEngin($event.value)"  >
+                    <mat-option *ngFor="let row of select_EnginByclasse" [value]="row.id">
+                        {{row.code_parc}}</mat-option>
+                </mat-select>
+            </ng-container>
+            <ng-container *ngSwitchCase="'select3'">
+                <mat-select [formControlName]="control_name" (selectionChange)="choixPersonnel($event.value)"  >
+                    <mat-option *ngFor="let row of select_personnel" [value]="row.id">
+                        {{row.nom + ' '+row.prenom}}</mat-option>
+                </mat-select>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'select4'">
+                <mat-select [formControlName]="control_name" >
+                    <mat-option *ngFor="let row of select_projet" [value]="row.id">
+                        {{row.intitule}}</mat-option>
+                </mat-select>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'select5'">
+                <mat-select [formControlName]="control_name" (selectionChange)="choixPersonnel($event.value)"  >
+                    <mat-option *ngFor="let row of select_sstraitant" [value]="row.id">
+                        {{row.entreprise}}</mat-option>
+                </mat-select>
+            </ng-container> 
+
+            <ng-container *ngSwitchCase="'select6'">
+                <mat-select [formControlName]="control_name" (selectionChange)="choixStatut($event.value)"  >
+                    <mat-option *ngFor="let row of select_statut" [value]="row.id">
+                        {{row.designation}}</mat-option>
+                </mat-select>
+            </ng-container> 
+
+            <!-- For date picker -->
+            <ng-container *ngSwitchCase="'date'">
+                <input matInput [matDatepicker]="datepicker" [formControlName]="control_name" placeholder="{{placeholder}}">
+            </ng-container>
+            <!-- For date range picker -->
+            <ng-container *ngSwitchCase="'daterange'">
+                <mat-date-range-input [rangePicker]="daterangepicker">
+                    <input matStartDate placeholder="Début Date" [formControlName]="control_name">
+                    <input matEndDate placeholder="Fin Date" [formControlName]="enddate_control_name">
+                </mat-date-range-input>
+            </ng-container>
+            <!-- For text areas -->
+            <ng-container *ngSwitchCase="'textarea'">
+                <textarea matInput placeholder="{{placeholder}}" [formControlName]="control_name"
+                    [attr.maxlength]="maxlength"></textarea>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'label'">
+                <input matInput [formControlName]="control_name" [attr.maxlength]="maxlength" type="text" value="{{default_design}}"  placeholder="{{placeholder}}">
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+                <input matInput [formControlName]="control_name" [attr.maxlength]="maxlength" [type]="type" placeholder="{{placeholder}}">
+            </ng-container>
+        </ng-container>
+        <mat-datepicker-toggle matSuffix [for]="datepicker" *ngIf="type=='date'"></mat-datepicker-toggle>
+        <mat-datepicker #datepicker></mat-datepicker>
+        <mat-datepicker-toggle matSuffix [for]="daterangepicker" *ngIf="type=='daterange'"></mat-datepicker-toggle>
+        <mat-date-range-picker #daterangepicker></mat-date-range-picker>
+        <mat-error>
+            {{control.hasError('required')?
+            (required_error || 'Ce champ ne peut pas être vide.')
+            : (control.hasError('message')?
+            control.getError('message')
+            : invalid_error)}}
+        </mat-error>
+    </mat-form-field>
+</div>

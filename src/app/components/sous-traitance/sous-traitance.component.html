@@ -1,0 +1,318 @@
+<mat-drawer-container class="wen-table-drawer-container">
+  <mat-drawer mode="over" position="end" #table_update_drawer id="creation_devis" [opened]="is_table_opened()"
+    disableClose="true">
+    <section class="table-update">
+      <div class="table-update__header">
+        @if(!is_table_updated() && !is_rubrique_parent())
+        {
+        <h2> POSTE PARENT</h2>
+        <h3>
+          {{"POSTE "+ expandedElement?.poste+" - "+expandedElement?.designation}}
+        </h3>
+        <h3>
+          {{"CODE PARENT: "+ expandedElement?.code}}
+        </h3>
+        <h3>
+          {{"MONTANT: "+ (expandedElement?.montant|currency:'F CFA')}}
+        </h3>
+        }
+      </div>
+      <div class="table-update__header_sous">
+            <mat-radio-group [(ngModel)]="type_rubrique" (change)="choix_type_rubrique()">
+              <mat-radio-button value="1">Avec sous niveaux</mat-radio-button>
+              <mat-radio-button value="2" [checked]="true">Sans sous niveaux</mat-radio-button>
+            </mat-radio-group>
+      </div>
+
+      <form [formGroup]="table_update_form" (ngSubmit)="updateTableData()">
+        <div class="table-update__body">
+          @if(is_table_updated() )
+          {
+          @if( type_rubrique()=="1")
+          {
+          <mat-form-field>
+            <mat-label>
+              CODE
+            </mat-label>
+            <input matInput formControlName="code" type="text" placeholder="CODE">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>
+              N° POSTE
+            </mat-label>
+            <input matInput formControlName="poste" type="text" placeholder="N° POSTE">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>
+              DESIGNATION
+            </mat-label>
+            <input matInput formControlName="designation" type="text" placeholder="DESIGNATION">
+          </mat-form-field>
+          }@else {
+          <mat-form-field>
+            <mat-label>
+              CODE
+            </mat-label>
+            <input matInput formControlName="code" type="text" placeholder="CODE">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>
+              N° POSTE
+            </mat-label>
+            <input matInput formControlName="poste" type="text" placeholder="N° POSTE">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>
+              DESIGNATION
+            </mat-label>
+            <input matInput formControlName="designation" type="text" placeholder="DESIGNATION">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>
+              UNITE
+            </mat-label>
+            <input matInput formControlName="unite" type="text" placeholder="UNITE">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>
+              PRIX UNITAIRE
+            </mat-label>
+            <input matInput formControlName="prix_u" type="number" placeholder="PRIX UNITAIRE">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>
+              QUANTITE
+            </mat-label>
+            <input matInput formControlName="quantite" type="number" placeholder="QUANTITE">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>
+              MONTANT
+            </mat-label>
+            <input matInput formControlName="montant" type="number" placeholder="MONTANT">
+          </mat-form-field>
+          }
+          }
+          @else {
+            @if( type_rubrique()=="1")
+            {
+              <mat-form-field>
+                <mat-label>
+                  CODE
+                </mat-label>
+                <input matInput formControlName="code" type="text" placeholder="CODE">
+              </mat-form-field>
+    
+              <mat-form-field>
+                <mat-label>
+                  N° POSTE
+                </mat-label>
+                <input matInput formControlName="poste" type="text" placeholder="N° POSTE">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>
+                  DESIGNATION
+                </mat-label>
+                <input matInput formControlName="designation" type="text" placeholder="DESIGNATION">
+              </mat-form-field>
+            }@else{
+              <mat-form-field>
+                <mat-label>
+                  CODE
+                </mat-label>
+                <input matInput formControlName="code" type="text" placeholder="CODE">
+              </mat-form-field>
+    
+              <mat-form-field>
+                <mat-label>
+                  N° POSTE
+                </mat-label>
+                <input matInput formControlName="poste" type="text" placeholder="N° POSTE">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>
+                  DESIGNATION
+                </mat-label>
+                <input matInput formControlName="designation" type="text" placeholder="DESIGNATION">
+              </mat-form-field>
+    
+              <mat-form-field>
+                <mat-label>
+                  UNITE
+                </mat-label>
+                <input matInput formControlName="unite" type="text" placeholder="UNITE">
+              </mat-form-field>
+    
+              <mat-form-field>
+                <mat-label>
+                  PRIX UNITAIRE
+                </mat-label>
+                <input matInput formControlName="prix_u" type="number" placeholder="PRIX UNITAIRE">
+              </mat-form-field>
+    
+              <mat-form-field>
+                <mat-label>
+                  QUANTITE
+                </mat-label>
+                <input matInput formControlName="quantite" type="number" placeholder="QUANTITE">
+              </mat-form-field>
+    
+              <mat-form-field>
+                <mat-label>
+                  MONTANT
+                </mat-label>
+                <input matInput formControlName="montant" type="number" placeholder="MONTANT">
+              </mat-form-field>
+            }
+            
+          }
+
+
+        </div>
+        <div class="table-update__footer">
+          <button mat-flat-button type="submit" color="primary" [disabled]="!table_update_form.valid">
+            {{is_table_updated()?'Modifier':'Ajouter'}}
+          </button>
+          <button mat-flat-button (click)="annuler()" color="warn" type="button"> Annuler
+          </button>
+        </div>
+      </form>
+
+    </section>
+  </mat-drawer>
+  <mat-drawer-content id="creationdevis">
+    <div class="content_head">
+      <h2>DEVIS PRESTATIONS</h2>
+    </div>
+    <div class="titre_devis">
+
+        <mat-form-field>
+          <mat-label>
+            Liste des devis
+          </mat-label>
+          <mat-select [(value)]="selected_devis" (selectionChange)="selectChangeDevis($event.value)">
+            <mat-option *ngFor="let row of Devis_Store.donnees_devis()" [value]="row.id">
+              {{(row.entreprise_id|entreprises:SousTraitance_Store.donnees_sstraitant()|async)+ ' --- '+row.code}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="titre_devis">
+      <h3> {{entreprise_id()|entreprises:SousTraitance_Store.donnees_sstraitant()|async}}</h3>
+      <h4> {{devis_objet()}}</h4>
+    </div>
+
+    <div class="actions5">
+      <button mat-flat-button (click)="ajouter_rubrique()" [disabled]="selected_devis()==''" > créer rubrique parent</button>
+      <button mat-flat-button (click)="ajouter()" [disabled]="expandedElement==null || (!has_child().includes(expandedElement.code) && has_child().includes(expandedElement.parent_code))"> créer sous_niveau</button>
+    </div>
+    <div class="content_body">
+      <table mat-table [dataSource]="dataSource()" class="mat-elevation-z8">
+        <ng-container matColumnDef="poste">
+          <th mat-header-cell *matHeaderCellDef> N° POSTE </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.poste}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="designation">
+          <th mat-header-cell *matHeaderCellDef> DESIGNATION </th>
+          <td mat-cell *matCellDef="let element; let ind = index;" [ngClass]="{
+        'decal0':ligne_parent0().includes(element.parent_code),
+      'decal1':ligne_parent1().includes(element.parent_code),
+      'decal2':ligne_parent2().includes(element.parent_code)}">
+            @if(has_child().includes(element.code))
+            {
+            <button mat-icon-button (click)="click_parent(element,ind)">
+              @if (element.collapsed==true) {
+              <mat-icon>keyboard_arrow_up</mat-icon>
+              } @else {
+              <mat-icon>keyboard_arrow_down</mat-icon>
+              }
+            </button>
+            }
+            {{element.designation}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="unite">
+          <th mat-header-cell *matHeaderCellDef> UNITE </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.unite}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="prix_u">
+          <th mat-header-cell *matHeaderCellDef> PRIX UNITAIRE </th>
+          <td mat-cell *matCellDef="let element">
+            @if(has_child().includes(element.code))
+            {
+  
+            }@else {
+            {{element.prix_u|currency:'F CFA'}}
+            }
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="quantite">
+          <th mat-header-cell *matHeaderCellDef> QUANTITE </th>
+          <td mat-cell *matCellDef="let element">
+            @if(has_child().includes(element.code))
+            {
+  
+            }@else {
+            {{element.quantite}}
+            }
+  
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="montant">
+          <th mat-header-cell *matHeaderCellDef> MONTANT </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.montant|currency:'F CFA'}}
+  
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="edit(element)"><mat-icon> edit</mat-icon> </button>
+            <button mat-icon-button (click)="delete(element)"><mat-icon> delete</mat-icon> </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="col1">
+          <td mat-footer-cell *matFooterCellDef colspan="4">
+            
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="col2">
+          <td mat-footer-cell *matFooterCellDef >
+            {{'MONTANT TOTAL HTVA'}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="col3">
+          <td mat-footer-cell *matFooterCellDef >
+            {{(sommeTotal()|currency:'F CFA')}}
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;let ind=index"
+          [ngClass]="{'classe_parent0':ligne_parent0().includes(element.code),'classhide':element.isvisible==false}"
+          (click)="clicker(element)" [class.demo-row-is-clicked]="expandedElement?.id==element.id">
+        </tr>
+        <tr mat-footer-row *matFooterRowDef="['col1','col2','col3'];sticky:true" ></tr>
+      </table>
+    </div>
+   
+  </mat-drawer-content>
+
+</mat-drawer-container>

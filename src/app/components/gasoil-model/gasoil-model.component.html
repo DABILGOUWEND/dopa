@@ -1,0 +1,124 @@
+<app-model [is_open]="is_open" [Entete]="Entete" [Corps]="Corps" [is_open2]="is_open2">
+
+</app-model>
+
+<ng-template #Entete>
+    <section class="table-update">
+        <div class="table-update__header">
+            <h2> {{is_update()?'Modifier':'Nouveau'}} </h2>
+        </div>
+        <form [formGroup]="table_update_form" (ngSubmit)="addNewItem()">
+            <div class="table-update__body">
+                <ng-container [ngTemplateOutlet]="saisies"
+                    [ngTemplateOutletContext]="{formGroup:table_update_form,table:table}">
+                </ng-container>
+            </div>
+            <div class="table-update__footer">
+                <ng-container [ngTemplateOutlet]="validation" [ngTemplateOutletContext]="{formGroup:table_update_form}">
+                </ng-container>
+            </div>
+        </form>
+    </section>
+</ng-template>
+<ng-template #Corps>
+    <ng-container [ngTemplateOutlet]="entetebody">
+    </ng-container>
+    <table mat-table [dataSource]="donnees_table()" class="wen-table">
+        <ng-container *ngFor="let column of displayedColumns |keyvalue " matColumnDef="{{column.key}}">
+            @if(column.key=='actions')
+            {
+            <th mat-header-cell *matHeaderCellDef>
+            </th>
+            <td mat-cell *matCellDef="let element;index as ind">
+                <ng-container [ngTemplateOutlet]="actiontemplate" [ngTemplateOutletContext]="{row:element,ind:ind}">
+                </ng-container>
+            </td>
+            }@else {
+            <th mat-header-cell *matHeaderCellDef> {{column.value}}
+            </th>
+            <td mat-cell *matCellDef="let element">
+                {{element[""+column.key]}}
+            </td>
+            }
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="header_titles"></tr>
+        <tr mat-row *matRowDef="let row; columns: header_titles;let index = index"></tr>
+    </table>
+</ng-template>
+
+<ng-template #actiontemplate let-row="row" let-ind="ind">
+    <button mat-icon-button type="button" (click)="supprimer(row.id)"> <mat-icon> delete</mat-icon> </button>
+    <button mat-icon-button type="button" (click)="modifier(row,ind)"> <mat-icon> edit</mat-icon> </button>
+</ng-template>
+<ng-template #validation let-formGroup="formGroup">
+    <button mat-flat-button type="submit"
+        [disabled]="!formGroup.valid">{{is_update()?'Modifier':'Enregistrer'}}</button>
+    <button mat-flat-button type="button" (click)="annuler()" color="warn">annuler</button>
+</ng-template>
+<ng-template #saisies let-formGroup="formGroup" let-table="table">
+    <ng-content>
+
+    </ng-content>
+    @for (item of table; track $index) {
+    @switch (item.type) {
+    @case (
+    "text1"
+    ) { <app-form-saisi label={{item.label}} type={{item.type}} control_name={{item.control_name}}
+        [parent_FG]="table_update_form">
+    </app-form-saisi>}
+    @case (
+    "number"
+    ) { <app-form-saisi label={{item.label}} type={{item.type}} control_name={{item.control_name}}
+        [parent_FG]="table_update_form">
+    </app-form-saisi>}
+    @case (
+    "date"
+    ) { <app-form-saisi label={{item.label}} type={{item.type}} control_name={{item.control_name}}
+        [parent_FG]="formGroup">
+    </app-form-saisi>}
+    @case (
+    "daterange"
+    ) {<app-form-saisi label={{item.label}} type={{item.type}} control_name={{item.control_name}}
+        enddate_control_name={{item.enddate_control_name}} [parent_FG]="formGroup">
+    </app-form-saisi>}
+    @case (
+    "select"
+    ) {<app-form-saisi label={{item.label}} type={{item.type}} control_name={{item.control_name}}
+        [tableau]="item.tableau" [parent_FG]="formGroup" (ChangeSelectEvent)="ChangeSelect($event,item.control_name)">
+    </app-form-saisi>}
+    }
+    }
+</ng-template>
+<ng-template #entetebody>
+    <ng-container [ngTemplateOutlet]="titre">
+    </ng-container>
+
+    <ng-content select="courbe">
+
+    </ng-content>
+    <div class="content_add_button">
+        <div class="AlignGauche">
+            <button (click)="printElement()" mat-fab extended color="primary" matTooltip="Imprimer rapport"
+            matTooltipPosition="left" aria-label="print">
+            <span class="material-icons">
+                print
+            </span>
+            imprimer rapport
+        </button>
+        </div>
+        <div class="AlignMilieu">
+            <ng-container [ngTemplateOutlet]="conso">
+            </ng-container>
+        </div>
+     
+        <div class="AlignDroite">
+            <button (click)="addElement()" mat-fab extended color="primary" matTooltip="Ajouter nouveau"
+                matTooltipPosition="left" aria-label="nouvelle conso">
+                <span class="material-icons">
+                    playlist_add
+                </span>
+                Nouvelle sortie
+            </button>
+        </div>
+    </div>
+</ng-template>

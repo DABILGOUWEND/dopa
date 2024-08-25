@@ -1,0 +1,32 @@
+<div class="toolbar2">
+    <mat-toolbar>
+        <ng-container>
+            <button mat-fab extended (click)="click_devis()" type="button">
+                DEVIS PRESTAIRES
+            </button>
+        </ng-container>
+        <span class="example-spacer2"> </span>
+
+        <ng-container>
+            <button mat-fab extended  (click)="click_constat()" type="button">
+                CONSTATS DES TRAVAUX
+            </button>
+        </ng-container>
+        <span class="example-spacer2"> </span>
+
+        <ng-container>
+            <button mat-fab extended  (click)="click_attach()" type="button">
+                ATTACHEMENTS TRAVAUX
+            </button>
+        </ng-container>
+  
+    </mat-toolbar>
+</div>
+<app-sous-traitance *ngIf="is_click_devis()">
+</app-sous-traitance>
+
+<app-constats *ngIf="is_click_constat()">
+</app-constats>
+
+<app-attachements *ngIf="is_click_attach()">
+</app-attachements>

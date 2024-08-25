@@ -1,0 +1,41 @@
+<div class="login-page">
+    <div class="login-form-container">
+        <form [formGroup]="loginForm" (ngSubmit)="sumitlogin()" class="login-form ">
+            <fieldset>
+                <legend>
+                    Connexion
+                </legend>
+                <div class="login-page__banner">
+                    <p><em>{{message}}</em></p>
+                </div>
+                <div class="login_saisi">
+                    <mat-form-field>
+                        <label>Entreprise</label>
+                        <mat-select formControlName="entreprise" (selectionChange)="choiceEntreprise($event.value)">
+                            <mat-option *ngFor="let row of entreprise_store.donnees_entreprise()" [value]="row.id">
+                                {{row.enseigne}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="login_saisi">
+                    <mat-form-field>
+                        <input matInput formControlName="identifiant" placeholder="identifiant">
+                    </mat-form-field>
+                </div>
+                <div class="login_saisi">
+                    <mat-form-field>
+                        <input matInput formControlName="mot_de_passe" placeholder="mode de passe" type="password">
+                    </mat-form-field>
+                </div>
+                <div class="login-form__footer">
+                    <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">
+                        Connexion
+                    </button>
+                </div>
+            </fieldset>
+
+        </form>
+    </div>
+</div>

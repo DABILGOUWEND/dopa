@@ -1,0 +1,190 @@
+<mat-drawer-container class="wen-table-drawer-container">
+  <mat-drawer mode="over" position="end" #table_update_drawer id="constats" [opened]="is_table_opened()"
+    disableClose="true">
+    <section class="table-update">
+      <div class="table-update__header">
+        <mat-form-field>
+          <mat-label>
+            Liste des postes
+          </mat-label>
+          <mat-select [(value)]="selected_poste_id" (selectionChange)="selectChangPostes($event.value)">
+            <mat-option *ngFor="let row of liste_poste()" [value]="row.id">
+              {{row.poste +' - ' + row.designation}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <h2> {{'Poste: ' + (ligne_poste?ligne_poste.poste:'')}}</h2>
+        <h3> {{'Désignation: ' + (ligne_poste?ligne_poste.designation:'')}}</h3>
+        <h3> {{'Prix untaire: ' + (ligne_poste?(ligne_poste.prix_u|currency:'F CFA'):'')}}</h3>
+        <h3> {{'Quantité devis: ' + (ligne_poste?ligne_poste.quantite + ' ' + ligne_poste.unite:'')}}</h3>
+        <h3> {{'Quantité exécutée: ' + (ligne_poste?totalExec() + ' ' + ligne_poste.unite:'')}}</h3>
+      </div>
+      <form [formGroup]="table_update_form" (ngSubmit)="updateTableData()">
+        <div class="table-update__body" *ngIf="ligne_poste">
+
+          <mat-form-field>
+            <mat-label>
+              QUANTITE MOIS
+            </mat-label>
+            <input matInput formControlName="quantite_mois" type="number" placeholder="QUANTITE">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>
+              DESCRIPTION
+            </mat-label>
+            <textarea matInput formControlName="description" placeholder="description"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="table-update__footer">
+          <button mat-flat-button type="submit" color="primary" [disabled]="!table_update_form.valid">
+            {{is_table_updated()?'Modifier':'Ajouter'}}
+          </button>
+          <button mat-flat-button (click)="annuler()" color="warn" type="button"> Annuler
+          </button>
+        </div>
+      </form>
+    </section>
+  </mat-drawer>
+
+  <mat-drawer-content id="constats">
+    <div class="content_head">
+      <h2>CONSTATS DE TRAVAUX</h2>
+    </div>
+    <div class="content_soushead">
+      <div class="table-col1">
+        <mat-form-field>
+          <mat-label>
+            Selectionner devis
+          </mat-label>
+          <mat-select [(value)]="selected_devis" (selectionChange)="selectChangeDevis($event.value)">
+            <mat-option *ngFor="let row of _devisStore.donnees_devis()" [value]="row.id">
+              {{(row.entreprise_id|entreprises:_sstrce_Store.donnees_sstraitant()|async)+ ' --- '+row.code }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="table-col2">
+        <button (click)="printConstat()" mat-flat-button [disabled]="selected_devis()=='' || donnees().length<=0" color="primary">
+          Imprimer constat
+        </button>
+      </div>
+      
+    </div>
+    <div class="titre_constats">
+      @if(numero_decompte()>0)
+      { <h3>{{'Décompte n°' + numero_decompte()}} </h3>}@else {
+      <h3>{{'Décompte n°' + '___'}} </h3>
+      }
+
+      <button mat-icon-button (click)="defilement_back()" [disabled]="numero_decompte()<=min_numero()"><mat-icon>
+          navigate_before</mat-icon></button>
+      <button mat-icon-button (click)="defilement_next()" [disabled]="numero_decompte()>=max_numero()"><mat-icon>
+          navigate_next</mat-icon></button>
+      <div>
+        <button mat-flat-button (click)="nouveau()" [disabled]="selected_devis()==''"> Nouveau décompte</button>
+      </div>
+      <div>
+        <button mat-icon-button (click)="deleteDec()" matTooltip="supprimer décompte"
+          [disabled]="_constat_store.constats_by_devis().length==0"> <mat-icon>delete</mat-icon></button>
+      </div>
+    </div>
+    <div class="content_add_button">
+
+
+    </div>
+    <div class="content_add_button">
+      <button (click)="ajouter()" mat-flat-button color="primary" matTooltip="Ajouter nouveau" matTooltipPosition="left"
+        aria-label="Add New Row" [disabled]="selected_devis()=='' || numero_decompte()==0">
+        <span class="material-icons">
+          playlist_add
+        </span>
+      </button>
+    </div>
+
+    <div class="content_body">
+      <table mat-table [dataSource]="dataSource()" class="mat-elevation-z8">
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> DATE </th>
+          <td mat-cell *matCellDef="let element">
+            @if(element.is_parent)
+            {
+            }@else { {{element.date}}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="poste">
+          <th mat-header-cell *matHeaderCellDef> POSTE </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.poste}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="designation">
+          <th mat-header-cell *matHeaderCellDef> DESIGNATION </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.designation}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantite_prec">
+          <th mat-header-cell *matHeaderCellDef> QUANTITE PRECEDENTE </th>
+          <td mat-cell *matCellDef="let element">
+            @if(element.is_parent)
+            {
+
+            }@else { {{element.quantite_prec}}}
+
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantite_mois">
+          <th mat-header-cell *matHeaderCellDef> QUANTITE DU MOIS </th>
+          <td mat-cell *matCellDef="let element">
+            @if(element.is_parent)
+            {
+
+            }@else { {{element.quantite_mois}}}
+
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantite_cumul">
+          <th mat-header-cell *matHeaderCellDef> QUANTITE CUMULEE </th>
+          <td mat-cell *matCellDef="let element">
+            @if(element.is_parent)
+            {
+
+            }@else { {{element.quantite_cumul}}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> DESCRIPTION </th>
+          <td mat-cell *matCellDef="let element">
+            @if(element.is_parent)
+            {
+
+            }@else { {{element.description}}}
+
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element">
+            @if(element.is_parent)
+            {}@else {<button mat-icon-button (click)="edit(element)"><mat-icon> edit</mat-icon> </button>
+            <button mat-icon-button (click)="delete(element.id)"><mat-icon> delete</mat-icon> </button>}
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;let ind=index"
+          [ngClass]="{'classe_parent0':element.is_parent}">
+        </tr>
+      </table>
+    </div>
+
+  </mat-drawer-content>
+</mat-drawer-container>

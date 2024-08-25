@@ -1,0 +1,13 @@
+<mat-drawer-container class="wen-table-drawer-container">
+    <mat-drawer mode="over" position="start" #table_update [opened]="is_open()" disableClose="true">
+        <ng-container [ngTemplateOutlet]="Entete">
+        </ng-container>
+    </mat-drawer>
+    <ng-content select="mydrawer2">
+
+    </ng-content>
+    <mat-drawer-content>
+        <ng-container [ngTemplateOutlet]="Corps">
+        </ng-container>
+    </mat-drawer-content>
+</mat-drawer-container> 

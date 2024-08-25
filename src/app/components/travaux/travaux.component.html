@@ -1,0 +1,104 @@
+<mat-drawer-container class="wen-table-drawer-container">
+    <mat-drawer mode="over" position="start" #table_update [opened]="is_open" disableClose="true">
+        <section class="table-update">
+            <div class="table-update__header">
+                <h3>Date:{{default_date.toLocaleDateString()}}</h3>
+                <h3> {{data_engin.designation}}</h3>
+                <h3> Quantité de gasoil:{{' '+data_engin.quantite_go+ ' litres'}}</h3>
+            </div>
+            <form [formGroup]="table_update_form" (ngSubmit)="updateTableData()">
+                <div class="table-update__body">
+                    <mat-form-field>
+                        <mat-label>
+                            Quantité latérite (m3)
+                        </mat-label>
+                        <input matInput formControlName="quantite" type="number" placeholder="quantité">
+                    </mat-form-field>
+                </div>
+                <div class="table-update__footer">
+                    <button mat-flat-button type="submit" color="primary" [disabled]="!table_update_form.valid">
+                        {{is_updated?'Modifier':'Enregistrer'}}
+                    </button>
+                    <button mat-flat-button (click)="annuler()" color="warn" type="button"> Annuler
+                    </button>
+
+                </div>
+            </form>
+        </section>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="content_head">
+            <h2>Travaux journaliers</h2>
+        </div>
+
+        <div class="content_soushead" *ngIf="selected.value==0">
+            <div class="tabcol1">
+                <canvasjs-chart [options]="chartOptionsConsoGo()" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+            </div>
+
+            <div class="tabcol3">
+                <h2> Quantité latérite approvisionnée ce jour {{datestring+':'+ appro_total()}}</h2>
+
+            </div>
+       
+        </div>
+        <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+            <mat-tab [label]="naturetrvx_store.designation()[0]">
+                <div> 
+                    <mat-form-field class="example-form-field">
+                        <mat-label>Choisir une date</mat-label>
+                        <input matInput [matDatepicker]="datepicker" (dateInput)="addEvent( $event)" [ngModel]="default_date" placeholder="date">
+                        <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #datepicker>
+                            <mat-datepicker-actions>
+                                <button mat-flat-button matDatepickerCancel color="warn">Annuler</button>
+                                <button mat-flat-button color="primary" matDatepickerApply>Appliquer</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <table mat-table [dataSource]="dataSource_appro()" class="wen-table">
+                    <ng-container matColumnDef="designation">
+                        <th mat-header-cell *matHeaderCellDef> DESIGNATION
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.designation +' - '+ element.code_parc}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="quantite_go">
+                        <th mat-header-cell *matHeaderCellDef> GO CONSOMME
+                        </th>
+                        <td mat-cell *matCellDef="let element;let i=index">
+                            {{gasoil_servi_appro()[i]}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="nature_trx">
+                        <th mat-header-cell *matHeaderCellDef> NATURE TRAVAUX
+                        </th>
+                        <td mat-cell *matCellDef="let element;let i=index">
+                           {{naturetrvx_store.designation()[0]}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="quantite">
+                        <th mat-header-cell *matHeaderCellDef> QUANTITE LATERITE
+                        </th>
+                        <td mat-cell *matCellDef="let element;let i=index">
+                            {{quantite()[0][i]}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let row;index as i">
+                            <button mat-icon-button (click)="addtravaux(row,i)" [disabled]="quantite()[1][i]"><mat-icon>playlist_add</mat-icon></button>
+                            <button mat-icon-button (click)="edit(row,i)" [disabled]="!quantite()[1][i]"><mat-icon>edit</mat-icon></button>
+                            <button mat-icon-button (click)="remove(i)" [disabled]="!quantite()[1][i]"><mat-icon>delete</mat-icon></button>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;let index = index"></tr>
+                </table>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-drawer-content>
+
+</mat-drawer-container>

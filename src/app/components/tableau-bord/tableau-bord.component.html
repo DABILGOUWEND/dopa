@@ -1,0 +1,28 @@
+<div class="toolbar2">
+    <mat-toolbar>
+        <ng-container>
+            <button mat-fab extended  type="button" (click)="click_taches()">
+                TACHES PROJET
+            </button>
+        </ng-container>
+        <span class="example-spacer2"> </span>
+
+        <ng-container>
+            <button mat-fab extended   type="button">
+                CONSTATS DES TRAVAUX
+            </button>
+        </ng-container>
+        <span class="example-spacer2"> </span>
+
+        <ng-container>
+            <button mat-fab extended   type="button">
+                ATTACHEMENTS TRAVAUX
+            </button>
+        </ng-container>
+  
+    </mat-toolbar>
+</div>
+<app-taches-projets *ngIf="is_click_taches()">
+
+</app-taches-projets>
+

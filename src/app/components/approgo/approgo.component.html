@@ -1,0 +1,88 @@
+<div class="table-update__header">
+<h2>Approvisionnements en gasoil</h2>
+</div>
+
+<div class="table-update__body">
+    <div  class="colon1">
+        <form  [formGroup]="formGroup" (ngSubmit)="updateTableData()">
+            <div class="row"> 
+                <mat-form-field appearance="fill">
+                    <mat-label>Choisir une date</mat-label>
+                    <input matInput [matDatepicker]="datepicker" formControlName="date" placeholder="date">
+                    <mat-hint>DD/MM/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker>
+                        <mat-datepicker-actions>
+                            <button mat-flat-button matDatepickerCancel type="button">Annuler</button>
+                            <button mat-flat-button color="primary" matDatepickerApply type="button">Appliquer</button>
+                        </mat-datepicker-actions>
+                    </mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="row"> 
+                <mat-form-field appearance="fill">
+                    <mat-label>Quantité</mat-label>
+                    <input matInput formControlName="quantite" type="number" placeholder="quantité">
+                    <mat-error></mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row"> 
+                <mat-form-field appearance="fill">
+                    <mat-label>Réceptionniste</mat-label>
+                    <input matInput formControlName="reception" type="text" placeholder="réceptionniste">
+                    <mat-error></mat-error>
+                </mat-form-field>
+            </div>
+            <div class="actions">
+                <button mat-flat-button class="primary-button" color="primary" type="submit"
+                    [disabled]="!formGroup.valid">{{is_new_row_being_added?"Enregistrer":"Modifier"}}</button>
+
+                <button mat-flat-button class="primary-button" color="warn" type="button"
+                    (click)="quitter()">quitter</button>
+            </div>
+
+        </form>
+
+    </div>
+    <div class="colon2">
+        <table mat-table [dataSource]="datasource()" class="wen-table">
+
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> DATE
+
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.date}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantite">
+                <th mat-header-cell *matHeaderCellDef> QUANTITE
+
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.quantite}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="reception">
+                <th mat-header-cell *matHeaderCellDef> RECEPTIONNISTE
+
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.reception}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-icon-button (click)="editappro(row)"><mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button (click)="deleteappro(row.id)"><mat-icon>delete</mat-icon></button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>

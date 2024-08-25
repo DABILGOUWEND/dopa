@@ -1,0 +1,358 @@
+<mat-drawer-container class="wen-table-drawer-container">
+    <mat-drawer mode="over" position="end" #table_update_drawer id="decomptes" [opened]="is_table_opened()"
+        disableClose="true">
+        <section class="table-update">
+            <div class="table-update__header">
+                <h2> {{entreprise_id()|entreprises:_sstrce_Store.donnees_sstraitant()|async}}</h2>
+                <h3>{{'DECOMPTE N°' + defile_numero() }} </h3>
+                @if(donneesDevis())
+                {
+                <h4>
+                    {{'MONTANT DU MARCHE HTVA : ' +
+                    (_ligneDevis_Store.montantDevis()|currency:"F
+                    CFA":"symbol":'1.0-0')
+                    }}
+                </h4>
+                <h4>
+                    {{'MONTANT AVANCE DE DEMARRAGE : ' +
+                    (donneesDevis()==undefined?0:donneesDevis().avance|currency:"F
+                    CFA":"symbol":'1.0-0')
+                    }}
+                </h4>
+                }
+            </div>
+            <div class="table-update__body">
+                <table mat-table [dataSource]="dataSourceDP()" class="mat-elevation-z8">
+                    <ng-container matColumnDef="designation">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let element;let ind=index">
+                            {{element.titre_precedent}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="precedent">
+                        <th mat-header-cell *matHeaderCellDef>MONTANT PRECEDENT </th>
+                        <td mat-cell *matCellDef="let element;let ind=index">
+                            {{element.montant_precedent|currency:'':"symbol":'1.0-0'}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="periode">
+                        <th mat-header-cell *matHeaderCellDef> MONTANT PERIODE</th>
+                        <td mat-cell *matCellDef="let element;let ind=index">
+                            @switch (ind) {
+                            @case (2) {
+                            @if(ligne_cliquer()==2)
+                            {
+                            <mat-form-field>
+                                <input matInput type="number" [(ngModel)]="current_avance" (keyup)="saisie()" />
+                            </mat-form-field>
+                            }@else {
+                            {{current_avance()|currency:'':"symbol":'1.0-0'}}
+                            }
+                            }
+                            @case (3 ) {
+                            @if(ligne_cliquer()==3)
+                            {
+                            <mat-form-field>
+                                <input matInput type="number" [(ngModel)]="current_autres_ret" (keyup)="saisie()" />
+                            </mat-form-field>
+
+                            }@else {
+                            {{current_autres_ret()|currency:'':"symbol":'1.0-0'}}
+                            }}
+                            @case (4) {
+                            {{(current_autres_ret()+current_avance()+sommeTotal_periode()*0.05)|currency:'':"symbol":'1.0-0'}}
+                            }
+                            @case (5) {
+                            {{(sommeTotal_periode()-current_avance()-current_autres_ret()-sommeTotal_periode()*0.05)|currency:'':"symbol":'1.0-0'}}
+                            }
+                            @case (7) {
+                            {{(sommeTotal_periode()*(1-0.05)-current_avance()-current_autres_ret()-sommeTotal_periode()*0.01)|currency:'':"symbol":'1.0-0'}}
+                            }
+                            @default {
+                            {{element.montant_periode|currency:'':"symbol":'1.0-0'}}
+                            }
+                            }
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="cumule">
+                        <th mat-header-cell *matHeaderCellDef>MONTANT CUMULE </th>
+                        <td mat-cell *matCellDef="let element;let ind=index">
+
+                            @switch (ind ) {
+                            @case (2) {
+                            {{(element.montant_precedent+ current_avance())|currency:'':"symbol":'1.0-0'}}
+                            }
+                            @case (3) {
+                            {{(element.montant_precedent+ current_autres_ret())|currency:'':"symbol":'1.0-0'}}
+                            }
+                            @case (4) {
+                            {{(element.montant_precedent+ current_autres_ret()+
+                            current_avance()+sommeTotal_periode()*0.05)|currency:'':"symbol":'1.0-0'}}
+                            }
+                            @case (5) {
+                            {{(sommeTotal_periode()-current_avance()-current_autres_ret()-sommeTotal_periode()*0.05+element.montant_precedent)|currency:'':"symbol":'1.0-0'}}
+                            }
+                            @case (7) {
+                            {{(sommeTotal_periode()*(1-0.05)-current_avance()-current_autres_ret()-sommeTotal_periode()*0.01+element.montant_precedent)|currency:'':"symbol":'1.0-0'}}
+                            }
+                            @default {
+                            {{element.montant_cumul|currency:'':"symbol":'1.0-0'}}
+                            }
+                            }
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columnsTodisplayDp"></tr>
+                    <tr mat-row *matRowDef="let element; columns: columnsTodisplayDp;let ind=index"
+                        [ngClass]="{'classe_recap':ind==8,'classe_total':ind==5}" (click)="clicker(ind)">
+                    </tr>
+                </table>
+            </div>
+            <div class="table-update__footer">
+                <button mat-flat-button (click)="Annuler()" color="Accent">
+                    Annuler
+                </button>
+                <button mat-flat-button (click)="Quitter()" color="warn">
+                    Quitter
+                </button>
+                <button mat-flat-button (click)="saveDp()" [disabled]="!is_changed()">
+                    {{is_dp_exist()?"Modifier":"Enregistrer"}}
+                </button>
+                <button mat-icon-button (click)="printDecompte()" [disabled]="!is_dp_exist() ||is_changed()">
+                    <mat-icon>
+                        print
+                    </mat-icon>
+                </button>
+            </div>
+        </section>
+    </mat-drawer>
+    <mat-drawer-content id="creationattach">
+        <div class="content_head">
+            <h2>ATTACHEMENTS</h2>
+        </div>
+        <div class="titre_attach">  
+            <div class="block1">
+                <mat-form-field>
+                    <mat-label>
+                        Liste des devis
+                    </mat-label>
+                    <mat-select [(value)]="selected_devis" (selectionChange)="selectChangeDevis($event.value)">
+                        <mat-option *ngFor="let row of _devisStore.donnees_devis()" [value]="row.id">
+                            {{
+                            (row.entreprise_id|entreprises:_sstrce_Store.donnees_sstraitant()|async)+ ' ---
+                            '+row.code}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+            </div>
+            <div class="hidediv">
+                <qrcode id="qrcode" (qrCodeURL)="onChangeURL($event)" elementType="canvas" [qrdata]="myAngularxQrCode()"
+                    [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+            </div>
+        </div>
+        <div class="titre_attach" *ngIf="selected_devis()!='' && _constat_store.last_num()>0">
+            <div class="block1">
+                <h3> {{entreprise_id()|entreprises:_sousTraitance_Store.donnees_sstraitant()|async}}</h3>
+                <h4>{{'ATTACHEMENT N° ' +defile_numero()}}</h4>
+
+                <button mat-icon-button (click)="defilement_back()" [disabled]="defile_numero()==_constat_store.min_numero()"><mat-icon>
+                        navigate_before</mat-icon></button>
+                <button mat-icon-button (click)="defilement_next()"
+                    [disabled]="defile_numero()>= _constat_store.last_num()"><mat-icon>
+                        navigate_next</mat-icon></button>
+                <div>
+                    <button mat-flat-button (click)="printAttachement()" [disabled]="_constat_store.last_num()==0">
+                        Imprimer
+                        attachement
+                    </button>
+                </div>
+
+            </div>
+            <div class="block2">
+                <button mat-flat-button (click)="decompte()">
+                    Fiche de décompte
+                </button>
+                <button mat-flat-button (click)="printFacture()" >
+                    Facture
+                </button>
+
+            </div>
+        </div>
+        <div class="content_body" *ngIf="selected_devis()!=''&&  _constat_store.last_num()>0">
+            <table mat-table [dataSource]="dataSource()" class="mat-elevation-z8">
+                <ng-container matColumnDef="poste">
+                    <th mat-header-cell *matHeaderCellDef> N° POSTE </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.poste}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="designation">
+                    <th mat-header-cell *matHeaderCellDef> DESIGNATION </th>
+                    <td mat-cell *matCellDef="let element; let ind = index;" [ngClass]="{
+                'decal0':ligne_parent0().includes(element.parent_code),
+              'decal1':ligne_parent1().includes(element.parent_code),
+              'decal2':ligne_parent2().includes(element.parent_code)}">
+
+                        {{element.designation}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="unite">
+                    <th mat-header-cell *matHeaderCellDef> UNITE </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.unite}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="prix_u">
+                    <th mat-header-cell *matHeaderCellDef> PRIX UNITAIRE </th>
+                    <td mat-cell *matCellDef="let element">
+                        @if(has_child().includes(element.code))
+                        {
+
+                        }@else {
+                        {{element.prix_u|currency:'F CFA'}}
+                        }
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="quantite_marche">
+                    <th mat-header-cell *matHeaderCellDef> QUANTITE MARCHE</th>
+                    <td mat-cell *matCellDef="let element">
+                        @if(has_child().includes(element.code))
+                        {
+
+                        }@else {
+                        {{element.quantite_marche}}
+                        }
+
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="quantite_prec">
+                    <th mat-header-cell *matHeaderCellDef> QUANTITE PRECEDENTE</th>
+                    <td mat-cell *matCellDef="let element">
+                        @if(has_child().includes(element.code))
+                        {
+
+                        }@else {
+                        {{element.quantite_prec}}
+                        }
+
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="quantite_periode">
+                    <th mat-header-cell *matHeaderCellDef> QUANTITE PERIODE</th>
+                    <td mat-cell *matCellDef="let element">
+                        @if(has_child().includes(element.code))
+                        {
+
+                        }@else {
+                        {{element.quantite_periode}}
+                        }
+
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="quantite_cumul">
+                    <th mat-header-cell *matHeaderCellDef> QUANTITE CUMULEE </th>
+                    <td mat-cell *matCellDef="let element">
+                        @if(has_child().includes(element.code))
+                        {
+
+                        }@else {
+                        {{element.quantite_cumul}}
+                        }
+
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="montant_marche">
+                    <th mat-header-cell *matHeaderCellDef> MONTANT MARCHE</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.montant_marche|currency:'F CFA'}}
+
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="montant_prec">
+                    <th mat-header-cell *matHeaderCellDef> MONTANT PRECEDENT</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.montant_prec|currency:'F CFA'}}
+
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="montant_periode">
+                    <th mat-header-cell *matHeaderCellDef> MONTANT PERIODE</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.montant_periode|currency:'F CFA'}}
+
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="montant_cumul">
+                    <th mat-header-cell *matHeaderCellDef> MONTANT CUMUL</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.montant_cumul|currency:'F CFA'}}
+
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="taux">
+                    <th mat-header-cell *matHeaderCellDef> TAUX</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.taux +' %'}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="vide">
+                    <td mat-footer-cell *matFooterCellDef colspan="8">
+                        {{'MONTANT TOTAL HTVA'}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="somme_marche">
+                    <td mat-footer-cell *matFooterCellDef>
+                        {{(sommeTotal_marche().toFixed(0)|currency:'F CFA')}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="somme_precedente">
+                    <td mat-footer-cell *matFooterCellDef>
+                        {{ (sommeTotal_prec().toFixed(0)|currency:'F CFA')}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="somme_periode">
+                    <td mat-footer-cell *matFooterCellDef>
+                        {{ (sommeTotal_periode().toFixed(0)|currency:'F CFA')}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="somme_cumul">
+                    <td mat-footer-cell *matFooterCellDef>
+                        {{ (sommeTotal_cumul().toFixed(0)|currency:'F CFA')}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="tauxC">
+                    <td mat-footer-cell *matFooterCellDef>
+                        {{ sommeTotal_marche()!=0?((sommeTotal_cumul()/sommeTotal_marche()*100).toFixed(2) +'%'):0 +'%'
+                        }}
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                <tr mat-row *matRowDef="let element; columns: columnsToDisplay;let ind=index"
+                    [ngClass]="{'classe_parent0':ligne_parent0().includes(element.code),'classhide':element.isvisible==false}">
+                </tr>
+                <tr mat-footer-row
+                    *matFooterRowDef="['vide','somme_marche','somme_precedente','somme_periode','somme_cumul','tauxC'];sticky:true">
+                </tr>
+
+            </table>
+        </div>
+
+
+        <div>
+            <qr-code>
+
+            </qr-code>
+        </div>
+
+    </mat-drawer-content>
+
+</mat-drawer-container>

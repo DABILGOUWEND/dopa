@@ -1,0 +1,13 @@
+<div class="accueil">
+    <div class="accueil_gauche">
+        <canvasjs-chart [options]="chartOptions1()" [styles]="{width: '100%', height:'100%'}"></canvasjs-chart>
+    </div>
+    <div class="accueil_droite">
+        <canvasjs-chart [options]="chartOptions2()" [styles]="{width: '100%', height:'100%'}"></canvasjs-chart>
+    </div>
+</div>
+<div class="pied_de_page">
+    <div class="part1_pied_de_page">
+        <h2>Stock actuel du gasoil: {{(approgo_store.quantite_go()-gasoil_store.quantite_go() -834)+' litres'}}</h2>
+    </div>
+</div>

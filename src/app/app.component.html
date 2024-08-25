@@ -1,0 +1,104 @@
+
+  <mat-sidenav-container fullscreen>
+    <mat-sidenav #sidnav>
+      <mat-nav-list (click)="sidnav.close()">
+        <a mat-list-item routerLink="materiel">
+          <mat-icon>build </mat-icon>
+          <span>Liste du Matériel</span>
+        </a>
+  
+        <a mat-list-item routerLink="personnel">
+          <mat-icon>people </mat-icon>
+          <span>Liste du Personnel</span>
+        </a>
+        -----------------------
+  
+        <a mat-list-item routerLink="rapportpannes">
+          <mat-icon>library_books </mat-icon>
+          <span>Rapport des pannes</span>
+        </a>
+        -----------------------
+        <a mat-list-item (click)="logout()">
+          <mat-icon>logout </mat-icon>
+          <span>déconnection</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="toolbar">
+      <mat-toolbar>
+  
+        <button mat-fab (click)="sidnav.open()" type="button">
+          <mat-icon>apps</mat-icon>
+        </button>
+  
+        <span class="example-spacer2"> </span>
+  
+        <button mat-fab (click)="click_accueil()" type="button">
+          <mat-icon> home</mat-icon>
+        </button>
+  
+        <span class="example-spacer2"> </span>
+  
+        <button mat-fab extended color="Accent" (click)="click_gasoil()" type="button" >
+          GASOIL
+        </button>
+  
+        <span class="example-spacer2"> </span>
+  
+        <button mat-fab extended color="Accent" (click)="click_pannes()" type="button">
+          PANNE ENGINS
+        </button>
+  
+        <span class="example-spacer2"> </span>
+  
+        <button mat-fab extended color="Accent" (click)="click_pointage()" type="button">
+          POINTAGE PERSONNEL
+        </button>
+  
+        <span class="example-spacer2"> </span>
+  
+        <button mat-fab extended color="Accent" (click)="click_travaux()" type="button">
+          POINTAGE TRAVAUX
+        </button>
+  
+        <span class="example-spacer2"> </span>
+  
+        <button mat-fab extended color="Accent" (click)="prestation()" type="button" >
+          PRESTATION TRAVAUX
+        </button>
+  
+        <span class="example-spacer2"> </span>
+  <div class="loginBtn"> 
+    <ng-container *ngIf="!_auth_service.isloggedIn" >
+      <button mat-fab extended   (click)="click_login()">
+
+      <mat-icon>login</mat-icon> LOGIN
+      </button>
+    </ng-container>
+  </div>
+     
+  
+        <span class="example-spacer2"> </span>
+        <div class="logoutBtn"> 
+          <ng-container *ngIf="_auth_service.isloggedIn" >
+            <button mat-fab extended  (click)="logout()" color="primary">
+              <mat-icon> logout</mat-icon> <span>déconnecter</span>
+            </button>
+          </ng-container>
+        </div>
+
+        <span class="example-spacer2"> </span>
+        <ng-container *ngIf="_auth_service.isloggedIn" >
+          <h1>{{_auth_service.is_connected()?.identifiant}}</h1>
+        </ng-container>
+        <span class="example-spacer2"> </span>
+        <div class="logo">
+          <h3>SOLUBTP </h3>
+          <h4>By Wen</h4>
+        </div>
+      
+      </mat-toolbar>
+        <router-outlet> </router-outlet>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>

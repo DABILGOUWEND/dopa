@@ -1,0 +1,148 @@
+<mat-drawer-container  class="wen-table-drawer-container8">
+    <mat-drawer   mode="over" position="end" id="table_edit_panne" [opened]="open_tab_pannes" disableClose="true">
+        <section class="table-update">
+            <form [formGroup]="formG" (ngSubmit)="UpdatePanne()">
+                <div class="table-update__header">
+                   <h2> {{is_update?'Modification':'Création'}} </h2>
+                </div>
+                <div class="table-update__body">
+                    <div class="row">
+                        <mat-form-field>
+                            <mat-label> DATE DEBUT PANNE</mat-label>
+                            <input matInput [matDatepicker]="datepicker1" formControlName="debut_panne" placeholder="date">
+                            <mat-datepicker-toggle matIconSuffix [for]="datepicker1"></mat-datepicker-toggle>
+                            <mat-datepicker #datepicker1>
+                                <mat-datepicker-actions>
+                                    <button mat-flat-button matDatepickerCancel color="warn" type="button">Annuler</button>
+                                    <button mat-flat-button color="primary" matDatepickerApply type="button">Appliquer</button>
+                                </mat-datepicker-actions>
+                            </mat-datepicker>
+                        </mat-form-field> 
+        
+                    </div>
+        
+                    <div class="row">
+                        <mat-form-field>
+                            <mat-label> HEURE DEBUT PANNE</mat-label>
+                            <input matInput formControlName="heure_debut" [format]="24" [ngxMatTimepicker]="pick1" placeholder="heure début" />
+                            <ngx-mat-timepicker color="warn" #pick1>
+                            </ngx-mat-timepicker>
+                        </mat-form-field>
+        
+                    </div>
+                    <div class="row">
+                        <mat-form-field>
+                            <mat-label> MOTIF PANNE</mat-label>
+                            <input matInput formControlName="motif_panne" placeholder="motif panne">
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <h2> situation de la panne </h2>
+                    </div>
+                    <div class="row">
+                        <mat-radio-group aria-label="situation de la panne" (change)="choix_situation($event)">
+                            <mat-radio-button [value]="1" [checked]="selected=='1'">Panne en cours</mat-radio-button>
+                            <mat-radio-button [value]="2" [checked]="selected=='2'">Engin dépanné</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div class="row" *ngIf="selected=='2'">
+                        <mat-form-field>
+                            <mat-label> DATE FIN PANNE</mat-label>
+                            <input matInput [matDatepicker]="datepicker2" formControlName="fin_panne" placeholder="date fin panne">
+                            <mat-datepicker-toggle matIconSuffix [for]="datepicker2"></mat-datepicker-toggle>
+                            <mat-datepicker #datepicker2>
+                                <mat-datepicker-actions>
+                                    <button mat-flat-button matDatepickerCancel color="warn" type="button">Annuler</button>
+                                    <button mat-flat-button color="primary" matDatepickerApply type="button">Appliquer</button>
+                                </mat-datepicker-actions>
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="row" *ngIf="selected=='2'">
+                        <mat-form-field>
+                            <mat-label> HEURE FIN PANNE</mat-label>
+                            <input matInput formControlName="heure_fin" [format]="24" [ngxMatTimepicker]="pick2"  placeholder="heure fin panne"/>
+                            <ngx-mat-timepicker color="warn" #pick2>
+                            </ngx-mat-timepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                
+                <div class="table-update__footer">
+                    <button mat-flat-button type="submit" color="primary"
+                        [disabled]="!formG.valid">{{modif?'Modifer':'Enregistrer'}}</button>
+                        <button  class="wen-table__action-button" mat-flat-button color="warn" (click)="open_tab_pannes=false" type="button">Annuler</button>
+                </div>
+            </form>
+        </section>
+       
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="content_head">
+                <h2> {{'CODE PARC: '+ engin.code_parc +' ' +engin.designation}}</h2>
+        </div>
+        <table mat-table [dataSource]="datasource()" class="wen-table">
+            <ng-container matColumnDef="debut_panne">
+                <th mat-header-cell *matHeaderCellDef> DEBUT PANNE
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.debut_panne +' ' +element.heure_debut}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="fin_panne">
+                <th mat-header-cell *matHeaderCellDef> FIN PANNE
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.fin_panne+' ' +element.heure_fin}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="motif_panne">
+                <th mat-header-cell *matHeaderCellDef> MOTIF PANNE
+
+                </th>
+                <td mat-cell *matCellDef="let element">
+
+                    {{element.motif_panne}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="situation">
+                <th mat-header-cell *matHeaderCellDef> SITUATION PANNE
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.situation}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="nbre_heure">
+                <th mat-header-cell *matHeaderCellDef> DUREE PANNE (heure)
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element|situationPanne:'nombre'|async}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let row; index as i">
+                    <button mat-icon-button (click)="modif_panne(row,i)"><mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button  (click)="delete(row)"><mat-icon>delete</mat-icon></button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;let index = index"
+                [ngClass]="{ 'selected': index === selectedRow}"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 20, 30, 40, 50,60,80,100]"
+            aria-label="Select page of users"></mat-paginator>
+        <div class="actions">
+            <button (click)="addpanne()" mat-flat-button  color="primary">
+                <span class="material-icons">
+                    playlist_add
+                </span>
+            </button>
+            
+            <button  class="wen-table__action-button" mat-flat-button  color="warn" (click)=" annuler()" type="button">Quitter</button>
+
+        </div>
+        <div class="actions">
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

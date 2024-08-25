@@ -1,0 +1,17 @@
+<mat-drawer-container class="wen-table-drawer-container">
+    <mat-drawer mode="over" position="start" #table_update [opened]="is_open()" disableClose="true">
+        <ng-container [ngTemplateOutlet]="Entete">
+        </ng-container>
+    </mat-drawer>
+    <mat-drawer mode="over" position="end" #table_update2 id="table_ajout_gasoil" [opened]="is_open2()" disableClose="true">
+        <section class="table-update">
+            <app-approgo [is_new_row_being_added]="true" (onRowAdd)="retourQuitter()">
+
+            </app-approgo>
+        </section>
+    </mat-drawer>
+    <mat-drawer-content>
+        <ng-container [ngTemplateOutlet]="Corps">
+        </ng-container>
+    </mat-drawer-content>
+</mat-drawer-container>

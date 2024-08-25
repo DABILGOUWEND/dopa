@@ -1,0 +1,163 @@
+<mat-drawer-container class="wen-table-drawer-container2">
+    <mat-drawer mode="over" position="start" #table_update [opened]="is_open" disableClose="true">
+        <section class="table-update2">
+            <div class="table-update__body">
+                <form [formGroup]="table_update_form" (ngSubmit)="updateTableData()">
+                    <header class="table-update__header">
+                        <h2 class="h3">{{is_new_row_being_added? 'Créer contrat' : 'Modifier contrat'}}</h2>
+                    </header>
+    
+                    <app-saisi [parent_FG]="table_update_form" control_name="projet_id" label="PROJET"
+                        [type]="text6">
+                    </app-saisi>
+    
+                    <app-saisi [parent_FG]="table_update_form" control_name="sous_traitant_id" label="SOUS TRAITANT"
+                        [type]="text7">
+                    </app-saisi>
+    
+                    <app-saisi [parent_FG]="table_update_form" control_name="montant" label="MONTANT TRAVAUX" [type]="text4">
+                    </app-saisi>
+    
+                    <app-saisi [parent_FG]="table_update_form" control_name="montant_avance" label="AVANCE DEMARRAGE"
+                        [type]="text4">
+                    </app-saisi>
+    
+                    <app-saisi [parent_FG]="table_update_form" control_name="duree_travaux" label="DUREE CONTRAT"
+                        [type]="text1">
+                    </app-saisi>
+    
+                    <div class="table-update__footer">
+                        <button mat-raised-button color="primary-darkry" color="warn" type="button"
+                            (click)="annuler()">Annuler</button>
+                        <button mat-raised-button class="primary-button" color="primary" type="submit"
+                            [disabled]="!table_update_form.valid">{{is_new_row_being_added?"Enregistrer":"Modifier"}}</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </mat-drawer> 
+    <mat-drawer-content>
+        <div class="content_head"> 
+            <h2>Contrats de sous-traitance</h2>
+        </div>
+        <div class="content_button">
+            <mat-form-field>
+                <mat-label>
+                    Choix projet
+                </mat-label>
+                <mat-select [(ngModel)]="choix_projet" (selectionChange)="projet_choice()">
+                    
+                    <mat-option  *ngFor="let row of projet_Store.donnees_projet()" [value]="row.id">
+                        {{row.intitule +'-'+ row.descrip_travaux}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div>
+                <mat-form-field class="example-form-field">
+                    <mat-label>Choisir une date impression</mat-label>
+                    <input matInput [matDatepicker]="datepicker" (dateInput)="addEvent( $event)"
+                        [ngModel]="default_date"  placeholder="date">
+                    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker >
+                        <mat-datepicker-actions>
+                            <button mat-button matDatepickerCancel>Annuler</button>
+                            <button mat-raised-button color="primary" matDatepickerApply>Appliquer</button>
+                        </mat-datepicker-actions>
+                    </mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="content_add_button">
+            <button (click)="addcontrat()" mat-raised-button matTooltip="Ajouter nouveau" matTooltipPosition="left"
+                aria-label="Add New Row" color="primary">
+                <span class="material-icons">
+                    playlist_add
+                </span>
+            </button>
+
+            <button (click)="imprimer()" mat-raised-button  color="primary"  [disabled]="!allComplete && !selected.includes(true)">
+                <mat-icon>
+                    save_alt
+                </mat-icon>
+            </button>
+
+        </div>
+
+        <table mat-table [dataSource]="datasource()" class="wen-table">
+
+            <ng-container matColumnDef="projet">
+                <th mat-header-cell *matHeaderCellDef> PROJET
+
+                </th>
+                <td mat-cell *matCellDef="let element,let i=index">
+                    {{projets()[i]}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="travaux">
+                <th mat-header-cell *matHeaderCellDef> TRAVAUX
+
+                </th>
+                <td mat-cell *matCellDef="let element,let i=index">
+                    {{travaux()[i]}}
+                </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="sous_traitant">
+                <th mat-header-cell *matHeaderCellDef> SOUS TRAITANT
+
+                </th>
+                <td mat-cell *matCellDef="let element,let i=index">
+                    {{sous_traitant()[i]}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="montant">
+                <th mat-header-cell *matHeaderCellDef> MONTANT CONTRAT
+
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.montant| currency:'F CFA'}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="avance">
+                <th mat-header-cell *matHeaderCellDef> MONTANT AVANCE
+
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.montant_avance| currency:'F CFA'}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="duree">
+                <th mat-header-cell *matHeaderCellDef> DUREE DU CONTRAT
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.duree_travaux}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox 
+                    [checked]="allComplete"
+                    [color]="task.color"
+                    [indeterminate]="someComplete()"
+                    (change)="setAll($event.checked)"
+                    > tout selectionner</mat-checkbox> </th>
+                <td mat-cell *matCellDef="let row;index as i">
+                    <button mat-icon-button (click)="editcontrat(row)"><mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button (click)="deletecontrat(row.id)"><mat-icon>delete</mat-icon></button>
+                    <mat-checkbox [checked]="donnees()[i].checked" (change)="is_checked(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;let index = index"
+                ></tr>
+        </table>
+    </mat-drawer-content>
+</mat-drawer-container>

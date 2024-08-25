@@ -1,0 +1,121 @@
+<app-gasoil-model [table]="table()" [table_update_form]="table_update_form" [dataSource]="dataSource"
+    [titre_tableau]="titre_tableau()" [displayedColumns]="displayedColumns" [is_open2]="is_open2"
+    (newItemEvent)="updateData($event)" (RemoveItemEvent)="deleteData($event)" 
+    (RechercheEvent)="recherche($event)"
+    (AfficheToutEvent)="afficheTout()" [titre]="titre" [conso]="conso"
+    (ChangeSelectEvent)="changeSelect($event)"
+    (PatchEvent)="PatchEventFct($event)" 
+    (addEvent)="addEventFct()"
+    (printEvent)="printgasoil()">
+
+    <div class="content_soushead" ngProjectAs="courbe">
+        <div class="table-col1">
+            <div class="myrow1">
+                <div>
+                    <label>Affichage: </label>
+                    <mat-radio-group [formControl]="floatLabelControl" (change)="choix_date()">
+                        <mat-radio-button value="date">date</mat-radio-button>
+                        <mat-radio-button value="idate">intervalle de dates</mat-radio-button>
+                        <mat-radio-button value="tout">toutes les dates</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div *ngIf="date_choice=='date'">
+                    <mat-form-field class="example-form-field">
+                        <mat-label>Choisir une date</mat-label>
+                        <input matInput [matDatepicker]="datepicker" (dateInput)="addEvent( $event)"
+                            [ngModel]="default_date" placeholder="date">
+                        <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #datepicker>
+                            <mat-datepicker-actions>
+                                <button mat-button matDatepickerCancel>Annuler</button>
+                                <button mat-raised-button color="primary" matDatepickerApply>Appliquer</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div *ngIf="date_choice=='idate'">
+                    <form [formGroup]="formG2">
+                        <mat-form-field class="example-form-field">
+                            <mat-label>Choisir intervale de dates</mat-label>
+                            <mat-date-range-input [rangePicker]="daterangepicker">
+                                <input matInput matStartDate placeholder="Start Date" formControlName="date_debut">
+                                <input matInput matEndDate placeholder="End Date" formControlName="date_fin"
+                                    (dateChange)="dateRangeChange()">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matSuffix [for]="daterangepicker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #daterangepicker>
+                            </mat-date-range-picker>
+                        </mat-form-field>
+                    </form>
+                </div>
+
+      
+            </div>
+            <div class="myrow2">
+                <h2> Filtre par engins</h2>
+                <mat-form-field>
+                    <mat-label>
+                        Classes d'engins
+                    </mat-label>
+                    <mat-select [(value)]="selected_classe_id"
+                        (selectionChange)="selectChangeEnginByclass($event.value)">
+                        <mat-option value="">
+                            --toutes les classes</mat-option>
+                        <mat-option *ngFor="let row of classes_store.classes_engins()" [value]="row.id">
+                            {{row.designation}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>
+                        Engins
+                    </mat-label>
+                    <mat-select [(value)]="selected_engin_id" (selectionChange)="selectChangeEngin($event.value)">
+                        <mat-option value="">
+                            --tous les engins</mat-option>
+                        <mat-option *ngFor="let row of donnees_enginsByclass()" [value]="row.id">
+                            {{row.designation+' - ' + row.code_parc}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="table-col2">
+            <canvasjs-chart [options]="chartOptions()" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+        </div>
+        <div class="table-col3">
+            <div class="row1_col3">
+                <h2> Stock gasoil (litre):{{approgo_store.quantite_go()-gasoil_store.quantite_go()-834}}</h2>
+                <button mat-flat-button color="primary" (click)="ouvrir_conso()">
+                    Nouvel appro gasoil
+                </button>
+            </div>
+            <div class="row2_col3">
+
+            </div>
+        </div>
+
+    </div>
+</app-gasoil-model>
+
+<ng-template #titre>
+    <div class="content_head_gasoil">
+        <h2> {{titre_tableau()}}</h2>
+    </div>
+</ng-template>
+<ng-template #conso>
+        <div *ngIf="date_choice=='date'">
+            <h2> {{ 'Consommation GO de ce jour '+ madate() +': ' + total_conso() +' litres'}}</h2>
+        </div>
+        <div *ngIf="date_choice=='idate'">
+            <h2> {{ 'Consommation GO entre le '+ gasoil_store.selectedDate()[0] + ' et le '
+                +gasoil_store.selectedDate()[1]+' :'+total_conso()+' litres'}}</h2>
+        </div>
+        <div *ngIf="date_choice=='tout'">
+            <h2> {{ 'Consommation totale de GO : ' + total_conso()+' litres'}}</h2>
+        </div>
+        <div *ngIf="selectClasseName()!=''">
+            <h3> {{selectClasseName()}}</h3>
+        </div>
+        <div *ngIf="selectEnginName()!=''">
+            <h4> {{selectEnginName()}}</h4>
+        </div>
+</ng-template>

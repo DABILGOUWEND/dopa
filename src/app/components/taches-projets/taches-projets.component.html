@@ -1,0 +1,118 @@
+<mat-drawer-container class="wen-table-drawer-container">
+    <mat-drawer mode="over" position="end" #table_update [opened]="is_open()" disableClose="true">
+        <section class="table-update">
+            <div class="table-update__header">
+             <h2> {{is_update()?'Modification':'Ajout'}} </h2> 
+            </div>
+            <form [formGroup]="table_update_form" (ngSubmit)="updateTableData()">
+                <div class="table-update__body">
+                    <mat-form-field>
+                        <mat-label>
+                            Selectionner projet
+                        </mat-label>
+                        <mat-select (selectionChange)="selectChangeProjet($event.value)" formControlName="projet_id">
+                            <mat-option *ngFor="let row of _projetStore.projets_data()" [value]="row.id">
+                                {{row.intitule }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>
+                            Selectionner taches
+                        </mat-label>
+                        <mat-select (selectionChange)="selectChangeTache($event.value)" formControlName="tache_id">
+                            <mat-option *ngFor="let row of _tachesStore.taches()" [value]="row.id">
+                                {{row.designation}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>
+                            UNITE
+                        </mat-label>
+                        <input matInput formControlName="unite" type="text" >
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>
+                            QUANTITE MARCHE
+                        </mat-label>
+                        <input matInput formControlName="quantiteDqe" type="number" placeholder="QUANTITE">
+                    </mat-form-field>
+                </div>
+                <div class="table-update__footer">
+                    <button mat-flat-button type="submit" color="primary" [disabled]="!table_update_form.valid">
+                        {{is_update()?'Modifier':'Ajouter'}}
+                    </button>
+                    <button mat-flat-button (click)="annuler()" color="warn" type="button"> Annuler
+                    </button>
+                </div>
+            </form>
+        </section>
+
+
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="content_head">
+            <h2> Liste des taches</h2>
+        </div>
+        <div class="content_soushead">
+            <div class="table-col1">
+                <mat-form-field>
+                    <mat-label>
+                        Selectionner projet
+                    </mat-label>
+                    <mat-select [(value)]="selected_projet_id" (selectionChange)="choiceProjet($event.value)">
+                        <mat-option *ngFor="let row of _projetStore.projets_data()" [value]="row.id">
+                            {{row.intitule }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+        </div>
+        
+
+        <div class="content_head">
+            <h2>
+                {{projet()}}
+            </h2>
+            <button mat-fab extended (click)="ajouter_tache()">
+                Nouveau
+            </button>
+        </div>
+        <table mat-table [dataSource]="dataSource()" class="mat-elevation-z8">
+            <ng-container matColumnDef="designation">
+                <th mat-header-cell *matHeaderCellDef> DESIGNATION </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.designation}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="unite">
+                <th mat-header-cell *matHeaderCellDef> UNITE </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.unite}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantiteDqe">
+                <th mat-header-cell *matHeaderCellDef> QUANTITE DQE </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.quantiteDqe}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button (click)="edit(element)"><mat-icon> edit</mat-icon> </button>
+                    <button mat-icon-button (click)="delete(element.id)"><mat-icon> delete</mat-icon> </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let element; columns: columnsToDisplay;let ind=index">
+            </tr>
+        </table>
+    </mat-drawer-content>
+</mat-drawer-container>
