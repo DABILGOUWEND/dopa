@@ -61,6 +61,7 @@ export class MesConstatsComponent implements OnInit {
   constats: element_constat[] = [];
   ligne_clicked = signal(Infinity);
   displayedColumns = ['poste', 'designation', 'unite', 'prix_u', 'quantite', 'quantite_prec', 'quantite_periode', 'quantite_cumul', 'actions'];
+  row_color = ['#5094D8', '#93B3BF', 'white', 'white', 'lightyellow', 'lightcoral', 'lightcyan'];
   nestedNodeMap = new Map<element_devis, ExampleFlatNode2>();
   flatNodeMap = new Map<ExampleFlatNode2, element_devis>();
   transformer = (node: element_devis, level: number) => {

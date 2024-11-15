@@ -9,7 +9,7 @@ import { TableDevisComponent } from '../table-devis/table-devis.component';
 @Component({
   selector: 'app-liste-devis',
   standalone: true,
-  imports: [ImportedModule, EssaiComponent, TableDevisComponent],
+  imports: [ImportedModule,  TableDevisComponent],
   templateUrl: './liste-devis.component.html',
   styleUrl: './liste-devis.component.scss'
 })

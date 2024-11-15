@@ -70,22 +70,23 @@
                         <div class="titre">
                             <h2>POINTAGES EFFECTUES</h2>
                         </div>
-                        @for(node of data_expand();track node; let index = $index){
-                        <div class="row_pointage">
-                            <button mat-icon-button (click)="expander(index)">
+                        @for(node of data_expand();track $index; let index = $index){
+                        <div [style]="{'background-color':'#D2D2D2','display':'flex','width.px':500,'border': '1px solid'}">
+                            <button mat-icon-button (click)="expander(index)" [ngStyle]="{'margin-left.px':10,'margin-top.px':20}">
                                 @if(tab_expander()[index]){
                                 <mat-icon>keyboard_arrow_down</mat-icon>
                                 }@else {
                                 <mat-icon>keyboard_arrow_up</mat-icon>
                                 }
                             </button>
-                            <h1>{{node.name}}</h1>
-                            <button mat-icon-button (click)="print(index)"> <mat-icon>print</mat-icon></button>
+                            <h1  [ngStyle]="{'font-size.px':18,'font-weight':'bold','margin-left.px':20,'font-family':'Trebuchet MS, sans-serif'}">{{node.name}}</h1>
+                            <button mat-icon-button (click)="print(index)" [ngStyle]="{'margin-left.px':20,'margin-top.px':20}"> <mat-icon>print</mat-icon></button>
                         </div>
                         @for(row of node.children;track row){
                         <div (click)="afficher(row.name)"
-                            [ngClass]="{'row_hide':tab_expander()[index] ,'ligne_expand':!tab_expander()[index]}">
-                            <h3> {{row.name}} </h3><button mat-icon-button (click)="deletedate(row.name)"><mat-icon>
+                            [ngClass]="{'row_hide':tab_expander()[index] ,'ligne_expand':!tab_expander()[index]}" [ngStyle]="{'margin-left.px':50}">
+                            <h3 [ngStyle]="{'font-size.px':16,'font-weight':'bold','margin-left.px':40}"> {{row.name}} </h3>
+                            <button mat-icon-button (click)="deletedate(row.name)"  [ngStyle]="{'margin-left.px':40}"><mat-icon>
                                     delete</mat-icon> </button>
                         </div>
 

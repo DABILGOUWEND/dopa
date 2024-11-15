@@ -59,6 +59,7 @@ export class MesAttachementsComponent implements OnInit {
 
   //current properties 
   row_color = ['#5094D8', '#93B3BF', 'white', 'white', 'lightyellow', 'lightcoral', 'lightcyan'];
+  
   constats: element_constat[] = [];
   ligne_clicked = signal(Infinity);
   displayedColumns = [

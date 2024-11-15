@@ -1,145 +1,168 @@
-<div [ngStyle]="{'width.%':100, 'display':'flex'}">
-
-  <div [ngStyle]="{
-    'width.%':20,
-    'margin-top.px':20,
-    'margin-bottom.px':20,
-    'margin-left.px':20,
-    'background-color':'lightcoral'}">
-    <mat-form-field [ngStyle]="{
-      'width.%':90,
-      'margin-top.px':20,
-      'margin-left.%':5
-      }">
-      <mat-label> SELECTIONNER DEVIS </mat-label>
-      <mat-select [(value)]="current_devis_id" (selectionChange)="selecteDevis($event.value)">
-        <mat-option *ngFor="let devis of liste_devis()" [value]="devis.id"> {{devis.entreprise}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div [ngStyle]="{'margin-left.%':20,'padding-top.px':20,'display':'block','text-align':'center'}">
-
-    <div>
-      <h4 [ngStyle]="{'font-size.px':18,'font-weight':'bold'}"> {{'constat n°: '+(current_constat()!=0?current_constat() +'/'
-        +last_constat():'')}}</h4>
+<mat-drawer-container class="wen-table-drawer-container">
+  <mat-drawer-content class="default">
+    <div class="content_head">
+      <h2>CONSTATS TRAVAUX</h2>
     </div>
-    <div [ngStyle]="{'display':'flex', 'justify-content':'center'}">
+    <div [ngStyle]="{'width.%':100, 'display':'flex'}">
 
-      <button mat-icon-button color="primary" (click)="previous_constat()" [disabled]="current_constat()<=1"> <mat-icon>
-          navigate_before </mat-icon> </button>
-      <button mat-icon-button color="primary" (click)="next_constat()" [disabled]="current_constat()==last_constat()">
-        <mat-icon> navigate_next </mat-icon> </button>
-
-    </div>
-   
-    <div [ngStyle]="{'display':'flex','justify-content':'center'}">
-      <button mat-icon-button title="supprimer constat"  color="primary" (click)="delete_constat()" [disabled]="current_constat()==0 || current_constat()<last_constat()"> 
-        <mat-icon> delete</mat-icon> </button>
+      <div [ngStyle]="{
+        'width.%':20,
+        'margin-top.px':20,
+        'margin-bottom.px':20,
+        'margin-left.px':20,
+        'background-color':'lightcoral'}">
+        <mat-form-field [ngStyle]="{
+          'width.%':90,
+          'margin-top.px':20,
+          'margin-left.%':5
+          }">
+          <mat-label> SELECTIONNER DEVIS </mat-label>
+          <mat-select [(value)]="current_devis_id" (selectionChange)="selecteDevis($event.value)">
+            <mat-option *ngFor="let devis of liste_devis()" [value]="devis.id"> {{devis.entreprise}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div [ngStyle]="{'margin-left.%':20,'padding-top.px':20,'display':'block','text-align':'center'}">
+    
         <div>
-          <button mat-icon-button title="nouveau constat" (click)="new_constat()" [disabled]="current_devis_id()==''"> <mat-icon> add</mat-icon>  </button>
+          <h4 [ngStyle]="{'font-size.px':18,'font-weight':'bold'}"> {{'constat n°: '+(current_constat()!=0?current_constat()
+            +'/'
+            +last_constat():'')}}</h4>
         </div>
+        <div [ngStyle]="{'display':'flex', 'justify-content':'center'}">
+    
+          <button mat-icon-button color="primary" (click)="previous_constat()" [disabled]="current_constat()<=1"> <mat-icon>
+              navigate_before </mat-icon> </button>
+          <button mat-icon-button color="primary" (click)="next_constat()" [disabled]="current_constat()==last_constat()">
+            <mat-icon> navigate_next </mat-icon> </button>
+    
+        </div>
+    
+        <div [ngStyle]="{'display':'flex','justify-content':'center'}">
+          <button mat-icon-button title="supprimer constat" color="primary" (click)="delete_constat()"
+            [disabled]="current_constat()==0 || current_constat()<last_constat()">
+            <mat-icon> delete</mat-icon> </button>
+          <div>
+            <button mat-icon-button title="nouveau constat" (click)="new_constat()" [disabled]="current_devis_id()==''">
+              <mat-icon> add</mat-icon> </button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+
+    <div class="content_body">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="poste">
+          <th mat-header-cell *matHeaderCellDef>
+            <span [style.paddingLeft.px]="40"> POSTE </span>
+          </th>
+      
+          <td mat-cell *matCellDef="let data;let ind=index">
+            <div [ngStyle]="{'display':'flex','width.%':100,'margin-left.px':data.level*25}">
+              <div [ngStyle]="{'margin-top.px':5,'width.%':30}">
+                <button mat-icon-button [style.visibility]="!data.expandable ? 'hidden' : ''">
+                  <mat-icon class="mat-icon-rtl-mirror">
+                    {{treeControl.isExpanded(data) ? 'expand_more' : 'chevron_right'}}
+                  </mat-icon>
+                </button>
+              </div>
+              <div [ngStyle]="{'margin-top.px':12.5,'width.%':70,'margin-left.px':12.5}">
+                {{data.poste}}
+              </div>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="designation">
+          <th mat-header-cell *matHeaderCellDef> DESIGNATION </th>
+          <td mat-cell *matCellDef="let data;let ind=index">
+            {{data.designation}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="unite">
+          <th mat-header-cell *matHeaderCellDef> UNITE </th>
+          <td mat-cell *matCellDef="let data;let ind=index">
+            {{data.unite|unites:_unit_store.unites_data()}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="prix_u">
+          <th mat-header-cell *matHeaderCellDef> PRIX UNITAIRE </th>
+          <td mat-cell *matCellDef="let data;let ind=index">
+            {{data.prix_u|currency:'F CFA'}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="quantite">
+          <th mat-header-cell *matHeaderCellDef> QUANTITE MARCHE</th>
+          <td mat-cell *matCellDef="let data; let ind=index">
+            {{data.quantite}}
+          </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="quantite_prec">
+          <th mat-header-cell *matHeaderCellDef> QUANTITE PRECEDENTE </th>
+          <td mat-cell *matCellDef="let data; let ind=index">
+            @if(ligne_clicked()==ind){
+            <div>
+              {{clicked_qte_prec()}}
+            </div>
+            }@else {
+            {{data.quantite_prec}}
+            }
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="quantite_periode">
+          <th mat-header-cell *matHeaderCellDef> QUANTITE PERIODE </th>
+          <td mat-cell *matCellDef="let data; let ind=index">
+            @if(ligne_clicked()==ind){
+            <div [ngStyle]="{'justify-content':'center'}">
+              <input [ngStyle]="
+                {'font-size.px':18,'text-align':'center','width.px':100}" type="number" [(ngModel)]="clicked_qte_periode"
+                (keyup)="saisie()">
+            </div>
+            }@else {
+            {{data.quantite_periode}}
+            }
+          </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="quantite_cumul">
+          <th mat-header-cell *matHeaderCellDef> QUANTITE CUMULEE </th>
+          <td mat-cell *matCellDef="let data; let ind=index">
+            @if(ligne_clicked()==ind){
+            <div>
+              {{clicked_qte_cumul()}}
+            </div>
+            }@else {
+            {{data.quantite_cumul}}
+            }
+          </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let data;let ind=index">
+            @if(ligne_clicked()==ind){
+            <button mat-icon-button (click)="save(data)"> <mat-icon> save</mat-icon> </button>
+            <button mat-icon-button (click)="close()"> <mat-icon> close</mat-icon> </button>
+            }@else {
+            @if(!data.expandable)
+            {
+            <button mat-icon-button (click)="ligne_click(data,ind)"> <mat-icon> edit</mat-icon> </button>
+            }
+            }
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;let ind=index " [ngStyle]="{  
+          'font-size.px':'11', 
+          'font-weight':row.expandable==true?'bold':'normal',
+          'background-color':row_color[row.level]}"></tr>
+      </table>
+    </div>
+    
+  </mat-drawer-content>
+</mat-drawer-container>
 
 
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container matColumnDef="poste">
-    <th mat-header-cell *matHeaderCellDef>
-      <span [style.paddingLeft.px]="40"> POSTE </span>
-    </th>
 
-    <td mat-cell *matCellDef="let data;let ind=index">
-      <button mat-icon-button [style.visibility]="!data.expandable ? 'hidden' : ''"
-        [style.marginLeft.px]="data.level * 32" (click)="treeControl.toggle(data)">
-        <mat-icon class="mat-icon-rtl-mirror">
-          {{treeControl.isExpanded(data) ? 'expand_more' : 'chevron_right'}}
-        </mat-icon>
-      </button>
-      {{data.poste}}
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="designation">
-    <th mat-header-cell *matHeaderCellDef> DESIGNATION </th>
-    <td mat-cell *matCellDef="let data;let ind=index">
-      {{data.designation}}
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="unite">
-    <th mat-header-cell *matHeaderCellDef> UNITE </th>
-    <td mat-cell *matCellDef="let data;let ind=index">
-      {{data.unite|unites:_unit_store.unites_data()}}
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="prix_u">
-    <th mat-header-cell *matHeaderCellDef> PRIX UNITAIRE </th>
-    <td mat-cell *matCellDef="let data;let ind=index">
-      {{data.prix_u|currency:'F CFA'}}
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="quantite">
-    <th mat-header-cell *matHeaderCellDef> QUANTITE MARCHE</th>
-    <td mat-cell *matCellDef="let data; let ind=index">
-      {{data.quantite}}
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="quantite_prec">
-    <th mat-header-cell *matHeaderCellDef> QUANTITE PRECEDENTE </th>
-    <td mat-cell *matCellDef="let data; let ind=index">
-      @if(ligne_clicked()==ind){
-      <div>
-        {{clicked_qte_prec()}}
-      </div>
-      }@else {
-      {{data.quantite_prec}}
-      }
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="quantite_periode">
-    <th mat-header-cell *matHeaderCellDef> QUANTITE PERIODE </th>
-    <td mat-cell *matCellDef="let data; let ind=index">
-      @if(ligne_clicked()==ind){
-      <div [ngStyle]="{'justify-content':'center'}">
-        <input [ngStyle]="
-          {'font-size.px':18,'text-align':'center','width.px':100}" type="number" [(ngModel)]="clicked_qte_periode"
-          (keyup)="saisie()">
-      </div>
-      }@else {
-      {{data.quantite_periode}}
-      }
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="quantite_cumul">
-    <th mat-header-cell *matHeaderCellDef> QUANTITE CUMULEE </th>
-    <td mat-cell *matCellDef="let data; let ind=index">
-      @if(ligne_clicked()==ind){
-      <div>
-        {{clicked_qte_cumul()}}
-      </div>
-      }@else {
-      {{data.quantite_cumul}}
-      }
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> </th>
-    <td mat-cell *matCellDef="let data;let ind=index">
-      @if(ligne_clicked()==ind){
-      <button mat-icon-button (click)="save(data)"> <mat-icon> save</mat-icon> </button>
-      <button mat-icon-button (click)="close()"> <mat-icon> close</mat-icon> </button>
-      }@else {
-      @if(!data.expandable)
-      {
-      <button mat-icon-button (click)="ligne_click(data,ind)"> <mat-icon> edit</mat-icon> </button>
-      }
-      }
-    </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;let ind=index "></tr>
-</table>

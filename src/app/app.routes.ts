@@ -28,7 +28,7 @@ import { MesAttachementsComponent } from './components/mes-attachements/mes-atta
 
 export const routes: Routes = [
     {
-        path: "", redirectTo: "/lignedevis", pathMatch: "full"
+        path: "", redirectTo: "/home", pathMatch: "full"
     },
     {
         path: 'home', component: HomeComponent, canActivate: [homeGuard]
@@ -52,16 +52,16 @@ export const routes: Routes = [
             },
             {
                 path: "devis",
-                component: ListeDevisComponent
+                component: LignedevisComponent
             },
             {
                 path: "constats",
-                component: ConstatsComponent
+                component: MesConstatsComponent
             }
             ,
             {
                 path: "attachements",
-                component: AttachementsComponent
+                component: MesAttachementsComponent
             },
             {
                 path: "decomptes",

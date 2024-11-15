@@ -48,7 +48,7 @@ export class LignedevisComponent implements OnInit {
   designation_search = signal<string[]>([]);
 
   //models
-  row_color = ['#b2b2b2', '#f0f0f0', 'white', 'white', 'lightyellow', 'lightcoral', 'lightcyan'];
+  row_color = ['#5094D8', '#93B3BF', 'white', 'white', 'lightyellow', 'lightcoral', 'lightcyan'];
   displayedColumns = ['poste', 'designation', 'unite', 'prix_u', 'quantite', 'montant', 'actions'];
   displaytab_recherche = ['designation'];
   searchText = '';
@@ -135,7 +135,8 @@ export class LignedevisComponent implements OnInit {
       let entreprise = this._ssTraitance_store.donnees_sstraitant().find(e => e.id == ent.entreprise_id);
       donnees.push({
         id: ent.id,
-        entreprise: entreprise ? entreprise.enseigne : ''
+        entreprise: entreprise ? entreprise.enseigne : '',
+        travaux: ent.reference
       });
     })
     return donnees;

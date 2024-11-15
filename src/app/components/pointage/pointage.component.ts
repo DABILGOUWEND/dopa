@@ -13,6 +13,7 @@ import { ImportedModule } from '../../modules/imported/imported.module';
 import { ThemePalette } from '@angular/material/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { Console } from 'node:console';
 
 @Component({
   selector: 'app-pointage',
@@ -22,10 +23,7 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
   styleUrl: './pointage.component.scss'
 })
 export class PointageComponent implements OnInit {
-
   personnel_store = inject(PersonnelStore);
-
-
   constructor(
     private _service: WenService,
     private _fb: FormBuilder) {
@@ -38,10 +36,13 @@ export class PointageComponent implements OnInit {
       date_debut: new FormControl(new Date(), Validators.required),
       date_fin: new FormControl(new Date(), Validators.required)
     })
+    effect(() => {
+      //console.log(this.data_expand())
+    })
   }
-    //signalsfff
-  tab_expander=signal<boolean[]>([]);
-  current_expanded=signal(false);
+  //signalsfff
+  tab_expander = signal<boolean[]>([]);
+  current_expanded = signal(false);
   nbre_hs = signal(0);
   nbre_absence = signal(0);
   debut_date = signal('');
@@ -65,8 +66,7 @@ export class PointageComponent implements OnInit {
   formG: FormGroup;
   displayedColumns: string[] = ['nom', 'prenom', 'fonction', 'presence', 'nbre_heure', 'heure_sup', 'actions']
 
-  
-//computed signals
+  //computed signals
   weekDays = computed(() => {
     let star = new Date(this._service.convertDate(this.debut_date()))
     star.setDate(star.getDate() - 1)
@@ -94,7 +94,7 @@ export class PointageComponent implements OnInit {
       }
     }
   );
- 
+
   datespointage = computed(() => {
     return this.personnel_store.getDates();
   })
@@ -102,35 +102,49 @@ export class PointageComponent implements OnInit {
   datespointageClass = computed(() => {
     return this._service.classement(this.datespointage())
   })
-
   data_expand = computed(() => {
     let tab: any[] = [];
-    var init = 0o5;
-    var debut_date = '21/' + '0'+init + '/2024';
+    var init = 5;
+    let annee = 2024;
+    var debut_date = '21/' + '0' + init + '/2024';
     var fin_date = this.getfin_date(debut_date);
-    while (fin_date.getMonth() <= new Date().getMonth()+1) {
-      init++;
-      let dates =this.personnel_store.getDates().filter((x: any) => {
+    let date=new Date().toLocaleDateString();
+    let now = this.getfin_date(date);
+   
+    while (fin_date.getTime() <= now.getTime() && init < (this._service.convertDate(date).getMonth()+1 )) {
+ 
+      let dates = this.personnel_store.getDates().filter((x: any) => {
         return this._service.convertDate(x).getTime() >= this._service.convertDate(debut_date).getTime()
           && this._service.convertDate(x).getTime() <= fin_date.getTime()
       })
-      let datesfiltres = this._service.classement(dates).map((x: any) => { return { 'name': x } })
+      let datesfiltres = this._service.classement(dates).map((x: any) => {
+        return { 'name': x }
+      })
+
       tab.push({
         'name': 'Du ' + debut_date + ' au ' + fin_date.toLocaleDateString(),
         'children': datesfiltres,
-        'debut' : debut_date,
-        'fin' : fin_date.toLocaleDateString()
+        'debut': debut_date,
+        'fin': fin_date.toLocaleDateString()
       });
-      debut_date = '21/' + (init>=10?init:('0'+init) )+ '/2024';
-      fin_date = this.getfin_date(debut_date);
 
+
+      if (init <= 11) {
+        init = init + 1;
+      } else {
+        init = 1;
+        annee = annee + 1;
+      }
+      debut_date = '21/' + (init >= 10 ? init : ('0' + init)) + '/' + annee;
+      fin_date = this.getfin_date(debut_date);
     }
     return tab.slice().reverse();
   }
   )
 
- //methods
+  //methods
   ngOnInit() {
+    this.personnel_store.loadPersonnel();
     this.madate.set(this.default_date().toLocaleDateString());
     this.personnel_store.filtrebyDate(this.madate());
     this.tab_expander.set(new Array(this.data_expand().length).fill(true))
@@ -459,117 +473,116 @@ export class PointageComponent implements OnInit {
       }])
       for (let person of personnel_bystatut) {
         let dates_pointage = this.personnel_store.getDates().
-        filter((x:any)=>{
-          return this._service.convertDate(x).getTime()>=this._service.convertDate(this.debut_date()).getTime()&&
-          this._service.convertDate(x).getTime()<=this._service.convertDate(this.fin_date()).getTime()
-        })
-        let rep=person.dates.every((x:any)=>!dates_pointage.includes(x))
-        if(!rep)
-        {
+          filter((x: any) => {
+            return this._service.convertDate(x).getTime() >= this._service.convertDate(this.debut_date()).getTime() &&
+              this._service.convertDate(x).getTime() <= this._service.convertDate(this.fin_date()).getTime()
+          })
+        let rep = person.dates.every((x: any) => !dates_pointage.includes(x))
+        if (!rep) {
           let dates = person.dates
 
-        let presence: any[] = []
-        let heuressup: any[] = []
-        let heuresnorm: any[] = []
+          let presence: any[] = []
+          let heuressup: any[] = []
+          let heuresnorm: any[] = []
 
-        //presence = [person.nom, this.titleCaseWord(person.prenom.toLowerCase()), this.titleCaseWord(person.fonction.toLowerCase())]
-        presence.push({
-          content: person.nom,
-          styles: {
-            halign: 'left'
-          }
-        })
-        presence.push({
-          content: this.titleCaseWord(person.prenom.toLowerCase()),
-          styles: {
-            halign: 'left'
-          }
-        })
-        presence.push({
-          content: this.titleCaseWord2(person.fonction.toLowerCase()),
-          styles: {
-            halign: 'left'
-          }
-        })
-        for (let row of this.weekDays()) {
-          let jour = Info.weekdays('short')[row.weekday - 1].replace('.', '')
-          if (dates.includes(row.toLocaleString())) {
-            let ind = dates.indexOf(row.toLocaleString())
-            heuressup.push(person.heureSup[ind])
-            if (jour == 'dim' || jour == 'sam') {
-              presence.push({
-                content: '',
-                styles: {
-                  halign: 'center',
-                  fillColor: [212, 204, 204],
-                }
-              })
-              heuresnorm.push(0)
+          //presence = [person.nom, this.titleCaseWord(person.prenom.toLowerCase()), this.titleCaseWord(person.fonction.toLowerCase())]
+          presence.push({
+            content: person.nom,
+            styles: {
+              halign: 'left'
             }
-            else {
-              if (!person.presence[ind]) {
-                this.nbre_absence.set(this.nbre_absence() + 1)
+          })
+          presence.push({
+            content: this.titleCaseWord(person.prenom.toLowerCase()),
+            styles: {
+              halign: 'left'
+            }
+          })
+          presence.push({
+            content: this.titleCaseWord2(person.fonction.toLowerCase()),
+            styles: {
+              halign: 'left'
+            }
+          })
+          for (let row of this.weekDays()) {
+            let jour = Info.weekdays('short')[row.weekday - 1].replace('.', '')
+            if (dates.includes(row.toLocaleString())) {
+              let ind = dates.indexOf(row.toLocaleString())
+              heuressup.push(person.heureSup[ind])
+              if (jour == 'dim' || jour == 'sam') {
+                presence.push({
+                  content: '',
+                  styles: {
+                    halign: 'center',
+                    fillColor: [212, 204, 204],
+                  }
+                })
+                heuresnorm.push(0)
               }
-              presence.push({
-                content: person.presence[ind] ? person.heuresN[ind] : 'A',
-                styles: {
-                  halign: 'center',
-                  fillColor: person.presence[ind] ? [255, 255, 255] : [242, 205, 163],
+              else {
+                if (!person.presence[ind]) {
+                  this.nbre_absence.set(this.nbre_absence() + 1)
                 }
-              })
-              heuresnorm.push(person.heuresN[ind])
-            }
-          }
-          else {
-            if (jour == 'dim' || jour == 'sam') {
-              presence.push({
-                content: '',
-                styles: {
-                  halign: 'center',
-                  fillColor: [212, 204, 204],
-                }
-              })
+                presence.push({
+                  content: person.presence[ind] ? person.heuresN[ind] : 'A',
+                  styles: {
+                    halign: 'center',
+                    fillColor: person.presence[ind] ? [255, 255, 255] : [242, 205, 163],
+                  }
+                })
+                heuresnorm.push(person.heuresN[ind])
+              }
             }
             else {
-              presence.push('')
+              if (jour == 'dim' || jour == 'sam') {
+                presence.push({
+                  content: '',
+                  styles: {
+                    halign: 'center',
+                    fillColor: [212, 204, 204],
+                  }
+                })
+              }
+              else {
+                presence.push('')
+              }
+              heuresnorm.push(0)
+              heuressup.push(0)
             }
-            heuresnorm.push(0)
-            heuressup.push(0)
           }
-        }
-        ;
-        let hn = this._service.somme(heuresnorm)
-        let hs = this._service.somme(heuressup)
-        presence.push({
-          content: hn,
-          styles: {
-            halign: 'center',
-            fillColor: [192, 192, 192],
-            fontStyle: "bold"
-          }
-        })
-        presence.push({
-          content: hs,
-          styles: {
-            halign: 'center',
-            fillColor: [255, 248, 220],
-            fontStyle: "bold"
-          }
-        })
-        presence.push({
-          content: hn + hs,
-          styles: {
-            halign: 'center',
-            fillColor: [230, 236, 238],
-            fontStyle: "bold"
-          }
-        })
-        this.nbre_hs.set(this.nbre_hs() + hs)
-        tab_person.push(presence)
+          ;
+          let hn = this._service.somme(heuresnorm)
+          let hs = this._service.somme(heuressup)
+          presence.push({
+            content: hn,
+            styles: {
+              halign: 'center',
+              fillColor: [192, 192, 192],
+              fontStyle: "bold"
+            }
+          })
+          presence.push({
+            content: hs,
+            styles: {
+              halign: 'center',
+              fillColor: [255, 248, 220],
+              fontStyle: "bold"
+            }
+          })
+          presence.push({
+            content: hn + hs,
+            styles: {
+              halign: 'center',
+              fillColor: [230, 236, 238],
+              fontStyle: "bold"
+            }
+          })
+          this.nbre_hs.set(this.nbre_hs() + hs)
+          tab_person.push(presence)
 
         }
 
-        
+
       }
 
     }
@@ -601,12 +614,11 @@ export class PointageComponent implements OnInit {
     let annee2 = num_month1 == 11 ? annee1 + 1 : annee1;
     return this._service.convertDate('20/' + (num_month2 + 1) + '/' + annee2);
   }
-  expander(index:number)
-  {
-    var rep=this.tab_expander()[index];
-    this.tab_expander.update((tab)=>tab.map((x,i)=>i==index?!rep:x))
+  expander(index: number) {
+    var rep = this.tab_expander()[index];
+    this.tab_expander.update((tab) => tab.map((x, i) => i == index ? !rep : x))
   }
-  print(index:number) {
+  print(index: number) {
     this.debut_date.set(this.data_expand()[index].debut);
     this.fin_date.set(this.data_expand()[index].fin);
     this.impression();

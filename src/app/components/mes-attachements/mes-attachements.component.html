@@ -1,3 +1,6 @@
+
+
+
 <div [ngStyle]="{'width.%':100, 'display':'flex'}">
 
     <div [ngStyle]="{
@@ -35,7 +38,6 @@
      
     </div>
   </div>
-  
   
   
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -123,7 +125,7 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;let ind=index " [ngStyle]="{  
-        'font-size.px':'11', 
-        'font-weight':row.expandable==true?'bold':'normal',
-        'background-color':row_color[row.level]}" ></tr>
+      'font-size.px':'11', 
+      'font-weight':row.expandable==true?'bold':'normal',
+      'background-color':row_color[row.level]}" ></tr>
   </table>
