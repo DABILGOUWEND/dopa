@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { HomeTemplateComponent } from '../../utilitaires/home-template/home-template.component';
 import { AuthenService } from '../../authen.service';
@@ -16,11 +16,18 @@ import { DataLoaderService } from '../../services/data-loader.service';
   styleUrl: './gestion.component.scss'
 })
 export class GestionComponent implements OnInit {
+  end_of_load = signal(true);
   ngOnInit() {
     //load data
     this._loader_service.setPath();
     this._loader_service.loadDataInit();
-    this._loader_service.Load_gestion_Data();
+    this._loader_service.Load_gestion_Data().subscribe({
+      complete: () => {
+        setTimeout(() => {
+          this.end_of_load.set(false);
+        }, 2000);
+      }
+    });
     
   }
   constructor() {

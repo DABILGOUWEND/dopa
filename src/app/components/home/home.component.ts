@@ -1,4 +1,4 @@
-import { APP_ID, Component, computed, effect, EventEmitter, inject, OnInit, Output, signal } from '@angular/core';
+import { APP_ID, Component, computed, effect, EventEmitter, inject, OnDestroy, OnInit, Output, signal } from '@angular/core';
 import { ApproGasoilStore, ClasseEnginsStore, CompteStore, EnginsStore, EntrepriseStore, GasoilStore, PannesStore, PersonnelStore, ProjetStore, StatutStore, TachesStore, UserStore } from '../../store/appstore';
 import { AuthenService } from '../../authen.service';
 import { ImportedModule } from '../../modules/imported/imported.module';
@@ -12,15 +12,17 @@ import { EnginsComponent } from '../engins/engins.component';
 import { Auth, authState } from '@angular/fire/auth';
 import { HomeTemplateComponent } from '../../utilitaires/home-template/home-template.component';
 import { DataLoaderService } from '../../services/data-loader.service';
+import { set } from 'firebase/database';
 export const APP_Is = 'AIzaSyBsK6a4cgI9g94bdY050vnuI3BP3ejiiXE';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ImportedModule, RouterOutlet, HomeTemplateComponent],
+  imports: [ImportedModule, HomeTemplateComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
+ 
   _engins_store = inject(EnginsStore);
   _classe_store = inject(ClasseEnginsStore);
   _personnel_store = inject(PersonnelStore);
@@ -35,12 +37,20 @@ export class HomeComponent implements OnInit {
 
   _auth_service = inject(AuthenService);
   _loader_service = inject(DataLoaderService);
+  end_of_load = signal(true);
 
   ngOnInit() {
     this._loader_service.setPath();
     this._loader_service.loadDataInit();
-    this._loader_service.Load_gestion_Data();
-    this._loader_service.Load_travaux_Data();
-     ///
+    let obs1 = this._loader_service.Load_gestion_Data();
+    let obs2 = this._loader_service.Load_travaux_Data();
+    concat(obs1, obs2).subscribe({
+      complete: () => {
+        setTimeout(() => {
+          this.end_of_load.set(false);
+        }, 2000);
+      }
+    });
+    ///
   }
 }

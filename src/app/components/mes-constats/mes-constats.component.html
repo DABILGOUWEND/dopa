@@ -1,12 +1,12 @@
 <mat-drawer-container class="wen-table-drawer-container">
-  <mat-drawer-content class="default">
+  <mat-drawer-content class="engins">
     <div class="content_head">
       <h2>CONSTATS TRAVAUX</h2>
     </div>
     <div [ngStyle]="{'width.%':100, 'display':'flex'}">
 
       <div [ngStyle]="{
-        'width.%':20,
+        'width.%':30,
         'margin-top.px':20,
         'margin-bottom.px':20,
         'margin-left.px':20,
@@ -18,7 +18,7 @@
           }">
           <mat-label> SELECTIONNER DEVIS </mat-label>
           <mat-select [(value)]="current_devis_id" (selectionChange)="selecteDevis($event.value)">
-            <mat-option *ngFor="let devis of liste_devis()" [value]="devis.id"> {{devis.entreprise}}
+            <mat-option [ngStyle]="{'font-size':''}" *ngFor="let devis of liste_devis()" [value]="devis.id"> {{'*'+devis.entreprise +' - ' +devis.travaux}}
             </mat-option>
           </mat-select>
         </mat-form-field>

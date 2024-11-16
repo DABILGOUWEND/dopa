@@ -1,6 +1,8 @@
 import { effect, inject, Injectable } from '@angular/core';
 import { EnginsStore, ClasseEnginsStore, PersonnelStore, ProjetStore, PannesStore, GasoilStore, ApproGasoilStore, StatutStore, TachesEnginsStore, EntrepriseStore, DevisStore, ConstatStore, LigneDevisStore, SstraitantStore, AttachementStore, DecompteStore, UserStore } from '../store/appstore';
 import { AuthenService } from '../authen.service';
+import { Observable, of, tap } from 'rxjs';
+import e from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -27,17 +29,16 @@ export class DataLoaderService {
   _decomptes_store = inject(DecompteStore)
   _users_store = inject(UserStore);
 
-  
+
 
   _auth_service = inject(AuthenService);
 
   loadDataInit() {
-    if (this._auth_service.userSignal())
-    {
+    if (this._auth_service.userSignal()) {
       this._projets_store.loadProjets()
       this._entreprise_store.loadEntreprises();
     }
-      
+
   }
   setPath() {
 
@@ -56,31 +57,37 @@ export class DataLoaderService {
     this._decomptes_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/decomptes');
 
   }
-  Load_gestion_Data() {
-    if (this._auth_service.userSignal()){
-      this._engins_store.loadengins();
-      this._classes_engins_store.loadclasses();
-      this._personnel_store.loadPersonnel();
-      this._pannes_store.loadPannes();
-      this._consogo_store.loadconso();
-      this._approgo_store.loadappro();
-      this._statuts_personnel_store.loadstatut();
+  Load_gestion_Data(): Observable<any> {
+    if (this._auth_service.userSignal()) {
+      return of({}).pipe(tap(() => {
+        this._engins_store.loadengins();
+        this._classes_engins_store.loadclasses();
+        this._personnel_store.loadPersonnel();
+        this._pannes_store.loadPannes();
+        this._consogo_store.loadconso();
+        this._approgo_store.loadappro();
+        this._statuts_personnel_store.loadstatut();
+      }))
+    } else {
+      return of({})
     }
-   
   }
-  Load_travaux_Data() {
-    if(this._auth_service.userSignal())
-    {
-      this._taches_engins_store.loadTachesEngins();
-      this._users_store.loadUsers();
-      this._devis_store.loadDevis();
-      this._ligneDevis_store.loadLigneDevis();
-      this._sousTraitance_store.loadSstraitants();
-      this._constats_store.loadConstats();
-      this._attachements_store.loadAttachements();
-      this._decomptes_store.loadAllDecomptes();
+  Load_travaux_Data(): Observable<any> {
+    if (this._auth_service.userSignal()) {
+      return of({}).pipe(tap(() => {
+        this._taches_engins_store.loadTachesEngins();
+        this._users_store.loadUsers();
+        this._devis_store.loadDevis();
+        this._ligneDevis_store.loadLigneDevis();
+        this._sousTraitance_store.loadSstraitants();
+        this._constats_store.loadConstats();
+        this._attachements_store.loadAttachements();
+        this._decomptes_store.loadAllDecomptes();
+      }))
+    } else {
+      return of({});
     }
-    
+
   }
 
 

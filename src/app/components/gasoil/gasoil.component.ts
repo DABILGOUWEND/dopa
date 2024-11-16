@@ -18,7 +18,7 @@ import { sign } from 'node:crypto';
 @Component({
   selector: 'app-gasoil',
   standalone: true,
-  imports: [ImportedModule, SaisiComponent, ApprogoComponent, EssaiComponent, GasoilModelComponent],
+  imports: [ImportedModule,   GasoilModelComponent],
   templateUrl: './gasoil.component.html',
   styleUrl: './gasoil.component.scss'
 })
@@ -151,7 +151,6 @@ export class GasoilComponent  implements OnInit{
     ]
   })
   classe_select = computed(() => {
-    let donnees: any = [];
     return this._classe_store.classes_engins().map(x => {
       return {
         'id': x.id,

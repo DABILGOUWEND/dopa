@@ -39,7 +39,8 @@ export class MesAttachementsComponent implements OnInit {
       let entreprise = this._ssTraitance_store.donnees_sstraitant().find(e => e.id == ent.entreprise_id);
       donnees.push({
         id: ent.id,
-        entreprise: entreprise ? entreprise.enseigne : ''
+        entreprise: entreprise ? entreprise.enseigne : '',
+        travaux: ent.reference
       });
     })
     return donnees;

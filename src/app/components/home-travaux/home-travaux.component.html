@@ -1,7 +1,17 @@
-<app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content">
-</app-home-template>
-<ng-template #nav_liste>
+<!-- Purpose: This is the main component for the home page of the application. It contains the toolbar and the content of the page. -->
+@if(!end_of_load()){
+    <app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content">
+    </app-home-template>    
+}
+@else {
+    <div [ngStyle]="{'padding-top.px':200}">
+        <mat-spinner [ngStyle]="{'margin-left.%':50}"></mat-spinner>
+    </div>
+}
+    
 
+
+<ng-template #nav_liste>
 </ng-template>
 <ng-template #toolbar>
     <div class="example-spacer2">
