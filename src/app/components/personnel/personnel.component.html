@@ -1,16 +1,23 @@
-<app-essai [table]="table()" [table_update_form]="table_update_form" [dataSource]="dataSource()"
-    [displayedColumns]="displayedColumns"
-    [className]="'personnel'"
-    (newItemEvent)="updateData($event)"
-    (RemoveItemEvent)="deleteData($event)" (RechercheEvent)="recherche($event)"
-    (AfficheToutEvent)="afficheTout()" 
-    [titre]="titre"
-    (PatchEvent)="PatchEventFct($event)"
-    (addEvent)="addEventFct()"> 
-</app-essai>
+<app-perso-template [table]="table()" [table_update_form]="table_update_form" [dataSource]="dataSource()"
+    [displayedColumns]="displayedColumns" [className]="'personnel'" (newItemEvent)="updateData($event)"
+    (RemoveItemEvent)="deleteData($event)" (RechercheEvent)="recherche($event)" (AfficheToutEvent)="afficheTout()"
+    [titre]="titre" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()"
+    [action_template]="actiontemplate"
+    [is_open2]="is_open2()"
+    [(is_open)]="is_open"
+    >
+</app-perso-template>
 
 <ng-template #titre>
     <div class="content_head">
         <h2> {{titre_tableau()}}</h2>
     </div>
-</ng-template> 
+</ng-template>
+<ng-template #actiontemplate let-row="row" let-ind="ind">
+    <div [ngStyle]="{'display':'flex'}">
+        <button mat-icon-button type="button" (click)="deleteData(row.id)"> <mat-icon> delete</mat-icon> </button>
+        <button mat-icon-button type="button" (click)="modifier(row)"> <mat-icon> edit</mat-icon> </button>
+        <button mat-flat-button type="button" (click)="pointage(row)"> pointage </button>
+    </div>
+    
+</ng-template>

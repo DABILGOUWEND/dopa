@@ -1,25 +1,24 @@
-import { Component, EventEmitter, Input, OnInit, Output, Signal, TemplateRef, ViewChild, WritableSignal, computed, inject, input, output, signal } from '@angular/core';
-import { TableComponent } from '../table/table.component';
-import { MatTableDataSource } from '@angular/material/table';
-import { Engins, tab_personnel } from '../../models/modeles';
-import { EnginsStore, PersonnelStore, ClasseEnginsStore } from '../../store/appstore';
-import { KeyValuePipe } from '@angular/common';
+import { Component, computed, input, model, OnInit, output, signal, TemplateRef } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormSaisiComponent } from '../form-saisi/form-saisi.component';
+import { KeyValuePipe } from '@angular/common';
+import { FormGroup } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { TableComponent } from '../table/table.component';
 
 @Component({
-  selector: 'app-essai',
+  selector: 'app-perso-template',
   standalone: true,
-  imports: [TableComponent, FormSaisiComponent, KeyValuePipe, ImportedModule],
-  templateUrl: './essai.component.html',
-  styleUrl: './essai.component.scss'
+  imports: [ ImportedModule,FormSaisiComponent,TableComponent],
+  templateUrl: './perso-template.component.html',
+  styleUrl: './perso-template.component.scss'
 })
-export class EssaiComponent implements OnInit {
+export class PersoTemplateComponent implements OnInit {
   ngOnInit() {
     this.header_titles = Object.keys(this.displayedColumns());
   }
-  is_open = signal(false)
+  is_open =model<boolean>(false)
+  is_open2 = input<boolean>(false)
   is_update = signal(false)
   current_row=signal([])
 
@@ -29,10 +28,10 @@ export class EssaiComponent implements OnInit {
   displayedColumns = input.required<any>()
   dataSource = input<any>()
   className = input<string>()
-  action_template = input<TemplateRef<any>>()
+  action_template = input.required<TemplateRef<any>>();
+
 
   newItemEvent = output<any>()
-  RemoveItemEvent = output<any>()
   RechercheEvent = output<any>()
   AfficheToutEvent = output()
   ChangeSelectEvent = output<any>()
@@ -54,22 +53,16 @@ export class EssaiComponent implements OnInit {
   addNewItem() {
     if (this.table_update_form().valid) {
       let valeur = this.table_update_form().value
-      this.newItemEvent.emit([valeur, this.current_row(), this.is_update()])
-      this.is_open.set(false)
+      this.newItemEvent.emit([valeur])
     }
 
   }
-  supprimer(id: string) {
-    this.is_update.set(false);
-    this.RemoveItemEvent.emit(id);
-  }
+
   annuler() {
     this.is_open.set(false)
   }
   addElement() {
-
     this.is_open.set(true)
-    this.is_update.set(false)
     this.addEvent.emit()
   }
   applyFilter(event: Event) {
@@ -82,5 +75,4 @@ export class EssaiComponent implements OnInit {
   ChangeSelect(data: any, controle_name: any) {
     this.ChangeSelectEvent.emit([data, controle_name])
   }
-
 }

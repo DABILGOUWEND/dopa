@@ -1,28 +1,29 @@
 import { Component, OnInit, ViewChild, computed, effect, inject, signal } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
-import { FormGroup, FormBuilder, FormControl, Validators, NonNullableFormBuilder } from '@angular/forms';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { tab_personnel } from '../../models/modeles';
+import { FormControl, Validators, NonNullableFormBuilder } from '@angular/forms';
 import { ClasseEnginsStore, CompteStore, EnginsStore, PersonnelStore, StatutStore } from '../../store/appstore';
-import { SaisiComponent } from '../../utilitaires/saisi/saisi.component';
-import { EssaiComponent } from '../essai/essai.component';
+import { PersoTemplateComponent } from '../perso-template/perso-template.component';
+import { tab_personnel } from '../../models/modeles';
 
 @Component({
   selector: 'app-personnel',
   standalone: true,
-  imports: [ImportedModule, SaisiComponent,EssaiComponent],
+  imports: [ImportedModule, PersoTemplateComponent],
   templateUrl: './personnel.component.html',
   styleUrl: './personnel.component.scss'
 })
-export class PersonnelComponent  implements OnInit{
+export class PersonnelComponent implements OnInit {
+
   constructor() {
     effect(() => {
-  // console.log(this.personnel_store.personnel_data())   
-   }
+      // console.log(this.personnel_store.personnel_data())   
+    }
     )
   }
+  is_open = signal(false)
+  is_open2 = signal(false)
+  current_row = signal<tab_personnel | undefined>(undefined);
+  is_update = signal(false)
   EnginsStore = inject(EnginsStore)
   personnel_store = inject(PersonnelStore)
   classeEngins_store = inject(ClasseEnginsStore)
@@ -45,7 +46,7 @@ export class PersonnelComponent  implements OnInit{
     'fonction': 'FONCTION',
     'num_phone1': 'NUMERO PHONE 1',
     'num_phone2': 'NUMERO PHONE 2',
-    'email':'E -MAIL',
+    'email': 'E -MAIL',
     'statut': 'STATUT',
     'actions': ''
   }
@@ -160,11 +161,9 @@ export class PersonnelComponent  implements OnInit{
 
   }
   updateData(data: any) {
-    let valeur =data[0]
-    let current_row=data[1]
-    let is_update=data[2]
+    let valeur = data[0]
     let mydata: any = []
-    if (is_update) {
+    if (this.is_update()) {
       mydata = {
         id: valeur.id,
         nom: valeur.nom,
@@ -174,10 +173,10 @@ export class PersonnelComponent  implements OnInit{
         num_phone2: valeur.num_phone2,
         email: valeur.email,
         num_matricule: valeur.num_matricule,
-        dates: current_row.dates,
-        presence: current_row.presence,
-        heuresN: current_row.heuresN,
-        heureSup: current_row.heureSup,
+        dates: this.current_row()?.dates,
+        presence: this.current_row()?.presence,
+        heuresN: this.current_row()?.heuresN,
+        heureSup: this.current_row()?.heureSup,
         statut_id: valeur.statut_id
       }
       this.personnel_store.updatePersonnel(mydata)
@@ -194,14 +193,15 @@ export class PersonnelComponent  implements OnInit{
         email: valeur.email,
         num_matricule: valeur.num_matricule,
         statut_id: valeur.statut_id,
-        presence:[],
-        dates:[],
-        heuresN:[],
-        heureSup:[]
-  
+        presence: [],
+        dates: [],
+        heuresN: [],
+        heureSup: []
+
       }
       this.personnel_store.addPersonnel(mydata)
     }
+    this.is_open.set(false)
   }
   deleteData(id: any) {
     if (confirm('voulez-vous supprimer cet élement?'))
@@ -213,14 +213,27 @@ export class PersonnelComponent  implements OnInit{
   afficheTout() {
     this.personnel_store.filterbyNomPrenom('')
   }
-  PatchEventFct(row:any)
-  {
+  PatchEventFct(row: any) {
     this.table_update_form.patchValue(
       row
-    ) 
+    )
   }
-  addEventFct()
-  {
-    this.table_update_form.reset()
+  addEventFct() {
+    this.is_update.set(false)
+    this.table_update_form.reset();
+  }
+  modifier(row: any) {
+    this.is_open.set(true)
+    this.is_update.set(true)
+    this.current_row.set(row)
+    this.table_update_form.patchValue(
+      row
+    )
+  }
+  supprimer(arg0: any) {
+
+  }
+  pointage(arg0: any) {
+    this.is_open2.set(true)
   }
 }

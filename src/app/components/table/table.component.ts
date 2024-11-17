@@ -16,8 +16,10 @@ import { FormGroup } from '@angular/forms';
 })
 export class TableComponent  {
   Entete = input.required<TemplateRef<any>>();
+  Entete2= input<TemplateRef<any>|null>(null);
   Corps = input.required<TemplateRef<any>>();
   is_open = input.required<boolean>()
+  is_open2 = input<boolean>(false)
   className = input<string>()
 
 }
