@@ -1,7 +1,5 @@
-<app-table [is_open]="is_open()" [Entete]="Entete" [Corps]="Corps" [className]="className()" 
-[Entete2]="Entete2"
-[is_open2]="is_open2()"
->
+<app-table [is_open]="is_open()" [Entete]="Entete" [Corps]="Corps" [className]="className()" [Entete2]="Entete2"
+    [is_open2]="is_open2()">
     <ng-template ngProjectAs="mydrawer2">
         <ng-content select="mydrawer">
 
@@ -21,26 +19,16 @@
                 </ng-container>
             </div>
             <div class="table-update__footer">
-                <ng-container [ngTemplateOutlet]="validation" [ngTemplateOutletContext]="{formGroup:table_update_form()}">
+                <ng-container [ngTemplateOutlet]="validation"
+                    [ngTemplateOutletContext]="{formGroup:table_update_form()}">
                 </ng-container>
             </div>
         </form>
     </section>
 </ng-template>
 <ng-template #Entete2>
-    <section class="table-update">
-        <div class="table-update__header">
-            <h2> Pointage </h2>
-        </div>
-        <form [formGroup]="table_update_form()" (ngSubmit)="addNewItem()">
-            <div class="table-update__body">
-               rtrttr
-            </div>
-            <div class="table-update__footer">
-                
-            </div>
-        </form>
-    </section>
+    <ng-container [ngTemplateOutlet]="pointage()">
+    </ng-container>
 </ng-template>
 <ng-template #Corps>
     <ng-container [ngTemplateOutlet]="entetebody">

@@ -96,7 +96,7 @@ export class PointageComponent implements OnInit {
   );
 
   datespointage = computed(() => {
-    return this.personnel_store.getDates();
+    return this.personnel_store.getDates()[0];
   })
 
   datespointageClass = computed(() => {
@@ -113,7 +113,7 @@ export class PointageComponent implements OnInit {
    
     while (fin_date.getTime() <= now.getTime() && init < (this._service.convertDate(date).getMonth()+1 )) {
  
-      let dates = this.personnel_store.getDates().filter((x: any) => {
+      let dates = this.personnel_store.getDates()[0].filter((x: any) => {
         return this._service.convertDate(x).getTime() >= this._service.convertDate(debut_date).getTime()
           && this._service.convertDate(x).getTime() <= fin_date.getTime()
       })
@@ -267,7 +267,7 @@ export class PointageComponent implements OnInit {
     this.default_date.set(this._service.convertDate(row))
   }
   deletedate(date: string) {
-    let filtre = this.personnel_store.getDates()
+    let filtre = this.personnel_store.getDates()[0]
     if (filtre) {
       if (confirm('Voulez-vous vraiment supprimer cette date?'))
         this.personnel_store.removeDate(date)
@@ -472,7 +472,7 @@ export class PointageComponent implements OnInit {
         }
       }])
       for (let person of personnel_bystatut) {
-        let dates_pointage = this.personnel_store.getDates().
+        let dates_pointage = this.personnel_store.getDates()[0].
           filter((x: any) => {
             return this._service.convertDate(x).getTime() >= this._service.convertDate(this.debut_date()).getTime() &&
               this._service.convertDate(x).getTime() <= this._service.convertDate(this.fin_date()).getTime()

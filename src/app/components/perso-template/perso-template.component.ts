@@ -23,6 +23,7 @@ export class PersoTemplateComponent implements OnInit {
   current_row=signal([])
 
   titre = input.required<TemplateRef<any>>();
+  pointage = input.required<TemplateRef<any>>();
   table_update_form = input.required<FormGroup>();
   table = input()
   displayedColumns = input.required<any>()

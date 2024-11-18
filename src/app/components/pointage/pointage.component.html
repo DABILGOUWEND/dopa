@@ -70,7 +70,7 @@
                         <div class="titre">
                             <h2>POINTAGES EFFECTUES</h2>
                         </div>
-                        @for(node of data_expand();track $index; let index = $index){
+                        @for(node of personnel_store.getDates()[1];track $index; let index = $index){
                         <div [style]="{'background-color':'#D2D2D2','display':'flex','width.px':500,'border': '1px solid'}">
                             <button mat-icon-button (click)="expander(index)" [ngStyle]="{'margin-left.px':10,'margin-top.px':20}">
                                 @if(tab_expander()[index]){

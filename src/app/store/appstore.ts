@@ -763,7 +763,45 @@ export const PersonnelStore = signalStore(
                     result = [...result, ...element]
                 });
                 let unique_dates = result.filter((value: any, index: any, self: any) => self.indexOf(value) === index);
-                return unique_dates
+
+                
+                let tab: any[] = [];
+                var init = 5;
+                let annee = 2024;
+                var debut_date = '21/' + '0' + init + '/2024';
+                var fin_date = getfin_date(debut_date);
+                let date=new Date().toLocaleDateString();
+                let now = getfin_date(date);
+               
+                while (fin_date.getTime() <= now.getTime() && init < (convertDate(date).getMonth()+1 )) {
+             
+                  let dates = unique_dates.filter((x: any) => {
+                    return convertDate(x).getTime() >= convertDate(debut_date).getTime()
+                      && convertDate(x).getTime() <= fin_date.getTime()
+                  })
+                  let datesfiltres = classement(dates).map((x: any) => {
+                    return { 'name': x }
+                  })
+            
+                  tab.push({
+                    'name': 'Du ' + debut_date + ' au ' + fin_date.toLocaleDateString(),
+                    'children': datesfiltres,
+                    'debut': debut_date,
+                    'fin': fin_date.toLocaleDateString()
+                  });
+            
+            
+                  if (init <= 11) {
+                    init = init + 1;
+                  } else {
+                    init = 1;
+                    annee = annee + 1;
+                  }
+                  debut_date = '21/' + (init >= 10 ? init : ('0' + init)) + '/' + annee;
+                  fin_date = getfin_date(debut_date);
+                }
+
+                return [unique_dates , tab.slice().reverse()]
             })
 
             ,
@@ -1983,7 +2021,7 @@ export const DevisStore = signalStore(
     )),
     withMethods((store,
         _task_service = inject(TaskService),
-        _sous_traitance_store=inject(SstraitantStore),
+        _sous_traitance_store = inject(SstraitantStore),
         snackbar = inject(MatSnackBar)) =>
     (
 
@@ -2019,8 +2057,8 @@ export const DevisStore = signalStore(
                 switchMap((devis) => {
                     return _task_service.addModel(store.path_string(), devis).pipe(switchMap(
                         resp => {
-                            let entreprise=_sous_traitance_store.donnees_sstraitant().find(x=>x.id==devis.entreprise_id)
-                            return _task_service.initialDevis(store.path_string(), devis,entreprise?.enseigne?entreprise.enseigne:'')
+                            let entreprise = _sous_traitance_store.donnees_sstraitant().find(x => x.id == devis.entreprise_id)
+                            return _task_service.initialDevis(store.path_string(), devis, entreprise?.enseigne ? entreprise.enseigne : '')
                         }
                     ))
 
@@ -2028,10 +2066,9 @@ export const DevisStore = signalStore(
             )),
             addDataDevis: rxMethod<any>(pipe(
                 switchMap((row) => {
-                    return _task_service.addDataDevis(store.path_string(), store.current_devis_id(),row).pipe(tap({
-                        next:()=>
-                        {},
-                        error:()=>Showsnackerbaralert('échoué', 'fail', snackbar)
+                    return _task_service.addDataDevis(store.path_string(), store.current_devis_id(), row).pipe(tap({
+                        next: () => { },
+                        error: () => Showsnackerbaralert('échoué', 'fail', snackbar)
                     }))
 
                 })
@@ -3750,6 +3787,14 @@ function classement_classes(mytable: classe_engins[]) {
 function classement_Ldevis(mytable: Ligne_devis[]) {
     return mytable.sort((a, b) => (a.code.toString()).localeCompare(b.code.toString()));
 }
+function getfin_date(date: string) {
+    let num_month1 = convertDate(date).getMonth();
+    let num_month2 = num_month1 == 11 ? 0 : num_month1 + 1;
+    let annee1 = convertDate(date).getFullYear();
+    let annee2 = num_month1 == 11 ? annee1 + 1 : annee1;
+    return convertDate('20/' + (num_month2 + 1) + '/' + annee2);
+}
+
 function Showsnackerbaralert(message: string, resptype: string = 'fail', _snackbar: MatSnackBar) {
     let _class = resptype == 'pass' ? 'text-green' : 'text-red';
     let a = _snackbar.open(message, 'ok',

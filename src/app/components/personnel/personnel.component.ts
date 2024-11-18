@@ -13,15 +13,25 @@ import { tab_personnel } from '../../models/modeles';
   styleUrl: './personnel.component.scss'
 })
 export class PersonnelComponent implements OnInit {
+  afficher(arg0: any) {
 
+    let ind = this.current_row()?.dates.indexOf(arg0)
+    if (ind)
+      if (ind != -1) {
+      }
+
+  }
   constructor() {
     effect(() => {
       // console.log(this.personnel_store.personnel_data())   
     }
     )
   }
+
+
   is_open = signal(false)
   is_open2 = signal(false)
+  tab_expander = signal<boolean[]>([]);
   current_row = signal<tab_personnel | undefined>(undefined);
   is_update = signal(false)
   EnginsStore = inject(EnginsStore)
@@ -158,7 +168,7 @@ export class PersonnelComponent implements OnInit {
     }
   );
   ngOnInit() {
-
+    this.tab_expander.set(new Array(this.personnel_store.getDates()[1].length).fill(true))
   }
   updateData(data: any) {
     let valeur = data[0]
@@ -233,7 +243,14 @@ export class PersonnelComponent implements OnInit {
   supprimer(arg0: any) {
 
   }
-  pointage(arg0: any) {
+  pointage(row: tab_personnel) {
+    this.current_row.set(row)
+    this.personnel_store.getDates()[1]
     this.is_open2.set(true)
+  }
+
+  expander(index: number) {
+    var rep = this.tab_expander()[index];
+    this.tab_expander.update((tab) => tab.map((x, i) => i == index ? !rep : x))
   }
 }

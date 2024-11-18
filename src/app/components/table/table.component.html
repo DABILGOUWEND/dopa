@@ -8,12 +8,7 @@
         <ng-container [ngTemplateOutlet]="Entete()">
         </ng-container>
     </mat-drawer>
-    <mat-drawer [ngClass]="{
-        'personnel':className()=='personnel',
-        'engins':className()=='engins',
-        'default':className()=='default',
-        'devis':className()=='devis'
-    }" mode="over" position="start" [opened]="is_open2()" disableClose="true">
+    <mat-drawer [ngStyle]="{'width.%':50}" mode="over" position="start" [opened]="is_open2()" disableClose="true">
         <ng-container [ngTemplateOutlet]="Entete2()">
         </ng-container>
     </mat-drawer>

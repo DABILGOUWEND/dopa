@@ -5,6 +5,7 @@
     [action_template]="actiontemplate"
     [is_open2]="is_open2()"
     [(is_open)]="is_open"
+    [pointage]="pointages"
     >
 </app-perso-template>
 
@@ -20,4 +21,48 @@
         <button mat-flat-button type="button" (click)="pointage(row)"> pointage </button>
     </div>
     
+</ng-template>
+<ng-template #pointages >
+    <div [ngStyle]="{'display':'block','padding.px':20}">
+        <div [ngStyle]="{'background-color':'#D6D3E2','text-align':'left','font-size.px':14,'padding.px':10,'margin-bottom.px':20}">
+            <h1 [ngStyle]="{'font-size.px':26}"> {{'NOM: ' + current_row()?.nom}}</h1>
+            <h1 [ngStyle]="{'font-size.px':26}"> {{ 'PRENOM: ' + current_row()?.prenom}}     </h1>
+            <h1 [ngStyle]="{'font-size.px':26}">{{ 'FONCTION: ' + current_row()?.fonction}}</h1>
+            <h1 [ngStyle]="{'font-size.px':26}">{{ 'N° TELEPHONE: ' + current_row()?.num_phone1}}</h1>
+        </div>
+        <div [ngStyle]="{'display':'flex'}">
+            <div [ngStyle]="{'display':'block','width.%':30,'margin-right.px':20,'border': '1px dashed'}">
+                <div [ngStyle]="{'display':'center','margin-bottom.px':20}" >
+                    <h2 [ngStyle]="{'font-size.px':24,'font-weight':'bold','text-align':'center'}">POINTAGES EFFECTUES</h2>
+                </div>
+                @for(node of personnel_store.getDates()[1];track $index; let index = $index){
+                <div [style]="{'background-color':'#D2D2D2','display':'flex','width.%':90,'border': '1px solid'}">
+                    <button mat-icon-button (click)="expander(index)" [ngStyle]="{'margin-left.px':10,'margin-top.px':20}">
+                        @if(tab_expander()[index]){
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+                        }@else {
+                        <mat-icon>keyboard_arrow_up</mat-icon>
+                        }
+                    </button>
+                    <h1  [ngStyle]="{'font-size.px':18,'font-weight':'bold','margin-left.px':20,'font-family':'Trebuchet MS, sans-serif'}">{{node.name}}</h1>
+                </div>
+                @for(row of node.children;track row){
+                <div (click)="afficher(row.name)"
+                    [ngClass]="{'row_hide':tab_expander()[index] ,'ligne_expand':!tab_expander()[index]}" [ngStyle]="{'margin-left.px':50}" >
+                    <h3 [ngStyle]="{'font-size.px':16,'font-weight':'bold','margin-left.px':40}"> {{row.name}} </h3>
+                </div>
+        
+                }
+                }
+
+            </div>
+
+            <div [ngStyle]="{'display':'block','width.%':70,'border': '1px dashed'}">
+                
+            </div>
+
+        </div>
+    </div>
+
+  
 </ng-template>
