@@ -18,7 +18,7 @@ export class TaskService {
   _auth_service = inject(AuthenService);
   constructor() {
     this.getaDevis().subscribe(data => {
-      this.dataChange.next([...data[0].data.sort((a, b) => b.poste.localeCompare(a.poste))])  ;
+      this.dataChange.next([...data[0].data.sort((a, b) => b.poste.localeCompare(a.poste))]);
     })
   }
   data_element(): element_devis[] { return this.dataChange.value; }
@@ -169,7 +169,8 @@ export class TaskService {
       )
     return from(docRef)
   }
-  ModifPerson(row: tab_personnel): Observable<void> {
+  ModifPerson(row: tab_personnel|any): Observable<void> {
+    console.log(row)
     let id = row.id
     let heuresN = row.heuresN
     let heuresup = row.heureSup
@@ -390,8 +391,8 @@ export class TaskService {
     return from(docRef)
   }
 
-  initialDevis(path_string: string,row: Devis,entreprise:string): Observable<void> {
-    const docRef1 = doc(this.db, path_string+'/'+ row.id);
+  initialDevis(path_string: string, row: Devis, entreprise: string): Observable<void> {
+    const docRef1 = doc(this.db, path_string + '/' + row.id);
     const docRef = updateDoc(docRef1, {
       data: [{
         'poste': row.code,
@@ -399,7 +400,7 @@ export class TaskService {
         'prix_u': null,
         'unite': '',
         'quantite': null,
-        'children':[]
+        'children': []
       }]
     }).then
       (response => { }
@@ -407,8 +408,8 @@ export class TaskService {
     return from(docRef)
   }
 
-  addDataDevis(path_string:string,devis_id:string,row:any): Observable<void> {
-    const docRef1 = doc(this.db, path_string+'/' + devis_id);
+  addDataDevis(path_string: string, devis_id: string, row: any): Observable<void> {
+    const docRef1 = doc(this.db, path_string + '/' + devis_id);
     const docRef = updateDoc(docRef1, { data: row }).then
       (response => { }
       )

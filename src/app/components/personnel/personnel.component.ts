@@ -1,9 +1,12 @@
-import { Component, OnInit, ViewChild, computed, effect, inject, signal } from '@angular/core';
+import { Component, OnInit, ViewChild, computed, effect, inject, model, signal } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { FormControl, Validators, NonNullableFormBuilder } from '@angular/forms';
 import { ClasseEnginsStore, CompteStore, EnginsStore, PersonnelStore, StatutStore } from '../../store/appstore';
 import { PersoTemplateComponent } from '../perso-template/perso-template.component';
 import { tab_personnel } from '../../models/modeles';
+import { ArgumentOutOfRangeError } from 'rxjs';
+import { TaskService } from '../../task.service';
+import { set } from 'firebase/database';
 
 @Component({
   selector: 'app-personnel',
@@ -13,32 +16,53 @@ import { tab_personnel } from '../../models/modeles';
   styleUrl: './personnel.component.scss'
 })
 export class PersonnelComponent implements OnInit {
-  afficher(arg0: any) {
 
-    let ind = this.current_row()?.dates.indexOf(arg0)
-    if (ind)
-      if (ind != -1) {
+  constructor(private _fb: NonNullableFormBuilder) {
+
+    this.table_update_form2.get('presence')?.valueChanges.subscribe((presence) => {
+      if (!presence) {
+        this.presence.set(false);
+        this.table_update_form2.controls.heuresN.disable();
+        this.table_update_form2.controls.heureSup.disable();
+        this.table_update_form2.controls.heuresN.clearValidators();
+        this.table_update_form2.controls.heureSup.clearValidators();
+        this.table_update_form2.controls.heuresN.updateValueAndValidity();
+        this.table_update_form2.controls.heureSup.updateValueAndValidity();
+      } else {
+        this.presence.set(true);
+        this.table_update_form2.controls.heuresN.enable();
+        this.table_update_form2.controls.heureSup.enable();
+        this.table_update_form2.controls.heuresN.setValidators([Validators.required, Validators.min(1)]);
+        this.table_update_form2.controls.heureSup.setValidators([Validators.required, Validators.min(0)]);
+        this.table_update_form2.controls.heuresN.updateValueAndValidity();
+        this.table_update_form2.controls.heureSup.updateValueAndValidity();
       }
+    })
 
-  }
-  constructor() {
+
     effect(() => {
-      // console.log(this.personnel_store.personnel_data())   
     }
     )
   }
-
 
   is_open = signal(false)
   is_open2 = signal(false)
   tab_expander = signal<boolean[]>([]);
   current_row = signal<tab_personnel | undefined>(undefined);
-  is_update = signal(false)
+  date_pointage = signal('');
+  is_update = signal(false);
+  is_click = signal<boolean | undefined>(false);
+  is_pointed = signal<boolean | undefined>(false);
+  presence = model<boolean | undefined>(undefined);
+  heurs_w = model<number | undefined>(0);
+  heurs_sup = model<number | undefined>(0);
   EnginsStore = inject(EnginsStore)
   personnel_store = inject(PersonnelStore)
   classeEngins_store = inject(ClasseEnginsStore)
   statut_store = inject(StatutStore)
   fb = inject(NonNullableFormBuilder)
+  fb2 = inject(NonNullableFormBuilder)
+  task_service = inject(TaskService)
   table_update_form = this.fb.group({
     id: new FormControl(''),
     nom: new FormControl('', Validators.required),
@@ -50,6 +74,12 @@ export class PersonnelComponent implements OnInit {
     email: new FormControl(''),
     num_matricule: new FormControl('')
   })
+  table_update_form2 = this.fb2.group({
+    presence: new FormControl(false),
+    heuresN: new FormControl(0, [Validators.required, Validators.min(1)]),
+    heureSup: new FormControl(0, [Validators.required, Validators.min(0)])
+  })
+  enregistrement = signal(false)
   displayedColumns = {
     'nom': 'NOM',
     'prenom': 'PRENOM',
@@ -252,5 +282,95 @@ export class PersonnelComponent implements OnInit {
   expander(index: number) {
     var rep = this.tab_expander()[index];
     this.tab_expander.update((tab) => tab.map((x, i) => i == index ? !rep : x))
+  }
+  afficher(arg0: any) {
+
+    this.date_pointage.set(arg0);
+    this.personnel_store.filtrebyDate(arg0);
+    this.afficher2()
+  }
+  afficher2() {
+    this.is_pointed.set(false);
+    this.is_click.set(true);
+    let arg0 = this.date_pointage();
+    let ind = this.current_row()?.dates.indexOf(arg0);
+
+    if (ind != undefined)
+      if (ind != -1) {
+        let presence = this.current_row()?.presence[ind];
+
+        if (presence != undefined) {
+          this.table_update_form2.patchValue({
+            'presence': presence,
+            'heuresN': this.current_row()?.heuresN[ind],
+            'heureSup': this.current_row()?.heureSup[ind]
+          });
+        }
+        this.is_pointed.set(true);
+      } else {
+        this.is_pointed.set(false);
+      }
+  }
+  quitter() {
+    this.is_open2.set(false);
+    this.is_click.set(false);
+    this.is_pointed.set(false);
+    this.presence.set(undefined);
+    this.heurs_w.set(0);
+    this.heurs_sup.set(0);
+    this.date_pointage.set('');
+
+  }
+  savepointage() {
+    if (this.table_update_form2.valid) {
+      let value = this.table_update_form2.value;
+      let current = this.current_row();
+      let presence = this.presence();
+      this.enregistrement.set(true);
+      if (current && presence != undefined) {
+        let ind = this.current_row()?.dates.indexOf(this.date_pointage());
+        let Presence = current.presence;
+        let heuresN = current.heuresN;
+        let heureSup = current.heureSup;
+        if (ind != undefined) {
+          presence ? Presence[ind] = true : Presence[ind] = false;
+          value.heuresN != undefined ? heuresN[ind] = value.heuresN : heuresN[ind] = 0;
+          value.heureSup != undefined ? heureSup[ind] = value.heureSup : heureSup[ind] = 0;
+          this.current_row.update((row: any) => ({
+            ...row,
+            'presence': Presence,
+            'heuresN': heuresN,
+            'heureSup': heureSup,
+
+          }))
+          this.task_service.ModifPerson(this.current_row()).subscribe({
+            complete: () => {
+              setTimeout(() => {
+                this.enregistrement.set(false);
+                this.is_click.set(false);
+                this.is_pointed.set(false);
+              }, 2000);
+            }
+
+          })
+        }
+      }
+    }
+  }
+  change_slide(data: boolean) {
+    if (data) {
+      let current = this.current_row()
+      if (current) {
+        this.task_service.updatePerson(current, this.date_pointage()).subscribe();
+
+      }
+    } else {
+      let current = this.current_row()
+      if (current)
+        this.task_service.removePerson(current, this.date_pointage()).subscribe()
+
+    }
+    this.afficher2();
+
   }
 }

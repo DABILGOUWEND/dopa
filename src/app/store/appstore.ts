@@ -763,7 +763,6 @@ export const PersonnelStore = signalStore(
                     result = [...result, ...element]
                 });
                 let unique_dates = result.filter((value: any, index: any, self: any) => self.indexOf(value) === index);
-
                 
                 let tab: any[] = [];
                 var init = 5;
@@ -773,7 +772,7 @@ export const PersonnelStore = signalStore(
                 let date=new Date().toLocaleDateString();
                 let now = getfin_date(date);
                
-                while (fin_date.getTime() <= now.getTime() && init < (convertDate(date).getMonth()+1 )) {
+                while (fin_date.getTime() <= now.getTime() && init <= (convertDate(date).getMonth()+1 )) {
              
                   let dates = unique_dates.filter((x: any) => {
                     return convertDate(x).getTime() >= convertDate(debut_date).getTime()

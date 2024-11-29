@@ -261,6 +261,9 @@ export class PointageComponent implements OnInit {
   Annuler2() {
     this.is_table_list_open.set(false);
   }
+  
+  
+  
   afficher(row: any) {
     this.personnel_store.filtrebyDate(row)
     this.madate.set(row)

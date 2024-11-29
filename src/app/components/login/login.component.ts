@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, effect, inject, OnDestroy, signal } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { EntrepriseStore, UserStore } from '../../store/appstore';
 import { AuthenService } from '../../authen.service';
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { WenService } from '../../wen.service';
 import { error } from 'console';
-
+import { Subject, Subscriber, Subscription } from 'rxjs';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -14,14 +14,14 @@ import { error } from 'console';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
-  entreprise_store = inject(EntrepriseStore);
+export class LoginComponent implements OnDestroy ,AfterViewInit{
+ 
   _service = inject(WenService);
   _auth_service = inject(AuthenService);
-  _user_store = inject(UserStore);
-  _entreprise=inject(EntrepriseStore);
+ subscribe=Subscriber;
   loginForm: FormGroup;
   message = signal('vous êtes déconnecté');
+   ngUnsubscribe: Subscription=new Subscription();
   constructor(
     private router: Router,
     private authservice: AuthenService,
@@ -36,6 +36,13 @@ export class LoginComponent {
     effect(() => {
     })
   }
+  ngAfterViewInit() {
+    this.ngUnsubscribe.unsubscribe();
+  }
+  ngOnDestroy() {
+  
+    this.ngUnsubscribe.unsubscribe();
+  }
   ngOnInit() {
   }
   setMessage() {
@@ -48,7 +55,8 @@ export class LoginComponent {
   sumitlogin() {
     this.message.set('tentative de connection en cours...');
     let value = this.loginForm.getRawValue();
-    this._auth_service.loginFirebase(value.email, value.password).subscribe(
+    this.ngUnsubscribe = this._auth_service.loginFirebase(value.email, value.password)
+    .subscribe(
       {
         next: () => {
           setTimeout(() => {

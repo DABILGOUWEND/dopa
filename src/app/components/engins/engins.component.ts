@@ -123,7 +123,6 @@ export class EnginsComponent implements OnInit {
       
       let donnees: any = []
       this.EnginsStore.donnees_engins().forEach(element => {
-        
         let classe = this.classeEngins_store.classes_engins().find(x => x.id == element.classe_id)
         let utilisat = this.personnel_store.donnees_personnel().find(x => x.id == element.utilisateur_id)
         donnees.push(

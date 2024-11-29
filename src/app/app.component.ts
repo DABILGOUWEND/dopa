@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ImportedModule } from './modules/imported/imported.module';
 import { AuthenService } from './authen.service';
@@ -13,23 +13,8 @@ import { TaskService } from './task.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
-  _engins_store = inject(EnginsStore);
-  _classes_engins_store = inject(ClasseEnginsStore);
-  _personnel_store = inject(PersonnelStore);
-  _projets_store = inject(ProjetStore);
-  _pannes_store = inject(PannesStore);
-  _consogo_store = inject(GasoilStore);
-  _approgo_store = inject(ApproGasoilStore);
-  _statuts_personnel_store = inject(StatutStore);
-  _taches_engins_store = inject(TachesEnginsStore);
-  _entreprise_store = inject(EntrepriseStore);
-  _devis_store = inject(DevisStore)
-  _constat_store = inject(ConstatStore)
-  _ligneDevis_store = inject(LigneDevisStore)
-  _sousTraitance_store = inject(SstraitantStore)
-  _attachements_store = inject(AttachementStore)
-  _decomptes_store = inject(DecompteStore)
+export class AppComponent implements OnInit,OnDestroy {
+ 
   
   _auth_service = inject(AuthenService);
 
@@ -38,13 +23,16 @@ export class AppComponent implements OnInit {
       (userCredential) => {
         if (userCredential)
           this._auth_service.handleCreateUser(userCredential);
-      }) 
+      })  
   }
+  ngOnDestroy() {
+  }
+    
 
 
-  _auth = inject(Auth);
-  title = signal('wenbtp');
+  _auth = inject(Auth)
   ngOnInit() {
+   
     this._auth_service.autoLogin();
   }
 }
