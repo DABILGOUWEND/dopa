@@ -231,7 +231,8 @@ export interface Tab_personnelStore {
     message: string,
     current_date: string,
     click: number[],
-    path_string: string
+    path_string: string,
+    is_finished: boolean
 }
 
 export interface PointageStore {

@@ -82,7 +82,7 @@
                             <h1  [ngStyle]="{'font-size.px':18,'font-weight':'bold','margin-left.px':20,'font-family':'Trebuchet MS, sans-serif'}">{{node.name}}</h1>
                             <button mat-icon-button (click)="print(index)" [ngStyle]="{'margin-left.px':20,'margin-top.px':20}"> <mat-icon>print</mat-icon></button>
                         </div>
-                        @for(row of node.children;track row){
+                        @for(row of node.children;;track $index){
                         <div (click)="afficher(row.name)"
                             [ngClass]="{'row_hide':tab_expander()[index] ,'ligne_expand':!tab_expander()[index]}" [ngStyle]="{'margin-left.px':50}">
                             <h3 [ngStyle]="{'font-size.px':16,'font-weight':'bold','margin-left.px':40}"> {{row.name}} </h3>
@@ -138,78 +138,90 @@
                             <button mat-flat-button color="primary" (click)="ouvriliste()"> Ajouter personnel </button>
                         </div>
                     </div>
-                    <div class="content_corps">   
-                        <table mat-table [dataSource]="dataSource()" class="wen-table">
-                            <ng-container matColumnDef="nom">
-                                <th mat-header-cell *matHeaderCellDef> NOM
-    
-                                </th>
-                                <td mat-cell *matCellDef="let element;let i=index">
-                                    <a (click)="editperso(element,i)">{{element.nom}} </a>
-                                </td>
-                            </ng-container>
-                            <ng-container matColumnDef="prenom">
-                                <th mat-header-cell *matHeaderCellDef> PRENOM
-    
-                                </th>
-                                <td mat-cell *matCellDef="let element">
-                                    {{element.prenom}}
-                                </td>
-                            </ng-container>
-    
-                            <ng-container matColumnDef="fonction">
-                                <th mat-header-cell *matHeaderCellDef> FONCTION
-    
-                                </th>
-                                <td mat-cell *matCellDef="let element">
-                                    {{element.fonction}}
-                                </td>
-                            </ng-container>
-                            <ng-container matColumnDef="presence">
-                                <th mat-header-cell *matHeaderCellDef>
-                                    <h3>PRESENCE</h3>
-                                    <mat-checkbox [checked]="allComplete()" [indeterminate]="someComplete()"
-                                        (change)="setAll($event.checked)">{{personnel_store.mytasks().name}}</mat-checkbox>
-                                </th>
-                                <td mat-cell *matCellDef="let row;index as i">
-                                    <mat-checkbox [checked]="personnel_store.mytasks().subtasks[i].completed"
-                                        (change)="is_checked(row,i)">
-                                        {{personnel_store.mytasks().subtasks[i].name}}
-                                    </mat-checkbox>
-                                </td>
-                            </ng-container>
-                            <ng-container matColumnDef="nbre_heure">
-                                <th mat-header-cell *matHeaderCellDef> NBRE HEURES
-    
-                                </th>
-                                <td mat-cell *matCellDef="let element;let i=index">
-                                    {{this.personnel_store.heures_normale()[i]}}
-                                </td>
-                            </ng-container>
-                            <ng-container matColumnDef="heure_sup">
-                                <th mat-header-cell *matHeaderCellDef> HEURES SUP
-    
-                                </th>
-                                <td mat-cell *matCellDef="let element;let i=index">
-                                    {{this.personnel_store.heures_sup()[i]}}
-                                </td>
-                            </ng-container>
-                            <ng-container matColumnDef="actions">
-                                <th mat-header-cell *matHeaderCellDef></th>
-                                <td mat-cell *matCellDef="let row;let i=index">
-                                    <div *ngIf="personnel_store.presence()[i]==true">
-                                        <button mat-icon-button
-                                            (click)="editperso(row,i)"><mat-icon>edit</mat-icon></button>
-                                    </div>
-                                    <button mat-icon-button (click)="exclure(row)"><mat-icon>clear</mat-icon></button>
-                                </td>
-                            </ng-container>
-    
-                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumns;let i=index;"
-                                [ngClass]="{'heuresup':personnel_store.heures_sup()[i]>0,'absent':personnel_store.presence()[i]==false}">
-                            </tr>
-                        </table>
+                    <div class="content_corps"> 
+                        @if(personnel_store.is_finished())  
+                        {
+                            <table mat-table [dataSource]="dataSource()" class="wen-table">
+                                <ng-container matColumnDef="nom">
+                                    <th mat-header-cell *matHeaderCellDef> NOM
+        
+                                    </th>
+                                    <td mat-cell *matCellDef="let element;let i=index">
+                                        <a (click)="editperso(element,i)">{{element.nom}} </a>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="prenom">
+                                    <th mat-header-cell *matHeaderCellDef> PRENOM
+        
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{element.prenom}}
+                                    </td>
+                                </ng-container>
+        
+                                <ng-container matColumnDef="fonction">
+                                    <th mat-header-cell *matHeaderCellDef> FONCTION
+        
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{element.fonction}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="presence">
+                                    <th mat-header-cell *matHeaderCellDef>
+                                        <h3>PRESENCE</h3>
+                                        <mat-checkbox [checked]="allComplete()" [indeterminate]="someComplete()"
+                                            (change)="setAll($event.checked)">{{personnel_store.mytasks().name}}</mat-checkbox>
+                                    </th>
+                                    <td mat-cell *matCellDef="let row;index as i">
+                                        @if(personnel_store.mytasks().subtasks[i])
+                                        {
+                                            <mat-checkbox [checked]="personnel_store.mytasks().subtasks[i].completed"
+                                            (change)="is_checked(row,i)">
+                                            {{personnel_store.mytasks().subtasks[i].name}}
+                                        </mat-checkbox>  
+                                        }
+                                      
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="nbre_heure">
+                                    <th mat-header-cell *matHeaderCellDef> NBRE HEURES
+        
+                                    </th>
+                                    <td mat-cell *matCellDef="let element;let i=index">
+                                        {{this.personnel_store.heures_normale()[i]}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="heure_sup">
+                                    <th mat-header-cell *matHeaderCellDef> HEURES SUP
+        
+                                    </th>
+                                    <td mat-cell *matCellDef="let element;let i=index">
+                                        {{this.personnel_store.heures_sup()[i]}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="actions">
+                                    <th mat-header-cell *matHeaderCellDef></th>
+                                    <td mat-cell *matCellDef="let row;let i=index">
+                                        <div *ngIf="personnel_store.presence()[i]==true">
+                                            <button mat-icon-button
+                                                (click)="editperso(row,i)"><mat-icon>edit</mat-icon></button>
+                                        </div>
+                                        <button mat-icon-button (click)="exclure(row)"><mat-icon>clear</mat-icon></button>
+                                    </td>
+                                </ng-container>
+        
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;let i=index;"
+                                    [ngClass]="{'heuresup':personnel_store.heures_sup()[i]>0,'absent':personnel_store.presence()[i]==false}">
+                                </tr>
+                            </table>
+                        } @else {
+                            <div [ngStyle]="{'padding-top.px':200}">
+                                <mat-spinner [ngStyle]="{'margin-left.%':50}"></mat-spinner>
+                            </div>
+                        } 
+                        
                     </div>
                    
                 </mat-sidenav-content>

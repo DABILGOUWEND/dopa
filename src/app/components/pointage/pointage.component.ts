@@ -37,7 +37,7 @@ export class PointageComponent implements OnInit {
       date_fin: new FormControl(new Date(), Validators.required)
     })
     effect(() => {
-      //console.log(this.data_expand())
+      //console.log(this.personnel_store.mytasks())
     })
   }
   //signalsfff
@@ -85,7 +85,7 @@ export class PointageComponent implements OnInit {
   dataSource = computed(
     () => {
       let date = this.personnel_store.current_date();
-      if (this.datespointage().includes(date)) {
+      if (this.datespointage().includes(date) && this.personnel_store.is_finished()) {
         return new MatTableDataSource<tab_personnel>
           (this.personnel_store.data_pointage())
       }
@@ -236,6 +236,7 @@ export class PointageComponent implements OnInit {
     this.madate.set(event.value.toLocaleDateString())
   }
   commencerPoint() {
+    this.personnel_store.setfiniched(false);
     this.personnel_store.initialPersonnel(this.personnel_store.donnees_personnel())
     this.personnel_store.filtrebyDate(this.madate())
   }
@@ -270,7 +271,8 @@ export class PointageComponent implements OnInit {
     this.default_date.set(this._service.convertDate(row))
   }
   deletedate(date: string) {
-    let filtre = this.personnel_store.getDates()[0]
+    this.personnel_store.setfiniched(false);
+    let filtre = this.personnel_store.getDates()[0];
     if (filtre) {
       if (confirm('Voulez-vous vraiment supprimer cette date?'))
         this.personnel_store.removeDate(date)

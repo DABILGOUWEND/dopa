@@ -105,7 +105,8 @@ const initialPersonnelState: Tab_personnelStore = {
     message: '',
     current_date: '',
     click: [-1],
-    path_string: ''
+    path_string: '',
+    is_finished: true
 
 
 }
@@ -737,18 +738,23 @@ export const PersonnelStore = signalStore(
             mytasks: computed(() => {
                 let personnel = store.personnel_data();
                 let data: any = [];
-                personnel.forEach((element) => {
-                    let dates = element.dates;
-                    let presence = element.presence;
-                    let index = dates.indexOf(store.current_date());
-                    if (index > 0) {
-                        data.push({
-                            name: presence[index] ? "présent" : "absent",
-                            completed: element.presence[index],
-                        })
-                    }
+                if (store.is_finished()) { 
+                    personnel.forEach((element) => {
+                        let dates = element.dates;
+                        let presence = element.presence;
+                        
+                        let index = dates.indexOf(store.current_date());
+                    
+                        if (index > 0) {
+                            data.push({
+                                name: presence[index] ? "présent" : "absent",
+                                completed: element.presence[index],
+                            })
+                        } 
 
-                });
+                    });
+                }
+
                 return {
                     name: 'selectionner tout',
                     completed: false,
@@ -757,62 +763,64 @@ export const PersonnelStore = signalStore(
             }),
             getDates: computed(() => {
                 let personnel = store.personnel_data();
+
                 let dates = personnel.map(x => x.dates);
                 let result: any = []
                 dates.forEach(element => {
                     result = [...result, ...element]
                 });
                 let unique_dates = result.filter((value: any, index: any, self: any) => self.indexOf(value) === index);
-                
                 let tab: any[] = [];
                 var init = 5;
                 let annee = 2024;
                 var debut_date = '21/' + '0' + init + '/2024';
                 var fin_date = getfin_date(debut_date);
-                let date=new Date().toLocaleDateString();
+                let date = new Date().toLocaleDateString();
                 let now = getfin_date(date);
-               
-                while (fin_date.getTime() <= now.getTime() && init <= (convertDate(date).getMonth()+1 )) {
-             
-                  let dates = unique_dates.filter((x: any) => {
-                    return convertDate(x).getTime() >= convertDate(debut_date).getTime()
-                      && convertDate(x).getTime() <= fin_date.getTime()
-                  })
-                  let datesfiltres = classement(dates).map((x: any) => {
-                    return { 'name': x }
-                  })
-            
-                  tab.push({
-                    'name': 'Du ' + debut_date + ' au ' + fin_date.toLocaleDateString(),
-                    'children': datesfiltres,
-                    'debut': debut_date,
-                    'fin': fin_date.toLocaleDateString()
-                  });
-            
-            
-                  if (init <= 11) {
-                    init = init + 1;
-                  } else {
-                    init = 1;
-                    annee = annee + 1;
-                  }
-                  debut_date = '21/' + (init >= 10 ? init : ('0' + init)) + '/' + annee;
-                  fin_date = getfin_date(debut_date);
+                while (fin_date.getTime() <= now.getTime() && init < (convertDate(date).getMonth() + 1)) {
+                    let dates = unique_dates.filter((x: any) => {
+                        return convertDate(x).getTime() >= convertDate(debut_date).getTime()
+                            && convertDate(x).getTime() <= fin_date.getTime()
+                    })
+                    let datesfiltres = classement(dates).map((x: any) => {
+                        return { 'name': x }
+                    })
+
+                    tab.push({
+                        'name': 'Du ' + debut_date + ' au ' + fin_date.toLocaleDateString(),
+                        'children': datesfiltres,
+                        'debut': debut_date,
+                        'fin': fin_date.toLocaleDateString()
+                    });
+
+
+                    if (init <= 11) {
+                        init = init + 1;
+                    } else {
+                        init = 1;
+                        annee = annee + 1;
+                    }
+                    debut_date = '21/' + (init >= 10 ? init : ('0' + init)) + '/' + annee;
+                    fin_date = getfin_date(debut_date);
                 }
 
-                return [unique_dates , tab.slice().reverse()]
+                return [unique_dates, tab.slice().reverse()]
             })
 
             ,
 
             data_pointage: computed(() => {
+               
                 let donnees = store.personnel_data();
                 let data: tab_personnel[] = [];
-                donnees.forEach(element => {
-                    let dates = element.dates;
-                    if (dates.includes(store.current_date()))
-                        data.push(element)
-                });
+                if(store.is_finished()){
+                    donnees.forEach(element => {
+                        let dates = element.dates;
+                        if (dates.includes(store.current_date()))
+                            data.push(element)
+                    });
+                }
+                
                 return data
             }),
             donnees_personnelById: computed(() => {
@@ -946,6 +954,9 @@ export const PersonnelStore = signalStore(
             setClick(types: number[]) {
                 patchState(store, { click: types })
             },
+            setfiniched(rep: boolean) {
+                patchState(store, { is_finished: rep})
+            },
 
             filterbyNomPrenom(mot: string) { patchState(store, { selectedNom_prenom: mot }) },
 
@@ -997,7 +1008,11 @@ export const PersonnelStore = signalStore(
                         if (row.dates.includes(date))
                             obs.push(task_service.removePerson(row, date))
                     }
-                    return concat(obs)
+                    return forkJoin(obs).pipe( tap({    
+                        complete: () => {
+                            patchState(store, { is_finished: true })
+                        }
+                    })) 
                 }
                 ))),
             updatePersonnel: rxMethod<tab_personnel>(pipe(
@@ -1078,7 +1093,14 @@ export const PersonnelStore = signalStore(
                     for (let row of donnees) {
                         obs.push(task_service.updatePerson(row, date));
                     }
-                    return concat(obs)
+                    return forkJoin(obs).pipe(
+                        tap({
+                            complete: () => {   
+                                patchState(store, { is_finished: true })
+                            }
+                        }
+                    )
+                    )
                 })
             )),
 

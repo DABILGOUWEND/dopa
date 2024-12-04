@@ -41,6 +41,7 @@ export class PersonnelComponent implements OnInit {
 
 
     effect(() => {
+      //console.log(this.personnel_store.getDates()[1])
     }
     )
   }
