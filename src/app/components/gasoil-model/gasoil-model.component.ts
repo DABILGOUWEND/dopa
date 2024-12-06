@@ -8,11 +8,10 @@ import { ApprogoComponent } from '../approgo/approgo.component';
 import { EnginsStore, GasoilStore } from '../../store/appstore';
 
 @Component({
-  selector: 'app-gasoil-model',
-  standalone: true,
-  imports: [ImportedModule, FormSaisiComponent, ModelComponent, ApprogoComponent],
-  templateUrl: './gasoil-model.component.html',
-  styleUrl: './gasoil-model.component.scss'
+    selector: 'app-gasoil-model',
+    imports: [ImportedModule, FormSaisiComponent, ModelComponent, ApprogoComponent],
+    templateUrl: './gasoil-model.component.html',
+    styleUrl: './gasoil-model.component.scss'
 })
 export class GasoilModelComponent implements OnInit {
   _gasoil_store=inject(GasoilStore)

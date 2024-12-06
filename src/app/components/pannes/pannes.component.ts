@@ -12,11 +12,10 @@ import { PannesService } from '../../services/pannes.service';
 
 
 @Component({
-  selector: 'app-pannes',
-  standalone: true,
-  imports: [ImportedModule,TablePanneComponent],
-  templateUrl: './pannes.component.html',
-  styleUrl: './pannes.component.scss'
+    selector: 'app-pannes',
+    imports: [ImportedModule, TablePanneComponent],
+    templateUrl: './pannes.component.html',
+    styleUrl: './pannes.component.scss'
 })
 export class PannesComponent {
   _pannestore = inject(PannesStore);

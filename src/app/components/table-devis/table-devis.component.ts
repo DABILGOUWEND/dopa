@@ -8,11 +8,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DevisStore, LigneDevisStore } from '../../store/appstore';
 
 @Component({
-  selector: 'app-table-devis',
-  standalone: true,
-  imports: [ImportedModule, SousTraitanceComponent, FormSaisiComponent],
-  templateUrl: './table-devis.component.html',
-  styleUrl: './table-devis.component.scss'
+    selector: 'app-table-devis',
+    imports: [ImportedModule, SousTraitanceComponent, FormSaisiComponent],
+    templateUrl: './table-devis.component.html',
+    styleUrl: './table-devis.component.scss'
 })
 export class TableDevisComponent implements OnInit {
   ngOnInit() {

@@ -9,11 +9,10 @@ import { PannesStore } from '../../store/appstore';
 import { WenService } from '../../wen.service';
 import { SituationPannePipe } from '../../situation-panne.pipe';
 @Component({
-  selector: 'app-table-panne',
-  standalone: true,
-  imports: [ImportedModule, SituationPannePipe],
-  templateUrl: './table-panne.component.html',
-  styleUrl: './table-panne.component.scss'
+    selector: 'app-table-panne',
+    imports: [ImportedModule, SituationPannePipe],
+    templateUrl: './table-panne.component.html',
+    styleUrl: './table-panne.component.scss'
 })
 export class TablePanneComponent implements OnInit {
   readonly PanneStore = inject(PannesStore)

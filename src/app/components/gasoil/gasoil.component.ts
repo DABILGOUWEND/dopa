@@ -16,11 +16,10 @@ import { TaskService } from '../../task.service';
 import { GasoilService } from '../../services/gasoil.service';
 import { sign } from 'node:crypto';
 @Component({
-  selector: 'app-gasoil',
-  standalone: true,
-  imports: [ImportedModule,   GasoilModelComponent],
-  templateUrl: './gasoil.component.html',
-  styleUrl: './gasoil.component.scss'
+    selector: 'app-gasoil',
+    imports: [ImportedModule, GasoilModelComponent],
+    templateUrl: './gasoil.component.html',
+    styleUrl: './gasoil.component.scss'
 })
 export class GasoilComponent  implements OnInit{
   

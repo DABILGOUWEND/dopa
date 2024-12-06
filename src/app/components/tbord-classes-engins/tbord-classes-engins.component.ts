@@ -5,11 +5,10 @@ import { EnginsStore, PersonnelStore, ClasseEnginsStore, StatutStore, UserStore,
 import { EssaiComponent } from '../essai/essai.component';
 
 @Component({
-  selector: 'app-tbord-classes-engins',
-  standalone: true,
-  imports: [ImportedModule, EssaiComponent],
-  templateUrl: './tbord-classes-engins.component.html',
-  styleUrl: './tbord-classes-engins.component.scss'
+    selector: 'app-tbord-classes-engins',
+    imports: [ImportedModule, EssaiComponent],
+    templateUrl: './tbord-classes-engins.component.html',
+    styleUrl: './tbord-classes-engins.component.scss'
 })
 export class TbordClassesEnginsComponent {
   constructor() {

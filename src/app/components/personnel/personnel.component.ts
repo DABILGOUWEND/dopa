@@ -9,11 +9,10 @@ import { TaskService } from '../../task.service';
 import { set } from 'firebase/database';
 
 @Component({
-  selector: 'app-personnel',
-  standalone: true,
-  imports: [ImportedModule, PersoTemplateComponent],
-  templateUrl: './personnel.component.html',
-  styleUrl: './personnel.component.scss'
+    selector: 'app-personnel',
+    imports: [ImportedModule, PersoTemplateComponent],
+    templateUrl: './personnel.component.html',
+    styleUrl: './personnel.component.scss'
 })
 export class PersonnelComponent implements OnInit {
 

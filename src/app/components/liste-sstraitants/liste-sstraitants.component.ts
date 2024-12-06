@@ -6,11 +6,10 @@ import { AuthenService } from '../../authen.service';
 import { DevisStore, SstraitantStore, EntrepriseStore, ProjetStore } from '../../store/appstore';
 
 @Component({
-  selector: 'app-liste-sstraitants',
-  standalone: true,
-  imports: [ImportedModule, EssaiComponent],
-  templateUrl: './liste-sstraitants.component.html',
-  styleUrl: './liste-sstraitants.component.scss'
+    selector: 'app-liste-sstraitants',
+    imports: [ImportedModule, EssaiComponent],
+    templateUrl: './liste-sstraitants.component.html',
+    styleUrl: './liste-sstraitants.component.scss'
 })
 export class ListeSstraitantsComponent {
   constructor() {

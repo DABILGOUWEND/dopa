@@ -9,11 +9,10 @@ import { BehaviorSubject } from 'rxjs';
 import { UnitesPipe } from '../../unites.pipe';
 
 @Component({
-  selector: 'app-mes-constats',
-  standalone: true,
-  imports: [ImportedModule, UnitesPipe],
-  templateUrl: './mes-constats.component.html',
-  styleUrl: './mes-constats.component.scss'
+    selector: 'app-mes-constats',
+    imports: [ImportedModule, UnitesPipe],
+    templateUrl: './mes-constats.component.html',
+    styleUrl: './mes-constats.component.scss'
 })
 export class MesConstatsComponent implements OnInit {
   //injections

@@ -12,11 +12,10 @@ import { AuthenService } from '../../authen.service';
 
 
 @Component({
-  selector: 'app-attachements',
-  standalone: true,
-  imports: [ImportedModule, EntreprisesPipe],
-  templateUrl: './attachements.component.html',
-  styleUrl: './attachements.component.scss'
+    selector: 'app-attachements',
+    imports: [ImportedModule, EntreprisesPipe],
+    templateUrl: './attachements.component.html',
+    styleUrl: './attachements.component.scss'
 })
 export class AttachementsComponent implements OnInit {
 

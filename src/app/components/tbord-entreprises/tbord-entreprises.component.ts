@@ -5,11 +5,10 @@ import { ImportedModule } from '../../modules/imported/imported.module';
 import { EssaiComponent } from '../essai/essai.component';
 
 @Component({
-  selector: 'app-tbord-entreprises',
-  standalone: true,
-  imports: [ImportedModule, EssaiComponent],
-  templateUrl: './tbord-entreprises.component.html',
-  styleUrl: './tbord-entreprises.component.scss'
+    selector: 'app-tbord-entreprises',
+    imports: [ImportedModule, EssaiComponent],
+    templateUrl: './tbord-entreprises.component.html',
+    styleUrl: './tbord-entreprises.component.scss'
 })
 export class TbordEntreprisesComponent {
   constructor() {

@@ -13,11 +13,10 @@ import { WenService } from '../../wen.service';
 import { SituationPannePipe } from '../../situation-panne.pipe';
 
 @Component({
-  selector: 'app-rapport-panne',
-  standalone: true,
-  imports: [ImportedModule, SituationPannePipe],
-  templateUrl: './rapport-panne.component.html',
-  styleUrl: './rapport-panne.component.scss'
+    selector: 'app-rapport-panne',
+    imports: [ImportedModule, SituationPannePipe],
+    templateUrl: './rapport-panne.component.html',
+    styleUrl: './rapport-panne.component.scss'
 })
 export class RapportPanneComponent implements OnInit {
   readonly Pannestore = inject(PannesStore)

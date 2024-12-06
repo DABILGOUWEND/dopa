@@ -16,11 +16,10 @@ import { sous_traitant } from '../../models/modeles';
 import { WenService } from '../../wen.service';
 
 @Component({
-  selector: 'app-liste-sous-traitants',
-  standalone: true,
-  imports: [ImportedModule, SaisiComponent],
-  templateUrl: './liste-sous-traitants.component.html',
-  styleUrl: './liste-sous-traitants.component.scss'
+    selector: 'app-liste-sous-traitants',
+    imports: [ImportedModule, SaisiComponent],
+    templateUrl: './liste-sous-traitants.component.html',
+    styleUrl: './liste-sous-traitants.component.scss'
 })
 export class ListeSousTraitantsComponent implements OnInit {
 

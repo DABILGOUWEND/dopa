@@ -9,11 +9,10 @@ import { appro_gasoil } from '../../models/modeles';
 
 
 @Component({
-  selector: 'app-approgo',
-  standalone: true,
-  imports: [ImportedModule],
-  templateUrl: './approgo.component.html',
-  styleUrl: './approgo.component.scss'
+    selector: 'app-approgo',
+    imports: [ImportedModule],
+    templateUrl: './approgo.component.html',
+    styleUrl: './approgo.component.scss'
 })
 export class ApprogoComponent  implements OnInit{
   

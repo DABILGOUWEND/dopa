@@ -4,11 +4,10 @@ import { ImportedModule } from '../../modules/imported/imported.module';
 import { ApprogoComponent } from '../approgo/approgo.component';
 
 @Component({
-  selector: 'app-model',
-  standalone: true,
-  imports: [NgTemplateOutlet, ImportedModule,ApprogoComponent],
-  templateUrl: './model.component.html',
-  styleUrl: './model.component.scss'
+    selector: 'app-model',
+    imports: [NgTemplateOutlet, ImportedModule, ApprogoComponent],
+    templateUrl: './model.component.html',
+    styleUrl: './model.component.scss'
 })
 export class ModelComponent implements OnInit {
   @Input() Entete: TemplateRef<any>;

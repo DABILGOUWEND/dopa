@@ -8,11 +8,10 @@ import { FormSaisiComponent } from '../form-saisi/form-saisi.component';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-table',
-  standalone: true,
-  imports: [NgTemplateOutlet, ImportedModule],
-  templateUrl: './table.component.html',
-  styleUrl: './table.component.scss'
+    selector: 'app-table',
+    imports: [NgTemplateOutlet, ImportedModule],
+    templateUrl: './table.component.html',
+    styleUrl: './table.component.scss'
 })
 export class TableComponent  {
   Entete = input.required<TemplateRef<any>>();

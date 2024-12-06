@@ -10,11 +10,10 @@ import { Router } from '@angular/router';
 import { DataLoaderService } from '../../services/data-loader.service';
 
 @Component({
-  selector: 'app-home-template',
-  standalone: true,
-  imports: [NgTemplateOutlet, ImportedModule],
-  templateUrl: './home-template.component.html',
-  styleUrl: './home-template.component.scss'
+    selector: 'app-home-template',
+    imports: [NgTemplateOutlet, ImportedModule],
+    templateUrl: './home-template.component.html',
+    styleUrl: './home-template.component.scss'
 })
 export class HomeTemplateComponent implements OnInit{
   _loader_service=inject(DataLoaderService);

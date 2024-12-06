@@ -7,11 +7,10 @@ import { EntrepriseStore, ProjetStore } from '../../store/appstore';
 import { TaskService } from '../../task.service';
 import { HttpClient } from '@angular/common/http';
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [ImportedModule],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+    selector: 'app-register',
+    imports: [ImportedModule],
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.scss'
 })
 export class RegisterComponent implements OnInit {
   ngOnInit() {

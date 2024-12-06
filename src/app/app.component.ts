@@ -7,11 +7,10 @@ import { ApproGasoilStore, AttachementStore, ClasseEnginsStore, CompteStore, Con
 import { TaskService } from './task.service';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, ImportedModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [RouterOutlet, ImportedModule],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit,OnDestroy {
  

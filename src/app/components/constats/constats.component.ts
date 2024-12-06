@@ -14,11 +14,10 @@ import autoTable from 'jspdf-autotable';
 import { DateTime, Info, Interval } from 'luxon';
 
 @Component({
-  selector: 'app-constats',
-  standalone: true,
-  imports: [ImportedModule, EntreprisesPipe, DevisPipe],
-  templateUrl: './constats.component.html',
-  styleUrl: './constats.component.scss'
+    selector: 'app-constats',
+    imports: [ImportedModule, EntreprisesPipe, DevisPipe],
+    templateUrl: './constats.component.html',
+    styleUrl: './constats.component.scss'
 })
 export class ConstatsComponent implements OnInit {
   ngOnInit() { 

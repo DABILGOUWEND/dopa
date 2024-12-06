@@ -5,11 +5,10 @@ import { EnginsStore, PersonnelStore, ClasseEnginsStore, ProjetStore, Sstraitant
 import { ImportedModule } from '../../modules/imported/imported.module';
 
 @Component({
-  selector: 'app-saisi',
-  standalone: true,
-  imports: [ImportedModule],
-  templateUrl: './saisi.component.html',
-  styleUrl: './saisi.component.scss'
+    selector: 'app-saisi',
+    imports: [ImportedModule],
+    templateUrl: './saisi.component.html',
+    styleUrl: './saisi.component.scss'
 })
 export class SaisiComponent implements OnInit {
 

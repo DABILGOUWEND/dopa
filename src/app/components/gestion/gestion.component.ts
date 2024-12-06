@@ -9,11 +9,10 @@ import { DataLoaderService } from '../../services/data-loader.service';
 
 
 @Component({
-  selector: 'app-gestion',
-  standalone: true,
-  imports: [ImportedModule, HomeTemplateComponent, RouterOutlet],
-  templateUrl: './gestion.component.html',
-  styleUrl: './gestion.component.scss'
+    selector: 'app-gestion',
+    imports: [ImportedModule, HomeTemplateComponent, RouterOutlet],
+    templateUrl: './gestion.component.html',
+    styleUrl: './gestion.component.scss'
 })
 export class GestionComponent implements OnInit {
   end_of_load = signal(true);

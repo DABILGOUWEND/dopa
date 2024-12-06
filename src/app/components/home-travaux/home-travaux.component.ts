@@ -8,11 +8,10 @@ import { DataLoaderService } from '../../services/data-loader.service';
 import { sign } from 'crypto';
 
 @Component({
-  selector: 'app-home-travaux',
-  standalone: true,
-  imports: [RouterOutlet, ImportedModule, HomeTemplateComponent],
-  templateUrl: './home-travaux.component.html',
-  styleUrl: './home-travaux.component.scss'
+    selector: 'app-home-travaux',
+    imports: [RouterOutlet, ImportedModule, HomeTemplateComponent],
+    templateUrl: './home-travaux.component.html',
+    styleUrl: './home-travaux.component.scss'
 })
 export class HomeTravauxComponent implements OnInit {
 

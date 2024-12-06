@@ -9,11 +9,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { FormSaisiComponent } from '../form-saisi/form-saisi.component';
 
 @Component({
-  selector: 'app-essai',
-  standalone: true,
-  imports: [TableComponent, FormSaisiComponent, KeyValuePipe, ImportedModule],
-  templateUrl: './essai.component.html',
-  styleUrl: './essai.component.scss'
+    selector: 'app-essai',
+    imports: [TableComponent, FormSaisiComponent, KeyValuePipe, ImportedModule],
+    templateUrl: './essai.component.html',
+    styleUrl: './essai.component.scss'
 })
 export class EssaiComponent implements OnInit {
   ngOnInit() {

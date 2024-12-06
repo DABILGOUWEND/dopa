@@ -8,11 +8,10 @@ import { AuthenService } from '../../authen.service';
 
 
 @Component({
-  selector: 'app-engins',
-  standalone: true,
-  imports: [ImportedModule, SaisiComponent, EssaiComponent],
-  templateUrl: './engins.component.html',
-  styleUrl: './engins.component.scss'
+    selector: 'app-engins',
+    imports: [ImportedModule, SaisiComponent, EssaiComponent],
+    templateUrl: './engins.component.html',
+    styleUrl: './engins.component.scss'
 })
 export class EnginsComponent implements OnInit {
   constructor() {

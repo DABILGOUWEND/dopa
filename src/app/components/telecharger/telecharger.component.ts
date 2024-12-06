@@ -14,11 +14,10 @@ import { DataLoaderService } from '../../services/data-loader.service';
 import { Console } from 'console';
 
 @Component({
-  selector: 'app-telecharger',
-  standalone: true,
-  imports: [ImportedModule],
-  templateUrl: './telecharger.component.html',
-  styleUrl: './telecharger.component.scss'
+    selector: 'app-telecharger',
+    imports: [ImportedModule],
+    templateUrl: './telecharger.component.html',
+    styleUrl: './telecharger.component.scss'
 })
 export class TelechargerComponent implements OnInit {
   constructor() {

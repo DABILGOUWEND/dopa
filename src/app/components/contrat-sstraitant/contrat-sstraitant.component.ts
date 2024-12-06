@@ -24,11 +24,10 @@ export interface Task {
 }
 
 @Component({
-  selector: 'app-contrat-sstraitant',
-  standalone: true,
-  imports: [ImportedModule, SaisiComponent],
-  templateUrl: './contrat-sstraitant.component.html',
-  styleUrl: './contrat-sstraitant.component.scss'
+    selector: 'app-contrat-sstraitant',
+    imports: [ImportedModule, SaisiComponent],
+    templateUrl: './contrat-sstraitant.component.html',
+    styleUrl: './contrat-sstraitant.component.scss'
 })
 export class ContratSstraitantComponent implements OnInit {
   contrat_Store = inject(ContratStore)

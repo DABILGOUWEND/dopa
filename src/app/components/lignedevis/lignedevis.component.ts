@@ -17,11 +17,10 @@ import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
-  selector: 'app-lignedevis',
-  standalone: true,
-  imports: [ImportedModule, UnitesPipe],
-  templateUrl: './lignedevis.component.html',
-  styleUrl: './lignedevis.component.scss'
+    selector: 'app-lignedevis',
+    imports: [ImportedModule, UnitesPipe],
+    templateUrl: './lignedevis.component.html',
+    styleUrl: './lignedevis.component.scss'
 })
 export class LignedevisComponent implements OnInit {
   //injections

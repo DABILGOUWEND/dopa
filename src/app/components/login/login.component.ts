@@ -8,11 +8,10 @@ import { WenService } from '../../wen.service';
 import { error } from 'console';
 import { Subject, Subscriber, Subscription } from 'rxjs';
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [ImportedModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+    selector: 'app-login',
+    imports: [ImportedModule],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnDestroy ,AfterViewInit{
  

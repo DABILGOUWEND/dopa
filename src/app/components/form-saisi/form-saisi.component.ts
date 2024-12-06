@@ -3,11 +3,10 @@ import { ImportedModule } from '../../modules/imported/imported.module';
 import { AbstractControl, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-form-saisi',
-  standalone: true,
-  imports: [ImportedModule],
-  templateUrl: './form-saisi.component.html',
-  styleUrl: './form-saisi.component.scss'
+    selector: 'app-form-saisi',
+    imports: [ImportedModule],
+    templateUrl: './form-saisi.component.html',
+    styleUrl: './form-saisi.component.scss'
 })
 export class FormSaisiComponent implements OnInit {
 

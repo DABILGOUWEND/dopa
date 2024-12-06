@@ -6,11 +6,10 @@ import { AuthenService } from '../../authen.service';
 
 
 @Component({
-  selector: 'app-accueil',
-  standalone: true,
-  imports: [ImportedModule],
-  templateUrl: './accueil.component.html',
-  styleUrl: './accueil.component.scss',
+    selector: 'app-accueil',
+    imports: [ImportedModule],
+    templateUrl: './accueil.component.html',
+    styleUrl: './accueil.component.scss'
 })
 export class AccueilComponent implements OnInit {
   readonly gasoil_store = inject(GasoilStore);

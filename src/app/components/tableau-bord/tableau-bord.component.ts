@@ -10,18 +10,16 @@ import { TbordEntreprisesComponent } from '../tbord-entreprises/tbord-entreprise
 import { TbordProjetsComponent } from '../tbord-projets/tbord-projets.component';
 
 @Component({
-  selector: 'app-tableau-bord',
-  standalone: true,
-  imports:
-    [
-      TbordUsersComponent,
-      TbordClassesEnginsComponent,
-      TbordEntreprisesComponent,
-      TbordProjetsComponent,
-      ImportedModule
+    selector: 'app-tableau-bord',
+    imports: [
+        TbordUsersComponent,
+        TbordClassesEnginsComponent,
+        TbordEntreprisesComponent,
+        TbordProjetsComponent,
+        ImportedModule
     ],
-  templateUrl: './tableau-bord.component.html',
-  styleUrl: './tableau-bord.component.scss'
+    templateUrl: './tableau-bord.component.html',
+    styleUrl: './tableau-bord.component.scss'
 })
 export class TableauBordComponent  implements OnInit {
 

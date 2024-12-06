@@ -22,11 +22,10 @@ interface ExampleFlatNode {
   level: number;
 }
 @Component({
-  selector: 'app-essai2',
-  standalone: true,
-  imports: [ImportedModule],
-  templateUrl: './essai2.component.html',
-  styleUrl: './essai2.component.scss'
+    selector: 'app-essai2',
+    imports: [ImportedModule],
+    templateUrl: './essai2.component.html',
+    styleUrl: './essai2.component.scss'
 })
 export class Essai2Component implements OnInit {
   _devis_store = inject(DevisStore);

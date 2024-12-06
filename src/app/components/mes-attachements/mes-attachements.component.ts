@@ -8,11 +8,10 @@ import { element_constat, element_devis, FlatNodeAttachement } from '../../model
 import { DevisStore, SstraitantStore, UnitesStore } from '../../store/appstore';
 
 @Component({
-  selector: 'app-mes-attachements',
-  standalone: true,
-  imports: [ImportedModule, UnitesPipe],
-  templateUrl: './mes-attachements.component.html',
-  styleUrl: './mes-attachements.component.scss'
+    selector: 'app-mes-attachements',
+    imports: [ImportedModule, UnitesPipe],
+    templateUrl: './mes-attachements.component.html',
+    styleUrl: './mes-attachements.component.scss'
 })
 export class MesAttachementsComponent implements OnInit {
   //injections

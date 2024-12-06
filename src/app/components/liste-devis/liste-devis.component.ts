@@ -7,11 +7,10 @@ import { DevisStore, SstraitantStore, ProjetStore, EntrepriseStore } from '../..
 import { TableDevisComponent } from '../table-devis/table-devis.component';
 
 @Component({
-  selector: 'app-liste-devis',
-  standalone: true,
-  imports: [ImportedModule,  TableDevisComponent],
-  templateUrl: './liste-devis.component.html',
-  styleUrl: './liste-devis.component.scss'
+    selector: 'app-liste-devis',
+    imports: [ImportedModule, TableDevisComponent],
+    templateUrl: './liste-devis.component.html',
+    styleUrl: './liste-devis.component.scss'
 })
 export class ListeDevisComponent {
   constructor() {

@@ -5,11 +5,10 @@ import { WenService } from '../../wen.service';
 import { EntreprisesPipe } from '../../entreprises.pipe';
 
 @Component({
-  selector: 'app-decomptes',
-  standalone: true,
-  imports: [ImportedModule,EntreprisesPipe],
-  templateUrl: './decomptes.component.html',
-  styleUrl: './decomptes.component.scss'
+    selector: 'app-decomptes',
+    imports: [ImportedModule, EntreprisesPipe],
+    templateUrl: './decomptes.component.html',
+    styleUrl: './decomptes.component.scss'
 })
 export class DecomptesComponent implements OnInit {
   ngOnInit(){

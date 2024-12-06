@@ -15,11 +15,10 @@ import { DataLoaderService } from '../../services/data-loader.service';
 import { set } from 'firebase/database';
 export const APP_Is = 'AIzaSyBsK6a4cgI9g94bdY050vnuI3BP3ejiiXE';
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [ImportedModule, HomeTemplateComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+    selector: 'app-home',
+    imports: [ImportedModule, HomeTemplateComponent],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
  

@@ -16,11 +16,10 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
 import { Console } from 'node:console';
 
 @Component({
-  selector: 'app-pointage',
-  standalone: true,
-  imports: [ImportedModule],
-  templateUrl: './pointage.component.html',
-  styleUrl: './pointage.component.scss'
+    selector: 'app-pointage',
+    imports: [ImportedModule],
+    templateUrl: './pointage.component.html',
+    styleUrl: './pointage.component.scss'
 })
 export class PointageComponent implements OnInit {
   personnel_store = inject(PersonnelStore);

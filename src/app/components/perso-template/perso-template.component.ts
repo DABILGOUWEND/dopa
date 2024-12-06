@@ -7,11 +7,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TableComponent } from '../table/table.component';
 
 @Component({
-  selector: 'app-perso-template',
-  standalone: true,
-  imports: [ ImportedModule,FormSaisiComponent,TableComponent],
-  templateUrl: './perso-template.component.html',
-  styleUrl: './perso-template.component.scss'
+    selector: 'app-perso-template',
+    imports: [ImportedModule, FormSaisiComponent, TableComponent],
+    templateUrl: './perso-template.component.html',
+    styleUrl: './perso-template.component.scss'
 })
 export class PersoTemplateComponent implements OnInit {
   ngOnInit() {

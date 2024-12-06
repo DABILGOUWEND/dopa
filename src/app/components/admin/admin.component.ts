@@ -9,11 +9,10 @@ import { TaskService } from '../../task.service';
 import { DataLoaderService } from '../../services/data-loader.service';
 
 @Component({
-  selector: 'app-admin',
-  standalone: true,
-  imports: [RouterOutlet, ImportedModule, HomeTemplateComponent],
-  templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+    selector: 'app-admin',
+    imports: [RouterOutlet, ImportedModule, HomeTemplateComponent],
+    templateUrl: './admin.component.html',
+    styleUrl: './admin.component.scss'
 })
 export class AdminComponent implements OnInit {
 

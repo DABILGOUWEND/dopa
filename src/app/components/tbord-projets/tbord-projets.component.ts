@@ -6,11 +6,10 @@ import { SaisiComponent } from '../../utilitaires/saisi/saisi.component';
 import { EssaiComponent } from '../essai/essai.component';
 
 @Component({
-  selector: 'app-tbord-projets',
-  standalone: true,
-  imports: [ImportedModule, SaisiComponent, EssaiComponent],
-  templateUrl: './tbord-projets.component.html',
-  styleUrl: './tbord-projets.component.scss'
+    selector: 'app-tbord-projets',
+    imports: [ImportedModule, SaisiComponent, EssaiComponent],
+    templateUrl: './tbord-projets.component.html',
+    styleUrl: './tbord-projets.component.scss'
 })
 export class TbordProjetsComponent {
   constructor() {
