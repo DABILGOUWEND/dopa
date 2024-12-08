@@ -44,7 +44,6 @@ export class PersonnelComponent implements OnInit {
     }
     )
   }
-
   is_open = signal(false)
   is_open2 = signal(false)
   tab_expander = signal<boolean[]>([]);
