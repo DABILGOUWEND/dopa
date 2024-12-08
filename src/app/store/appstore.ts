@@ -35,6 +35,7 @@ import { DateAdapter } from "@angular/material/core";
 import { PassThrough } from "node:stream";
 import { ComptesDateInitService } from "../services/comptes-date-init.service";
 import { error } from "node:console";
+import { setFulfilled, setPending, withRequestStatus } from "./request-status.feature";
 const initialGasoilState: gasoilStore = {
     conso_data: [],
     err: null,
@@ -723,6 +724,7 @@ export const ClasseEnginsStore = signalStore(
 export const PersonnelStore = signalStore(
     { providedIn: 'root' },
     withState(initialPersonnelState),
+    withRequestStatus(),
     withComputed((store, dates = inject(DatesStore)) => (
         {
             taille: computed(() => store.personnel_data().length),
@@ -963,7 +965,8 @@ export const PersonnelStore = signalStore(
             loadPersonnel: rxMethod<void>(pipe(switchMap(() => {
                 return task_service.getallPersonnel().pipe(
                     tap(data => {
-                        patchState(store, { personnel_data: classePersonnel(data) })
+                        patchState(store, setPending());
+                        patchState(store, { personnel_data: classePersonnel(data) },setFulfilled())
                     })
                 )
             }

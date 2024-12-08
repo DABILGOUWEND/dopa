@@ -12,6 +12,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import{provideAnimationsAsync} from '@angular/platform-browser/animations/async'
 import { functionalInterceptor } from './functional.interceptor';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { provideClientHydration, withIncrementalHydration } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   
@@ -46,5 +47,7 @@ export const appConfig: ApplicationConfig = {
          messagingSenderId: '126234609649' })),  
        provideFirestore(() => getFirestore()), 
        provideDatabase(() => getDatabase()),
-       provideAnimationsAsync()]
+       provideAnimationsAsync(),
+       provideClientHydration(withIncrementalHydration()),
+      ]
 };

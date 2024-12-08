@@ -9,7 +9,7 @@ import { EnginsStore, GasoilStore } from '../../store/appstore';
 
 @Component({
     selector: 'app-gasoil-model',
-    imports: [ImportedModule, FormSaisiComponent, ModelComponent, ApprogoComponent],
+    imports: [ImportedModule, FormSaisiComponent, ApprogoComponent],
     templateUrl: './gasoil-model.component.html',
     styleUrl: './gasoil-model.component.scss'
 })

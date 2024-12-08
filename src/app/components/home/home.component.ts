@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
   end_of_load = signal(true);
 
   ngOnInit() {
+    console.log("heloo")
     this._loader_service.setPath();
     this._loader_service.loadDataInit();
     let obs1 = this._loader_service.Load_gestion_Data();

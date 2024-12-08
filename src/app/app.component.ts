@@ -5,16 +5,18 @@ import { AuthenService } from './authen.service';
 import { Auth } from '@angular/fire/auth';
 import { ApproGasoilStore, AttachementStore, ClasseEnginsStore, CompteStore, ConstatStore, DatesStore, DecompteStore, DevisStore, EnginsStore, EntrepriseStore, GasoilStore, LigneDevisStore, PannesStore, PersonnelStore, ProjetStore, SstraitantStore, StatutStore, TachesEnginsStore, TachesStore } from './store/appstore';
 import { TaskService } from './task.service';
+import { HomeComponent } from './components/home/home.component';
+import { DefercompComponent } from './defercomp/defercomp.component';
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, ImportedModule],
+    imports: [ImportedModule,RouterOutlet],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit,OnDestroy {
  
-  
+  ready=false
   _auth_service = inject(AuthenService);
 
   constructor() {

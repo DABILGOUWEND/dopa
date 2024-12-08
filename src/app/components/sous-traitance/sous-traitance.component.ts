@@ -11,7 +11,7 @@ import { AuthenService } from '../../authen.service';
 
 @Component({
     selector: 'app-sous-traitance',
-    imports: [ImportedModule, EntreprisesPipe],
+    imports: [ImportedModule],
     templateUrl: './sous-traitance.component.html',
     animations: [
         trigger('detailExpand', [

@@ -15,7 +15,7 @@ import { DateTime, Info, Interval } from 'luxon';
 
 @Component({
     selector: 'app-constats',
-    imports: [ImportedModule, EntreprisesPipe, DevisPipe],
+    imports: [ImportedModule, EntreprisesPipe],
     templateUrl: './constats.component.html',
     styleUrl: './constats.component.scss'
 })

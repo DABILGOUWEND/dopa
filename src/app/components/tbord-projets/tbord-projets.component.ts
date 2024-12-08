@@ -7,7 +7,7 @@ import { EssaiComponent } from '../essai/essai.component';
 
 @Component({
     selector: 'app-tbord-projets',
-    imports: [ImportedModule, SaisiComponent, EssaiComponent],
+    imports: [ImportedModule, EssaiComponent],
     templateUrl: './tbord-projets.component.html',
     styleUrl: './tbord-projets.component.scss'
 })

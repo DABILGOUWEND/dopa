@@ -9,7 +9,7 @@ import { AuthenService } from '../../authen.service';
 
 @Component({
     selector: 'app-engins',
-    imports: [ImportedModule, SaisiComponent, EssaiComponent],
+    imports: [ImportedModule,EssaiComponent],
     templateUrl: './engins.component.html',
     styleUrl: './engins.component.scss'
 })

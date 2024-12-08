@@ -1,9 +1,19 @@
-<app-perso-template [table]="table()" [table_update_form]="table_update_form" [dataSource]="dataSource()"
+@defer (
+    when personnel_store.isFulfilled()
+) {
+    <app-perso-template [table]="table()" [table_update_form]="table_update_form" [dataSource]="dataSource()"
     [displayedColumns]="displayedColumns" [className]="'personnel'" (newItemEvent)="updateData($event)"
     (RemoveItemEvent)="deleteData($event)" (RechercheEvent)="recherche($event)" (AfficheToutEvent)="afficheTout()"
     [titre]="titre" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()" [action_template]="actiontemplate"
     [is_open2]="is_open2()" [(is_open)]="is_open" [pointage]="pointages">
-</app-perso-template>
+</app-perso-template> 
+}
+@placeholder {
+    <div [ngStyle]="{'padding-top.px':200}">
+      <h2>telechargement.....</h2>
+    </div>
+}
+
 
 <ng-template #titre>
     <div class="content_head">

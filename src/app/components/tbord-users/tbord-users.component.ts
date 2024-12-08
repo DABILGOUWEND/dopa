@@ -10,7 +10,7 @@ import { ComptesDateInitService } from '../../services/comptes-date-init.service
 
 @Component({
     selector: 'app-tbord-users',
-    imports: [ImportedModule, SaisiComponent, EssaiComponent],
+    imports: [ImportedModule,EssaiComponent],
     templateUrl: './tbord-users.component.html',
     styleUrl: './tbord-users.component.scss'
 })
