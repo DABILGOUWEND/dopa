@@ -1,5 +1,5 @@
 import { Inject, Injectable, PLATFORM_ID, computed, effect, inject, signal } from '@angular/core';
-import { Observable, from, map, tap } from 'rxjs';
+import { Observable, Subscription, from, map, tap } from 'rxjs';
 import { Users } from './models/modeles';
 import { Router } from '@angular/router';
 import { Auth, signInWithEmailAndPassword, signOut, user } from '@angular/fire/auth';
@@ -22,10 +22,13 @@ export class AuthenService {
   constructor() {
     this.isBrowser = isPlatformBrowser(this.platformId)
   }
+  ngUnsubscribe: Subscription=new Subscription();
+  
   platformId = inject(PLATFORM_ID)
   isBrowser: boolean;
   router = inject(Router);
   _auth = inject(Auth);
+  
   _http = inject(HttpClient);
   database = inject(Database);
   _firestore = inject(Firestore);
@@ -47,6 +50,7 @@ export class AuthenService {
       }
     ).pipe(tap((resp: any) => {
       let userId = resp.localId;
+  
       let data = {
         id: userId,
         email: resp.email,
@@ -59,13 +63,14 @@ export class AuthenService {
     }))
   };
   loginFirebase(email: string, password: string): Observable<any> {
+  
     this.loadings.set(true);
     const auth = getAuth();
     return from(this._auth.setPersistence(browserLocalPersistence).then(() => {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          this.affichage.set(user.email)
+          this.affichage.set(user.email);
           this.handleCreateUser(user);
         })
         .catch((error) => {
@@ -77,7 +82,7 @@ export class AuthenService {
   logout(): Observable<any> {
     let promise = signOut(this._auth).then(() => {
       this.router.navigateByUrl('/login');
-      localStorage.removeItem('user');
+      //localStorage.removeItem('user');
       this.userSignal.set(undefined);
       this.current_projet_id.set(undefined);
 

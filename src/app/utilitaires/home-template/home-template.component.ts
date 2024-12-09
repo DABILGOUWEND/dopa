@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, computed, effect, EventEmitter, inject, input, Input, OnInit, output, Output, signal, TemplateRef } from '@angular/core';
+import { Component, computed, effect, EventEmitter, inject, input, Input, OnDestroy, OnInit, output, Output, signal, TemplateRef } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { AuthenService } from '../../authen.service';
 import { TaskService } from '../../task.service';
@@ -15,7 +15,7 @@ import { DataLoaderService } from '../../services/data-loader.service';
     templateUrl: './home-template.component.html',
     styleUrl: './home-template.component.scss'
 })
-export class HomeTemplateComponent implements OnInit{
+export class HomeTemplateComponent implements OnInit,OnDestroy{
   _loader_service=inject(DataLoaderService);
 constructor()
 {
@@ -24,6 +24,9 @@ constructor()
 }
 )
 }
+  ngOnDestroy(): void {
+    this._auth_service.ngUnsubscribe.unsubscribe()
+  }
  nav_liste=input.required<TemplateRef<any>>();
  toolbar=input.required<TemplateRef<any>>();
  content=input.required<TemplateRef<any>>();
@@ -31,6 +34,7 @@ constructor()
  _projet_store=inject(ProjetStore);
  _router=inject((Router));  
  selected_projet_id=signal<string | undefined>('');
+
  ngOnInit() {
  }
  choix_projet(data:any)

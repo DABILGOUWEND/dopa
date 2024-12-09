@@ -13,14 +13,14 @@ import { Subject, Subscriber, Subscription } from 'rxjs';
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnDestroy ,AfterViewInit{
+export class LoginComponent{
  
   _service = inject(WenService);
   _auth_service = inject(AuthenService);
  subscribe=Subscriber;
   loginForm: FormGroup;
   message = signal('vous êtes déconnecté');
-   ngUnsubscribe: Subscription=new Subscription();
+   
   constructor(
     private router: Router,
     private authservice: AuthenService,
@@ -35,13 +35,7 @@ export class LoginComponent implements OnDestroy ,AfterViewInit{
     effect(() => {
     })
   }
-  ngAfterViewInit() {
-    this.ngUnsubscribe.unsubscribe();
-  }
-  ngOnDestroy() {
-  
-    this.ngUnsubscribe.unsubscribe();
-  }
+
   ngOnInit() {
   }
   setMessage() {
@@ -54,7 +48,7 @@ export class LoginComponent implements OnDestroy ,AfterViewInit{
   sumitlogin() {
     this.message.set('tentative de connection en cours...');
     let value = this.loginForm.getRawValue();
-    this.ngUnsubscribe = this._auth_service.loginFirebase(value.email, value.password)
+    this.authservice.ngUnsubscribe = this._auth_service.loginFirebase(value.email, value.password)
     .subscribe(
       {
         next: () => {

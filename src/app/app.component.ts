@@ -7,33 +7,30 @@ import { ApproGasoilStore, AttachementStore, ClasseEnginsStore, CompteStore, Con
 import { TaskService } from './task.service';
 import { HomeComponent } from './components/home/home.component';
 import { DefercompComponent } from './defercomp/defercomp.component';
+import { elementAt } from 'rxjs';
 
 @Component({
-    selector: 'app-root',
-    imports: [ImportedModule,RouterOutlet],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+  selector: 'app-root',
+  imports: [ImportedModule, RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit,OnDestroy {
- 
-  ready=false
+export class AppComponent implements OnInit {
+  ready = false;
   _auth_service = inject(AuthenService);
-
+  _auth = inject(Auth);
   constructor() {
-   this._auth.onAuthStateChanged(
+    this._auth.onAuthStateChanged(
       (userCredential) => {
         if (userCredential)
+        { 
           this._auth_service.handleCreateUser(userCredential);
-      })  
+         }
+          
+      })
   }
-  ngOnDestroy() {
-  }
-    
-
-
-  _auth = inject(Auth)
+  ;
   ngOnInit() {
-   
     this._auth_service.autoLogin();
   }
 }
