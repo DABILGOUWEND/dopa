@@ -22,14 +22,12 @@ export class AppComponent implements OnInit {
   constructor() {
     this._auth.onAuthStateChanged(
       (userCredential) => {
-        if (userCredential)
-        { 
+        if (userCredential) {
           this._auth_service.handleCreateUser(userCredential);
-         }
-          
+        }
+
       })
   }
-  ;
   ngOnInit() {
     this._auth_service.autoLogin();
   }

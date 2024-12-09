@@ -20,18 +20,9 @@ export const APP_Is = 'AIzaSyBsK6a4cgI9g94bdY050vnuI3BP3ejiiXE';
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit,OnDestroy {
-  constructor()
-  {
-    if(this._auth_service._auth.currentUser==null)
-    {
-      this._auth_service.ngUnsubscribe.unsubscribe()
-    }
-  }
-  ngOnDestroy(): void {
-    
-  }
- 
+export class HomeComponent implements OnInit {
+
+
   
   _auth_service = inject(AuthenService);
   _loader_service = inject(DataLoaderService);

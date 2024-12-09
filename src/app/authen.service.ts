@@ -22,13 +22,13 @@ export class AuthenService {
   constructor() {
     this.isBrowser = isPlatformBrowser(this.platformId)
   }
-  ngUnsubscribe: Subscription=new Subscription();
-  
+  ngUnsubscribe: Subscription = new Subscription();
+
   platformId = inject(PLATFORM_ID)
   isBrowser: boolean;
   router = inject(Router);
   _auth = inject(Auth);
-  
+
   _http = inject(HttpClient);
   database = inject(Database);
   _firestore = inject(Firestore);
@@ -50,7 +50,7 @@ export class AuthenService {
       }
     ).pipe(tap((resp: any) => {
       let userId = resp.localId;
-  
+
       let data = {
         id: userId,
         email: resp.email,
@@ -63,7 +63,7 @@ export class AuthenService {
     }))
   };
   loginFirebase(email: string, password: string): Observable<any> {
-  
+
     this.loadings.set(true);
     const auth = getAuth();
     return from(this._auth.setPersistence(browserLocalPersistence).then(() => {
@@ -81,17 +81,16 @@ export class AuthenService {
   }
   logout(): Observable<any> {
     let promise = signOut(this._auth).then(() => {
-      this.router.navigateByUrl('/login');
-      //localStorage.removeItem('user');
+      localStorage.removeItem('user');
+      this.router.navigateByUrl('/login')
       this.userSignal.set(undefined);
       this.current_projet_id.set(undefined);
-
     })
       .catch((error) => {
         console.log('error', error)
       })
 
-    return from(promise);
+    return from(promise)
   }
 
 
@@ -123,7 +122,7 @@ export class AuthenService {
         tap(
           (resp: any) => {
             let data = resp.data();
-          
+
             this.userSignal.update(
               (user: any) =>
               (
@@ -139,7 +138,7 @@ export class AuthenService {
             )
             localStorage.setItem('user', JSON.stringify(this.userSignal()));
             this.current_projet_id.set(data.projet_id[0]);
-         
+
           }
         )
       ).subscribe()
@@ -163,7 +162,7 @@ export class AuthenService {
         }
       })
     }
-    
+
 
   }
 
