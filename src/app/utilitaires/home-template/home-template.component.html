@@ -1,3 +1,5 @@
+@if(!affiche())
+{
 <mat-sidenav-container class="example-container">
     <mat-sidenav #sidnav>
         <mat-nav-list (click)="sidnav.close()">
@@ -78,3 +80,13 @@
     </mat-sidenav-content>
 
 </mat-sidenav-container>
+}
+@else {
+<div [ngStyle]="{'display':'flex','justify-content':'center','padding-top.px':100}">
+    <div>
+        <mat-spinner [ngStyle]="{'margin-right.px':100}"></mat-spinner>
+    </div>
+    <h2>déconnexion....</h2>
+</div>
+
+}

@@ -9,10 +9,10 @@ import { BehaviorSubject } from 'rxjs';
 import { UnitesPipe } from '../../unites.pipe';
 
 @Component({
-    selector: 'app-mes-constats',
-    imports: [ImportedModule, UnitesPipe],
-    templateUrl: './mes-constats.component.html',
-    styleUrl: './mes-constats.component.scss'
+  selector: 'app-mes-constats',
+  imports: [ImportedModule, UnitesPipe],
+  templateUrl: './mes-constats.component.html',
+  styleUrl: './mes-constats.component.scss'
 })
 export class MesConstatsComponent implements OnInit {
   //injections
@@ -33,7 +33,7 @@ export class MesConstatsComponent implements OnInit {
   //computed properties
   data_loaded = computed(() => this._devis_store.donnees_currentDevis()?.data)
   liste_devis = computed(() => {
-    let donnees: any = []
+    let donnees: any = [];
     this._devis_store.donnees_devis().forEach(ent => {
       let entreprise = this._ssTraitance_store.donnees_sstraitant().find(e => e.id == ent.entreprise_id);
       donnees.push({
@@ -43,11 +43,8 @@ export class MesConstatsComponent implements OnInit {
       });
     })
     return donnees;
-
   })
-  liste_unites = computed(() => {
-    return this._unit_store.unites_data()
-  })
+ 
   last_constat = computed(() => {
     let dataAll = this._devis_store.devis_data().find(x => x.id == this.current_devis_id());
     let data = dataAll?.data;
@@ -56,7 +53,7 @@ export class MesConstatsComponent implements OnInit {
     return constats_numero.length > 0 ? Math.max(...constats_numero) : 0;
   })
 
-  
+
   //current properties 
   constats: element_constat[] = [];
   ligne_clicked = signal(Infinity);
@@ -115,12 +112,7 @@ export class MesConstatsComponent implements OnInit {
 
   // methods
   ngOnInit() {
-    this._devis_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/devis');
-    this._ssTraitance_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/sous_traitants');
-    this._unit_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/unites');
-    this._devis_store.loadDevis();
-    this._ssTraitance_store.loadSstraitants();
-    this._unit_store.loadUnites();
+
   }
 
   init_dat(data: element_devis[] | undefined) {

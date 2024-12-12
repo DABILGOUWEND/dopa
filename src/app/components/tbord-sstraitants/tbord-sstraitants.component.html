@@ -1,0 +1,12 @@
+<app-essai [table]="table()" [table_update_form]="table_update_form" [dataSource]="datasource()"
+    [displayedColumns]="displayedColumns" (newItemEvent)="updateData($event)"
+    [className]="'default'"
+    (RemoveItemEvent)="deleteData($event)" (RechercheEvent)="recherche($event)" (AfficheToutEvent)="afficheTout()"
+    [titre]="titre" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()">
+</app-essai>
+<ng-template #titre>
+    <div class="content_head">
+        <h2> {{titre_tableau()}}</h2>
+    </div>
+</ng-template>
+

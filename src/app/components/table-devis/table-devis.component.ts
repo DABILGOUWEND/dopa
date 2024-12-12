@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, OnInit, output, signal, TemplateRef } from '@angular/core';
+import { Component, computed, effect, inject, input, model, OnInit, output, signal, TemplateRef } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { SousTraitanceComponent } from '../sous-traitance/sous-traitance.component';
 import { FormGroup } from '@angular/forms';
@@ -9,7 +9,7 @@ import { DevisStore, LigneDevisStore } from '../../store/appstore';
 
 @Component({
     selector: 'app-table-devis',
-    imports: [ImportedModule, SousTraitanceComponent, FormSaisiComponent],
+    imports: [ImportedModule,FormSaisiComponent],
     templateUrl: './table-devis.component.html',
     styleUrl: './table-devis.component.scss'
 })
@@ -26,7 +26,7 @@ export class TableDevisComponent implements OnInit {
   _ligne_devis_store = inject(LigneDevisStore);
   //signals
   is_update = signal(false);
-  is_open = signal(false);
+  is_open = model(false);
   current_row = signal<any>([]);
 
   //computed

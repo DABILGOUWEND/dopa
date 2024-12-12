@@ -35,12 +35,14 @@ export class HomeComponent implements OnInit {
     let obs1 = this._loader_service.Load_gestion_Data();
     let obs2 = this._loader_service.Load_travaux_Data();
     concat(obs1, obs2).subscribe({
-      complete: () => {
-        setTimeout(() => {
-          this.end_of_load.set(false);
-        }, 2000);
-      }
-    });
+  
+complete :()=>{
+  setTimeout(() => {
+    this.end_of_load.set(false);
+  }, 2000);
+}
     ///
-  }
+  });
+
+}
 }

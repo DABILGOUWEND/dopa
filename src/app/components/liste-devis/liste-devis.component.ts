@@ -1,16 +1,15 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
-import { EssaiComponent } from '../essai/essai.component';
 import { NonNullableFormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthenService } from '../../authen.service';
 import { DevisStore, SstraitantStore, ProjetStore, EntrepriseStore } from '../../store/appstore';
 import { TableDevisComponent } from '../table-devis/table-devis.component';
 
 @Component({
-    selector: 'app-liste-devis',
-    imports: [ImportedModule, TableDevisComponent],
-    templateUrl: './liste-devis.component.html',
-    styleUrl: './liste-devis.component.scss'
+  selector: 'app-liste-devis',
+  imports: [ImportedModule, TableDevisComponent],
+  templateUrl: './liste-devis.component.html',
+  styleUrl: './liste-devis.component.scss'
 })
 export class ListeDevisComponent {
   constructor() {
@@ -25,7 +24,7 @@ export class ListeDevisComponent {
 
   }
   //injected services
-  _devis_tore = inject(DevisStore);
+  _devis_store = inject(DevisStore);
   _sstraitant_store = inject(SstraitantStore);
   _clients_store = inject(EntrepriseStore);
   _projets_store = inject(ProjetStore);
@@ -39,6 +38,7 @@ export class ListeDevisComponent {
   selected_projet = signal<string | undefined>('');
   devis_opened = signal(false);
   titre_tableau = signal('Liste des devis');
+  is_open = signal(false);
 
   //others properties
   table_update_form = this.fb.group({
@@ -186,7 +186,7 @@ export class ListeDevisComponent {
     () => {
 
       let donnees: any = []
-      this._devis_tore.devis_data().forEach(element => {
+      this._devis_store.devis_data().forEach(element => {
         let client = this._clients_store.donnees_entreprise().find(x => x.id == element.client_id)
         let entreprise = this._sstraitant_store.sstraitant_data().find(x => x.id == element.entreprise_id)
         let projet = this._projets_store.donnees_projet().find(x => x.id == element.projet_id)
@@ -203,7 +203,8 @@ export class ListeDevisComponent {
             avance: element.avance,
             client: client?.enseigne,
             entreprise: entreprise?.enseigne,
-            projet: projet?.intitule
+            projet: projet?.intitule,
+            data: element.data
           }
         )
       });
@@ -211,7 +212,7 @@ export class ListeDevisComponent {
     }
   )
   last_code = computed(() => {
-    let codes = this._devis_tore.donnees_devis().map(x => x.code.split(this.code_devis())[1]).
+    let codes = this._devis_store.donnees_devis().map(x => x.code.split(this.code_devis())[1]).
       filter(x => x != undefined).sort((a, b) => Number(a) - Number(b))
     if (codes.length > 0) {
       return this.code_devis() + '00' + (Number(codes[codes.length - 1]) + 1).toString()
@@ -239,11 +240,13 @@ export class ListeDevisComponent {
         reference: element.reference,
         montant: element.montant,
         avance: element.avance,
+        data: current_row.data
 
       }
-      this._devis_tore.updateDevis(mydata);
+      this._devis_store.updateDevis(mydata);
     }
     else {
+      let ent=this._sstraitant_store.sstraitant_data().find(x => x.id == element.entreprise_id)
       mydata = {
         code: this.last_code(),
         client_id: element.client_id,
@@ -253,13 +256,23 @@ export class ListeDevisComponent {
         reference: element.reference,
         montant: element.montant,
         avance: element.avance,
+        data: [{
+          poste: '',
+          designation: element.reference + '/' + ent?.entreprise,
+          prix_u: null,
+          unite:''  ,
+          quantite: null,
+          constat: [],
+          children: []
+         }]
       }
-      this._devis_tore.addDevis(mydata);
+      this._devis_store.addDevis(mydata);
     }
+    this.is_open.set(false)
   }
   deleteData(id: any) {
     if (confirm('voulez-vous supprimer cet élement?'))
-      this._devis_tore.removeDevis(id);
+      this._devis_store.removeDevis(id);
   }
   recherche(word: any) {
 
@@ -268,10 +281,11 @@ export class ListeDevisComponent {
 
   }
   PatchEventFct(row: any) {
+    console.log(row)
     this.table_update_form.patchValue(
       row
     )
-    this._devis_tore.setCurrentDevisId(row.id);
+    this._devis_store.setCurrentDevisId(row.id);
   }
   addEventFct() {
     this.table_update_form.reset();

@@ -8,16 +8,20 @@ import { TbordUsersComponent } from '../tbord-users/tbord-users.component';
 import { TbordClassesEnginsComponent } from '../tbord-classes-engins/tbord-classes-engins.component';
 import { TbordEntreprisesComponent } from '../tbord-entreprises/tbord-entreprises.component';
 import { TbordProjetsComponent } from '../tbord-projets/tbord-projets.component';
+import { TbordSstraitantsComponent } from '../tbord-sstraitants/tbord-sstraitants.component';
+import { ListeDevisComponent } from "../liste-devis/liste-devis.component";
 
 @Component({
     selector: 'app-tableau-bord',
     imports: [
-        TbordUsersComponent,
-        TbordClassesEnginsComponent,
-        TbordEntreprisesComponent,
-        TbordProjetsComponent,
-        ImportedModule
-    ],
+    TbordUsersComponent,
+    TbordClassesEnginsComponent,
+    TbordEntreprisesComponent,
+    TbordProjetsComponent,
+    TbordSstraitantsComponent,
+    ImportedModule,
+    ListeDevisComponent
+],
     templateUrl: './tableau-bord.component.html',
     styleUrl: './tableau-bord.component.scss'
 })
@@ -48,6 +52,15 @@ export class TableauBordComponent  implements OnInit {
       'id': 4,
       'value': "projets",
     }
+    ,
+    {
+      'id': 5,
+      'value': "sous_traitants",
+    },
+    {
+      'id': 6,
+      'value': "liste des devis",
+    }
 
   ]
   choix_rubrique(data: any) {
@@ -72,6 +85,16 @@ export class TableauBordComponent  implements OnInit {
           this.selected_rubrique.set(4)
         }
         break;
+        case 5:
+          {
+            this.selected_rubrique.set(5)
+          }
+          break;
+          case 6:
+          {
+            this.selected_rubrique.set(6)
+          }
+          break;
       default:
         {
           this.selected_rubrique.set(0)

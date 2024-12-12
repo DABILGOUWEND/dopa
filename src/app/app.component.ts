@@ -3,11 +3,6 @@ import { RouterOutlet } from '@angular/router';
 import { ImportedModule } from './modules/imported/imported.module';
 import { AuthenService } from './authen.service';
 import { Auth } from '@angular/fire/auth';
-import { ApproGasoilStore, AttachementStore, ClasseEnginsStore, CompteStore, ConstatStore, DatesStore, DecompteStore, DevisStore, EnginsStore, EntrepriseStore, GasoilStore, LigneDevisStore, PannesStore, PersonnelStore, ProjetStore, SstraitantStore, StatutStore, TachesEnginsStore, TachesStore } from './store/appstore';
-import { TaskService } from './task.service';
-import { HomeComponent } from './components/home/home.component';
-import { DefercompComponent } from './defercomp/defercomp.component';
-import { elementAt } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +20,6 @@ export class AppComponent implements OnInit {
         if (userCredential) {
           this._auth_service.handleCreateUser(userCredential);
         }
-
       })
   }
   ngOnInit() {

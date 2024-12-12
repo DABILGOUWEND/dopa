@@ -2079,12 +2079,9 @@ export const DevisStore = signalStore(
             ,
             addDevis: rxMethod<Devis>(pipe(
                 switchMap((devis) => {
-                    return _task_service.addModel(store.path_string(), devis).pipe(switchMap(
-                        resp => {
-                            let entreprise = _sous_traitance_store.donnees_sstraitant().find(x => x.id == devis.entreprise_id)
-                            return _task_service.initialDevis(store.path_string(), devis, entreprise?.enseigne ? entreprise.enseigne : '')
-                        }
-                    ))
+                    return _task_service.addModel(store.path_string(), devis).pipe(tap({next:()=>{
+                        Showsnackerbaralert('ajouté avec succes', 'pass', snackbar);
+                    }}))
 
                 })
             )),
@@ -2111,6 +2108,7 @@ export const DevisStore = signalStore(
                 }))),
             updateDevis: rxMethod<Devis>(pipe(
                 switchMap((devis) => {
+                    console.log(devis)
                     return _task_service.updateModel(store.path_string(), devis).pipe(
                         tap({
                             next: () => {

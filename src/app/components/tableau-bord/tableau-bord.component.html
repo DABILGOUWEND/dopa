@@ -13,18 +13,41 @@
 
 </div>
 
-<app-tbord-users *ngIf="selected_rubrique()==1">
+@if(selected_rubrique()==1)
+{
+    <app-tbord-users>
+    </app-tbord-users>
+}
 
-</app-tbord-users>
+@if(selected_rubrique()==2)
+{
+    <app-tbord-classes-engins>
+    </app-tbord-classes-engins>
+}
+@if(selected_rubrique()==3)
+{
+    <app-tbord-entreprises>
+    </app-tbord-entreprises>
+}
+    
+@if(selected_rubrique()==4)
+{
+    <app-tbord-projets>
+    </app-tbord-projets>
+}
+@if(selected_rubrique()==4)
+{
+    <app-tbord-projets>
+    </app-tbord-projets>
+}
+@if(selected_rubrique()==5)
+{
+    <app-tbord-sstraitants>
+    </app-tbord-sstraitants>
+}
+@if(selected_rubrique()==6)
+{
+    <app-liste-devis>
+    </app-liste-devis>
+}
 
-<app-tbord-classes-engins *ngIf="selected_rubrique()==2">
-
-</app-tbord-classes-engins>
-
-<app-tbord-entreprises *ngIf="selected_rubrique()==3">
-
-</app-tbord-entreprises>
-
-<app-tbord-projets *ngIf="selected_rubrique()==4">
-
-</app-tbord-projets>

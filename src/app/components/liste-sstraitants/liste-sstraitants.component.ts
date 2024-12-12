@@ -122,7 +122,7 @@ export class ListeSstraitantsComponent {
 
       {
         label: 'DATE DE NAISSANCE',
-        type: 'text1',
+        type: 'date',
         control_name: 'date_naissance',
         end_control_name: '',
         tableau: []

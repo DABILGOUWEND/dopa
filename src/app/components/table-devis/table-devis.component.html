@@ -1,19 +1,16 @@
 <mat-drawer-container class="wen-table-drawer-container">
 
-    <mat-drawer class="devis" mode="over" position="end" [opened]="is_open()" disableClose="true">
-        <section class="table-update2">
-            <div class="table-update__header2">
+    <mat-drawer [ngStyle]="{'width.%':30}" mode="over" position="end" [opened]="is_open()" disableClose="true">
+        <section [ngStyle]="{'width.%':90}">
+            <div [ngStyle]="{'background-color':'gray','text-align':'center'}">
                 <h2> DATA</h2>
             </div>
-            <div class="table-update__body2">
-                <div class="col1">
+            <div [ngStyle]="{'display':'block'}">
+                <div>
                     <ng-container [ngTemplateOutlet]="Entete">
                     </ng-container>
                 </div>
-                <div class="col2">
-                    <app-sous-traitance (onRowAdd)="retourQuitter()">
-                    </app-sous-traitance>
-                </div>
+                
             </div>
         </section>
     </mat-drawer>
@@ -24,8 +21,8 @@
 </mat-drawer-container>
 
 <ng-template #Entete>
-        <div class="table-update__header">
-            <h2> {{is_update()?'Modifier':'Nouveau'}} </h2>
+        <div [ngStyle]="{'text-align':'center'}">
+            <h2 [ngStyle]="{'font-size.px':28}"> {{is_update()?'Modifier':'Nouveau'}} </h2>
         </div>
         <form [formGroup]="table_update_form()" (ngSubmit)="addNewItem()">
             <div class="table-update__body">
@@ -33,7 +30,7 @@
                     [ngTemplateOutletContext]="{formGroup:table_update_form(),table:table()}">
                 </ng-container>
             </div>
-            <div class="table-update__footer">
+            <div [ngStyle]="{'text-align':'center'}">
                 <ng-container [ngTemplateOutlet]="validation"
                     [ngTemplateOutletContext]="{formGroup:table_update_form()}">
                 </ng-container>
@@ -73,7 +70,7 @@
 </ng-template>
 <ng-template #validation let-formGroup="formGroup">
     <button mat-flat-button type="submit"
-        [disabled]="!formGroup.valid">{{is_update()?'Modifier':'Enregistrer'}}</button>
+        [disabled]="!formGroup.valid" [ngStyle]="{'margin-right.px':50}" >{{is_update()?'Modifier':'Enregistrer'}}</button>
     <button mat-flat-button type="button" (click)="annuler()" color="warn">quitter</button>
 </ng-template>
 <ng-template #saisies let-formGroup="formGroup" let-table="table">

@@ -7,6 +7,7 @@ import { ApproGasoilStore, ClasseEnginsStore, CompteStore, EnginsStore, Entrepri
 import { AuthenService } from '../../authen.service';
 import { TaskService } from '../../task.service';
 import { DataLoaderService } from '../../services/data-loader.service';
+import { concat } from 'rxjs';
 
 @Component({
     selector: 'app-admin',
@@ -22,8 +23,9 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this._loader_service.setPath();
     this._loader_service.loadDataInit();
-    this._loader_service.Load_gestion_Data();
-    this._loader_service.Load_travaux_Data();
+    let obs1 = this._loader_service.Load_gestion_Data();
+    let obs2 = this._loader_service.Load_travaux_Data();
+    concat(obs1, obs2).subscribe();
   }
   click_home() {
     this._router.navigateByUrl('/home');

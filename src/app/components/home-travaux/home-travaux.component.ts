@@ -26,9 +26,7 @@ export class HomeTravauxComponent implements OnInit {
     this._loader_service.loadDataInit();
     this._loader_service.Load_travaux_Data().subscribe({
       complete: () => {
-        setTimeout(() => {
-          this.end_of_load.set(false);
-        }, 2000);
+        this.end_of_load.set(false);
       } 
     });
 

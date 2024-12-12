@@ -13,6 +13,8 @@ import { and, doc, getDoc } from 'firebase/firestore';
 
 import { isPlatformBrowser, NumberSymbol } from '@angular/common';
 import { DataLoaderService } from './services/data-loader.service';
+import { time } from 'node:console';
+import { set } from 'firebase/database';
 
 const apiKey = environment.firebaseConfig.apiKey;
 @Injectable({
@@ -81,16 +83,23 @@ export class AuthenService {
   }
   logout(): Observable<any> {
     let promise = signOut(this._auth).then(() => {
-      localStorage.removeItem('user');
-      this.router.navigateByUrl('/login')
-      this.userSignal.set(undefined);
-      this.current_projet_id.set(undefined);
+
     })
       .catch((error) => {
         console.log('error', error)
       })
 
-    return from(promise)
+    return from(promise).pipe(tap({
+      next: () => { 
+        setTimeout(() => {  
+          localStorage.removeItem('user');
+          this.router.navigateByUrl('/login')
+          this.userSignal.set(undefined);
+          this.current_projet_id.set(undefined);
+        }
+          , 2000);
+      }
+    }))
   }
 
 

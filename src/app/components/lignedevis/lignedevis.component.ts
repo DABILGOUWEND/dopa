@@ -1,16 +1,13 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, computed, effect, inject, model, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
-import { element_devis, ExampleFlatNode, taches, taches_engins, } from '../../models/modeles';
+import { element_devis, ExampleFlatNode } from '../../models/modeles';
 import { ImportedModule } from '../../modules/imported/imported.module';
 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DevisStore, SstraitantStore, TachesEnginsStore, TachesStore, UnitesStore } from '../../store/appstore';
+import { DevisStore, SstraitantStore, TachesStore, UnitesStore } from '../../store/appstore';
 import { AuthenService } from '../../authen.service';
-import { BehaviorSubject } from 'rxjs';
 import { UnitesPipe } from '../../unites.pipe';
-import { FilterTachesPipe } from '../../filter-taches.pipe';
-import { HightligthDirective } from '../../hightligth.directive';
 import { MatTableDataSource } from '@angular/material/table';
 
 
@@ -27,9 +24,8 @@ export class LignedevisComponent implements OnInit {
   _devis_store = inject(DevisStore);
   _ssTraitance_store = inject(SstraitantStore);
   _unit_store = inject(UnitesStore);
-  _auth_service = inject(AuthenService);
   _taches = inject(TachesStore);
-
+  _auth_service = inject(AuthenService);
 
   //signals
   ligne_cliquer = signal(Infinity);
@@ -141,20 +137,11 @@ export class LignedevisComponent implements OnInit {
     return donnees;
 
   })
-  liste_unites = computed(() => {
-    return this._unit_store.unites_data()
-  })
+
 
   //methods
   ngOnInit() {
-    this._devis_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/devis');
-    this._ssTraitance_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/sous_traitants');
-    this._unit_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/unites');
-    this._taches.setPathString('comptes/' + this._auth_service.current_projet_id() + '/taches');
-    this._devis_store.loadDevis();
-    this._ssTraitance_store.loadSstraitants();
-    this._unit_store.loadUnites();
-    this._taches.loadTaches();
+
   }
   init_dat(data: element_devis[] | undefined) {
     if (data) {

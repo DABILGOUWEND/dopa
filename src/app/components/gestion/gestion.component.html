@@ -1,8 +1,8 @@
-@if(!end_of_load()){
+@defer(on timer(1s);hydrate when !end_of_load()){
     <app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content">
     </app-home-template>
 }
-@else {
+@placeholder{
     <div [ngStyle]="{'padding-top.px':200}">
         <mat-spinner [ngStyle]="{'margin-left.%':50}"></mat-spinner>
     </div>

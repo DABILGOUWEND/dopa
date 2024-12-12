@@ -1,5 +1,5 @@
 import { effect, inject, Injectable } from '@angular/core';
-import { EnginsStore, ClasseEnginsStore, PersonnelStore, ProjetStore, PannesStore, GasoilStore, ApproGasoilStore, StatutStore, TachesEnginsStore, EntrepriseStore, DevisStore, ConstatStore, LigneDevisStore, SstraitantStore, AttachementStore, DecompteStore, UserStore } from '../store/appstore';
+import { EnginsStore, ClasseEnginsStore, PersonnelStore, ProjetStore, PannesStore, GasoilStore, ApproGasoilStore, StatutStore, TachesEnginsStore, EntrepriseStore, DevisStore, ConstatStore, LigneDevisStore, SstraitantStore, AttachementStore, DecompteStore, UserStore, UnitesStore, TachesStore } from '../store/appstore';
 import { AuthenService } from '../authen.service';
 import { Observable, of, tap } from 'rxjs';
 import e from 'express';
@@ -17,7 +17,8 @@ export class DataLoaderService {
   _consogo_store = inject(GasoilStore);
   _approgo_store = inject(ApproGasoilStore);
   _statuts_personnel_store = inject(StatutStore);
-
+  _unit_store = inject(UnitesStore);
+  _taches = inject(TachesStore);
   //travaux
   _taches_engins_store = inject(TachesEnginsStore);
   _entreprise_store = inject(EntrepriseStore);
@@ -55,6 +56,8 @@ export class DataLoaderService {
     this._constats_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/constats');
     this._attachements_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/attachements');
     this._decomptes_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/decomptes');
+    this._unit_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/unites');
+    this._taches.setPathString('comptes/' + this._auth_service.current_projet_id() + '/taches');
 
   }
   Load_gestion_Data(): Observable<any> {
@@ -67,6 +70,7 @@ export class DataLoaderService {
         this._consogo_store.loadconso();
         this._approgo_store.loadappro();
         this._statuts_personnel_store.loadstatut();
+
       }))
     } else {
       return of({})
@@ -83,6 +87,8 @@ export class DataLoaderService {
         this._constats_store.loadConstats();
         this._attachements_store.loadAttachements();
         this._decomptes_store.loadAllDecomptes();
+        this._unit_store.loadUnites();
+        this._taches.loadTaches();
       }))
     } else {
       return of({});

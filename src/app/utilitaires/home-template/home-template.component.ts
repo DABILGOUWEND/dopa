@@ -8,6 +8,9 @@ import { GasoilComponent } from '../../components/gasoil/gasoil.component';
 import { EnginsStore, GasoilStore, ProjetStore } from '../../store/appstore';
 import { Router } from '@angular/router';
 import { DataLoaderService } from '../../services/data-loader.service';
+import { sign } from 'node:crypto';
+import { tap } from 'rxjs';
+import { set } from 'firebase/database';
 
 @Component({
   selector: 'app-home-template',
@@ -19,10 +22,10 @@ export class HomeTemplateComponent implements OnInit{
   _loader_service = inject(DataLoaderService);
   constructor() {
     effect(() => {
-      //  console.log(this.projets())  
     }
     )
   }
+  affiche=signal(false);
 
   nav_liste = input.required<TemplateRef<any>>();
   toolbar = input.required<TemplateRef<any>>();
@@ -44,16 +47,8 @@ export class HomeTemplateComponent implements OnInit{
 
   }
   logout() {
-    if (this._auth_service._auth.currentUser != null) {
-      console.log(this._auth_service._auth.currentUser)
-      this._auth_service.logout().subscribe()
-    } else {
-      localStorage.removeItem('user');
-      this.router.navigateByUrl('/login')
-      this._auth_service.userSignal.set(undefined);
-      this._auth_service.current_projet_id.set(undefined);
-    }
-
+    this.affiche.set(true);
+    this._auth_service.logout().subscribe()
   }
 
   //computed properties

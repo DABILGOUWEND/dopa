@@ -96,10 +96,10 @@
             </div>
 
             }@else {
-            <div  [ngStyle]="{'display':'flex','width.%':100,'margin-left.px':data.level*25}" >
+            <div [ngStyle]="{'display':'flex','width.%':100,'margin-left.px':data.level*25}">
               <div [ngStyle]="{'margin-top.px':5,'width.%':30}">
                 <button mat-icon-button [style.visibility]="!data.expandable ? 'hidden' : ''"
-                  (click)="treeControl.toggle(data)" >
+                  (click)="treeControl.toggle(data)">
                   <mat-icon class="mat-icon-rtl-mirror">
                     {{treeControl.isExpanded(data) ? 'expand_more' : 'chevron_right'}}
                   </mat-icon>
@@ -145,29 +145,24 @@
               'text-align':'center'
             }">
               <mat-select [(value)]="current_unite">
-                <mat-option *ngFor="let unite of liste_unites()" [value]="unite.id"> {{unite.unite}}
+                <mat-option *ngFor="let unite of _unit_store.unites_data()" [value]="unite.id"> {{unite.unite}}
                 </mat-option>
               </mat-select>
 
             </div>
-
             }@else {
             {{data.unite|unites:_unit_store.unites_data()}}
             }
           </td>
         </ng-container>
-
         <ng-container matColumnDef="prix_u">
           <th mat-header-cell *matHeaderCellDef> PRIX UNITAIRE </th>
           <td mat-cell *matCellDef="let data;let ind=index">
             @if(ligne_cliquer()==ind && !data.expandable && data.level>0)
             {
             <div class="row_saisie">
-
               <input matInput type="number" [(ngModel)]="current_prix" (keyup)="saisie()" placeholder="prix unitaire" />
-
             </div>
-
             }@else {
             {{data.prix_u|currency:'F CFA'}}
             }

@@ -1,7 +1,7 @@
 <app-table-devis [table]="table()" [table_update_form]="table_update_form" [dataSource]="dataSource()"
     [displayedColumns]="displayedColumns" [titre]="titre" [devis_opened]="devis_opened()"
     (newItemEvent)="updateData($event)" (RemoveItemEvent)="deleteData($event)"
-    (ChangeSelectEvent)="changeSelect($event)" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()">
+    (ChangeSelectEvent)="changeSelect($event)" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()" [(is_open)]="is_open">
 
 </app-table-devis>
 <ng-template #titre>

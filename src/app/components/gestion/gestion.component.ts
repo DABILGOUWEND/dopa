@@ -22,9 +22,7 @@ export class GestionComponent implements OnInit {
     this._loader_service.loadDataInit();
     this._loader_service.Load_gestion_Data().subscribe({
       complete: () => {
-        setTimeout(() => {
-          this.end_of_load.set(false);
-        }, 2000);
+        this.end_of_load.set(false);
       }
     });
     
