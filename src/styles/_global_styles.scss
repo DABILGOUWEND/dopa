@@ -857,6 +857,7 @@ wen-table:make-gold {
         }
       }
     }
+
     .table-update3 {
       .table-update__header3 {
         display: block;
@@ -944,6 +945,7 @@ wen-table:make-gold {
   mat-drawer.devis2 {
     width: 50%;
     border: solid 1px map-get($wen-colors, border_botom_color);
+
     .table-update {
 
       .table-update__header {
@@ -1012,7 +1014,70 @@ wen-table:make-gold {
       }
     }
 
-  
+
+
+  }
+
+  mat-drawer.constats {
+    width: 30%;
+
+    .table-update {
+      .table-update__header {
+        width: 100%;
+        border-bottom: 1px solid map-get($wen-colors, divider);
+        padding-top: 5px;
+
+        h2 {
+
+          font-size: 28px;
+          margin-top: 0px;
+          text-align: center;
+          color: rgb(73, 63, 224);
+          font-weight: bold;
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+          border-bottom: 1px solid black
+        }
+
+        h3 {
+
+          font-size: 24px;
+          font-weight: bold;
+          margin-top: 5px;
+          margin-left: 50px;
+        }
+
+        button {
+          background-color: red;
+        }
+      }
+
+      .table-update__body {
+        width: 100%;
+        padding-top: 20px;
+        border-bottom: 1px solid map-get($wen-colors, divider);
+        background-color: silver;
+
+        mat-form-field {
+          width: 80%;
+          margin-left: 10%;
+          font-size: 20px;
+        }
+      }
+
+      .table-update__footer {
+
+        padding-top: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        button {
+          width: 25%;
+          margin-left: 2.5%;
+          margin-right: 2.5%;
+        }
+      }
+    }
+
 
   }
 
@@ -2840,7 +2905,7 @@ wen-table:make-gold {
     }
   }
 
- 
+
 
   mat-drawer-content#pointages {
     display: block;
@@ -4021,9 +4086,11 @@ wen-table:make-gold {
 
 .wen-table-drawer-container_rev {
   min-height: 800px;
+
   mat-drawer.devis_rev {
     width: 50%;
     border: solid 1px map-get($wen-colors, border_botom_color);
+
     .table-update_rev {
       .table-update__header_rev {
         display: block;
@@ -4059,6 +4126,7 @@ wen-table:make-gold {
           text-align: center;
           font-weight: bold;
         }
+
         mat-form-field {
           width: 90%;
         }
@@ -4078,7 +4146,7 @@ wen-table:make-gold {
       }
     }
 
-  
+
 
   }
 
@@ -5382,8 +5450,8 @@ tr.example-element-row:not(.example-expanded-row):active {
 th {
   background-color: rgb(161, 146, 146) !important;
   font-size: 18px !important;
-  border-bottom:  1px solid blue!important;
-  border-top:  1px solid blue;
+  border-bottom: 1px solid blue !important;
+  border-top: 1px solid blue;
 }
 
 .demo-row-is-clicked {
@@ -5730,30 +5798,35 @@ th {
   margin-left: 20px;
   width: 200px;
 }
-.row_saisie{
+
+.row_saisie {
   text-align: center;
   width: 100%;
- 
-  input{
+
+  input {
     text-align: center;
     font-size: 20px;
     width: 100%;
   }
-  textarea{
+
+  textarea {
     text-align: center;
     font-size: 18px;
     width: 100%;
 
   }
-  mat-select{
+
+  mat-select {
     text-align: center;
     font-size: 20px;
     width: 100%;
   }
-  .row_buttons{
+
+  .row_buttons {
     display: flex;
     text-align: center;
-    button{
+
+    button {
       margin-left: 10px;
     }
   }

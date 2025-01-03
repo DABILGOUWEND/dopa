@@ -5,21 +5,25 @@ import { AuthenService } from '../../authen.service';
 import { UserStore, EnginsStore, ClasseEnginsStore, PersonnelStore, ProjetStore, CompteStore, DevisStore, LigneDevisStore, ApproGasoilStore, GasoilStore, PannesStore, AttachementStore, DecompteStore, TachesStore, ConstatStore, UnitesStore, SstraitantStore, StatutStore } from '../../store/appstore';
 import { TaskService } from '../../task.service';
 import { WenService } from '../../wen.service';
-import { concat, forkJoin, Observable, of, switchMap } from 'rxjs';
+import { concat, forkJoin, map, Observable, of, switchMap, tap } from 'rxjs';
 import { TelechargerService } from '../../services/telecharger.service';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { collection, collectionData, Firestore } from '@angular/fire/firestore';
-import { appro_gasoil, Entreprise, Gasoil, Statuts, tab_personnel } from '../../models/modeles';
+import { appro_gasoil, element_constat, element_devis, Entreprise, ExampleFlatNode, ExampleFlatNode2, Gasoil, Statuts, tab_personnel } from '../../models/modeles';
 import { DataLoaderService } from '../../services/data-loader.service';
 import { Console } from 'console';
+import { stringify } from 'querystring';
 
 @Component({
-    selector: 'app-telecharger',
-    imports: [ImportedModule],
-    templateUrl: './telecharger.component.html',
-    styleUrl: './telecharger.component.scss'
+  selector: 'app-telecharger',
+  imports: [ImportedModule],
+  templateUrl: './telecharger.component.html',
+  styleUrl: './telecharger.component.scss'
 })
 export class TelechargerComponent implements OnInit {
+  service = inject(TelechargerService);
+   nestedNodeMap = new Map<element_devis, ExampleFlatNode2>();
+   flatNodeMap = new Map<ExampleFlatNode2, element_devis>();
   constructor() {
     effect(() => console.log(this._devis_store.devis_data()));
 
@@ -31,6 +35,7 @@ export class TelechargerComponent implements OnInit {
     this._sous_traitance_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/sous_traitants');
     this._devis_store.loadDevis();
     this._sous_traitance_store.loadSstraitants();
+
     // this._lignedevis_store.loadLigneDevis();
     //this._attachement_store.loadAttachements();
     // this._decompte_store.loadAllDecomptes();
@@ -41,8 +46,62 @@ export class TelechargerComponent implements OnInit {
 
   }
   telecharger() {
-    this.upload_devis().subscribe();
+
+    let obsrv: Observable<any>[] = []
+    this._devis_store.devis_data().forEach(val1 => {
+      let tab: any = []
+      let mon_obs: Observable<any> = this.service.getallLigneDevis().pipe(
+        switchMap(
+          data_ligne_devis => {
+            let filtre1 = data_ligne_devis.filter(x => x.devis_id == val1.id && x.unite != '');
+            let id_devis = filtre1.map(y => y.id);
+            return this.service.getallSoustraitant().pipe(switchMap(data_sous_traitant => {
+              let ent = data_sous_traitant.find(x => x.id == val1.entreprise_id);
+              return this.service.getallConstats().pipe(map(data_constats => {
+                //filtre des constats appartenant au devis du sous traitant
+                let filtre_constat = data_constats.filter(x => {
+                  return id_devis.includes(x.poste_id)
+                });
+
+                let rangs = filtre_constat.map(x => x.numero).filter((value: any, index: any, self: any) => self.indexOf(value) === index).sort(
+                  (a, b) => a - b
+                )
+
+                rangs.forEach(element => {
+                  let data = filtre_constat.filter(x => x.numero === element)
+
+                  let id_uniques = data.map(x => x.poste_id).filter((value: any, index: any, self: any) => self.indexOf(value) === index);
+                  id_uniques.forEach(element => {
+                    let data2 = data.find(x => x.poste_id == element)
+                    let ligne=data_ligne_devis.find(x=>x.id==data2?.poste_id)
+                    tab.push({
+                      'poste': ligne?.poste,
+                      'numero': data2?.numero,
+                      'quantite': data2?.quantite_mois
+                    });
+
+                  });
+
+                })
+                console.log(ent?.enseigne, tab)
+                return [ent?.enseigne, tab]
+              }))
+            }))
+          }
+        )
+      )
+      obsrv.push(
+        mon_obs)
+    });
+    forkJoin(obsrv).subscribe(rep=>{
+      console.log(rep)
+    })
+
   }
+
+
+
+  constats: element_constat[] = [];
   db = inject(Firestore);
   _loader_service = inject(DataLoaderService);
   _user_store = inject(UserStore);
@@ -197,7 +256,7 @@ export class TelechargerComponent implements OnInit {
       if (data) {
         let ent = data[0]
         ent.poste = ''
-        ent.designation = element.code+'/'+entreprise?.enseigne
+        ent.designation = element.code + '/' + entreprise?.enseigne
       }
       obsrv.push(
         this._telecharger_service.saveDevis(element.id, data)
@@ -306,4 +365,18 @@ export class TelechargerComponent implements OnInit {
     }
     ))
   }
+  getChildren(data: element_devis[] | undefined) {
+
+    if (data) {
+      data.forEach((each) => {
+
+        if (each.constat.length > 0) {
+          this.constats.push(...each.constat);
+        }
+        this.getChildren(each.children);
+      });
+    }
+    return this.constats;
+  }
+
 }

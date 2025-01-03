@@ -415,6 +415,14 @@ export class TaskService {
       )
     return from(docRef)
   }
+  addNewDecompteDevis(path_string: string, devis_id: string, row: any): Observable<void> {
+    const docRef1 = doc(this.db, path_string + '/' + devis_id);
+    const docRef = updateDoc(docRef1, { decompte: row }).then
+      (response => { }
+      )
+    return from(docRef)
+  }
+
   updateDevis(data: any): Observable<void> {
     let id = data.id
     const docRef = doc(this.db, 'comptes/' +

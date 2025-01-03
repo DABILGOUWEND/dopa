@@ -740,19 +740,19 @@ export const PersonnelStore = signalStore(
             mytasks: computed(() => {
                 let personnel = store.personnel_data();
                 let data: any = [];
-                if (store.is_finished()) { 
+                if (store.is_finished()) {
                     personnel.forEach((element) => {
                         let dates = element.dates;
                         let presence = element.presence;
-                        
+
                         let index = dates.indexOf(store.current_date());
-                    
+
                         if (index > 0) {
                             data.push({
                                 name: presence[index] ? "présent" : "absent",
                                 completed: element.presence[index],
                             })
-                        } 
+                        }
 
                     });
                 }
@@ -812,17 +812,17 @@ export const PersonnelStore = signalStore(
             ,
 
             data_pointage: computed(() => {
-               
+
                 let donnees = store.personnel_data();
                 let data: tab_personnel[] = [];
-                if(store.is_finished()){
+                if (store.is_finished()) {
                     donnees.forEach(element => {
                         let dates = element.dates;
                         if (dates.includes(store.current_date()))
                             data.push(element)
                     });
                 }
-                
+
                 return data
             }),
             donnees_personnelById: computed(() => {
@@ -957,7 +957,7 @@ export const PersonnelStore = signalStore(
                 patchState(store, { click: types })
             },
             setfiniched(rep: boolean) {
-                patchState(store, { is_finished: rep})
+                patchState(store, { is_finished: rep })
             },
 
             filterbyNomPrenom(mot: string) { patchState(store, { selectedNom_prenom: mot }) },
@@ -966,7 +966,7 @@ export const PersonnelStore = signalStore(
                 return task_service.getallPersonnel().pipe(
                     tap(data => {
                         patchState(store, setPending());
-                        patchState(store, { personnel_data: classePersonnel(data) },setFulfilled())
+                        patchState(store, { personnel_data: classePersonnel(data) }, setFulfilled())
                     })
                 )
             }
@@ -1011,11 +1011,11 @@ export const PersonnelStore = signalStore(
                         if (row.dates.includes(date))
                             obs.push(task_service.removePerson(row, date))
                     }
-                    return forkJoin(obs).pipe( tap({    
+                    return forkJoin(obs).pipe(tap({
                         complete: () => {
                             patchState(store, { is_finished: true })
                         }
-                    })) 
+                    }))
                 }
                 ))),
             updatePersonnel: rxMethod<tab_personnel>(pipe(
@@ -1098,11 +1098,11 @@ export const PersonnelStore = signalStore(
                     }
                     return forkJoin(obs).pipe(
                         tap({
-                            complete: () => {   
+                            complete: () => {
                                 patchState(store, { is_finished: true })
                             }
                         }
-                    )
+                        )
                     )
                 })
             )),
@@ -2079,15 +2079,27 @@ export const DevisStore = signalStore(
             ,
             addDevis: rxMethod<Devis>(pipe(
                 switchMap((devis) => {
-                    return _task_service.addModel(store.path_string(), devis).pipe(tap({next:()=>{
-                        Showsnackerbaralert('ajouté avec succes', 'pass', snackbar);
-                    }}))
+                    return _task_service.addModel(store.path_string(), devis).pipe(tap({
+                        next: () => {
+                            Showsnackerbaralert('ajouté avec succes', 'pass', snackbar);
+                        }
+                    }))
 
                 })
             )),
             addDataDevis: rxMethod<any>(pipe(
                 switchMap((row) => {
                     return _task_service.addDataDevis(store.path_string(), store.current_devis_id(), row).pipe(tap({
+                        next: () => { },
+                        error: () => Showsnackerbaralert('échoué', 'fail', snackbar)
+                    }))
+
+                })
+            ))
+            ,
+            addDecompteDevis: rxMethod<any>(pipe(
+                switchMap((row) => {
+                    return _task_service.addNewDecompteDevis(store.path_string(), store.current_devis_id(), row).pipe(tap({
                         next: () => { },
                         error: () => Showsnackerbaralert('échoué', 'fail', snackbar)
                     }))

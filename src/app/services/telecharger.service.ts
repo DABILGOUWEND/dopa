@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 import { AuthenService } from '../authen.service';
-import { Devis, Constats, Ligne_devis, ModelAttachement, ModelDecompte, unites, Gasoil, Statuts } from '../models/modeles';
+import { Devis, Constats, Ligne_devis, ModelAttachement, ModelDecompte, unites, Gasoil, Statuts, sous_traitant } from '../models/modeles';
 import { child } from 'firebase/database';
 
 @Injectable({
@@ -72,6 +72,10 @@ export class TelechargerService {
   getallDevis(): Observable<Devis[]> {
     const DevisCollection = collection(this.db, 'Devis')
     return collectionData(DevisCollection, { idField: 'id' }) as Observable<Devis[]>
+  }
+  getallSoustraitant(): Observable<sous_traitant[]> {
+    const DevisCollection = collection(this.db, 'sstraitants')
+    return collectionData(DevisCollection, { idField: 'id' }) as Observable<sous_traitant[]>
   }
   addDevis(data: Devis): Observable<void> {
     let mydata =

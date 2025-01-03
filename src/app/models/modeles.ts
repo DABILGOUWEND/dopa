@@ -122,6 +122,7 @@ export interface Devis {
     montant: number,
     avance: number,
     data: element_devis[]
+    decompte:element_decompte[]
 }
 export interface Ligne_devis {
     id: string,
@@ -183,12 +184,25 @@ export interface ExampleFlatNode {
     montant_prec: number | null,
     montant_periode: number | null,
     montant_cumul: number | null,
+    montant: number | null,
   }
 export  interface  element_constat{
     numero: number,
     quantite_periode: number,
+    date: string,
+    description: string,
+    numero_decompte:number
     
 }
+export  interface  element_decompte{
+    numero: number,
+    date: string,
+    retenue_garantie:number,
+    rembours_avance:number,
+    autre_retenue:number,
+    
+}
+
 
 
 export interface Contrats {

@@ -57,8 +57,6 @@ export class LignedevisComponent implements OnInit {
     'Batman',
     'Batwoman'
   ]
-
-
   /** Map from nested node to flattened node. This helps us to keep the same object for selection */
   nestedNodeMap = new Map<element_devis, ExampleFlatNode>();
   flatNodeMap = new Map<ExampleFlatNode, element_devis>();
@@ -141,13 +139,14 @@ export class LignedevisComponent implements OnInit {
 
   //methods
   ngOnInit() {
-
+this._devis_store.setCurrentDevisId('')
   }
+  
   init_dat(data: element_devis[] | undefined) {
     if (data) {
       let children = data[0].children
       let sorting = children.sort((a, b) => a.poste.localeCompare(b.poste))
-      data[0].children = sorting
+      data[0].children = sorting;
       this.dataSource.data = data;
       this.treeControl.expandAll();
       for (let i = this.treeControl.dataNodes.length - 1; i >= 0; i--) {
@@ -184,6 +183,7 @@ export class LignedevisComponent implements OnInit {
             unite: data.unite,
             quantite: data.quantite,
             constat: [],
+            decompte:[],
             children: []
           }
           row.children.push(child);
@@ -364,5 +364,6 @@ export class LignedevisComponent implements OnInit {
     let id = taches && taches.uniteid ? taches.uniteid : '';
     return taches && taches.designation ? taches.designation : '';
   }
+  
 }
 

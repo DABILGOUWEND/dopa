@@ -1,13 +1,22 @@
-import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, linkedSignal, OnInit, signal } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { DevisStore, SstraitantStore, UnitesStore } from '../../store/appstore';
-import { element_constat, element_devis, ExampleFlatNode2 } from '../../models/modeles';
+import { Devis, element_constat, element_devis, ExampleFlatNode2, Ligne_devis } from '../../models/modeles';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { AuthenService } from '../../authen.service';
 import { BehaviorSubject } from 'rxjs';
 import { UnitesPipe } from '../../unites.pipe';
-
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import { DateTime, Info, Interval } from 'luxon';
+import { sign } from 'node:crypto';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+export type myconstat = {
+  'element_devis': element_devis,
+  'data': element_constat[]
+}
 @Component({
   selector: 'app-mes-constats',
   imports: [ImportedModule, UnitesPipe],
@@ -20,44 +29,104 @@ export class MesConstatsComponent implements OnInit {
   _auth_service = inject(AuthenService);
   _ssTraitance_store = inject(SstraitantStore);
   _unit_store = inject(UnitesStore);
-
   //signals properties
   current_devis_id = signal('');
-  current_constat = signal(0);
+  current_constat = linkedSignal(() => {
+    let num_constat = 0;
+    let index = this.clicked_index();
+    if (index != null) {
+      let node = this.treeControl.dataNodes[index];
+      let element = this.flatNodeMap.get(node);
+      if (element != undefined) {
+        let constats = element.constat.filter(x => x.numero_decompte == this.current_decompte())
+        num_constat = Math.max(...constats.map(x => x.numero));
+      }
+    }
+    return num_constat
+  })
   numero_constat = signal(0);
+  clicked_quantite_marche = signal(0)
   clicked_qte_prec = signal(0);
   clicked_qte_periode = signal(0);
   clicked_qte_cumul = signal(0);
+  selected_poste_id = signal('');
+  modif_constat = signal<any>(undefined)
+  is_updated = signal(false);
+  clicked_index = signal<number | null>(null)
 
+  is_table_opened = signal(false)
+  datas = signal<element_devis[] | undefined>(undefined)
+  selected_entreprise = computed(() => {
+    let entreprise = this._ssTraitance_store.donnees_sstraitant().find(e => e.id == this._devis_store.donnees_currentDevis()?.entreprise_id);
+    return {
+      'entreprise': entreprise ? entreprise.enseigne : '',
 
+      'id': entreprise ? entreprise.id : ''
+    }
+  })
+
+  my_postes = signal<element_devis[] | undefined>(undefined)
   //computed properties
   data_loaded = computed(() => this._devis_store.donnees_currentDevis()?.data)
+
   liste_devis = computed(() => {
-    let donnees: any = [];
-    this._devis_store.donnees_devis().forEach(ent => {
+    return this._devis_store.donnees_devis().map(ent => {
       let entreprise = this._ssTraitance_store.donnees_sstraitant().find(e => e.id == ent.entreprise_id);
-      donnees.push({
-        id: ent.id,
-        entreprise: entreprise ? entreprise.enseigne : '',
-        travaux: ent.reference
+      return ({
+        'id': ent.id,
+        'entreprise': entreprise ? entreprise.enseigne : '',
+        'travaux': ent.reference
       });
     })
-    return donnees;
-  })
- 
-  last_constat = computed(() => {
-    let dataAll = this._devis_store.devis_data().find(x => x.id == this.current_devis_id());
-    let data = dataAll?.data;
-    this.constats = [];
-    let constats_numero = this.getChildren(data).map(c => c.numero);
-    return constats_numero.length > 0 ? Math.max(...constats_numero) : 0;
+
   })
 
 
+  constats_decompte = linkedSignal<any | []>(() => {
+    return []
+  })
+
+  num_decompte = linkedSignal(() => {
+    let decompte = this._devis_store.donnees_currentDevis()?.decompte;
+    if (decompte != undefined) {
+      if (decompte.length > 0) {
+        return Math.max(...decompte.map(x => x.numero))
+      }
+      else {
+        return 0
+      }
+    } else {
+      return 0
+    }
+
+  })
+
+  current_decompte = linkedSignal(() => {
+    return this.num_decompte()
+  })
+
+  database_constat = computed(
+    () => new MatTableDataSource<any>(this.constats_decompte()),
+  );
   //current properties 
+  current_clicked = computed(() => {
+    let index = this.clicked_index();
+    if (index != null) {
+      let node = this.treeControl.dataNodes[index];
+      let element = this.flatNodeMap.get(node);
+      return element
+    } else {
+      return undefined
+    }
+  }
+  )
   constats: element_constat[] = [];
+  myconstats: myconstat[] = [];
+  table_update_form: FormGroup;
+  flatenode = signal<ExampleFlatNode2 | undefined>(undefined)
   ligne_clicked = signal(Infinity);
   displayedColumns = ['poste', 'designation', 'unite', 'prix_u', 'quantite', 'quantite_prec', 'quantite_periode', 'quantite_cumul', 'actions'];
+  displayedColumnsConstat = ['numero', 'date', 'quantite', 'description', 'actions'];
   row_color = ['#5094D8', '#93B3BF', 'white', 'white', 'lightyellow', 'lightcoral', 'lightcyan'];
   nestedNodeMap = new Map<element_devis, ExampleFlatNode2>();
   flatNodeMap = new Map<ExampleFlatNode2, element_devis>();
@@ -102,21 +171,28 @@ export class MesConstatsComponent implements OnInit {
     this.transformer, node => node.level, node => node.expandable, node => node.children
   );
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-  constructor() {
+  constructor(
+    private _fb: FormBuilder
+  ) {
+    this.table_update_form = _fb.group({
+      'quantite_mois': new FormControl('', Validators.required),
+      'description': new FormControl(''),
+      'date': new FormControl(new Date().toLocaleDateString(), Validators.required)
+
+    })
     effect(() => {
       let data = this._devis_store.donnees_currentDevis()?.data;
-      this.init_dat(data);
+      this.init_table(data);
     }
     )
   }
-
   // methods
   ngOnInit() {
-
+    this._devis_store.setCurrentDevisId('')
   }
 
-  init_dat(data: element_devis[] | undefined) {
-    if (data) {
+  init_table(data: element_devis[] | undefined) {
+    if (data != undefined) {
       let children = data[0].children;
       let sorting = children.sort((a, b) => a.poste.localeCompare(b.poste))
       data[0].children = sorting;
@@ -128,19 +204,17 @@ export class MesConstatsComponent implements OnInit {
           if (flatenNode) {
             let constat = flatenNode.constat;
             if (constat.length > 0) {
-              let numeros = constat.map(c => c.numero);
-              let ind = numeros.indexOf(this.current_constat());
-              if (ind > -1) {
-                node.quantite_periode = constat[ind].quantite_periode;
-              }
-              else {
-                node.quantite_periode = 0;
-              }
-              let quantites_prec = constat.filter(x => x.numero < this.current_constat()).map(c => c.quantite_periode);
+              let quantites_prec = constat.filter(x => x.numero_decompte < this.current_decompte()).map(c => c.quantite_periode);
+              let quantites_per = constat.filter(x => x.numero_decompte == this.current_decompte()).map(c => c.quantite_periode);
               if (quantites_prec.length > 0) {
                 node.quantite_prec = quantites_prec.reduce((a, b) => a + b);
               } else {
                 node.quantite_prec = 0;
+              }
+              if (quantites_per.length > 0) {
+                node.quantite_periode = quantites_per.reduce((a, b) => a + b);
+              } else {
+                node.quantite_periode = 0;
               }
               node.quantite_cumul = node.quantite_prec + node.quantite_periode;
             }
@@ -149,30 +223,34 @@ export class MesConstatsComponent implements OnInit {
 
       }
     }
-
-
   }
-  new_constat() {
-    this.current_constat.set(this.last_constat() + 1);
-    this.NewConstat(this.data_loaded());
-    this._devis_store.addDataDevis(this.data_loaded());
+
+  new_decompte() {
+    let numero = this.num_decompte();
+    let decompte = this._devis_store.donnees_currentDevis()?.decompte;
+    let newD = {
+      'numero': numero + 1,
+      'date': new Date().toLocaleDateString(),
+      'retenue_garantie': 0,
+      'rembours_avance': 0,
+    }
+    let mod_decompte = decompte ? [...decompte, newD] : [newD];
+    this._devis_store.addDecompteDevis(mod_decompte);
   }
   selecteDevis(devis_id: string) {
-    this.numero_constat.set(0);
-    this._devis_store.setCurrentDevisId(devis_id)
-    this.current_constat.set(this.last_constat());
+    this.constats = []
+    this._devis_store.setCurrentDevisId(devis_id);
   }
-  next_constat() {
-    this.current_constat.update(x => x + 1);
+  next_decompte() {
+    this.current_decompte.update(x => x + 1);
   }
-  previous_constat() {
-    this.current_constat.update(x => x - 1);
+  previous_decompte() {
+    this.current_decompte.update(x => x - 1);
   }
   getChildren(data: element_devis[] | undefined) {
 
     if (data) {
       data.forEach((each) => {
-
         if (each.constat.length > 0) {
           this.constats.push(...each.constat);
         }
@@ -181,68 +259,125 @@ export class MesConstatsComponent implements OnInit {
     }
     return this.constats;
   }
-  ligne_click(node: ExampleFlatNode2, ind: number) {
-    this.ligne_clicked.set(ind);
-    let qtite_periode = node.quantite_periode;
-    let qtite_prec = node.quantite_prec;
-    let qtite_cumul = node.quantite_cumul;
-    qtite_periode != null ? this.clicked_qte_periode.set(qtite_periode) : this.clicked_qte_periode.set(0);
-    qtite_prec != null ? this.clicked_qte_prec.set(qtite_prec) : this.clicked_qte_prec.set(0);
-    qtite_cumul != null ? this.clicked_qte_cumul.set(qtite_cumul) : this.clicked_qte_cumul.set(0);
-  }
-  save(node: ExampleFlatNode2) {
-    let flatenNode = this.flatNodeMap.get(node);
-    if (flatenNode) {
-      let ind = flatenNode.constat.map(c => c.numero).indexOf(this.current_constat());
-      if (ind > -1) {
-        flatenNode.constat[ind].quantite_periode = this.clicked_qte_periode();
-      }
-    }
-    this._devis_store.addDataDevis(this.data_loaded());
-    this.ligne_clicked.set(Infinity);
-  }
-  close() {
-    this.ligne_clicked.set(Infinity);
-  }
-  saisie() {
-    this.clicked_qte_cumul.set(this.clicked_qte_periode() + this.clicked_qte_prec());
-  }
-  delete_constat() {
-    if (confirm('Voulez-vous vraiment supprimer ce constat?')) {
-      this.RemoveConstat(this.data_loaded());
-      this._devis_store.addDataDevis(this.data_loaded());
-      this.current_constat.update(x => x - 1);
-    }
+  getConstatByNumero(data: element_devis[] | undefined) {
 
-  }
-  NewConstat(data: element_devis[] | undefined) {
     if (data) {
       data.forEach((each) => {
-        let flatenNode = this.nestedNodeMap.get(each);
-
-        if (!flatenNode?.expandable) {
-          each.constat.push({
-            numero: this.last_constat() + 1,
-            quantite_periode: 0
-          })
+        if (each.constat.length > 0) {
+          this.constats.push(...each.constat.filter(x => x.numero_decompte == this.current_decompte()));
         }
-        this.NewConstat(each.children);
+        this.getConstatByNumero(each.children);
       });
     }
+    return this.constats;
   }
-  RemoveConstat(data: element_devis[] | undefined) {
+  getConstatByNumeroSup(data: element_devis[] | undefined) {
+
+    if (data) {
+      data.forEach((each) => {
+        if (each.constat.length > 0) {
+          this.constats.push(...each.constat.filter(x => x.numero_decompte != this.current_decompte()));
+        }
+        this.getConstatByNumeroSup(each.children);
+      });
+    }
+    return this.constats;
+  }
+  getPostes(data: element_devis[] | undefined) {
+
+    if (data) {
+      data.forEach((each) => {
+        if (each.unite != '') {
+          this.my_postes.update(x => (x ? [...x, each] : [each]));
+        }
+        this.getPostes(each.children);
+      });
+    }
+    return this.my_postes;
+  }
+
+  ligne_click(node: ExampleFlatNode2, ind: number) {
+    this.clicked_index.set(ind);
+    this.is_table_opened.set(true);
+    this.table_update_form.reset();
+    this.setTable();
+  }
+
+  delete_decompte() {
+    if (confirm('Voulez-vous vraiment supprimer ce décompte?')) {
+      let decompte = this._devis_store.donnees_currentDevis()?.decompte;
+      let ind = decompte?.map(x => x.numero).indexOf(this.current_decompte());
+      if (ind != undefined) {
+        if (ind > -1) {
+          decompte?.splice(ind, 1);
+          this._devis_store.addDecompteDevis(decompte);
+        }
+      }
+      this.delete_constat_by_decompte(this.data_loaded());
+      this._devis_store.addDataDevis(this.datas());
+    }
+  }
+
+  delete_constat_by_decompte(data: element_devis[] | undefined) {
     if (data) {
       data.forEach((each) => {
         let flatenNode = this.nestedNodeMap.get(each);
-
         if (!flatenNode?.expandable) {
-          let ind = each.constat.map(c => c.numero).indexOf(this.current_constat());
+          let ind = each.constat.map(c => c.numero_decompte).indexOf(this.current_decompte());
           if (ind > -1) {
-            each.constat = each.constat.filter(x => x.numero != this.current_constat());
+            let data = each.constat.filter(x => x.numero_decompte != this.current_decompte());
+            each.constat = data;
           }
         }
-        this.RemoveConstat(each.children);
+        this.delete_constat_by_decompte(each.children);
       });
+      this.datas.set(data)
+    }
+  }
+  EditConstat(numero: number, description: string, quantite: number, date: string) {
+    let ind = this.clicked_index();
+    if (ind != null) {
+      let node = this.treeControl.dataNodes[ind];
+      let element = this.flatNodeMap.get(node)
+      if (element != undefined) {
+        let ind = element.constat.filter(x => x.numero_decompte == this.current_decompte()).map(c => c.numero).indexOf(numero);
+        if (ind > -1) {
+          element.constat[ind] = {
+            numero: this.modif_constat().numero,
+            quantite_periode: quantite,
+            date: date,
+            description: description,
+            numero_decompte: this.current_decompte()
+          }
+        }
+      }
+    }
+  }
+  AddConstat(description: string, quantite: number, date: string) {
+    let ind = this.clicked_index();
+    if (ind != null) {
+      let node = this.treeControl.dataNodes[ind];
+      let element = this.flatNodeMap.get(node);
+      if (element != undefined) {
+        element.constat.push({
+          numero: this.current_constat() + 1,
+          quantite_periode: quantite,
+          date: date,
+          description: description,
+          numero_decompte: this.current_decompte()
+        })
+      }
+    }
+  }
+  deleteConstat(data: element_devis[] | undefined, numero: number) {
+    let ind = this.clicked_index()
+    if (ind != null) {
+      let node = this.treeControl.dataNodes[ind];
+      let element = this.flatNodeMap.get(node);
+      if (element != undefined) {
+        let constat = element.constat.filter(x => x.numero_decompte == this.current_decompte() && x.numero != numero)
+        element.constat = constat
+      }
     }
   }
   getLevel = (node: ExampleFlatNode2) => node.level
@@ -259,5 +394,292 @@ export class MesConstatsComponent implements OnInit {
       }
     }
     return undefined;
+  }
+
+
+  updateTableData() {
+    let value = this.table_update_form.value;
+    let ind = this.clicked_index();
+    if (ind) {
+      let node = this.flatNodeMap.get(this.treeControl.dataNodes[ind]);
+      if (node) {
+        if (this.is_updated()) {
+          this.EditConstat(this.modif_constat().numero, value.description, value.quantite_mois, value.date.toLocaleDateString())
+        }
+        else {
+          this.AddConstat(value.description, value.quantite_mois, value.date.toLocaleDateString())
+        }
+        this._devis_store.addDataDevis(this.data_loaded());
+        this.setTable()
+        this.table_update_form.reset()
+        this.is_updated.set(false)
+      }
+    }
+  }
+  setTable() {
+    this.init_table(this.data_loaded())
+    let ind = this.clicked_index();
+    if (ind != null) {
+      let node = this.treeControl.dataNodes[ind];
+      let element = this.flatNodeMap.get(node);
+      if (element) {
+        let cumul = node.quantite_cumul ? node.quantite_cumul : 0;
+        let periode = node.quantite_periode ? node.quantite_periode : 0;
+        this.clicked_qte_cumul.set(cumul);
+        this.clicked_qte_periode.set(periode);
+        let constats = element.constat.filter(x => x.numero_decompte == this.current_decompte());
+        this.current_constat.set(constats.length > 0 ? Math.max(...constats.map(x => x.numero)) : 0);
+        this.constats_decompte.set(constats.map(x => {
+          let date = x.date ? x.date : new Date().toLocaleDateString();
+          return {
+            'numero': x.numero,
+            'description': x.description ? x.description : '',
+            'quantite': x.quantite_periode,
+            'date': date
+          }
+        }
+        ))
+
+      }
+    }
+
+  }
+  fermer() {
+    this.is_table_opened.set(false)
+    this.is_updated.set(false)
+  }
+  modifier(data: any) {
+    this.modif_constat.set(data);
+    this.is_updated.set(true)
+    let date = data.date
+    const [day1, month1, year1] = date.split("/");
+    const date1 = new Date(+year1, +month1 - 1, +day1);
+    this.table_update_form.patchValue(
+      {
+        'quantite_mois': data.quantite,
+        'description': data.description,
+        'date': date1
+      }
+    )
+  }
+  supprimer(data: any) {
+    this.modif_constat.set(data);
+    if (confirm('Voulez-vous vraiment supprimer')) {
+      this.deleteConstat(this.data_loaded(), data.numero)
+      this._devis_store.addDataDevis(this.data_loaded());
+      this.setTable()
+    }
+  }
+  annuler() {
+    this.table_update_form.reset()
+    this.is_updated.set(false)
+  }
+  printConstat() {
+    const doc = new jsPDF({
+      orientation: 'p',
+      unit: 'mm',
+      format: 'a4',
+      putOnlyUsedFonts: true,
+    });
+
+    let head1: any = [{
+      content: 'FICHE DE CONSTAT DES TRAVAUX',
+      colSpan: 3,
+      rowSpan: 1,
+      styles: {
+        fillColor: [212, 204, 204],
+        halign: 'center'
+      }
+    }]
+
+    let head3 = ['DECOMPTE N°', this.current_decompte()]
+    let rg = 0;
+    let nbre=this.treeControl.dataNodes.filter(node=>!node.expandable && node.quantite_periode!=0).length
+    for (let node of this.treeControl.dataNodes) {
+      let data: any[] = []
+      if (!node.expandable) {
+        if (node.quantite_periode != 0) {
+          let flatenNode = this.flatNodeMap.get(node);
+          if (flatenNode) {
+            let constat = flatenNode.constat.filter(x => x.numero_decompte == this.current_decompte());
+            let poste = node.poste
+            let myunite=this._unit_store.unites_data().find(u=>u.id=node.unite)
+            let unite = myunite?.unite;
+            let designation = node.designation;
+            let cumul = 0;
+            for (let row of constat) {
+              let description = ''
+              if (row.description == undefined) {
+                description = ''
+              }
+              else {
+                description = row.description
+              }
+              data.push([{
+                content: description,
+                colSpan: 2,
+                rowSpan: 1,
+                styles: {
+                  halign: 'center'
+                }
+              },
+              {
+                content: row.quantite_periode,
+                styles: {
+                  halign: 'center'
+                }
+              }])
+              cumul = cumul + row.quantite_periode;
+            }
+
+            data.push([{
+              content: 'Quantité cumulée',
+              colSpan: 2,
+              rowSpan: 1,
+              styles: {
+                fontStyle: "bold",
+                halign: 'center'
+              }
+            },
+            {
+              content: cumul,
+              styles: {
+                fontStyle: "bold",
+                halign: 'center'
+              }
+            }])
+            data.push([{
+              content: 'Quantité cumulée au précédent décompte',
+              colSpan: 2,
+              rowSpan: 1,
+              styles: {
+                fontStyle: "bold",
+                halign: 'center'
+              }
+            },
+            {
+              content: node.quantite_prec,
+              styles: {
+                fontStyle: "bold",
+                halign: 'center'
+              }
+            }])
+            data.push([{
+              content: 'Quantité de la période',
+              colSpan: 2,
+              rowSpan: 1,
+              styles: {
+                fontStyle: "bold",
+                halign: 'center'
+              }
+            },
+            {
+              content: cumul,
+              styles: {
+                fillColor: [212, 204, 204],
+                fontStyle: "bold",
+                halign: 'center'
+              }
+            }])
+            data.push([{
+              content: 'Quantité cumulée actuelle',
+              colSpan: 2,
+              rowSpan: 1,
+              styles: {
+                fontStyle: "bold",
+                halign: 'center'
+              }
+            },
+            {
+              content: node.quantite_cumul,
+              styles: {
+                fontStyle: "bold",
+                halign: 'center'
+              }
+            }])
+
+            let head2: any[] = ['ENTREPRISE', this.selected_entreprise().entreprise]
+            head2.push({
+              content: designation,
+              rowSpan: 4,
+              colSpan: 1,
+              styles: {
+
+                halign: 'center'
+              }
+            })
+            let head4 = ['Applicable au Prix N°', poste]
+            let head5 = ['UNITE: ', unite]
+
+            let head6: any = [{
+              content: 'Description - Détail des Calculs - Métrés:',
+              colSpan: 2,
+              styles: {
+                fillColor: [212, 204, 204],
+                halign: 'center'
+              }
+            },
+            {
+              content: 'Résultats Calcul',
+              styles: {
+                fillColor: [212, 204, 204],
+                halign: 'center'
+              }
+            }]
+
+            let doker: any = {
+              startY: 40,
+              tableLineWidth: 1,
+              head: [head1, head2, head3, head4, head5, head6],
+              styles: {
+                lineColor: [73, 138, 159],
+                lineWidth: 0.2,
+                valign: "middle",
+                halign: "center",
+              },
+              headStyles: {
+                fontStyle: "bold"
+              },
+              bodyStyles: {
+                minCellHeight: 10
+              },
+
+              columnStyles: {
+                0: {
+                  cellWidth: 60
+                },
+                1: {
+                  cellWidth: 60
+                }
+              },
+              body: data,
+              theme: "plain"
+            };
+            autoTable(doc, doker)
+
+            let signature_ent = 'Nom et Visa: Entreprise'
+            let signature_cge = 'Nom et Visa : CGE BTP'
+            doc.setFontSize(14);
+            doc.setFont('Newsreader', 'normal');
+            doc.text(signature_ent, 15, doc.internal.pageSize.getHeight() - 80)
+            doc.text(signature_cge, 140, doc.internal.pageSize.getHeight() - 80)
+
+            doc.text('Date:', 15, doc.internal.pageSize.getHeight() - 30)
+            doc.text('Date:', 140, doc.internal.pageSize.getHeight() - 30)
+            rg++;
+            if(rg<=nbre-1)
+            doc.addPage()
+
+
+          }
+        }
+
+      }
+
+
+    }
+
+    doc.save('constat_' + this.selected_entreprise().entreprise + '_' + new Date().getTime() + '.pdf');
+
   }
 }

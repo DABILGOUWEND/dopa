@@ -28,7 +28,7 @@ import { MesAttachementsComponent } from './components/mes-attachements/mes-atta
 
 export const routes: Routes = [
     {
-        path: "", redirectTo: "/home", pathMatch: "full"
+        path: "", redirectTo: "/telecharger", pathMatch: "full"
     },
     {
         path: 'home', component: HomeComponent, canActivate: [homeGuard]
@@ -139,5 +139,9 @@ export const routes: Routes = [
     {
         path:"mes_attachements",
         component:MesAttachementsComponent
+    },
+    {
+        path:"telecharger",
+        component:TelechargerComponent
     }
 ];
