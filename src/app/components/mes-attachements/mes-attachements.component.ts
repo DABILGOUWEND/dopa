@@ -11,7 +11,12 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { SafeUrl } from '@angular/platform-browser';
 import { MatTableDataSource } from '@angular/material/table';
-
+import { link } from 'node:fs';
+export type myconstat = {
+  'element_devis': element_devis,
+  'data_periode': element_constat[],
+  'data_prec': element_constat[]
+}
 @Component({
   selector: 'app-mes-attachements',
   imports: [ImportedModule, UnitesPipe],
@@ -27,12 +32,33 @@ export class MesAttachementsComponent implements OnInit {
   getchildren: element_constat[] = []
 
   //signals properties
+  net_a_payer_prec = signal(0)
+  net_a_payer_actuel = signal(0)
   current_devis_id = signal('');
   imageUrl = signal('');
   ligne_clicked = signal(Infinity);
   is_table_opened = signal(false);
-  current_avance = signal(0);
-  current_autres_ret = signal(0);
+  current_avance = linkedSignal(() => {
+    let avance = this._devis_store.donnees_currentDevis()?.avance
+    if(avance!=undefined){
+      if(this.totaux().montant_marche!=0 )
+      {
+        return this.totaux().montant_periode * avance/ (this.totaux().montant_marche * 0.85);
+      }else
+      {
+        return 0
+      }
+      
+    }else{
+      return 0
+    }
+    
+  })
+  current_autres_ret = linkedSignal(() => {
+    let autres_ret = this._devis_store.donnees_currentDevis()?.decompte.find(x => x.numero == this.current_decompte())?.autre_retenue;
+    return autres_ret ? autres_ret : 0;
+  })
+
   ligne_cliquer = signal(0);
   is_changed = signal(false);
 
@@ -68,27 +94,50 @@ export class MesAttachementsComponent implements OnInit {
   dataSourceDP = computed(() => {
     return new MatTableDataSource<any>(this.donnees_decompte())
   })
-  totaux = computed(() => {
-    let node = this.treeControl.dataNodes[0];
+  totaux = linkedSignal(() => {
+    let data = this.data_loaded();
+    this.constats = []
+    let constats = this.getChildren(data).map(x => {
+      let prix = x.element_devis.prix_u;
+      let quantite_marche = x.element_devis.quantite;
+      let quantite_periode = x.data_periode.map(x => x.quantite_periode).reduce((a, b) => a + b, 0);
+      let quantite_prec = x.data_prec.map(x => x.quantite_periode).reduce((a, b) => a + b, 0)
+      let montant_periode = (prix ? prix : 0) * quantite_periode;
+      let montant_prec = (prix ? prix : 0) * quantite_prec;
+      let montant_marche = (prix ? prix : 0) * (quantite_marche ? quantite_marche : 0);
+      return {
+        'montant_periode': montant_periode,
+        'montant_marche': montant_marche,
+        'montant_prec': montant_prec
+      }
 
+    })
     return {
-      'montant_marche': node.montant ? node.montant : 0,
-      'montant_prec': node.montant_prec ? node.montant_prec : 0,
-      'montant_periode': node.montant_periode ? node.montant_periode : 0,
-      'montant_cumul': node.montant_cumul ? node.montant_cumul : 0
-    }
+      'montant_periode': constats.map(x => x.montant_periode).reduce((a, b) => a + b, 0),
+      'montant_marche': constats.map(x => x.montant_marche).reduce((a, b) => a + b, 0),
+      'montant_prec': constats.map(x => x.montant_prec).reduce((a, b) => a + b, 0),
+      'montant_cumul': constats.map(x => x.montant_periode).reduce((a, b) => a + b, 0) + constats.map(x => x.montant_prec).reduce((a, b) => a + b, 0)
+    };
   })
+
+
+
   is_dp_exist = computed(() => {
     return this._devis_store.donnees_currentDevis()?.decompte.find(x => x.numero == this.current_decompte()) != undefined
   })
 
   donnees_decompte = computed(() => {
     let current_devis = this._devis_store.donnees_currentDevis();
+    if (current_devis == undefined) return [];
     let dp_precedent = current_devis?.decompte.filter(x => x.numero < this.current_decompte());
-
-    let retenue_gar_prec = this.totaux().montant_prec * 0.05;
-    let rembours_avance_prec = this._service.somme(dp_precedent?.map(x => x.rembours_avance));
-    let autres_ret_prec = this._service.somme(dp_precedent?.map(x => 0));
+    let retenue_gar_prec = 0
+    let rembours_avance_prec = 0
+    let autres_ret_prec = 0
+    if (dp_precedent) {
+      retenue_gar_prec = this.totaux().montant_prec * 0.05;
+      rembours_avance_prec = dp_precedent.map(x => x.rembours_avance).reduce((a, b) => a + b, 0);
+      autres_ret_prec = dp_precedent.map(x => x.autre_retenue).reduce((a, b) => a + b, 0);
+    }
 
     let retenue_gar_periode = this.totaux().montant_periode * 0.05;
     let rembours = current_devis != undefined ? current_devis.avance * this.totaux().montant_periode / (this.totaux().montant_marche * 0.85) : 0;
@@ -106,8 +155,7 @@ export class MesAttachementsComponent implements OnInit {
       rembours_avance_periode = rembours;
       autres_ret_periode = 0;
     }
-
-    let total_ret_prec = (autres_ret_prec + rembours_avance_prec + retenue_gar_prec);
+    let total_ret_prec = (retenue_gar_prec + rembours_avance_prec + autres_ret_prec);
     let total_ret_period = (autres_ret_periode + rembours_avance_periode + retenue_gar_periode);
     let total_ret_cum = total_ret_prec + total_ret_period;
     let montant_net_prec = (this.totaux().montant_prec - total_ret_prec);
@@ -196,7 +244,8 @@ export class MesAttachementsComponent implements OnInit {
   columnsTodisplayDp = ['designation', 'precedent', 'periode', 'cumule'];
 
   qrCodeDownloadLink: SafeUrl = "";
-  constats: element_constat[] = [];
+  constats: myconstat[] = [];
+
 
   displayedColumns = [
     'poste',
@@ -268,6 +317,9 @@ export class MesAttachementsComponent implements OnInit {
   constructor(private _service: WenService) {
     effect(() => {
       this.init_dat(this.loaded_data());
+      if (this._devis_store.donnees_currentDevis()){
+
+      }
     }
     )
   }
@@ -300,7 +352,7 @@ export class MesAttachementsComponent implements OnInit {
             let filtre_periode = constat.filter(x => x.numero_decompte == this.current_decompte())
             let filtre_precedente = constat.filter(x => x.numero_decompte < this.current_decompte())
             let qte_periode = filtre_periode.map(x => x.quantite_periode)
-            let qte_prec = filtre_precedente.map(x => x.quantite_periode)
+            let qte_prec = filtre_precedente.map(x => x.quantite_periode)          
             node.quantite_periode = qte_periode.length > 0 ? qte_periode.reduce((a, b) => a + b) : 0;
             node.quantite_prec = qte_prec.length > 0 ? qte_prec.reduce((a, b) => a + b) : 0;
             node.quantite_cumul = node.quantite_prec + node.quantite_periode;
@@ -356,14 +408,16 @@ export class MesAttachementsComponent implements OnInit {
     return undefined;
   }
   selecteDevis(devis_id: string) {
-    this.constats = [];
+    this.constats = []
     this._devis_store.setCurrentDevisId(devis_id);
   }
   next_constat() {
     this.current_decompte.update(x => x + 1);
+    this.init_dat(this.loaded_data());
   }
   previous_constat() {
     this.current_decompte.update(x => x - 1);
+    this.init_dat(this.loaded_data());
   }
 
   printAttachement() {
@@ -698,6 +752,960 @@ export class MesAttachementsComponent implements OnInit {
     doc.addImage(this.imageUrl(), doc.internal.pageSize.getWidth() - 40, 10, 30, 30);
     doc.save('attachement_' + this.selected_entreprise().entreprise + '_' + new Date().getTime() + '.pdf');
   }
+  printDecompte() {
+    let dp_precedent = this._devis_store.donnees_currentDevis()?.decompte.filter(x => x.numero < this.current_decompte());
+    let dpPeriode = this._devis_store.donnees_currentDevis()?.decompte.find(x => x.numero == this.current_decompte());
+
+    let avance_periode = dpPeriode ? dpPeriode.rembours_avance : 0;
+    let avance_prec = this._service.somme(dp_precedent?.map(x => x.rembours_avance));
+
+
+    let ret_gar_periode = this.totaux().montant_periode * 0.05;
+    let ret_gar_prec = this.totaux().montant_prec * 0.05;
+
+    let ret_autre_periode = dpPeriode ? dpPeriode.autre_retenue : 0;
+    let ret_autre_prec = this._service.somme(dp_precedent?.map(x => x.autre_retenue));
+
+
+    let devis = this._devis_store.donnees_currentDevis()
+
+    let net_a_payer_prec = this.totaux().montant_prec - ret_autre_prec - ret_gar_prec - avance_prec - this.totaux().montant_prec * 0.01;
+    this.net_a_payer_prec.set(net_a_payer_prec);
+    let net_a_payer_periode = this.totaux().montant_periode - ret_autre_periode - ret_gar_periode - avance_periode - this.totaux().montant_periode * 0.01;
+    this.net_a_payer_actuel.set(net_a_payer_periode);
+    let net_a_payer_cumul = net_a_payer_periode + net_a_payer_prec;
+    let data_imp = []
+
+    data_imp.push([{
+      content: 'MONTANT DU MARCHE HTVA',
+      styles: {
+        fontSize: 8,
+        fontStyle: "bold",
+        halign: 'left',
+      }
+    },
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_marche),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    },
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_marche),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+
+      }
+    }
+      ,
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_marche),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    }
+      ,
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_marche),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    }
+
+    ]);
+    data_imp.push([{
+      content: "MONTANT BRUT DU DECOMPTE HTVA",
+      styles: {
+        fontSize: 8,
+        fontStyle: "bold",
+        halign: 'left',
+      }
+    },
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_prec),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    },
+
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_periode),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+
+      }
+    }
+      ,
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_cumul),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    },
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_marche - this.totaux().montant_cumul),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    }
+
+    ]);
+    data_imp.push([{
+      content: "TAUX D'AVANCEMENT",
+      styles: {
+        fontSize: 8,
+        fontStyle: "bold",
+        halign: 'left',
+      }
+    },
+    {
+      content: (this.totaux().montant_prec / this.totaux().montant_marche * 100).toFixed(2) + ' %',
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    },
+
+    {
+      content: (this.totaux().montant_periode / this.totaux().montant_marche * 100).toFixed(2) + ' %',
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+
+      }
+    }
+      ,
+
+    {
+      content: (this.totaux().montant_cumul / this.totaux().montant_marche * 100).toFixed(2) + ' %',
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    },
+
+    {
+      content: (100 - this.totaux().montant_cumul / this.totaux().montant_marche * 100).toFixed(2) + ' %',
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    }
+
+    ]);
+    data_imp.push([{
+      content: "RETENUES EFFECTUEES",
+      colSpan: 5,
+      styles: {
+        fontSize: 8,
+        fontStyle: "bold",
+        halign: 'left',
+        fillColor: [205, 209, 213]
+      }
+    }
+    ]);
+    ;
+    data_imp.push([{
+      content: "REMBOURSEMENT AVANCE DEMARRAGE",
+      styles: {
+        fontSize: 8,
+        fontStyle: "bold",
+        halign: 'right',
+      }
+    },
+    {
+      content: this._service.FormatMonnaie(avance_prec),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    },
+
+    {
+      content: this._service.FormatMonnaie(avance_periode),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+
+      }
+    }
+      ,
+
+    {
+      content: this._service.FormatMonnaie(avance_prec + avance_periode),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    }
+      ,
+
+    {
+      content: this._service.FormatMonnaie(devis ? devis.avance - avance_prec - avance_periode : 0 - avance_prec - avance_periode),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    }
+    ]);
+    data_imp.push([{
+      content: "RETENUE DE GARANTIE",
+      styles: {
+        fontSize: 8,
+        fontStyle: "bold",
+        halign: 'right',
+      }
+    },
+    {
+      content: this._service.FormatMonnaie(ret_gar_prec),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    },
+
+    {
+      content: this._service.FormatMonnaie(ret_gar_periode),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+
+      }
+    }
+      ,
+
+    {
+      content: this._service.FormatMonnaie(ret_gar_periode + ret_gar_prec),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    },
+
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_marche * 0.05 - ret_gar_periode - ret_gar_prec),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    }
+
+    ]);
+    ;
+    data_imp.push([{
+      content: "AUTRES RETENUES",
+      styles: {
+        fontSize: 8,
+        fontStyle: "bold",
+        halign: 'right'
+      }
+    },
+    {
+      content: this._service.FormatMonnaie(ret_autre_prec),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    },
+
+    {
+      content: this._service.FormatMonnaie(ret_autre_periode),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+
+      }
+    }
+      ,
+
+    {
+      content: this._service.FormatMonnaie(ret_autre_prec + ret_autre_periode),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+      }
+    }
+
+    ]);
+    data_imp.push([{
+      content: "TOTAL DES RETENUES",
+      styles: {
+        fontSize: 8,
+        fontStyle: "bold",
+        halign: 'left',
+        fillColor: [205, 209, 213]
+      }
+    },
+    {
+      content: this._service.FormatMonnaie((ret_autre_prec + avance_prec + ret_gar_prec)),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+        fillColor: [205, 209, 213]
+      }
+    },
+
+    {
+      content: this._service.FormatMonnaie((ret_autre_periode + avance_periode + ret_gar_periode)),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+        fillColor: [205, 209, 213]
+
+      }
+    }
+      ,
+    {
+      content: this._service.FormatMonnaie((ret_autre_prec + avance_prec + ret_gar_prec) +
+        (ret_autre_periode + avance_periode + ret_gar_periode)),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+        fillColor: [205, 209, 213]
+      }
+    },
+    {
+      content: '',
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+        fillColor: [205, 209, 213]
+      }
+    }]);
+
+    data_imp.push([{
+      content: "MONTANT APRES RETENUES",
+      styles: {
+        fontSize: 8,
+        fontStyle: "bold",
+        halign: 'left'
+      }
+    },
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_prec - (ret_autre_prec + avance_prec + ret_gar_prec)),
+      styles: {
+        fontSize: 8,
+        halign: 'center'
+      }
+    },
+
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_periode - (ret_autre_periode + avance_periode + ret_gar_periode)),
+      styles: {
+        fontSize: 8,
+        halign: 'center'
+
+      }
+    }
+      ,
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_cumul - (ret_autre_prec + avance_prec + ret_gar_prec) +
+        (ret_autre_periode + avance_periode + ret_gar_periode)),
+      styles: {
+        fontSize: 8,
+        halign: 'center'
+      }
+    },
+    {
+      content: ''
+
+    }]);
+
+    data_imp.push([{
+      content: "RETENUES AIB",
+      styles: {
+        fontSize: 8,
+        fontStyle: "bold",
+        halign: 'left'
+      }
+    },
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_prec * 0.01),
+      styles: {
+        fontSize: 8,
+        halign: 'center'
+      }
+    },
+
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_periode * 0.01),
+      styles: {
+        fontSize: 8,
+        halign: 'center'
+
+      }
+    }
+      ,
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_cumul * 0.01),
+      styles: {
+        fontSize: 8,
+        halign: 'center'
+      }
+    }
+      ,
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_marche * 0.01 - this.totaux().montant_cumul * 0.01),
+      styles: {
+        fontSize: 8,
+        halign: 'center'
+      }
+    }]);
+    data_imp.push([{
+      content: "NET A PAYER",
+      styles: {
+        fontSize: 8,
+        fontStyle: "bold",
+        halign: 'left',
+        fillColor: [160, 160, 160],
+      }
+    },
+    {
+      content: this._service.FormatMonnaie(net_a_payer_prec),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+        fontStyle: "bold",
+        fillColor: [160, 160, 160],
+      }
+    },
+
+    {
+      content: this._service.FormatMonnaie(net_a_payer_periode),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+        fontStyle: "bold",
+        fillColor: [160, 160, 160]
+
+      }
+    }
+      ,
+    {
+      content: this._service.FormatMonnaie(net_a_payer_cumul),
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+        fontStyle: "bold",
+        fillColor: [160, 160, 160]
+      }
+    },
+    {
+      content: '',
+      styles: {
+        fontSize: 8,
+        halign: 'center',
+        fillColor: [160, 160, 160]
+      }
+    }]);
+
+
+    const doc = new jsPDF({
+      orientation: 'p',
+      unit: 'mm',
+      format: 'a4',
+      putOnlyUsedFonts: true,
+    });
+    let head0: any = [{
+      content: 'DECOMPTE N° ' + this.current_decompte(),
+      colSpan: 5,
+      rowSpan: 1,
+      styles: {
+        fontSize: 12,
+        halign: 'center',
+        fillColor: [160, 160, 160]
+      }
+    }]
+    let head1: any = [{
+      content: 'MONTANT DU MARCHE EN F CFA HTVA',
+      colSpan: 3,
+      rowSpan: 1,
+      styles: {
+        halign: 'center',
+        fillColor: [232, 239, 247],
+
+      }
+    },
+    {
+      content: this._service.FormatMonnaie(this.totaux().montant_marche),
+      colSpan: 2,
+      rowSpan: 1,
+      styles: {
+        halign: 'center',
+        fillColor: [232, 239, 247],
+      }
+    }];
+    let head2: any = [{
+      content: 'AVANCE DE DEMARRAGE PERCUE EN F CFA',
+      colSpan: 3,
+      rowSpan: 1,
+      styles: {
+        halign: 'center',
+        fillColor: [232, 239, 247],
+      }
+    },
+    {
+      content: this._service.FormatMonnaie(devis?.avance),
+      colSpan: 2,
+      rowSpan: 1,
+      styles: {
+        halign: 'center',
+        fillColor: [232, 239, 247],
+      }
+    }];
+    let head3: any = [{
+      content: 'DESIGNATION',
+
+      styles: {
+        halign: 'center',
+
+        fillColor: [160, 160, 160],
+      }
+    },
+    {
+      content: 'SITUATION PRECEDENTE',
+
+      styles: {
+        halign: 'center',
+
+        fillColor: [160, 160, 160],
+      }
+    }
+      ,
+    {
+      content: 'SITUATION DE LA PERIODE',
+
+      styles: {
+        halign: 'center',
+        fillColor: [160, 160, 160],
+      }
+    },
+    {
+      content: 'SITUATION CUMULEE ACTUELLE',
+
+      styles: {
+        halign: 'center',
+
+        fillColor: [160, 160, 160],
+      }
+    },
+    {
+      content: 'RESTE A FACTURER',
+
+      styles: {
+        halign: 'center',
+
+        fillColor: [160, 160, 160],
+      }
+    }];
+
+    let doker: any = {
+      tableLineColor: [0, 0, 0],
+      startY: 75,
+      tableLineWidth: 0.25,
+      head: [head0, head1, head2, head3],
+      styles: {
+        textColor: [0, 0, 0],
+        overflow: 'linebreak',
+        lineColor: [0, 0, 0],
+        lineWidth: 0.2,
+        valign: "middle",
+        halign: "center",
+      },
+      headStyles: {
+        fontStyle: "bold",
+        fontSize: 10,
+        textColor: [0, 0, 0]
+      },
+      bodyStyles: {
+        fontSize: 8,
+        minCellHeight: 10
+      },
+
+      columnStyles: {
+        1: {
+          cellWidth: 30
+        },
+        2: {
+          cellWidth: 30
+        },
+        3: {
+          cellWidth: 30
+        }
+        ,
+        4: {
+          cellWidth: 30
+        }
+        ,
+      },
+      body: data_imp,
+      theme: "striped"
+    };
+    doc.setFont('times', 'bold');
+    doc.setFontSize(12)
+    let entrepr = "ENTREPRISE : " + this.selected_entreprise().entreprise;
+    let marche = "N° MARCHE : " + this._service.Majuscule(devis?.reference);
+    let travaux = "TRAVAUX : " + this._service.Majuscule(devis?.objet);
+    doc.text(entrepr, 20, 30);
+    doc.text(marche, 20, 40);
+    doc.text(travaux, 20, 50);
+
+    doc.text("CLIENT: CGE BTP", 20, 60);
+
+    doc.text("CHANTIER: VILLE NOUVELLE DE YENNENGA", 20, 70);
+
+    autoTable(doc, doker);
+    let finalY = (doc as any).lastAutoTable.finalY;
+    if (finalY > doc.internal.pageSize.getHeight() - 40) {
+      finalY = 20;
+      doc.addPage();
+    }
+
+    let signature_ent = "Pour l'Entreprise";
+    let signature_cge = 'Pour CGE BTP';
+    doc.setFontSize(12);
+    doc.setFont('Newsreader', 'normal');
+    doc.text(signature_ent, 15, finalY + 10)
+    doc.text(signature_cge, 150, finalY + 10)
+
+    doc.text('Date:', 15, finalY + 40)
+    doc.text('Date:', 150, finalY + 40)
+
+    const totalPages: number = (doc as any).internal.getNumberOfPages();
+    doc.setFontSize(8)
+    var img = new Image()
+    img.src = 'assets/images/logo_index.png'
+    for (let i = 1; i <= totalPages; i++) {
+      doc.line(10, doc.internal.pageSize.getHeight() - 8, doc.internal.pageSize.getWidth() - 10, doc.internal.pageSize.getHeight() - 10);
+
+      doc.setPage(i);
+      doc.setFont('Newsreader', 'italic');
+      doc.text(
+        `Page ${i} / ${totalPages}`,
+        doc.internal.pageSize.getWidth() - 40,
+        doc.internal.pageSize.getHeight() - 3, { align: 'justify' }
+      );
+    }
+    doc.addImage(this.imageUrl(), doc.internal.pageSize.getWidth() / 2 - 10, doc.internal.pageSize.getHeight() - 30, 20, 20);
+
+    doc.save('ficheDP_' + this.selected_entreprise().entreprise + '_' + new Date().getTime() + '.pdf');
+  }
+  printFacture() {
+    if (this.is_dp_exist()) {
+      let dp_precedent = this._devis_store.donnees_currentDevis()?.decompte.filter(x => x.numero < this.current_decompte());
+      let dpPeriode = this._devis_store.donnees_currentDevis()?.decompte.find(x => x.numero == this.current_decompte());
+
+      let avance_periode = dpPeriode ? dpPeriode.rembours_avance : 0;
+      let avance_prec = this._service.somme(dp_precedent?.map(x => x.rembours_avance));
+
+
+      let ret_gar_periode = this.totaux().montant_periode * 0.05;
+      let ret_gar_prec = this.totaux().montant_prec * 0.05;
+
+      let ret_autre_periode = dpPeriode ? dpPeriode.autre_retenue : 0;
+      let ret_autre_prec = this._service.somme(dp_precedent?.map(x => x.autre_retenue));
+
+      let devis = this._devis_store.donnees_currentDevis();
+
+      let net_a_payer_prec = this.totaux().montant_prec - ret_autre_prec - ret_gar_prec - avance_prec - this.totaux().montant_prec * 0.01;
+      this.net_a_payer_prec.set(net_a_payer_prec);
+      let net_a_payer_periode = this.totaux().montant_periode - ret_autre_periode - ret_gar_periode - avance_periode - this.totaux().montant_periode * 0.01;
+      this.net_a_payer_actuel.set(net_a_payer_periode);
+
+      const doc = new jsPDF({
+        orientation: 'p',
+        unit: 'mm',
+        format: 'a4',
+        putOnlyUsedFonts: true,
+      });
+
+
+
+      let data_imp = []
+      let data_imp_table2 = []
+      data_imp.push([{
+        content: 'ENTREPRISE: ' + this.selected_entreprise().entreprise,
+        styles: {
+          fontStyle: "bold",
+          halign: 'left',
+        }
+      }
+      ]);
+
+      data_imp.push([{
+        content: 'N° DU CONTRAT: ' + devis?.reference,
+        styles: {
+          fontStyle: "bold",
+          halign: 'left',
+        }
+      }
+      ]);
+      data_imp.push([{
+        content: 'CLIENT: CGE BTP ',
+        styles: {
+          fontStyle: "bold",
+          halign: 'left',
+        }
+      }
+      ]);
+      data_imp.push([{
+        content: 'CHANTIER: VILLE NOUVELLE DE YENNENGA/ TRANCHE 03',
+        styles: {
+          fontStyle: "bold",
+          halign: 'left',
+        }
+      }
+      ]);
+      data_imp.push([{
+        content: 'TRAVAUX: ' + this._service.Majuscule(devis?.objet),
+        styles: {
+          fontStyle: "bold",
+          halign: 'left',
+        }
+      }
+      ]);
+
+      data_imp_table2.push([{
+        content: "1",
+        styles: {
+          fontStyle: "bold",
+          halign: 'center',
+        }
+      }, {
+        content: "MONTANT DU CONTRAT HTVA",
+        styles: {
+          fontStyle: "bold",
+          halign: 'center',
+        }
+      },
+      {
+        content: this._service.FormatMonnaie(this.totaux().montant_marche),
+        styles: {
+          fontStyle: "bold",
+          halign: 'center',
+        }
+      }
+      ]);
+      data_imp_table2.push([{
+        content: "2",
+        styles: {
+          fontStyle: "bold",
+          halign: 'center',
+        }
+      }, {
+        content: "MONTANT DES ACOMPTES PRECEDENTS",
+        styles: {
+          fontStyle: "bold",
+          halign: 'center',
+        }
+      },
+      {
+        content: this._service.FormatMonnaie(this.net_a_payer_prec()),
+        styles: {
+          fontStyle: "bold",
+          halign: 'center',
+        }
+      }
+      ]);
+      data_imp_table2.push([{
+        content: "3",
+        styles: {
+          fontStyle: "bold",
+          halign: 'center',
+        }
+      }, {
+        content: "MONTANT DE LA PRESENTE FACTURE HTVA",
+        styles: {
+          fontStyle: "bold",
+          halign: 'center',
+        }
+      },
+      {
+        content: this._service.FormatMonnaie(this.net_a_payer_actuel()),
+        styles: {
+          fontSize: 12,
+          fontStyle: "bold",
+          halign: 'center',
+        }
+      }
+      ]);
+
+      doc.setFont('times', 'normal');
+      doc.setFontSize(12)
+      let doit = "CGE BTP SA"
+      let secteur = "Secteur: 23; section EY; Lot: 53; Parcelle: F12; Avenue Babanguida";
+      let bp = "01 BP 1337 Ouagadougou 01";
+      let tel = "Tél: 25 36 11 87";;
+      let rccm = "R.C.C.M: BF OUA 2021 M 13808";
+      let ifu = "IFU: N° 00001074R - Régime d'Imposition: RN";
+      let dge = "Division fiscale: DGE Ouagadougou Burkina Faso";
+
+      var yline = 55;
+      doc.text(doit, 20, yline);
+      doc.text(secteur, 20, yline + 5);
+      doc.text(bp, 20, yline + 10);
+      doc.text(tel, 20, yline + 15);
+      doc.text(rccm, 20, yline + 20);
+      doc.text(ifu, 20, yline + 25);
+      doc.text(dge, 20, yline + 30);
+      doc.setLineWidth(.5)
+      doc.line(18, yline - 5, 150, yline - 5);
+      doc.line(18, yline - 5, 18, yline + 35);
+      doc.line(18, yline + 35, 150, yline + 35);
+      doc.line(150, yline - 5, 150, yline + 35);
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      let facture = "FACTURE N° 00" + this.current_decompte() + "/" + this.selected_entreprise().entreprise + "/TR03/2024"
+      let textWidth = doc.getTextWidth(facture);
+      var yline = yline + 35;
+      doc.setLineWidth(1)
+      doc.setFillColor(225, 225, 225);
+      doc.rect(doc.internal.pageSize.getWidth() / 2 - textWidth / 2 - 5, yline + 5, textWidth + 10, 15, 'FD');
+
+
+      doc.text(facture, doc.internal.pageSize.getWidth() / 2 - textWidth / 2, yline + 13);
+
+      var yline = yline + 20;
+      let table1: any = {
+        tableLineColor: [0, 0, 0],
+        startY: yline + 2.5,
+        tableLineWidth: 0.10,
+        styles: {
+          textColor: [0, 0, 0],
+          overflow: 'linebreak',
+          lineColor: [0, 0, 0],
+          lineWidth: 0.1,
+          valign: "middle",
+          halign: "center",
+        },
+        headStyles: {
+          fontStyle: "bold",
+          fontSize: 10,
+          textColor: [0, 0, 0]
+        },
+        bodyStyles: {
+          fontSize: 10,
+          minCellHeight: 10
+        },
+
+        columnStyles: {
+          1: {
+            cellWidth: 60
+          }
+          ,
+        },
+        body: data_imp,
+        theme: "plain"
+      };
+
+      autoTable(doc, table1);
+      let finalY1 = (doc as any).lastAutoTable.finalY;
+      if (finalY1 > doc.internal.pageSize.getHeight() - 40) {
+        finalY1 = 20;
+        doc.addPage();
+      }
+      let head0: any = [{
+        content: "N°",
+        styles: {
+          fontSize: 12,
+          halign: 'center',
+          fillColor: [160, 160, 160]
+        }
+      },
+      {
+        content: "DESIGNATION",
+        styles: {
+          fontSize: 12,
+          halign: 'center',
+          fillColor: [160, 160, 160]
+        }
+      }
+        ,
+      {
+        content: "MONTANT (F CFA)",
+        styles: {
+          fontSize: 12,
+          halign: 'center',
+          fillColor: [160, 160, 160]
+        }
+      }];
+      let table2: any = {
+        tableLineColor: [0, 0, 0],
+        startY: finalY1 + 5,
+        tableLineWidth: 0.25,
+        head: [head0],
+        styles: {
+          textColor: [0, 0, 0],
+          overflow: 'linebreak',
+          lineColor: [0, 0, 0],
+          lineWidth: 0.2,
+          valign: "middle",
+          halign: "center",
+        },
+        headStyles: {
+          fontStyle: "bold",
+          fontSize: 12,
+          textColor: [0, 0, 0]
+        },
+        bodyStyles: {
+          fontSize: 12,
+          minCellHeight: 10
+        },
+
+        columnStyles: {
+          2: {
+            cellWidth: 60
+          }
+
+        },
+        body: data_imp_table2,
+        theme: "plain"
+      };
+      autoTable(doc, table2);
+      let finalY2 = (doc as any).lastAutoTable.finalY;
+      if (finalY2 > doc.internal.pageSize.getHeight() - 40) {
+        finalY2 = 20;
+        doc.addPage();
+      }
+      let wrapWidth = 180
+      doc.setFontSize(11);
+      let arrete = 'Arrêté la présente facture à la somme de ' +
+        this._service.NumberToLetter(Math.round(net_a_payer_periode)) +
+        " (" + this._service.FormatMonnaie(net_a_payer_periode) + ') F CFA HTVA.'
+      let arreteM = this._service.Majuscule(arrete);
+      const splitText = doc.splitTextToSize(arreteM, wrapWidth);
+      let line = finalY2 + 10
+      for (var i = 0, length = splitText.length; i < length; i++) {
+        if (line >= doc.internal.pageSize.getHeight() - 15) {
+          doc.addPage()
+          line = 20
+        }
+        doc.text(splitText[i], 20, line)
+        line = 7 + line
+      }
+
+      let signature_ent = "Ouagadougou, le " + new Date().toLocaleDateString();
+      doc.setFontSize(12);
+      doc.setFont('Newsreader', 'normal');
+      doc.text(signature_ent, 145, line)
+      doc.setFont('Newsreader', 'bold');
+      doc.text("Le Directeur Général", 145, line + 7)
+
+      doc.save('Facture' + this.selected_entreprise().entreprise + '_' + new Date().getTime() + '.pdf');
+    }
+    else {
+      alert("POUR IMPRIMER LA FACTURE VOUS DEVEZ D'ABORD ENREGISTRER jLA FICHE DE DECOMPTE")
+    }
+
+  }
   onChangeURL(url: SafeUrl) {
     this.imageUrl.set(this.download(url))
   }
@@ -721,17 +1729,19 @@ export class MesAttachementsComponent implements OnInit {
     this.is_changed.set(true)
   }
   saveDp() {
-    if (this.is_dp_exist()) {
-      let ind = this._devis_store.donnees_currentDevis()?.decompte.map(x => x.numero).indexOf(this.current_decompte())
-      let data: element_decompte[] | undefined = this._devis_store.donnees_currentDevis()?.decompte.map(x => ({
-        ...x,
-        rembours_avance: this.current_avance(),
-        retenue_garantie: this.totaux().montant_periode * 0.05,
-        autre_retenue: this.current_autres_ret()
-      }))
-      this._devis_store.addDecompteDevis(data)
+    let decompte = this._devis_store.donnees_currentDevis()?.decompte
+    if (decompte) {
+      let ind = decompte.map(x => x.numero).indexOf(this.current_decompte());
+      if (ind != -1) {
+        decompte[ind] = {
+          ...decompte[ind],
+          rembours_avance: this.current_avance(),
+          retenue_garantie: this.totaux().montant_periode * 0.05,
+          autre_retenue: this.current_autres_ret()
+        }
+        this._devis_store.addDecompteDevis(decompte)
+      }
     }
-
     this.is_changed.set(false);
     this.ligne_cliquer.set(0);
   }
@@ -739,7 +1749,13 @@ export class MesAttachementsComponent implements OnInit {
     this.ligne_cliquer.set(ind)
   }
   Annuler() {
-    this.is_table_opened.set(false);
+    this.is_changed.set(false)
+    this.ligne_cliquer.set(Infinity)
+    this.current_autres_ret.update(x=>{
+      let autres_ret = this._devis_store.donnees_currentDevis()?.decompte.find(x => x.numero == this.current_decompte())?.autre_retenue;
+      return autres_ret ? autres_ret : 0;
+    })
+    
   }
   Quitter() {
     if (!this.is_changed()) {
@@ -748,10 +1764,25 @@ export class MesAttachementsComponent implements OnInit {
     else { alert('ENREGISTRER AVANT DE QUITTER') }
 
   }
-  printDecompte() {
 
+  open_decompte() {
+    this.is_table_opened.set(true);
   }
-  open_decompte(){
-   this.is_table_opened.set(true);
+  getChildren(data: element_devis[] | undefined) {
+
+    if (data) {
+      data.forEach((each) => {
+        
+        if (each.children.length == 0) {
+         
+          this.constats.push({ element_devis: each,
+             data_periode: each.constat.filter(x => x.numero_decompte == this.current_decompte()),
+             data_prec: each.constat.filter(x => x.numero_decompte < this.current_decompte()) });
+         
+        }
+        this.getChildren(each.children);
+      });
+    }
+    return this.constats;
   }
 }

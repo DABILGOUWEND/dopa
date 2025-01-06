@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject, linkedSignal, OnInit, signal } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { DevisStore, SstraitantStore, UnitesStore } from '../../store/appstore';
-import { Devis, element_constat, element_devis, ExampleFlatNode2, Ligne_devis } from '../../models/modeles';
+import { Devis, element_constat, element_decompte, element_devis, ExampleFlatNode2, Ligne_devis } from '../../models/modeles';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { AuthenService } from '../../authen.service';
@@ -81,6 +81,27 @@ export class MesConstatsComponent implements OnInit {
 
   })
 
+  montant_total = computed(() => {
+    let data = this.data_loaded();
+
+    this.constats = []
+    let constats = this.getChildren(data).map(x => {
+      let prix = x.element_devis.prix_u;
+      let quantite_marche = x.element_devis.quantite;
+      let quantite_periode = x.data.map(x => x.quantite_periode).reduce((a, b) => a + b, 0)
+      let montant_periode = (prix ? prix : 0) * quantite_periode;
+      let montant_marche = (prix ? prix : 0) * (quantite_marche ? quantite_marche : 0);
+      return {
+        'montant_periode': montant_periode,
+        'montant_marche': montant_marche
+      }
+
+    })
+    return {
+      'montant_periode': constats.map(x => x.montant_periode).reduce((a, b) => a + b, 0),
+      'montant_marche': constats.map(x => x.montant_marche).reduce((a, b) => a + b, 0)
+    };
+  })
 
   constats_decompte = linkedSignal<any | []>(() => {
     return []
@@ -120,7 +141,7 @@ export class MesConstatsComponent implements OnInit {
     }
   }
   )
-  constats: element_constat[] = [];
+  constats: myconstat[] = [];
   myconstats: myconstat[] = [];
   table_update_form: FormGroup;
   flatenode = signal<ExampleFlatNode2 | undefined>(undefined)
@@ -192,6 +213,7 @@ export class MesConstatsComponent implements OnInit {
   }
 
   init_table(data: element_devis[] | undefined) {
+
     if (data != undefined) {
       let children = data[0].children;
       let sorting = children.sort((a, b) => a.poste.localeCompare(b.poste))
@@ -203,6 +225,7 @@ export class MesConstatsComponent implements OnInit {
           let flatenNode = this.flatNodeMap.get(node);
           if (flatenNode) {
             let constat = flatenNode.constat;
+            
             if (constat.length > 0) {
               let quantites_prec = constat.filter(x => x.numero_decompte < this.current_decompte()).map(c => c.quantite_periode);
               let quantites_per = constat.filter(x => x.numero_decompte == this.current_decompte()).map(c => c.quantite_periode);
@@ -251,38 +274,15 @@ export class MesConstatsComponent implements OnInit {
 
     if (data) {
       data.forEach((each) => {
-        if (each.constat.length > 0) {
-          this.constats.push(...each.constat);
+        if (each.children.length == 0) {
+          this.constats.push({ element_devis: each, data: each.constat.filter(x => x.numero_decompte == this.current_decompte()) });
         }
         this.getChildren(each.children);
       });
     }
     return this.constats;
   }
-  getConstatByNumero(data: element_devis[] | undefined) {
 
-    if (data) {
-      data.forEach((each) => {
-        if (each.constat.length > 0) {
-          this.constats.push(...each.constat.filter(x => x.numero_decompte == this.current_decompte()));
-        }
-        this.getConstatByNumero(each.children);
-      });
-    }
-    return this.constats;
-  }
-  getConstatByNumeroSup(data: element_devis[] | undefined) {
-
-    if (data) {
-      data.forEach((each) => {
-        if (each.constat.length > 0) {
-          this.constats.push(...each.constat.filter(x => x.numero_decompte != this.current_decompte()));
-        }
-        this.getConstatByNumeroSup(each.children);
-      });
-    }
-    return this.constats;
-  }
   getPostes(data: element_devis[] | undefined) {
 
     if (data) {
@@ -411,6 +411,19 @@ export class MesConstatsComponent implements OnInit {
         }
         this._devis_store.addDataDevis(this.data_loaded());
         this.setTable()
+        let avance = this._devis_store.donnees_currentDevis()?.avance;
+        let decompte = this._devis_store.donnees_currentDevis()?.decompte;
+        if (decompte) {
+          let index = decompte.map(x => x.numero).indexOf(this.current_decompte());
+          if (index > -1) {
+            decompte[index] = {
+              ...decompte[index],
+              'retenue_garantie': this.montant_total().montant_periode * 0.05,
+              'rembours_avance': (avance ? avance : 0) * this.montant_total().montant_periode / (0.85 * this.montant_total().montant_marche)
+            }
+            this._devis_store.addDecompteDevis(decompte);
+          }
+        }
         this.table_update_form.reset()
         this.is_updated.set(false)
       }
@@ -442,6 +455,7 @@ export class MesConstatsComponent implements OnInit {
 
       }
     }
+
 
   }
   fermer() {
@@ -475,6 +489,7 @@ export class MesConstatsComponent implements OnInit {
     this.is_updated.set(false)
   }
   printConstat() {
+    this.init_table(this.data_loaded())
     const doc = new jsPDF({
       orientation: 'p',
       unit: 'mm',
@@ -494,16 +509,16 @@ export class MesConstatsComponent implements OnInit {
 
     let head3 = ['DECOMPTE N°', this.current_decompte()]
     let rg = 0;
-    let nbre=this.treeControl.dataNodes.filter(node=>!node.expandable && node.quantite_periode!=0).length
+    let nbre = this.treeControl.dataNodes.filter(node => !node.expandable  && node.quantite_periode != null && node.quantite_periode != 0   ).length
     for (let node of this.treeControl.dataNodes) {
       let data: any[] = []
       if (!node.expandable) {
-        if (node.quantite_periode != 0) {
+        if (node.quantite_periode != null && node.quantite_periode != 0) {
           let flatenNode = this.flatNodeMap.get(node);
           if (flatenNode) {
             let constat = flatenNode.constat.filter(x => x.numero_decompte == this.current_decompte());
             let poste = node.poste
-            let myunite=this._unit_store.unites_data().find(u=>u.id=node.unite)
+            let myunite = this._unit_store.unites_data().find(u => u.id = node.unite)
             let unite = myunite?.unite;
             let designation = node.designation;
             let cumul = 0;
@@ -667,8 +682,8 @@ export class MesConstatsComponent implements OnInit {
             doc.text('Date:', 15, doc.internal.pageSize.getHeight() - 30)
             doc.text('Date:', 140, doc.internal.pageSize.getHeight() - 30)
             rg++;
-            if(rg<=nbre-1)
-            doc.addPage()
+            if (rg <= nbre - 1)
+              doc.addPage()
 
 
           }

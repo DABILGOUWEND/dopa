@@ -1081,6 +1081,91 @@ wen-table:make-gold {
 
   }
 
+  mat-drawer.decomptes {
+    width: 45%;
+
+    .table-update {
+      .table-update__header {
+        width: 100%;
+        border-bottom: 1px solid map-get($wen-colors, divider);
+        padding-top: 5px;
+
+        h2 {
+
+          font-size: 28px;
+          margin-top: 0px;
+          text-align: center;
+          color: rgb(73, 63, 224);
+          font-weight: bold;
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+          border-bottom: 1px solid black
+        }
+
+        h3 {
+
+          font-size: 24px;
+          font-weight: bold;
+          margin-top: 5px;
+          text-align: center;
+          border-bottom: 1px solid black
+        }
+
+        h4 {
+
+          font-size: 22px;
+          font-weight: bold;
+          margin-top: 5px;
+          text-align: center;
+        }
+
+        button {
+          margin-left: 95%;
+          background-color: red;
+        }
+      }
+
+      .table-update__body {
+        width: 100%;
+        padding-top: 20px;
+        border-bottom: 1px solid map-get($wen-colors, divider);
+        background-color: silver;
+
+        mat-form-field {
+          width: 80%;
+          margin-left: 10%;
+          font-size: 20px;
+        }
+      }
+
+      .table-update__footer {
+        padding-bottom: 10px;
+        padding-top: 20px;
+        text-align: center;
+        button {
+          width: 25%;
+          margin-left: 2.5%;
+          margin-right: 2.5%;
+        }
+      }
+
+      .table-update__footer2 {
+        margin-top: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+        background-color: #d6d6d9;
+        border-top: 1px solid map-get($wen-colors, divider);
+
+        button {
+          margin-left: 2.5%;
+          margin-right: 2.5%;
+        }
+      }
+    }
+
+
+  }
+
   mat-drawer-content.default {
     display: block;
 

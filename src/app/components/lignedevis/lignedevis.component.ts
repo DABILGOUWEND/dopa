@@ -135,7 +135,14 @@ export class LignedevisComponent implements OnInit {
     return donnees;
 
   })
+  selected_entreprise = computed(() => {
+    let entreprise = this._ssTraitance_store.donnees_sstraitant().find(e => e.id == this._devis_store.donnees_currentDevis()?.entreprise_id);
+    return {
+      'entreprise': entreprise ? entreprise.enseigne : '',
 
+      'id': entreprise ? entreprise.id : ''
+    }
+  })
 
   //methods
   ngOnInit() {

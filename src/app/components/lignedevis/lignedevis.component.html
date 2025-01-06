@@ -53,28 +53,32 @@
   <mat-drawer-content class="default">
     <div class="content_head">
       <h2>DEVIS PRESTATIONS</h2>
+      <h3 [ngStyle]="{'font-size.px':26,'text-align':'center'}">{{selected_entreprise().entreprise}}</h3>
     </div>
-
-    <div [ngStyle]="{
-      'width.%':30,
-      'margin-top.px':20,
-      'margin-bottom.px':20,
-      'margin-left.px':20,
-      'background-color':'lightcoral'}">
-      <mat-form-field [ngStyle]="{
-        'width.%':90,
-        'margin-top.px':20,
-        'margin-left.%':5
-        }">
-        <mat-label> SELECTIONNER DEVIS </mat-label>
-        <mat-select [(value)]="current_devis_id" (selectionChange)="selecteDevis($event.value)">
-          <mat-option *ngFor="let devis of liste_devis()" [value]="devis.id"> {{devis.entreprise+'-'+devis.travaux}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+  
 
     <div class="content_body">
+      <div [ngStyle]="{'width.%':100, 'display':'block'}">
+        <div [ngStyle]="{
+          'width.%':40,
+          'margin-top.px':20,
+          'margin-bottom.px':20,
+          'margin-left.%':30,
+          'background-color':'lightcoral'}">
+          <mat-form-field [ngStyle]="{
+            'width.%':90,
+            'margin-top.px':20,
+            'margin-left.%':5
+            }">
+            <mat-label> ---SELECTIONNER ENTREPRISE</mat-label>
+            <mat-select [(value)]="current_devis_id" (selectionChange)="selecteDevis($event.value)">
+              <mat-option [ngStyle]="{'font-weight':'bold','text-align':'center','border-bottom':'1px solid red'}" *ngFor="let devis of liste_devis()" [value]="devis.id"> {{devis.entreprise+'-'+devis.travaux}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+     
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="poste">
           <th mat-header-cell *matHeaderCellDef>
@@ -164,7 +168,7 @@
               <input matInput type="number" [(ngModel)]="current_prix" (keyup)="saisie()" placeholder="prix unitaire" />
             </div>
             }@else {
-            {{data.prix_u|currency:'F CFA'}}
+            {{data.prix_u|currency:'FR-fr':'':'1.0-0' }}
             }
           </td>
         </ng-container>
@@ -189,7 +193,7 @@
               <input matInput type="number" [(ngModel)]="current_montant" [disabled]="true" (keyup)="saisie()" />
             </div>
             }@else {
-            {{data.montant|currency:'F CFA' }}
+            {{data.montant|currency:'FR-fr':'':'1.0-0'}}
             }
           </td>
         </ng-container>
