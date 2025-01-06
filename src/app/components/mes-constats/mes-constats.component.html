@@ -154,7 +154,9 @@
           </div>
         </div>
         <div>
-          <button mat-icon-button (click)="printConstat()" [disabled]="!_devis_store.donnees_currentDevis() || montant_total().montant_periode==0" title="imprimer constat"> <mat-icon> print</mat-icon></button>
+          <button mat-icon-button (click)="printConstat()"
+            [disabled]="!_devis_store.donnees_currentDevis() || montant_total().montant_periode==0"
+            title="imprimer constat"> <mat-icon> print</mat-icon></button>
         </div>
       </div>
     </div>
@@ -236,7 +238,8 @@
           <td mat-cell *matCellDef="let data;let ind=index">
             @if(!data.expandable)
             {
-            <button mat-icon-button (click)="ligne_click(data,ind)" [disabled]="num_decompte()==0"> <mat-icon>
+            <button mat-icon-button (click)="ligne_click(data,ind)" [disabled]="num_decompte()==0">
+              <mat-icon>
                 edit</mat-icon> </button>
             }
           </td>
