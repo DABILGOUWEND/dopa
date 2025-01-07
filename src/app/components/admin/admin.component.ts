@@ -36,5 +36,8 @@ export class AdminComponent implements OnInit {
   click_tableau_bord() {
     this._router.navigateByUrl('admin/tableau_bord');
   }
+  click_devis() {
+    this._router.navigateByUrl('admin/devis');
+  }
 
 }

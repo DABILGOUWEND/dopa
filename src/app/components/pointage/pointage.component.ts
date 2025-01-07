@@ -36,7 +36,6 @@ export class PointageComponent implements OnInit {
       date_fin: new FormControl(new Date(), Validators.required)
     })
     effect(() => {
-      //console.log(this.personnel_store.mytasks())
     })
   }
   //signalsfff
@@ -101,52 +100,14 @@ export class PointageComponent implements OnInit {
   datespointageClass = computed(() => {
     return this._service.classement(this.datespointage())
   })
-  data_expand = computed(() => {
-    let tab: any[] = [];
-    var init = 5;
-    let annee = 2024;
-    var debut_date = '21/' + '0' + init + '/2024';
-    var fin_date = this.getfin_date(debut_date);
-    let date=new Date().toLocaleDateString();
-    let now = this.getfin_date(date);
-   
-    while (fin_date.getTime() <= now.getTime() && init < (this._service.convertDate(date).getMonth()+1 )) {
- 
-      let dates = this.personnel_store.getDates()[0].filter((x: any) => {
-        return this._service.convertDate(x).getTime() >= this._service.convertDate(debut_date).getTime()
-          && this._service.convertDate(x).getTime() <= fin_date.getTime()
-      })
-      let datesfiltres = this._service.classement(dates).map((x: any) => {
-        return { 'name': x }
-      })
 
-      tab.push({
-        'name': 'Du ' + debut_date + ' au ' + fin_date.toLocaleDateString(),
-        'children': datesfiltres,
-        'debut': debut_date,
-        'fin': fin_date.toLocaleDateString()
-      });
-
-
-      if (init <= 11) {
-        init = init + 1;
-      } else {
-        init = 1;
-        annee = annee + 1;
-      }
-      debut_date = '21/' + (init >= 10 ? init : ('0' + init)) + '/' + annee;
-      fin_date = this.getfin_date(debut_date);
-    }
-    return tab.slice().reverse();
-  }
-  )
 
   //methods
   ngOnInit() {
     this.personnel_store.loadPersonnel();
     this.madate.set(this.default_date().toLocaleDateString());
     this.personnel_store.filtrebyDate(this.madate());
-    this.tab_expander.set(new Array(this.data_expand().length).fill(true))
+    this.tab_expander.set(new Array(this.personnel_store.getDates()[1].length).fill(true))
   }
   editperso(row: tab_personnel, index: number) {
     this.is_table_being_updated.set(true);
@@ -595,7 +556,6 @@ export class PointageComponent implements OnInit {
   titleCaseWord(strin: string) {
     let splite = strin.split(" ");
     let ret = ''
-    console.log(splite)
     for (let ind in splite) {
       let mystr = splite[ind]
       if (mystr != '') {
@@ -623,8 +583,8 @@ export class PointageComponent implements OnInit {
     this.tab_expander.update((tab) => tab.map((x, i) => i == index ? !rep : x))
   }
   print(index: number) {
-    this.debut_date.set(this.data_expand()[index].debut);
-    this.fin_date.set(this.data_expand()[index].fin);
+    this.debut_date.set(this.personnel_store.getDates()[1][index].debut);
+    this.fin_date.set(this.personnel_store.getDates()[1][index].fin);
     this.impression();
   }
 }

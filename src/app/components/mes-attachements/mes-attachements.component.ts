@@ -40,19 +40,17 @@ export class MesAttachementsComponent implements OnInit {
   is_table_opened = signal(false);
   current_avance = linkedSignal(() => {
     let avance = this._devis_store.donnees_currentDevis()?.avance
-    if(avance!=undefined){
-      if(this.totaux().montant_marche!=0 )
-      {
-        return this.totaux().montant_periode * avance/ (this.totaux().montant_marche * 0.85);
-      }else
-      {
+    if (avance != undefined) {
+      if (this.totaux().montant_marche != 0) {
+        return this.totaux().montant_periode * avance / (this.totaux().montant_marche * 0.85);
+      } else {
         return 0
       }
-      
-    }else{
+
+    } else {
       return 0
     }
-    
+
   })
   current_autres_ret = linkedSignal(() => {
     let autres_ret = this._devis_store.donnees_currentDevis()?.decompte.find(x => x.numero == this.current_decompte())?.autre_retenue;
@@ -120,19 +118,17 @@ export class MesAttachementsComponent implements OnInit {
     };
   })
 
-
-
   is_dp_exist = computed(() => {
     return this._devis_store.donnees_currentDevis()?.decompte.find(x => x.numero == this.current_decompte()) != undefined
   })
 
   donnees_decompte = computed(() => {
     let current_devis = this._devis_store.donnees_currentDevis();
-    if (current_devis == undefined) return [];
+    if (!current_devis) return [];
     let dp_precedent = current_devis?.decompte.filter(x => x.numero < this.current_decompte());
-    let retenue_gar_prec = 0
-    let rembours_avance_prec = 0
-    let autres_ret_prec = 0
+    let retenue_gar_prec = 0;
+    let rembours_avance_prec = 0;
+    let autres_ret_prec = 0;
     if (dp_precedent) {
       retenue_gar_prec = this.totaux().montant_prec * 0.05;
       rembours_avance_prec = dp_precedent.map(x => x.rembours_avance).reduce((a, b) => a + b, 0);
@@ -140,12 +136,11 @@ export class MesAttachementsComponent implements OnInit {
     }
 
     let retenue_gar_periode = this.totaux().montant_periode * 0.05;
-    let rembours = current_devis != undefined ? current_devis.avance * this.totaux().montant_periode / (this.totaux().montant_marche * 0.85) : 0;
-
+    let rembours = this.totaux().montant_marche != 0 ? current_devis.avance * this.totaux().montant_periode / (this.totaux().montant_marche * 0.85) : 0;
     let rembours_avance_periode = 0;
     let autres_ret_periode = 0;
     if (this.is_dp_exist()) {
-      let dp_cours = current_devis?.decompte.find(x => x.numero == this.current_decompte());
+      let dp_cours = current_devis.decompte.find(x => x.numero == this.current_decompte());
       if (dp_cours) {
         rembours_avance_periode = dp_cours.rembours_avance;
         autres_ret_periode = dp_cours.autre_retenue;
@@ -317,7 +312,7 @@ export class MesAttachementsComponent implements OnInit {
   constructor(private _service: WenService) {
     effect(() => {
       this.init_dat(this.loaded_data());
-      if (this._devis_store.donnees_currentDevis()){
+      if (this._devis_store.donnees_currentDevis()) {
 
       }
     }
@@ -352,7 +347,7 @@ export class MesAttachementsComponent implements OnInit {
             let filtre_periode = constat.filter(x => x.numero_decompte == this.current_decompte())
             let filtre_precedente = constat.filter(x => x.numero_decompte < this.current_decompte())
             let qte_periode = filtre_periode.map(x => x.quantite_periode)
-            let qte_prec = filtre_precedente.map(x => x.quantite_periode)          
+            let qte_prec = filtre_precedente.map(x => x.quantite_periode)
             node.quantite_periode = qte_periode.length > 0 ? qte_periode.reduce((a, b) => a + b) : 0;
             node.quantite_prec = qte_prec.length > 0 ? qte_prec.reduce((a, b) => a + b) : 0;
             node.quantite_cumul = node.quantite_prec + node.quantite_periode;
@@ -1751,11 +1746,11 @@ export class MesAttachementsComponent implements OnInit {
   Annuler() {
     this.is_changed.set(false)
     this.ligne_cliquer.set(Infinity)
-    this.current_autres_ret.update(x=>{
+    this.current_autres_ret.update(x => {
       let autres_ret = this._devis_store.donnees_currentDevis()?.decompte.find(x => x.numero == this.current_decompte())?.autre_retenue;
       return autres_ret ? autres_ret : 0;
     })
-    
+
   }
   Quitter() {
     if (!this.is_changed()) {
@@ -1772,13 +1767,15 @@ export class MesAttachementsComponent implements OnInit {
 
     if (data) {
       data.forEach((each) => {
-        
+
         if (each.children.length == 0) {
-         
-          this.constats.push({ element_devis: each,
-             data_periode: each.constat.filter(x => x.numero_decompte == this.current_decompte()),
-             data_prec: each.constat.filter(x => x.numero_decompte < this.current_decompte()) });
-         
+
+          this.constats.push({
+            element_devis: each,
+            data_periode: each.constat.filter(x => x.numero_decompte == this.current_decompte()),
+            data_prec: each.constat.filter(x => x.numero_decompte < this.current_decompte())
+          });
+
         }
         this.getChildren(each.children);
       });

@@ -37,12 +37,9 @@ export class PersonnelComponent implements OnInit {
         this.table_update_form2.controls.heureSup.updateValueAndValidity();
       }
     })
-
-
-    effect(() => {
-   console.log( this.personnel_store.isFulfilled());
-    }
-    )
+    effect(()=>{
+      console.log(this.personnel_store.isFulfilled())
+    })
   }
   is_open = signal(false)
   is_open2 = signal(false)

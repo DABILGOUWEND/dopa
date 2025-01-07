@@ -1,10 +1,16 @@
-<div class="rubrique_class">
-    <mat-form-field>
+<div [ngStyle]="{'display':'block',
+'width.%':40,
+'text-align':'center',
+'padding-top.px':10,
+'margin-left.%':30,
+'margin-right.%':30}">
+    <mat-form-field 
+    [ngStyle]="{'width.%':90}">
         <mat-label>Rubrique</mat-label>
         <mat-select (selectionChange)="choix_rubrique($event)">
             @for(item of items;track item)
             {
-            <mat-option [value]="item.id">
+            <mat-option [value]="item.id" [ngStyle]="{'font-weight':'bold','text-align':'center','border-bottom':'1px solid red'}" >
                 {{item.value}}
             </mat-option>
             }

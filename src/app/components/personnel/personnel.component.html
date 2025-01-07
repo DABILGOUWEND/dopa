@@ -6,11 +6,11 @@
     (RemoveItemEvent)="deleteData($event)" (RechercheEvent)="recherche($event)" (AfficheToutEvent)="afficheTout()"
     [titre]="titre" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()" [action_template]="actiontemplate"
     [is_open2]="is_open2()" [(is_open)]="is_open" [pointage]="pointages">
-</app-perso-template> 
+</app-perso-template>  
 }
 @placeholder {
-    <div [ngStyle]="{'padding-top.px':200}">
-      <h2>telechargement.....</h2>
+    <div [ngStyle]="{'padding-top.px':200,'text-align':'center'}">
+      <h2>téléchargement des données.....</h2>
     </div>
 }
 

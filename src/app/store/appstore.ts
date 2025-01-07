@@ -777,9 +777,12 @@ export const PersonnelStore = signalStore(
                 let annee = 2024;
                 var debut_date = '21/' + '0' + init + '/2024';
                 var fin_date = getfin_date(debut_date);
-                let date = new Date().toLocaleDateString();
-                let now = getfin_date(date);
-                while (fin_date.getTime() <= now.getTime() && init < (convertDate(date).getMonth() + 1)) {
+                let madate= new Date().toLocaleDateString()
+                let now = getfin_date(madate);
+                const [day1, month1, year1] = madate.split("/")
+                let daye=Number(day1)
+                let comp= daye>20?now.getTime() +1:now.getTime()
+                while (fin_date.getTime() < comp) {
                     let dates = unique_dates.filter((x: any) => {
                         return convertDate(x).getTime() >= convertDate(debut_date).getTime()
                             && convertDate(x).getTime() <= fin_date.getTime()
@@ -2120,7 +2123,6 @@ export const DevisStore = signalStore(
                 }))),
             updateDevis: rxMethod<Devis>(pipe(
                 switchMap((devis) => {
-                    console.log(devis)
                     return _task_service.updateModel(store.path_string(), devis).pipe(
                         tap({
                             next: () => {

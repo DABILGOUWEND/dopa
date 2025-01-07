@@ -18,7 +18,7 @@
             }
             @if(_auth_service.userSignal()?.role=='admin' || _auth_service.userSignal()?.role=='user2')
             {
-            <a mat-list-item routerLink="/home_travaux/devis">
+            <a mat-list-item routerLink="/admin/liste_devis">
                 <mat-icon> local_shipping </mat-icon>
                 <span>Liste des devis</span>
             </a>

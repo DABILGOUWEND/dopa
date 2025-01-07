@@ -111,13 +111,14 @@
         'margin-top.px':20,
         'margin-bottom.px':20,
         'margin-left.%':30,
-        'background-color':'lightcoral'}">
+        'background-color':'#BFCDC7'}">
         <mat-form-field [ngStyle]="{
+          'text-align':'center',
           'width.%':90,
           'margin-top.px':20,
           'margin-left.%':5
           }">
-          <mat-label> ---SELECTIONNER ENTREPRISE </mat-label>
+          <mat-label > ---SELECTIONNER ENTREPRISE </mat-label>
           <mat-select [(value)]="current_devis_id" (selectionChange)="selecteDevis($event.value)">
             <mat-option [ngStyle]="{'font-weight':'bold','text-align':'center','border-bottom':'1px solid red'}"
               *ngFor="let devis of liste_devis()" [value]="devis.id">

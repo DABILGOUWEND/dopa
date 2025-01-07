@@ -1,16 +1,12 @@
 import { Component, computed, effect, inject, linkedSignal, OnInit, signal } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { DevisStore, SstraitantStore, UnitesStore } from '../../store/appstore';
-import { Devis, element_constat, element_decompte, element_devis, ExampleFlatNode2, Ligne_devis } from '../../models/modeles';
+import {  element_constat, element_devis, ExampleFlatNode2, Ligne_devis } from '../../models/modeles';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { AuthenService } from '../../authen.service';
-import { BehaviorSubject } from 'rxjs';
 import { UnitesPipe } from '../../unites.pipe';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { DateTime, Info, Interval } from 'luxon';
-import { sign } from 'node:crypto';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 export type myconstat = {
@@ -26,7 +22,6 @@ export type myconstat = {
 export class MesConstatsComponent implements OnInit {
   //injections
   _devis_store = inject(DevisStore);
-  _auth_service = inject(AuthenService);
   _ssTraitance_store = inject(SstraitantStore);
   _unit_store = inject(UnitesStore);
   //signals properties
@@ -44,18 +39,18 @@ export class MesConstatsComponent implements OnInit {
     }
     return num_constat
   })
-  numero_constat = signal(0);
-  clicked_quantite_marche = signal(0)
-  clicked_qte_prec = signal(0);
+
   clicked_qte_periode = signal(0);
   clicked_qte_cumul = signal(0);
-  selected_poste_id = signal('');
   modif_constat = signal<any>(undefined)
   is_updated = signal(false);
   clicked_index = signal<number | null>(null)
-
+  flatenode = signal<ExampleFlatNode2 | undefined>(undefined)
+  ligne_clicked = signal(Infinity);
   is_table_opened = signal(false)
   datas = signal<element_devis[] | undefined>(undefined)
+  //computed properties
+   
   selected_entreprise = computed(() => {
     let entreprise = this._ssTraitance_store.donnees_sstraitant().find(e => e.id == this._devis_store.donnees_currentDevis()?.entreprise_id);
     return {
@@ -65,8 +60,6 @@ export class MesConstatsComponent implements OnInit {
     }
   })
 
-  my_postes = signal<element_devis[] | undefined>(undefined)
-  //computed properties
   data_loaded = computed(() => this._devis_store.donnees_currentDevis()?.data)
 
   liste_devis = computed(() => {
@@ -83,7 +76,6 @@ export class MesConstatsComponent implements OnInit {
 
   montant_total = computed(() => {
     let data = this.data_loaded();
-
     this.constats = []
     let constats = this.getChildren(data).map(x => {
       let prix = x.element_devis.prix_u;
@@ -102,11 +94,9 @@ export class MesConstatsComponent implements OnInit {
       'montant_marche': constats.map(x => x.montant_marche).reduce((a, b) => a + b, 0)
     };
   })
-
   constats_decompte = linkedSignal<any | []>(() => {
     return []
   })
-
   num_decompte = linkedSignal(() => {
     let decompte = this._devis_store.donnees_currentDevis()?.decompte;
     if (decompte != undefined) {
@@ -142,10 +132,7 @@ export class MesConstatsComponent implements OnInit {
   }
   )
   constats: myconstat[] = [];
-  myconstats: myconstat[] = [];
   table_update_form: FormGroup;
-  flatenode = signal<ExampleFlatNode2 | undefined>(undefined)
-  ligne_clicked = signal(Infinity);
   displayedColumns = ['poste', 'designation', 'unite', 'prix_u', 'quantite', 'quantite_prec', 'quantite_periode', 'quantite_cumul', 'actions'];
   displayedColumnsConstat = ['numero', 'date', 'quantite', 'description', 'actions'];
   row_color = ['#5094D8', '#93B3BF', 'white', 'white', 'lightyellow', 'lightcoral', 'lightcyan'];
@@ -153,9 +140,7 @@ export class MesConstatsComponent implements OnInit {
   flatNodeMap = new Map<ExampleFlatNode2, element_devis>();
   transformer = (node: element_devis, level: number) => {
     const existingNode = this.nestedNodeMap.get(node);
-    const flatNode = existingNode && (existingNode.poste === node.poste
-
-    )
+    const flatNode = existingNode && (existingNode.poste === node.poste)
       ? existingNode
       : {
         poste: node.poste,
@@ -180,8 +165,6 @@ export class MesConstatsComponent implements OnInit {
     flatNode.quantite_prec = null;
     flatNode.quantite_periode = null;
     flatNode.quantite_cumul = null;
-
-
     this.flatNodeMap.set(flatNode, node);
     this.nestedNodeMap.set(node, flatNode);
     return flatNode;
@@ -202,16 +185,14 @@ export class MesConstatsComponent implements OnInit {
 
     })
     effect(() => {
-      let data = this._devis_store.donnees_currentDevis()?.data;
-      this.init_table(data);
+      this.init_table(this.data_loaded());
     }
     )
   }
   // methods
   ngOnInit() {
-    this._devis_store.setCurrentDevisId('')
+    this._devis_store.setCurrentDevisId('');
   }
-
   init_table(data: element_devis[] | undefined) {
 
     if (data != undefined) {
@@ -225,7 +206,6 @@ export class MesConstatsComponent implements OnInit {
           let flatenNode = this.flatNodeMap.get(node);
           if (flatenNode) {
             let constat = flatenNode.constat;
-            
             if (constat.length > 0) {
               let quantites_prec = constat.filter(x => x.numero_decompte < this.current_decompte()).map(c => c.quantite_periode);
               let quantites_per = constat.filter(x => x.numero_decompte == this.current_decompte()).map(c => c.quantite_periode);
@@ -247,7 +227,6 @@ export class MesConstatsComponent implements OnInit {
       }
     }
   }
-
   new_decompte() {
     let numero = this.num_decompte();
     let decompte = this._devis_store.donnees_currentDevis()?.decompte;
@@ -256,6 +235,7 @@ export class MesConstatsComponent implements OnInit {
       'date': new Date().toLocaleDateString(),
       'retenue_garantie': 0,
       'rembours_avance': 0,
+      'autre_retenue':0
     }
     let mod_decompte = decompte ? [...decompte, newD] : [newD];
     this._devis_store.addDecompteDevis(mod_decompte);
@@ -271,7 +251,6 @@ export class MesConstatsComponent implements OnInit {
     this.current_decompte.update(x => x - 1);
   }
   getChildren(data: element_devis[] | undefined) {
-
     if (data) {
       data.forEach((each) => {
         if (each.children.length == 0) {
@@ -282,27 +261,12 @@ export class MesConstatsComponent implements OnInit {
     }
     return this.constats;
   }
-
-  getPostes(data: element_devis[] | undefined) {
-
-    if (data) {
-      data.forEach((each) => {
-        if (each.unite != '') {
-          this.my_postes.update(x => (x ? [...x, each] : [each]));
-        }
-        this.getPostes(each.children);
-      });
-    }
-    return this.my_postes;
-  }
-
   ligne_click(node: ExampleFlatNode2, ind: number) {
     this.clicked_index.set(ind);
     this.is_table_opened.set(true);
     this.table_update_form.reset();
     this.setTable();
   }
-
   delete_decompte() {
     if (confirm('Voulez-vous vraiment supprimer ce décompte?')) {
       let decompte = this._devis_store.donnees_currentDevis()?.decompte;
@@ -317,7 +281,6 @@ export class MesConstatsComponent implements OnInit {
       this._devis_store.addDataDevis(this.datas());
     }
   }
-
   delete_constat_by_decompte(data: element_devis[] | undefined) {
     if (data) {
       data.forEach((each) => {
@@ -381,22 +344,6 @@ export class MesConstatsComponent implements OnInit {
     }
   }
   getLevel = (node: ExampleFlatNode2) => node.level
-  getParentNode(node: ExampleFlatNode2): ExampleFlatNode2 | undefined {
-    const currentLevel = this.getLevel(node);
-    if (currentLevel < 1) {
-      return undefined;
-    }
-    const startIndex = this.treeControl.dataNodes.indexOf(node) - 1;
-    for (let i = startIndex; i >= 0; i--) {
-      const currentNode = this.treeControl.dataNodes[i];
-      if (this.getLevel(currentNode) < currentLevel) {
-        return currentNode;
-      }
-    }
-    return undefined;
-  }
-
-
   updateTableData() {
     let value = this.table_update_form.value;
     let ind = this.clicked_index();

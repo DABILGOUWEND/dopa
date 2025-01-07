@@ -204,7 +204,8 @@ export class ListeDevisComponent {
             client: client?.enseigne,
             entreprise: entreprise?.enseigne,
             projet: projet?.intitule,
-            data: element.data
+            data: element.data,
+            decompte: element.decompte
           }
         )
       });
@@ -240,10 +241,12 @@ export class ListeDevisComponent {
         reference: element.reference,
         montant: element.montant,
         avance: element.avance,
-        data: current_row.data
+        data: current_row.data,
+        decompte: current_row.decompte
 
       }
       this._devis_store.updateDevis(mydata);
+
     }
     else {
       let ent=this._sstraitant_store.sstraitant_data().find(x => x.id == element.entreprise_id)
@@ -256,6 +259,7 @@ export class ListeDevisComponent {
         reference: element.reference,
         montant: element.montant,
         avance: element.avance,
+        decompte: [], 
         data: [{
           poste: '',
           designation: element.reference + '/' + ent?.entreprise,

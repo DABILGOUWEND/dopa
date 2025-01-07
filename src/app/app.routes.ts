@@ -48,11 +48,7 @@ export const routes: Routes = [
         children: [
 
             {
-                path: "", redirectTo: "/home_travaux/devis", pathMatch: "full"
-            },
-            {
-                path: "devis",
-                component: LignedevisComponent
+                path: "", redirectTo: "/home_travaux/constats", pathMatch: "full"
             },
             {
                 path: "constats",
@@ -121,6 +117,15 @@ export const routes: Routes = [
             {
                 path: "tableau_bord",
                 component: TableauBordComponent
+            },
+            
+            {
+                path: "devis",
+                component: LignedevisComponent
+            },
+            {
+                path: "liste_devis",
+                component: ListeDevisComponent
             }
         ]
     },
