@@ -1,86 +1,24 @@
-import { Component, OnInit, computed, effect, inject } from '@angular/core';
+import { Component, OnInit, TemplateRef, computed, effect, inject, input, signal } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
-import { ApproGasoilStore, EnginsStore, GasoilStore, TravauxStore } from '../../store/appstore';
+import { ApproGasoilStore, EnginsStore, GasoilStore, ProjetStore, TravauxStore } from '../../store/appstore';
 import { WenService } from '../../wen.service';
 import { AuthenService } from '../../authen.service';
+
+import { DataLoaderService } from '../../services/data-loader.service';
+import { Router } from '@angular/router';
+import { HomeComponent } from "../home/home.component";
+import { EssaiSsrComponent } from '../essai-ssr/essai-ssr.component';
+import { EssaiComponent } from "../essai/essai.component";
+import { EssaisSsrComponent } from "../essais-ssr/essais-ssr.component";
+import { ChildSsrComponent } from '../child-ssr/child-ssr.component';
 
 
 @Component({
     selector: 'app-accueil',
-    imports: [ImportedModule],
+    imports: [ImportedModule,EssaiSsrComponent],
     templateUrl: './accueil.component.html',
     styleUrl: './accueil.component.scss'
 })
-export class AccueilComponent implements OnInit {
-  readonly gasoil_store = inject(GasoilStore);
-  readonly travaux_store = inject(TravauxStore);
-  readonly approgo_store = inject(ApproGasoilStore);
-  _aut_service = inject(AuthenService)
-  constructor() {
-    effect(() => {
-    }
-    )
-  }
-  ngOnInit() {
-
-  }
-  chartOptions1 = computed(() => {
-    var mydata = this.gasoil_store.historique_consogo()[0]
-    return {
-      title: {
-        text: "Historique consommation gasoil"
-      },
-      theme: "light2",
-      animationEnabled: true,
-      axisX: {
-        title: "Date",
-        gridThickness: 1,
-        tickLength: 10
-      },
-      axisY: {
-        title: "Gasoil(l)",
-        gridThickness: 1,
-        tickLength: 10,
-        includeZero: true
-
-      },
-      data: [{
-        type: "column", //change type to bar, line, area, pie, etc
-        indexLabel: "{y}", //Shows y value on all Data Points
-        indexLabelFontColor: "#5A5757",
-        dataPoints: mydata
-      }]
-    }
-  }
-  )
-  chartOptions2 = computed(() => {
-    var mydata = this.travaux_store.historique_appro();
-    return {
-      title: {
-        text: "Appro de latérite"
-      },
-      theme: "light2",
-      animationEnabled: true,
-
-      axisX: {
-        title: "Date",
-        gridThickness: 1,
-        tickLength: 10
-      },
-      axisY: {
-        title: "Volume latérite(m3)",
-        gridThickness: 1,
-        tickLength: 10,
-        includeZero: true
-
-      },
-      data: [{
-        type: "column", //change type to bar, line, area, pie, etc
-        indexLabel: "{y}", //Shows y value on all Data Points
-        indexLabelFontColor: "#5A5757",
-        dataPoints: mydata
-      }]
-    }
-  }
-  )
+export class AccueilComponent  {
+ 
 }

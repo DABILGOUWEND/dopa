@@ -25,14 +25,13 @@ import { ListeSstraitantsComponent } from './components/liste-sstraitants/liste-
 import { LignedevisComponent } from './components/lignedevis/lignedevis.component';
 import { MesConstatsComponent } from './components/mes-constats/mes-constats.component';
 import { MesAttachementsComponent } from './components/mes-attachements/mes-attachements.component';
+import { AccueilComponent } from './components/accueil/accueil.component';
+import { EssaiComponent } from './components/essai/essai.component';
+import { EssaisSsrComponent } from './components/essais-ssr/essais-ssr.component';
 
 export const routes: Routes = [
     {
-        path: "", redirectTo: "/home", pathMatch: "full"
-    },
-    {
-        path: 'home', component: HomeComponent, canActivate: [homeGuard]
-
+        path: "", redirectTo: "/accueil", pathMatch: "full"
     }
     ,
     {
@@ -148,5 +147,11 @@ export const routes: Routes = [
     {
         path:"telecharger",
         component:TelechargerComponent
+    }
+    
+    ,
+    {
+        path:"accueil",
+        component:AccueilComponent,canActivate:[homeGuard]
     }
 ];
