@@ -1,5 +1,92 @@
+@if(!affiche())
+{
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidnav>
+        <mat-nav-list (click)="sidnav.close()">
+            @if(_auth_service.userSignal()?.role=='admin' || _auth_service.userSignal()?.role=='user1')
+            {
+            <a mat-list-item routerLink="/home_gestion/materiel">
+                <mat-icon> local_shipping </mat-icon>
+                <span>Liste matériel</span>
+            </a>
+            -----------------------
+            <a mat-list-item routerLink="/home_gestion/personnel">
+                <mat-icon>person </mat-icon>
+                <span>Liste personnel </span>
+            </a>
+            -----------------------
+            }
+            @if(_auth_service.userSignal()?.role=='admin' || _auth_service.userSignal()?.role=='user2')
+            {
+            <a mat-list-item routerLink="/admin/liste_devis">
+                <mat-icon> local_shipping </mat-icon>
+                <span>Liste des devis</span>
+            </a>
+            -----------------------
+            <a mat-list-item routerLink="/home_travaux/liste_sstraitants">
+                <mat-icon>person </mat-icon>
+                <span>Liste des sous-traitants </span>
+            </a>
+            -----------------------
+            }
+
+            @if(_auth_service.userSignal()?.role=='admin')
+            { <a mat-list-item routerLink="/admin">
+                <mat-icon>build </mat-icon>
+                <span>Administration</span>
+            </a>
+            -----------------------
+            }
+
+            <a mat-list-item (click)="logout()">
+                <mat-icon>logout </mat-icon>
+                <span>Déconnecter</span>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="toolbar">
+        <mat-toolbar>
+            <button mat-icon-button (click)="sidnav.open()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <ng-container [ngTemplateOutlet]="toolbar()">
+            </ng-container>
+
+            <div class="spacer_register">
+
+            </div>
+
+            <div class="spacer_user">
+
+                <mat-form-field>
+                    <mat-label> Choisir projet</mat-label>
+                    <mat-select (selectionChange)="choix_projet($event)" [(ngModel)]="_auth_service.current_projet_id">
+                        @for(projet of projets();track projet.id){
+                        <mat-option [value]="projet.id">{{projet.intitule}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="spacer_logo">
+                <h1>{{ _auth_service.userSignal()?.username}}</h1>
+                <div class="logo">
+                    <h3>SOLUBTP </h3>
+                    <h4>By Wen</h4>
+                </div>
+            </div>
+        </mat-toolbar>
         <ng-container [ngTemplateOutlet]="content()">
         </ng-container>
+    </mat-sidenav-content>
 
+</mat-sidenav-container>
+}
+@else {
+<div [ngStyle]="{'display':'flex','justify-content':'center','padding-top.px':100}">
+    <div>
+        <mat-spinner [ngStyle]="{'margin-right.px':100}"></mat-spinner>
+    </div>
+    <h2>déconnexion....</h2>
+</div>
 
-
+}
