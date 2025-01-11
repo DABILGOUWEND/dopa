@@ -19,7 +19,7 @@ export class AdminComponent implements OnInit {
 
   _router = inject(Router);
   _loader_service = inject(DataLoaderService);
-
+  _auth_service = inject(AuthenService);
   ngOnInit() {
     this._loader_service.setPath();
     this._loader_service.loadDataInit();
@@ -27,6 +27,7 @@ export class AdminComponent implements OnInit {
     let obs2 = this._loader_service.Load_travaux_Data();
     concat(obs1, obs2).subscribe();
   }
+
   click_home() {
     this._router.navigateByUrl('/home');
   }
@@ -38,6 +39,14 @@ export class AdminComponent implements OnInit {
   }
   click_devis() {
     this._router.navigateByUrl('admin/devis');
+  }
+
+  click_constats() {
+    this._router.navigateByUrl('home_travaux/constats');
+  }
+
+  click_attachements() {
+    this._router.navigateByUrl('home_travaux/attachements');
   }
 
 }

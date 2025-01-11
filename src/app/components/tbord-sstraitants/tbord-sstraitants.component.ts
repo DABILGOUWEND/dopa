@@ -29,8 +29,8 @@ export class TbordSstraitantsComponent {
     phone: new FormControl(''),
     date_naissance: new FormControl(''),
     lieu_naissance: new FormControl(''),
-    nom_reponsable: new FormControl('', Validators.required),
-    prenom_reponsable: new FormControl('', Validators.required),
+    nom_responsable: new FormControl('', Validators.required),
+    prenom_responsable: new FormControl('', Validators.required),
     num_cnib: new FormControl('', Validators.required)
   })
 
@@ -93,14 +93,14 @@ export class TbordSstraitantsComponent {
         {
           label: 'NOM RESPONSABLE',
           type: 'text1',
-          control_name: 'nom_reponsable',
+          control_name: 'nom_responsable',
           end_control_name: '',
           tableau: []
         },
         {
           label: 'PRENOM RESPONSABLE',
           type: 'text1',
-          control_name: 'prenom_reponsable',
+          control_name: 'prenom_responsable',
           end_control_name: '',
           tableau: []
         },
@@ -158,9 +158,9 @@ export class TbordSstraitantsComponent {
     }
   )
   updateData(data: any) {
-    let value = data[0]
-    let current_row = data[1]
-    let is_update = data[2]
+    let value = data[0];
+    let current_row = data[1];
+    let is_update = data[2];
     let mydata: any = []
     if (is_update) {
       mydata = {

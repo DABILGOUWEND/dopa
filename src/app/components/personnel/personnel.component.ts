@@ -7,6 +7,7 @@ import { tab_personnel } from '../../models/modeles';
 import { ArgumentOutOfRangeError } from 'rxjs';
 import { TaskService } from '../../task.service';
 import { set } from 'firebase/database';
+import { EssaiSsrComponent } from '../essai-ssr/essai-ssr.component';
 
 @Component({
     selector: 'app-personnel',

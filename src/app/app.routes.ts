@@ -27,14 +27,15 @@ import { MesConstatsComponent } from './components/mes-constats/mes-constats.com
 import { MesAttachementsComponent } from './components/mes-attachements/mes-attachements.component';
 import { AccueilComponent } from './components/accueil/accueil.component';
 import { EssaiComponent } from './components/essai/essai.component';
+import { EssaiSsrComponent } from './components/essai-ssr/essai-ssr.component';
 
 export const routes: Routes = [
     {
-        path: "", redirectTo: "/home", pathMatch: "full"
+        path: "", redirectTo: "/essais", pathMatch: "full"
     }
     ,
     {
-        path: 'home', component: HomeComponent
+        path: 'home', component: HomeComponent,canActivate:[homeGuard]
     },
     {
         path: 'login', component: LoginComponent
@@ -153,7 +154,7 @@ export const routes: Routes = [
     
     ,
     {
-        path:"accueil",
-        component:AccueilComponent,canActivate:[homeGuard]
+        path:"essais",
+        component:EssaiSsrComponent
     }
 ];

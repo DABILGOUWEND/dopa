@@ -1,5 +1,3 @@
-@import 'styles/variables';
-
-@import 'styles/global_styles';
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+$materialize-fonts-path: '~materialize-angular/fonts';
+ 
+@import 'css/materialize';

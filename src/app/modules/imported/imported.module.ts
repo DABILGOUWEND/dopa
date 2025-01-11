@@ -36,6 +36,7 @@ import { QrCodeModule } from 'ng-qrcode';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
+
 const MATERIAL_COMPONENTS = [
   CommonModule,
   MatTabsModule,
@@ -77,6 +78,7 @@ const MATERIAL_COMPONENTS = [
   MatFormFieldModule,
   QrCodeModule,
   QRCodeModule,
+  
 ];
 
 
@@ -84,7 +86,7 @@ const MATERIAL_COMPONENTS = [
 @NgModule({
   declarations: [],
   imports: [
-    MATERIAL_COMPONENTS
+    MATERIAL_COMPONENTS,
   ],
   exports: [MATERIAL_COMPONENTS],
 })

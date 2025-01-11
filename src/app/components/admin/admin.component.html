@@ -10,16 +10,23 @@
         </button>
     </div>
     <div class="example-spacer3">
-        <button mat-fab extended type="button" (click)="click_tableau_bord()">
-            TABLEAU DE BORD
+        @if(_auth_service.userSignal()?.role=='admin' )
+        {
+            <button mat-fab extended type="button" (click)="click_devis()" >
+                DEVIS 
+            </button>
+        }
+       
+        <button mat-fab extended type="button" (click)="click_constats()" >
+            CONSTATS 
         </button>
-        <button mat-fab extended type="button" (click)="click_devis()">
-            DEVIS
+        <button mat-fab extended type="button"  (click)="click_attachements()">
+            ATTACHEMENTS
         </button>
     </div>
-   
 
 </ng-template>
+
 <ng-template #content>
     <router-outlet>
     </router-outlet>

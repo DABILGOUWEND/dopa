@@ -121,7 +121,6 @@ export class MesAttachementsComponent implements OnInit {
   is_dp_exist = computed(() => {
     return this._devis_store.donnees_currentDevis()?.decompte.find(x => x.numero == this.current_decompte()) != undefined
   })
-
   donnees_decompte = computed(() => {
     let current_devis = this._devis_store.donnees_currentDevis();
     if (!current_devis) return [];
@@ -134,7 +133,6 @@ export class MesAttachementsComponent implements OnInit {
       rembours_avance_prec = dp_precedent.map(x => x.rembours_avance).reduce((a, b) => a + b, 0);
       autres_ret_prec = dp_precedent.map(x => x.autre_retenue).reduce((a, b) => a + b, 0);
     }
-
     let retenue_gar_periode = this.totaux().montant_periode * 0.05;
     let rembours = this.totaux().montant_marche != 0 ? current_devis.avance * this.totaux().montant_periode / (this.totaux().montant_marche * 0.85) : 0;
     let rembours_avance_periode = 0;
@@ -156,7 +154,6 @@ export class MesAttachementsComponent implements OnInit {
     let montant_net_prec = (this.totaux().montant_prec - total_ret_prec);
     let montant_net_periode = (this.totaux().montant_periode - total_ret_period);
     let montant_net_cumul = (this.totaux().montant_cumul - total_ret_cum);
-
     let donnees = [];
     donnees.push(
       {
@@ -1452,7 +1449,7 @@ export class MesAttachementsComponent implements OnInit {
       }
       ]);
       data_imp.push([{
-        content: 'CHANTIER: VILLE NOUVELLE DE YENNENGA/ TRANCHE 03',
+        content: 'CHANTIER: VILLE NOUVELLE DE YENNENGA',
         styles: {
           fontStyle: "bold",
           halign: 'left',
@@ -1558,7 +1555,7 @@ export class MesAttachementsComponent implements OnInit {
       doc.line(150, yline - 5, 150, yline + 35);
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
-      let facture = "FACTURE N° 00" + this.current_decompte() + "/" + this.selected_entreprise().entreprise + "/TR03/2024"
+      let facture = "FACTURE N° 00" + this.current_decompte() + "/" + this.selected_entreprise().entreprise + "/VNY/2025"
       let textWidth = doc.getTextWidth(facture);
       var yline = yline + 35;
       doc.setLineWidth(1)

@@ -42,8 +42,8 @@ export class HomeTemplateComponent implements OnInit{
     this._auth_service.current_projet_id.set(data.value);
     this._loader_service.setPath();
     this._loader_service.loadDataInit();
-    this._loader_service.Load_gestion_Data();
-    this._loader_service.Load_travaux_Data();
+    this._loader_service.Load_gestion_Data().subscribe();
+    this._loader_service.Load_travaux_Data().subscribe();
 
   }
   logout() {

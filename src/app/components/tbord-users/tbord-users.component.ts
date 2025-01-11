@@ -150,6 +150,7 @@ export class TbordUsersComponent implements OnInit {
 
       }
       this._user_store.updateUser(mydata)
+      this._auth_service.userSignal.update((x: any) =>({...x, projet_id:valeur.projet_id}))
 
     }
     else {

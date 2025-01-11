@@ -36,6 +36,7 @@ import { PassThrough } from "node:stream";
 import { ComptesDateInitService } from "../services/comptes-date-init.service";
 import { error } from "node:console";
 import { setFulfilled, setPending, withRequestStatus } from "./request-status.feature";
+import { AuthenService } from "../authen.service";
 const initialGasoilState: gasoilStore = {
     conso_data: [],
     err: null,
@@ -394,6 +395,7 @@ export const ProjetStore = signalStore(
     ),
     withMethods((store, _task_service = inject(TaskService),
         _compte_data = inject(ComptesDateInitService),
+    _authservice=inject(AuthenService ),
         snackbar = inject(MatSnackBar)) =>
     (
         {
@@ -413,11 +415,11 @@ export const ProjetStore = signalStore(
                 switchMap((projet) => {
                     return _task_service.addProjets(projet).pipe(
                         tap(resp => {
-                            let obsrv: Observable<any>[] = [];
                             if (resp != "") {
                                 _compte_data.upload_data("unites", "unites", resp)
                                 _compte_data.upload_data("satut", "statuts_personnel", resp)
                                 _compte_data.upload_data("classes", "classes_engins", resp)
+                                
                             }
                         }
                         )
@@ -426,17 +428,12 @@ export const ProjetStore = signalStore(
             )),
             removeProjet: rxMethod<string>(pipe(
                 switchMap((id) => {
-                    return _task_service.deleteProjets(id).pipe(tap({
-                        next: () => {
-                            Showsnackerbaralert('élément supprimé', 'pass', snackbar)
-                        },
-                        error: () => {
-                            patchState(store, { message: 'echoué' });
-                            Showsnackerbaralert('échoué', 'fail', snackbar)
+                    return _task_service.deleteProjets(id).pipe(tap(
+                        () => {
+                            _compte_data.delete_data_fields(id).subscribe(console.log)
                         }
-                    }
-
-                    ))
+                    )
+                )
                 }))),
             updateProjet: rxMethod<Projet>(pipe(
                 switchMap((projet) => {

@@ -41,7 +41,13 @@ export class HomeTravauxComponent implements OnInit {
   click_constats() {
     this._router.navigateByUrl('home_travaux/constats');
   }
+  click_devis() {
+    this._router.navigateByUrl('admin/devis');
+  }
   click_attachements() {
     this._router.navigateByUrl('home_travaux/attachements');
+  }
+  click_admin() {
+    this._router.navigateByUrl('admin');
   }
 }

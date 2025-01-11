@@ -8,6 +8,11 @@
         <mat-spinner [ngStyle]="{'margin-left.%':50}"></mat-spinner>
     </div>
 }
+@loading {
+    <div [ngStyle]="{'padding-top.px':200,'text-align':'center'}">
+        <h1>patienter...</h1>
+    </div>
+}
     
 
 
@@ -20,12 +25,20 @@
         </button>
     </div>
     <div class="example-spacer3">
+        @if(_auth_service.userSignal()?.role=='admin' )
+        {
+            <button mat-fab extended type="button" (click)="click_devis()" >
+                DEVIS 
+            </button>
+        }
+       
         <button mat-fab extended type="button" (click)="click_constats()" >
             CONSTATS 
         </button>
         <button mat-fab extended type="button"  (click)="click_attachements()">
             ATTACHEMENTS
         </button>
+
     </div>
 
 </ng-template>

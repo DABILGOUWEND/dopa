@@ -14,10 +14,10 @@ import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
-    selector: 'app-lignedevis',
-    imports: [ImportedModule, UnitesPipe],
-    templateUrl: './lignedevis.component.html',
-    styleUrl: './lignedevis.component.scss'
+  selector: 'app-lignedevis',
+  imports: [ImportedModule, UnitesPipe],
+  templateUrl: './lignedevis.component.html',
+  styleUrl: './lignedevis.component.scss'
 })
 export class LignedevisComponent implements OnInit {
   //injections
@@ -146,9 +146,9 @@ export class LignedevisComponent implements OnInit {
 
   //methods
   ngOnInit() {
-this._devis_store.setCurrentDevisId('')
+    this._devis_store.setCurrentDevisId('')
   }
-  
+
   init_dat(data: element_devis[] | undefined) {
     if (data) {
       let children = data[0].children
@@ -190,7 +190,7 @@ this._devis_store.setCurrentDevisId('')
             unite: data.unite,
             quantite: data.quantite,
             constat: [],
-            decompte:[],
+            decompte: [],
             children: []
           }
           row.children.push(child);
@@ -371,6 +371,6 @@ this._devis_store.setCurrentDevisId('')
     let id = taches && taches.uniteid ? taches.uniteid : '';
     return taches && taches.designation ? taches.designation : '';
   }
-  
+
 }
 

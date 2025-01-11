@@ -1,5 +1,16 @@
-<app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content">
-</app-home-template>
+@defer (
+when !end_of_load()
+) {
+    <app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content">
+    </app-home-template>
+}
+@placeholder {
+    <div [ngStyle]="{'height': '100vh', 'display': 'flex', 'justify-content': 'center', 'align-items': 'center'}">
+        <mat-spinner></mat-spinner>
+    </div>
+
+
+}
 
 
 <ng-template #nav_liste>

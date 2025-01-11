@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 
-import { Observable, switchMap, concat, map } from 'rxjs';
+import { Observable, switchMap, concat, map, from, of } from 'rxjs';
 import { appro_gasoil } from '../models/modeles';
 import { TaskService } from '../task.service';
-import { collection, collectionData, Firestore } from '@angular/fire/firestore';
+import { collection, collectionData, deleteDoc, deleteField, doc, Firestore, updateDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,7 @@ export class ComptesDateInitService {
     const source_collection = collection(this.db, source_path)
     let rep = collectionData(source_collection, { idField: 'id' }) as Observable<any[]>
 
- rep.pipe(switchMap(data => {
-      console.log(data)
+    rep.pipe(switchMap(data => {
       data.forEach(
         (element: any) => {
           obsrv.push(
@@ -27,7 +26,28 @@ export class ComptesDateInitService {
         })
       return concat(obsrv)
     }
-    )).subscribe( )
+    )).subscribe()
+  }
+  delete_data_fields(compte_id: string): Observable<any> {
+    const messagesCollection= collection(this.db, "comptes/"+ compte_id );
+    let obsrv: Observable<any>[] = [];
+    let rep = collectionData(messagesCollection, { idField: 'id' }) as Observable<any[]>
+    return rep.pipe(switchMap(data => {
+      data.forEach(
+        (element: any) => {
+          obsrv.push(
+            of(element.id)
+          )
+        })
+      return concat(obsrv)
+    }
+    ))
+
+  }
+  delete_data(compte_id: string,id:string): Observable<any> {
+    const docRefs = doc(this.db, "comptes/"+ compte_id+'/'+id);
+    const promise = deleteDoc(docRefs)
+    return from(promise)
   }
 
 }
