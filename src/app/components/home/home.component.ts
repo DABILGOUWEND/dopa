@@ -16,7 +16,7 @@ import { set } from 'firebase/database';
 export const APP_Is = 'AIzaSyBsK6a4cgI9g94bdY050vnuI3BP3ejiiXE';
 @Component({
   selector: 'app-home',
-  imports: [ImportedModule],
+  imports: [ImportedModule,HomeTemplateComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
