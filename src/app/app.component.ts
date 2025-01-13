@@ -11,7 +11,6 @@ import { Auth } from '@angular/fire/auth';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  ready = false;
   _auth_service = inject(AuthenService);
   _auth = inject(Auth);
   constructor() {
