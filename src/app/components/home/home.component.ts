@@ -9,34 +9,42 @@ import { v4 as uuid } from 'uuid';
 import { TaskService } from '../../task.service';
 import { WenService } from '../../wen.service';
 import { EnginsComponent } from '../engins/engins.component';
-import { Auth, authState } from '@angular/fire/auth';
+import { Auth, authState, getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { HomeTemplateComponent } from '../../utilitaires/home-template/home-template.component';
 import { DataLoaderService } from '../../services/data-loader.service';
 import { set } from 'firebase/database';
+import { on } from 'node:events';
 export const APP_Is = 'AIzaSyBsK6a4cgI9g94bdY050vnuI3BP3ejiiXE';
 @Component({
   selector: 'app-home',
-  imports: [ImportedModule,HomeTemplateComponent],
+  imports: [ImportedModule, HomeTemplateComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
+  auth = getAuth();
+  router = inject(Router);
+  constructor() {
+
+    authState(this.auth).subscribe((resp: any) => {
+      if (resp != null) {
+        this.end_of_load.set(false);
+        this._loader_service.setPath();
+        this._loader_service.loadDataInit();
+      }
+    }
+    )
+    effect(() => {
+      console.log(this._auth_service.userSignal()?.uid)
+    }
+    )
+
+  }
   _auth_service = inject(AuthenService);
   _loader_service = inject(DataLoaderService);
   end_of_load = signal(true);
   ngOnInit() {
-    console.log('home');
-    this._loader_service.setPath();
-    this._loader_service.loadDataInit();
-    let obs1 = this._loader_service.Load_gestion_Data();
-    let obs2 = this._loader_service.Load_travaux_Data();
-    concat(obs1, obs2).subscribe({
-      complete: () => {
-        setTimeout(() => {
-          this.end_of_load.set(false);
-        }, 2000);
-      }
-    });
+
 
   }
 }

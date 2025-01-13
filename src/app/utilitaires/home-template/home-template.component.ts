@@ -11,6 +11,7 @@ import { DataLoaderService } from '../../services/data-loader.service';
 import { sign } from 'node:crypto';
 import { tap } from 'rxjs';
 import { set } from 'firebase/database';
+import { authState } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home-template',
@@ -21,7 +22,9 @@ import { set } from 'firebase/database';
 export class HomeTemplateComponent implements OnInit{
   _loader_service = inject(DataLoaderService);
   constructor() {
+    
     effect(() => {
+      console.log(this.projets());
     }
     )
   }
@@ -48,7 +51,18 @@ export class HomeTemplateComponent implements OnInit{
   }
   logout() {
     this.affiche.set(true);
-    this._auth_service.logout().subscribe()
+    authState(this._auth_service._auth).subscribe((resp: any) => {
+      if(resp!=null){
+        console.log(resp);
+        this._auth_service.logout().subscribe();
+      }else
+      {
+        this._auth_service.userSignal.set(undefined);
+        localStorage.removeItem('user');
+        this.router.navigateByUrl('/login');
+      }
+    });
+    
   }
 
   //computed properties

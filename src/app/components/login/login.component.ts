@@ -20,7 +20,7 @@ export class LoginComponent{
  subscribe=Subscriber;
   loginForm: FormGroup;
   loginForm_mob: FormGroup;
-  message = signal('connexion en cours....');
+  message = signal('tentative de connexion ....');
    
   constructor(
     private router: Router,
@@ -48,7 +48,7 @@ export class LoginComponent{
   }
 
   sumitlogin() {
-    this._auth_service.message.set('connexion en cours....');
+    this._auth_service.message.set('tentative de connexion....');
     this._auth_service.loadings.set(true);
     let value = this.loginForm.getRawValue();
     this._auth_service.ngUnsubscribe = this._auth_service.loginFirebase(value.email, value.password)
@@ -57,7 +57,6 @@ export class LoginComponent{
         next: () => {
          
           setTimeout(() => {
-            this.message.set('connexion reussie');
             this._auth_service.loadings.set(false);
             this.router.navigateByUrl('/home');
             

@@ -66,7 +66,6 @@ export class AuthenService {
     }))
   };
   loginFirebase(email: string, password: string): Observable<any> {
-
     this.loadings.set(true);
     const auth = getAuth();
     return from(this._auth.setPersistence(browserLocalPersistence).then(() => {
@@ -80,7 +79,7 @@ export class AuthenService {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          this.message.set('connexion échouée: ' + errorMessage);
+          this.message.set('connexion échouée: identifiant et/ou mot de passe invalide(s)');
         })
     }))
   }
@@ -93,10 +92,10 @@ export class AuthenService {
       })
 
     return from(promise).pipe(tap({
-      next: () => { 
-        setTimeout(() => {  
+      next: () => {
+        setTimeout(() => {
           localStorage.removeItem('user');
-          this.router.navigateByUrl('/login')
+          //this.router.navigateByUrl('/login')
           this.userSignal.set(undefined);
           this.current_projet_id.set(undefined);
         }
