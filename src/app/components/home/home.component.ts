@@ -14,7 +14,6 @@ import { HomeTemplateComponent } from '../../utilitaires/home-template/home-temp
 import { DataLoaderService } from '../../services/data-loader.service';
 import { set } from 'firebase/database';
 import { on } from 'node:events';
-export const APP_Is = 'AIzaSyBsK6a4cgI9g94bdY050vnuI3BP3ejiiXE';
 @Component({
   selector: 'app-home',
   imports: [ImportedModule, HomeTemplateComponent],
@@ -22,7 +21,7 @@ export const APP_Is = 'AIzaSyBsK6a4cgI9g94bdY050vnuI3BP3ejiiXE';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  auth = getAuth();
+
   router = inject(Router);
   constructor() {
 

@@ -51,7 +51,7 @@ export class LoginComponent{
     this._auth_service.message.set('tentative de connexion....');
     this._auth_service.loadings.set(true);
     let value = this.loginForm.getRawValue();
-    this._auth_service.ngUnsubscribe = this._auth_service.loginFirebase(value.email, value.password)
+  this._auth_service.loginFirebase(value.email, value.password)
     .subscribe(
       {
         next: () => {
