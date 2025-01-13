@@ -2,7 +2,8 @@
     <div class="row">
         <h3 class="light-blue-text center">Connexion</h3>
         <form (ngSubmit)="sumitlogin()" [formGroup]="loginForm">
-            <div class="col s4 offset-s4 z-depth-4 hide-on-med-and-down" [ngStyle]="{'padding-top.%':2,'background-color':'#3BA899'}">
+            <div class="col s4 offset-s4 z-depth-4 hide-on-med-and-down"
+                [ngStyle]="{'padding-top.%':2,'background-color':'#3BA899'}">
                 <div class="center-align">
                     <mat-form-field [ngStyle]="{'width.%':90}">
                         <mat-label>Email</mat-label>
@@ -18,14 +19,26 @@
                     </mat-form-field>
                 </div>
                 <div class="center-align">
-                    <button mat-flat-button type="submit" color="primary"
-                        [ngStyle]="{'width.%':60,'margin-bottom.%':5}" [disabled]="!loginForm.valid" >connecter</button>
+                    <button mat-flat-button type="submit" color="primary" [ngStyle]="{'width.%':60,'margin-bottom.%':5}"
+                        [disabled]="!loginForm.valid">connecter</button>
+                </div>
+                <div class="center-align">
+                    @if( _auth_service.loadings()
+                    ) {
+
+                    <h5>{{message()}} </h5>
+                    <mat-spinner [ngStyle]="{'margin-left.%':45}"></mat-spinner>
+
+                    }@else {
+                    <h5>{{_auth_service.message()}}</h5>
+
+                    }
                 </div>
             </div>
         </form>
-        <form (ngSubmit)="sumitlogin()" [formGroup]="loginForm">
+        <form (ngSubmit)="sumitlogin()" [formGroup]="loginForm_mob">
             <div class="col s12  z-depth-5 " data-target="nav-mobile" [ngStyle]="{'border-radius.rem':1.5}"
-                [ngStyle]="{'padding-top.%':2}">
+                [ngStyle]="{'padding-top.%':2}" id="nav-mobile" class="sidenav">
                 <div class="center-align">
                     <mat-form-field [ngStyle]="{'width.%':90}">
                         <mat-label>Email</mat-label>
@@ -41,9 +54,20 @@
                     </mat-form-field>
                 </div>
                 <div class="center-align">
-                    <button mat-flat-button type="submit" color="primary"
-                        [ngStyle]="{'width.%':60,'margin-bottom.%':5}" [disabled]="!loginForm.valid">connection</button>
+                    <button mat-flat-button type="submit" color="primary" [ngStyle]="{'width.%':60,'margin-bottom.%':5}"
+                        [disabled]="!loginForm_mob.valid">connection</button>
                 </div>
+                <div class="center-align">
+                    @defer ( when !_auth_service.loadings()
+                    ) {
+                    <h2>{{_auth_service.message()}} </h2>
+                    }@placeholder {
+                    <div class="center-align">
+                        <mat-spinner></mat-spinner>
+                    </div>
+                    }
+                </div>
+
             </div>
         </form>
     </div>

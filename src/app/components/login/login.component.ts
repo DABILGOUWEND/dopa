@@ -19,11 +19,11 @@ export class LoginComponent{
   _auth_service = inject(AuthenService);
  subscribe=Subscriber;
   loginForm: FormGroup;
-  message = signal('vous êtes déconnecté');
+  loginForm_mob: FormGroup;
+  message = signal('connexion en cours....');
    
   constructor(
     private router: Router,
-    private authservice: AuthenService,
     private _fb: FormBuilder
   ) {
     this.loginForm = this._fb.group(
@@ -31,38 +31,41 @@ export class LoginComponent{
         email: new FormControl('', Validators.required),
         password: new FormControl('', Validators.required),
       }
+    );
+    
+    this.loginForm_mob = this._fb.group(
+      {
+        email: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required),
+      }
     )
     effect(() => {
+      console.log(this._auth_service.userSignal()?.uid)
     })
   }
 
   ngOnInit() {
   }
-  setMessage() {
-    if (this.authservice.userSignal()?.uid!=="") {
-      this.message.set('vous êtes connecté.')
-    } else {
-      this.message.set('identifiant ou mot de passe incorrecte.')
-    }
-  }
+
   sumitlogin() {
-    this.message.set('tentative de connection en cours...');
+    this._auth_service.message.set('connexion en cours....');
+    this._auth_service.loadings.set(true);
     let value = this.loginForm.getRawValue();
-    this.authservice.ngUnsubscribe = this._auth_service.loginFirebase(value.email, value.password)
+    this._auth_service.ngUnsubscribe = this._auth_service.loginFirebase(value.email, value.password)
     .subscribe(
       {
         next: () => {
+         
           setTimeout(() => {
-           this.message.set('connexion réussie');
-            this.authservice.loadings.set(false);
+            this.message.set('connexion reussie');
+            this._auth_service.loadings.set(false);
             this.router.navigateByUrl('/home');
             
-          }, 2000);
+          }, 5000);
          
         },
         error: error => {
-          this.message.set('erreur lors de la connexion:' + error);
-          this.authservice.loadings.set(false);
+          this._auth_service.loadings.set(false);
         }
       }
     )

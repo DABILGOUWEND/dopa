@@ -42,6 +42,7 @@ export class AuthenService {
   affichage = signal<string | null | undefined>('')
   current_projet_id = signal<string | undefined>("1");
   list_projet = signal<string[]>([]);
+  message = signal('');
 
 
   register(email: string, password: string, role: string, nom: string, entreprise_id: string, projet_id: string[]): Observable<any> {
@@ -74,10 +75,12 @@ export class AuthenService {
           const user = userCredential.user;
           this.affichage.set(user.email);
           this.handleCreateUser(user);
+          this.message.set('vous êtes connecté');
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          this.message.set('connexion échouée: ' + errorMessage);
         })
     }))
   }
