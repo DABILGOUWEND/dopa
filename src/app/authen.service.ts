@@ -69,9 +69,12 @@ export class AuthenService {
     this.loadings.set(true);
     const auth = getAuth();
     return from(this._auth.setPersistence(browserLocalPersistence).then(() => {
+      
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
+         
           const user = userCredential.user;
+          console.log(user)
           this.affichage.set(user.email);
           this.handleCreateUser(user);
           this.message.set('vous êtes connecté');
