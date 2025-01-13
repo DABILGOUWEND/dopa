@@ -30,7 +30,8 @@
             }
 
             @if(_auth_service.userSignal()?.role=='admin')
-            { <a mat-list-item routerLink="/admin">
+            {
+            <a mat-list-item routerLink="/admin">
                 <mat-icon>build </mat-icon>
                 <span>Administration</span>
             </a>

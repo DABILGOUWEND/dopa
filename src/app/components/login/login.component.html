@@ -1,79 +1,51 @@
-
-    <div class="backbox">
-        <div class="loginMsg">
-            <div class="logo">
-                <h3>SOLUBTP</h3>
-                <h4>by Wen</h4>
+<div class="container" [ngStyle]="{'margin-top.%':10}">
+    <div class="row">
+        <h3 class="light-blue-text center">Connexion</h3>
+        <form (ngSubmit)="sumitlogin()" [formGroup]="loginForm">
+            <div class="col s4 offset-s4 z-depth-4 hide-on-med-and-down" [ngStyle]="{'padding-top.%':2,'background-color':'#3BA899'}">
+                <div class="center-align">
+                    <mat-form-field [ngStyle]="{'width.%':90}">
+                        <mat-label>Email</mat-label>
+                        <input [ngStyle]="{'text-align':'center'}" matInput type="text" placeholder="email"
+                            formControlName="email" />
+                    </mat-form-field>
+                </div>
+                <div class="center-align">
+                    <mat-form-field [ngStyle]="{'width.%':90}">
+                        <mat-label>mot de passe</mat-label>
+                        <input [ngStyle]="{'text-align':'center'}" matInput type="password" placeholder="password"
+                            formControlName="password" />
+                    </mat-form-field>
+                </div>
+                <div class="center-align">
+                    <button mat-flat-button type="submit" color="primary"
+                        [ngStyle]="{'width.%':60,'margin-bottom.%':5}" [disabled]="!loginForm.valid" >connecter</button>
+                </div>
             </div>
-            <div class="textcontent">
-                <p class="sstitle">Solutions Informatiques pour chantiers de BTP.</p>
+        </form>
+        <form (ngSubmit)="sumitlogin()" [formGroup]="loginForm">
+            <div class="col s12  z-depth-5 " data-target="nav-mobile" [ngStyle]="{'border-radius.rem':1.5}"
+                [ngStyle]="{'padding-top.%':2}">
+                <div class="center-align">
+                    <mat-form-field [ngStyle]="{'width.%':90}">
+                        <mat-label>Email</mat-label>
+                        <input [ngStyle]="{'text-align':'center'}" matInput type="text" placeholder="email"
+                            formControlName="email" />
+                    </mat-form-field>
+                </div>
+                <div class="center-align">
+                    <mat-form-field [ngStyle]="{'width.%':90}">
+                        <mat-label>mot de passe</mat-label>
+                        <input [ngStyle]="{'text-align':'center'}" matInput type="password" placeholder="password"
+                            formControlName="password" />
+                    </mat-form-field>
+                </div>
+                <div class="center-align">
+                    <button mat-flat-button type="submit" color="primary"
+                        [ngStyle]="{'width.%':60,'margin-bottom.%':5}" [disabled]="!loginForm.valid">connection</button>
+                </div>
             </div>
-        </div>
-        <div class="signupMsg visibility">
-            <div class="textcontent">
-                <p class="title">Have an account?</p>
-                <p>Log in to see all your collection.</p>
-                <button id="switch2">LOG IN</button>
-            </div>
-        </div>
-    </div>
-    <!-- backbox -->
-
-    <div class="frontbox">
-        <div class="login">
-            <h2>LOGIN</h2>
-            <form [formGroup]="loginForm" (ngSubmit)="sumitlogin()" class="login-form ">
-                <div class="inputbox">
-                    <mat-form-field>
-                        <input matInput placeholder="email" formControlName="email">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput type="password" placeholder="password" formControlName="password">
-                    </mat-form-field>
-                </div>
-                <button mat-flat-button extended [disabled]="!loginForm.valid">Connexion</button>
-            </form>
-        </div>
-        <div>
-            <p>
-                {{message()}}
-            </p>
-
-        </div>
-        <div class="spinner">
-            <mat-spinner *ngIf="_auth_service.loadings()"></mat-spinner>
-        </div>
-    </div>
-
-
-<!-- <div class="login-page">
-
-    <div class="login-form-container">
-        <form [formGroup]="loginForm" (ngSubmit)="sumitlogin()" class="login-form ">
-            <fieldset>
-                <legend>
-                    Connexion
-                </legend>
-                <div class="login-page__banner">
-                    <p><em>{{message()}}</em></p>
-                </div>
-                <div class="login_saisi">
-                    <mat-form-field>
-                        <input matInput formControlName="email" placeholder="email" type="email">
-                    </mat-form-field>
-                </div>
-                <div class="login_saisi">
-                    <mat-form-field>
-                        <input matInput formControlName="password" placeholder="mot de passe" type="password">
-                    </mat-form-field>
-                </div>
-                <div class="login-form__footer">
-                    <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">
-                        Connexion
-                    </button>
-                </div>
-            </fieldset>
-
         </form>
     </div>
-</div> -->
+
+</div>

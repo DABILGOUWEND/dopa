@@ -31,9 +31,14 @@ import { EssaiSsrComponent } from './components/essai-ssr/essai-ssr.component';
 
 export const routes: Routes = [
     {
-        path: "", redirectTo: "/essais", pathMatch: "full"
+        path: "", redirectTo: "/accueil", pathMatch: "full"
     }
     ,
+    
+    {
+        path:"accueil",
+        component:AccueilComponent
+    },
     {
         path: 'home', component: HomeComponent,canActivate:[homeGuard]
     },

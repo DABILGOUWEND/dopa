@@ -6503,7 +6503,7 @@ textarea.materialize-textarea + label:after, .select-wrapper + label:after {
   margin-left: 5px;
 }
 
-.input-field.inline input,
+.input-field.inline input,mat-form-field
 .input-field.inline .select-dropdown {
   margin-bottom: 1rem;
 }
@@ -9075,3 +9075,7 @@ input[type=range]::-ms-thumb {
     margin-top: 1.2rem;
   }
 }
+#login-page {
+  width: 500px;
+}
+

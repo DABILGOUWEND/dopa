@@ -9,10 +9,15 @@ import { DataLoaderService } from '../../services/data-loader.service';
 
 @Component({
     selector: 'app-accueil',
-    imports: [],
+    imports: [ImportedModule],
     templateUrl: './accueil.component.html',
     styleUrl: './accueil.component.scss'
 })
 export class AccueilComponent  {
+    email=signal("dabilgou10@gmail.com")
+    //methods
+    open(){
+        console.log("open")
+    }
  
 }

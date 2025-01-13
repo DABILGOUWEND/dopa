@@ -1,0 +1,124 @@
+<nav class="light-blue lighten-1" role="navigation">
+  <div class="nav-wrapper container">
+    <ul class="left" [ngStyle]="{'background-color':'gray','height.%':100}">
+      <h5 [ngStyle]="{'margin.rem':1,'font-weight':'bold'}"> SOLUBTP</h5>
+    </ul>
+    <ul class="right hide-on-med-and-down">
+      <li>Wend-lassida DABILGOU</li>
+    </ul>
+
+    <ul id="nav-mobile" class="sidenav">
+      <li><a href="#">Navbar Link</a></li>
+    </ul>
+    <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+  </div>
+</nav>
+
+<div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <br><br>
+    <h1 class="header center light-blue-text">SoluBTP</h1>
+    <div class="row center">
+      <h5 class="header col s12 light">Application web de gestion des chantiers de BTP</h5>
+    </div>
+
+    <br><br>
+
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="section">
+    <!--   Icon Section   -->
+    <div class="row">
+      <a routerLink="/home">
+        <div class="col s12 m3">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"> <mat-icon>settings</mat-icon>
+            </h2>
+  
+            <h5 class="center">Gestion du matériel</h5>
+  
+            <p class="light">Cette section vous offre des outils pour la gestion de votre parc: suivi des pannes,
+              consommation en gasoil des engins</p>
+          </div>
+        </div>
+      </a>
+  
+
+      <div class="col s12 m3">
+        <div class="icon-block">
+          <h2 class="center light-blue-text"><mat-icon>people</mat-icon></h2>
+          <h5 class="center">Gestion du personnel</h5>
+
+          <p class="light">Le pointage du personnel, les autorisations d'absences sont traités dans cette section</p>
+        </div>
+      </div>
+
+      <div class="col s12 m3">
+        <div class="icon-block">
+          <h2 class="center light-blue-text"><mat-icon>work</mat-icon></h2>
+          <h5 class="center">Facturation chantier</h5>
+
+          <p class="light">Création de budget exploitation, création de devis, établissement des décomptes de travaux de
+            l'entreprise et des prestaires</p>
+        </div>
+      </div>
+      <div class="col s12 m3">
+        <div class="icon-block">
+          <h2 class="center light-blue-text"><mat-icon>money</mat-icon></h2>
+          <h5 class="center">Comptabilité</h5>
+
+          <p class="light">Saisies comptables</p>
+        </div>
+      </div>
+      <div class="col s12 m3">
+        <div class="icon-block">
+          <h2 class="center light-blue-text"><mat-icon>shop</mat-icon></h2>
+          <h5 class="center">Matériaux</h5>
+
+          <p class="light">Gestion des stocks et commandes de matériaux</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <br><br>
+</div>
+
+<footer class="page-footer orange">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">Qui sommes nous?</h5>
+        <p class="grey-text text-lighten-4">Nous sommes une équipe d'Ingénieurs en BTP passionnés de nouvelles
+          technologies. Nous passons nos temps libres à devélopper des applis web axées dans le domaine du BTP.
+          Notre but est de mettre à votre disposition des outils modernes de gestion de vos chantiers de BTP. l'Appli
+          SoluBTP est developpée avec la technologie <a href="https://angular.dev/"> Angular</a>.
+        </p>
+
+
+      </div>
+
+      <div class="col l3 s12">
+        <h5 class="white-text">Contacts</h5>
+        <ul>
+          <li>Tél: 66 41 66 59 /78 34 66 45 / 73 07 57 74</li>
+          <li>{{'email:'+ ' ' +email()}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      Made by Wend-lassida DABILGOU
+    </div>
+  </div>
+</footer>
+
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
