@@ -26,25 +26,23 @@ export class HomeComponent implements OnInit {
   router = inject(Router);
   constructor() {
 
-    authState(this.auth).subscribe((resp: any) => {
-      if (resp != null) {
-        this.end_of_load.set(false);
-        this._loader_service.setPath();
-        this._loader_service.loadDataInit();
-      }
-    }
-    )
-    effect(() => {
-      console.log(this._auth_service.userSignal()?.uid)
-    }
-    )
-
   }
   _auth_service = inject(AuthenService);
   _loader_service = inject(DataLoaderService);
   end_of_load = signal(true);
   ngOnInit() {
-
+    console.log('home');
+    this._loader_service.setPath();
+    this._loader_service.loadDataInit();
+    let obs1 = this._loader_service.Load_gestion_Data();
+    let obs2 = this._loader_service.Load_travaux_Data();
+    concat(obs1, obs2).subscribe({
+      complete: () => {
+        setTimeout(() => {
+          this.end_of_load.set(false);
+        }, 2000);
+      }
+    });
 
   }
 }
