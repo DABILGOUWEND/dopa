@@ -16,7 +16,7 @@ import { Subject, Subscriber, Subscription } from 'rxjs';
 export class LoginComponent{
  
   _service = inject(WenService);
-  _auth_service = inject(AuthenService);
+_auth_service   = inject(AuthenService);
  subscribe=Subscriber;
   loginForm: FormGroup;
   loginForm_mob: FormGroup;
@@ -48,22 +48,22 @@ export class LoginComponent{
   }
 
   sumitlogin() {
-    this._auth_service.message.set('tentative de connexion....');
-    this._auth_service.loadings.set(true);
+    this.message.set('tentative de connection en cours...');
     let value = this.loginForm.getRawValue();
-  this._auth_service.loginFirebase(value.email, value.password)
+ this._auth_service.loginFirebase(value.email, value.password)
     .subscribe(
       {
         next: () => {
-         
           setTimeout(() => {
+           this.message.set('connexion réussie');
             this._auth_service.loadings.set(false);
             this.router.navigateByUrl('/home');
             
-          }, 5000);
+          }, 2000);
          
         },
         error: error => {
+          this.message.set('erreur lors de la connexion:' + error);
           this._auth_service.loadings.set(false);
         }
       }
