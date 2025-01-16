@@ -42,6 +42,7 @@ export class AuthenService {
   affichage = signal<string | null | undefined>('')
   current_projet_id = signal<string | undefined>("1");
   list_projet = signal<string[]>([]);
+  message=signal('déconnecté')
 
 
   register(email: string, password: string, role: string, nom: string, entreprise_id: string, projet_id: string[]): Observable<any> {
