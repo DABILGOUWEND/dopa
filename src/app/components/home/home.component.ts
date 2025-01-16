@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
   _loader_service = inject(DataLoaderService);
   end_of_load = signal(true);
   ngOnInit() {
-    console.log('home');
     this._loader_service.setPath();
     this._loader_service.loadDataInit();
     let obs1 = this._loader_service.Load_gestion_Data();
