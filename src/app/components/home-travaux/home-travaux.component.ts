@@ -9,7 +9,7 @@ import { sign } from 'crypto';
 
 @Component({
     selector: 'app-home-travaux',
-    imports: [RouterOutlet, ImportedModule, HomeTemplateComponent],
+    imports: [RouterOutlet, ImportedModule],
     templateUrl: './home-travaux.component.html',
     styleUrl: './home-travaux.component.scss'
 })

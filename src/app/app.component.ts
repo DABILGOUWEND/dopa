@@ -1,8 +1,9 @@
-import { Component, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnDestroy, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ImportedModule } from './modules/imported/imported.module';
 import { AuthenService } from './authen.service';
 import { Auth } from '@angular/fire/auth';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,9 @@ export class AppComponent implements OnInit {
   _auth = inject(Auth);
   constructor() {
     this._auth.onAuthStateChanged(
+
       (userCredential) => {
-        if (userCredential) {
+        if (userCredential != null) {
           this._auth_service.handleCreateUser(userCredential);
         }
       })

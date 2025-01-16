@@ -11,7 +11,7 @@ import { EssaiSsrComponent } from '../essai-ssr/essai-ssr.component';
 
 @Component({
     selector: 'app-personnel',
-    imports: [ImportedModule, PersoTemplateComponent],
+    imports: [ImportedModule],
     templateUrl: './personnel.component.html',
     styleUrl: './personnel.component.scss'
 })

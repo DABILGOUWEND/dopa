@@ -11,7 +11,7 @@ import { concat } from 'rxjs';
 
 @Component({
     selector: 'app-admin',
-    imports: [RouterOutlet, ImportedModule, HomeTemplateComponent],
+    imports: [RouterOutlet, ImportedModule],
     templateUrl: './admin.component.html',
     styleUrl: './admin.component.scss'
 })

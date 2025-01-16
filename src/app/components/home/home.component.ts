@@ -14,14 +14,15 @@ import { HomeTemplateComponent } from '../../utilitaires/home-template/home-temp
 import { DataLoaderService } from '../../services/data-loader.service';
 import { set } from 'firebase/database';
 import { on } from 'node:events';
+import { GasoilComponent } from '../gasoil/gasoil.component';
 @Component({
   selector: 'app-home',
-  imports: [ImportedModule, HomeTemplateComponent],
+  imports: [ImportedModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-
+  _auth = inject(Auth);
   router = inject(Router);
   constructor() {
 
@@ -29,8 +30,8 @@ export class HomeComponent implements OnInit {
   _auth_service = inject(AuthenService);
   _loader_service = inject(DataLoaderService);
   end_of_load = signal(true);
+  email = signal("dabilgou10@gmail.com")
   ngOnInit() {
-    console.log('home');
     this._loader_service.setPath();
     this._loader_service.loadDataInit();
     let obs1 = this._loader_service.Load_gestion_Data();
@@ -42,6 +43,10 @@ export class HomeComponent implements OnInit {
         }, 2000);
       }
     });
+
+
+
+
 
   }
 }

@@ -19,20 +19,19 @@ import { authState } from '@angular/fire/auth';
   templateUrl: './home-template.component.html',
   styleUrl: './home-template.component.scss'
 })
-export class HomeTemplateComponent implements OnInit{
+export class HomeTemplateComponent implements OnInit {
   _loader_service = inject(DataLoaderService);
   constructor() {
-    
+
     effect(() => {
-      console.log(this.projets());
     }
     )
   }
-  affiche=signal(false);
+  affiche = signal(false);
 
-  nav_liste = input.required<TemplateRef<any>>();
-  toolbar = input.required<TemplateRef<any>>();
+  nav_liste = input<TemplateRef<any>|null>(null );
   content = input.required<TemplateRef<any>>();
+  footer = input<TemplateRef<any>|null>(null );
   _auth_service = inject(AuthenService);
   _projet_store = inject(ProjetStore);
   router = inject(Router);
@@ -51,18 +50,16 @@ export class HomeTemplateComponent implements OnInit{
   }
   logout() {
     this.affiche.set(true);
-    authState(this._auth_service._auth).subscribe((resp: any) => {
-      if(resp!=null){
-        console.log(resp);
-        this._auth_service.logout().subscribe();
-      }else
-      {
-        this._auth_service.userSignal.set(undefined);
-        localStorage.removeItem('user');
-        this.router.navigateByUrl('/login');
+    this._auth_service.message.set('déconnexion en cours....');
+    this._auth_service.logout().subscribe({
+      next: () => {
+        setTimeout(() => {
+          this._auth_service.message.set('vous êtes déconnecté');
+          this.router.navigateByUrl('/login');
+        }, 2000);
       }
-    });
-    
+    })
+
   }
 
   //computed properties

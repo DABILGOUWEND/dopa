@@ -18,20 +18,18 @@
                             formControlName="password" />
                     </mat-form-field>
                 </div>
-                <div class="center-align">
+                <div class="center-align" >
                     <button mat-flat-button type="submit" color="primary" [ngStyle]="{'width.%':60,'margin-bottom.%':5}"
                         [disabled]="!loginForm.valid">connecter</button>
                 </div>
-                <div class="center-align">
+                <div class="center-align" [ngStyle]="{}">
                     @if( _auth_service.loadings()
                     ) {
-
-                    <h5>{{message()}} </h5>
-                    <mat-spinner [ngStyle]="{'margin-left.%':45}"></mat-spinner>
+                    <h5 [ngStyle]="{'font-size.rem':1}">{{_auth_service.message()}} </h5>
+                    <mat-spinner  diameter="50" [ngStyle]="{'margin-left.%':45}"></mat-spinner>
 
                     }@else {
-                    <h5>{{_auth_service.message()}}</h5>
-
+                    <h5 [ngStyle]="{'font-size.rem':1}">{{_auth_service.message()}}</h5>
                     }
                 </div>
             </div>

@@ -10,7 +10,7 @@ import { DataLoaderService } from '../../services/data-loader.service';
 
 @Component({
     selector: 'app-gestion',
-    imports: [ImportedModule, HomeTemplateComponent, RouterOutlet],
+    imports: [ImportedModule,  RouterOutlet],
     templateUrl: './gestion.component.html',
     styleUrl: './gestion.component.scss'
 })

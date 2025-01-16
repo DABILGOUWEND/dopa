@@ -1,8 +1,8 @@
 import { Inject, Injectable, PLATFORM_ID, computed, effect, inject, signal } from '@angular/core';
-import { Observable, Subscription, from, map, tap } from 'rxjs';
+import { Observable, Subscription, from, map, of, switchMap, tap } from 'rxjs';
 import { Users } from './models/modeles';
 import { Router } from '@angular/router';
-import { Auth, signInWithEmailAndPassword, signOut, user } from '@angular/fire/auth';
+import { Auth, authState, signInWithEmailAndPassword, signOut, user } from '@angular/fire/auth';
 import { collection, collectionData, deleteDoc, Firestore, setDoc } from '@angular/fire/firestore';
 import { WenService } from './wen.service';
 import { browserLocalPersistence, browserSessionPersistence, getAuth, setPersistence, signInWithCustomToken } from 'firebase/auth';
@@ -42,7 +42,7 @@ export class AuthenService {
   affichage = signal<string | null | undefined>('')
   current_projet_id = signal<string | undefined>("1");
   list_projet = signal<string[]>([]);
-  message = signal('');
+  message = signal('vous êtes déconnecté');
 
 
   register(email: string, password: string, role: string, nom: string, entreprise_id: string, projet_id: string[]): Observable<any> {
@@ -67,14 +67,14 @@ export class AuthenService {
   };
   loginFirebase(email: string, password: string): Observable<any> {
     this.loadings.set(true);
+    this.message.set('tentative de connection en cours...');
     const auth = getAuth();
     return from(this._auth.setPersistence(browserLocalPersistence).then(() => {
-      
+
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-         
+
           const user = userCredential.user;
-          console.log(user)
           this.affichage.set(user.email);
           this.handleCreateUser(user);
           this.message.set('vous êtes connecté');
@@ -87,27 +87,25 @@ export class AuthenService {
     }))
   }
   logout(): Observable<any> {
-    let promise = signOut(this._auth).then(() => {
-
-    })
-      .catch((error) => {
-        console.log('error', error)
-      })
-
-    return from(promise).pipe(tap({
-      next: () => {
-        setTimeout(() => {
-          localStorage.removeItem('user');
-          this.router.navigateByUrl('/login')
-          this.userSignal.set(undefined);
-          this.current_projet_id.set(undefined);
-        }
-          , 2000);
+    const userKey = Object.keys(window.localStorage)
+      .filter(it => it.startsWith('firebase:authUser'))[0];
+    const user = userKey ? JSON.parse(localStorage.getItem(userKey) || '{}') : undefined;
+    if (user) {
+      let promise = signOut(this._auth);
+      return from(promise).pipe(tap(() => {
+        this.userSignal.set(undefined);
+        localStorage.removeItem('user');
       }
-    }))
+      ))
+    }
+    else {
+      return of('').pipe(tap(() => {
+        this.userSignal.set(undefined);
+        localStorage.removeItem('user');
+      }
+      ))
+    }
   }
-
-
   autoLogin() {
     if (this.isBrowser) {
       let data = localStorage.getItem('user');

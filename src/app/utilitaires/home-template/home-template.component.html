@@ -1,6 +1,21 @@
-@if(!affiche()){
-<mat-sidenav-container class="center">
-    <mat-sidenav #sidnav>
+@if(!affiche())
+{
+
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container">
+        <a routerLink="/accueil" class="brand-logo">SOLUBTP</a>
+        <ng-container [ngTemplateOutlet]="nav_liste()">
+        </ng-container>
+    </div>
+    
+</nav>
+<ng-container [ngTemplateOutlet]="content()">
+</ng-container>
+<ng-container [ngTemplateOutlet]="footer()">
+</ng-container>
+<!-- 
+<mat-sidenav-container class="centainer">
+    <mat-sidenav #sidnav >
         <mat-nav-list (click)="sidnav.close()">
             @if(_auth_service.userSignal()?.role=='admin' || _auth_service.userSignal()?.role=='user1')
             {
@@ -46,42 +61,34 @@
     </mat-sidenav>
     <mat-sidenav-content class="toolbar">
         <mat-toolbar>
-            <button mat-icon-button (click)="sidnav.open()">
-                <mat-icon>menu</mat-icon>
-            </button>
-            <ng-container [ngTemplateOutlet]="toolbar()">
-            </ng-container>
+            <div class="row">
+                <div class="col s1 m1">
+                    <button mat-icon-button (click)="sidnav.open()">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                </div>
+                <div class="col s1 m1">
+                    <ng-container [ngTemplateOutlet]="toolbar()">
+                    </ng-container>
+                </div>
+                <div class="col s1 m1">
+                    <button mat-icon-button (click)="logout()">
+                        <mat-icon>logout</mat-icon>
+                    </button>
+                </div>
+                <div class="col s1 m1">
+                    <h1>{{ _auth_service.userSignal()?.username}}</h1>
 
-            <div class="spacer_register">
-
-            </div>
-
-            <div class="spacer_user">
-
-                <mat-form-field>
-                    <mat-label> Choisir projet</mat-label>
-                    <mat-select (selectionChange)="choix_projet($event)" [(ngModel)]="_auth_service.current_projet_id">
-                        @for(projet of projets();track projet.id){
-                        <mat-option [value]="projet.id">{{projet.intitule}}</mat-option>
-                        }
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="spacer_logo">
-                <h1>{{ _auth_service.userSignal()?.username}}</h1>
-                <div class="logo">
-                    <h3>SOLUBTP </h3>
-                    <h4>By Wen</h4>
                 </div>
             </div>
         </mat-toolbar>
         <ng-container [ngTemplateOutlet]="content()">
         </ng-container>
     </mat-sidenav-content>
-
-</mat-sidenav-container>
-}
-@else {
-<h1 [ngStyle]="{'text-align':'center','margin-top.%':5}">déconnexion....</h1>
-
+</mat-sidenav-container> -->
+}@else {
+<div [ngStyle]="{'display-content':'center'}">
+    <h5 [ngStyle]="{'text-align':'center'}">{{_auth_service.message()}}</h5>
+    <mat-spinner diameter="50" [ngStyle]="{'color':'red','margin-left.%':45}"></mat-spinner>
+</div>
 }

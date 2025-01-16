@@ -1,19 +1,4 @@
 <!-- Purpose: This is the main component for the home page of the application. It contains the toolbar and the content of the page. -->
-@defer(on timer(2s);hydrate when !end_of_load()){
-    <app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content">
-    </app-home-template>    
-}
-@placeholder {
-    <div [ngStyle]="{'padding-top.px':200}">
-        <mat-spinner [ngStyle]="{'margin-left.%':50}"></mat-spinner>
-    </div>
-}
-@loading {
-    <div [ngStyle]="{'padding-top.px':200,'text-align':'center'}">
-        <h1>patienter...</h1>
-    </div>
-}
-    
 
 
 <ng-template #nav_liste>
@@ -46,3 +31,4 @@
     <router-outlet>
     </router-outlet>
 </ng-template>
+
