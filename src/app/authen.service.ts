@@ -66,7 +66,7 @@ export class AuthenService {
     }))
   };
   loginFirebase(email: string, password: string): Observable<any> {
-
+  
     this.loadings.set(true);
     const auth = getAuth();
     return from(this._auth.setPersistence(browserLocalPersistence).then(() => {
