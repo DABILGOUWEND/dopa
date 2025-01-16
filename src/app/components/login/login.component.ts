@@ -1,12 +1,10 @@
 import { AfterViewInit, Component, effect, inject, OnDestroy, signal } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { EntrepriseStore, UserStore } from '../../store/appstore';
 import { AuthenService } from '../../authen.service';
 import { Router } from '@angular/router';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { WenService } from '../../wen.service';
-import { error } from 'console';
-import { Subject, Subscriber, Subscription } from 'rxjs';
+import { Subscriber, Subscription } from 'rxjs';
 @Component({
     selector: 'app-login',
     imports: [ImportedModule],
