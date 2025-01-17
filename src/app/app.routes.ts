@@ -30,11 +30,11 @@ import { EssaiComponent } from './components/essai/essai.component';
 
 export const routes: Routes = [
     {
-        path: "", redirectTo: "/home", pathMatch: "full"
+        path: "", redirectTo: "/accueil", pathMatch: "full"
     }
     ,
     {
-        path: 'home', component: HomeComponent,canActivate:[homeGuard]
+        path: 'home', component: HomeComponent
     },
     {
         path: 'login', component: LoginComponent
@@ -154,6 +154,6 @@ export const routes: Routes = [
     ,
     {
         path:"accueil",
-        component:AccueilComponent,canActivate:[homeGuard]
+        component:AccueilComponent
     }
 ];
