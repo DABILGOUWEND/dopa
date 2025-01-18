@@ -154,6 +154,6 @@ export const routes: Routes = [
     ,
     {
         path:"accueil",
-        component:AccueilComponent
+        component:AccueilComponent,canActivate:[homeGuard]
     }
 ];
