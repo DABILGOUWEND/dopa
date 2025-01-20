@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, computed, effect, inject, model, signal } from '@angular/core';
+import { Component, OnInit, ViewChild, computed, effect, inject, linkedSignal, model, signal } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { FormControl, Validators, NonNullableFormBuilder } from '@angular/forms';
 import { ClasseEnginsStore, CompteStore, EnginsStore, PersonnelStore, StatutStore } from '../../store/appstore';
@@ -9,10 +9,10 @@ import { TaskService } from '../../task.service';
 import { set } from 'firebase/database';
 
 @Component({
-    selector: 'app-personnel',
-    imports: [ImportedModule, PersoTemplateComponent],
-    templateUrl: './personnel.component.html',
-    styleUrl: './personnel.component.scss'
+  selector: 'app-personnel',
+  imports: [ImportedModule, PersoTemplateComponent],
+  templateUrl: './personnel.component.html',
+  styleUrl: './personnel.component.scss'
 })
 export class PersonnelComponent implements OnInit {
 
@@ -37,7 +37,7 @@ export class PersonnelComponent implements OnInit {
         this.table_update_form2.controls.heureSup.updateValueAndValidity();
       }
     })
-    effect(()=>{
+    effect(() => {
       console.log(this.personnel_store.isFulfilled())
     })
   }
@@ -193,6 +193,8 @@ export class PersonnelComponent implements OnInit {
       return donnees
     }
   );
+
+  clicker = linkedSignal(() => this.personnel_store.donnees_personnel().map(x => false))
   ngOnInit() {
     this.tab_expander.set(new Array(this.personnel_store.getDates()[1].length).fill(true))
   }
@@ -258,13 +260,15 @@ export class PersonnelComponent implements OnInit {
     this.is_update.set(false)
     this.table_update_form.reset();
   }
-  modifier(row: any) {
-    this.is_open.set(true)
+  modifier(row: any, ind: number) {
+    this.clicker.update(x => x.map((y, i) => i == ind ? true : false))
+    this.current_row.set(row)
+/*     this.is_open.set(true)
     this.is_update.set(true)
     this.current_row.set(row)
     this.table_update_form.patchValue(
       row
-    )
+    ) */
   }
   supprimer(arg0: any) {
 

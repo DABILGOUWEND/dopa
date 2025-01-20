@@ -1,6 +1,47 @@
-<div class="section">
-    <h2>
-        ldldldl
-    </h2>
+<div class="container">
+    <div class="backbox">
+        <div class="loginMsg">
+            <div class="logo">
+                <h3>SOLUBTP</h3>
+                <h4>by Wen</h4>
+            </div>
+            <div class="textcontent">
+                <p class="sstitle">Solutions Informatiques pour chantiers de BTP.</p>
+            </div>
+        </div>
+        <div class="signupMsg visibility">
+            <div class="textcontent">
+                <p class="title">Have an account?</p>
+                <p>Log in to see all your collection.</p>
+                <button id="switch2">LOG IN</button>
+            </div>
+        </div>
+    </div>
+    <!-- backbox -->
 
+    <div class="frontbox">
+        <div class="login">
+            <h2>LOGIN</h2>
+            <form [formGroup]="loginForm" (ngSubmit)="sumitlogin()" class="login-form ">
+                <div class="inputbox">
+                    <mat-form-field>
+                        <input matInput placeholder="email" formControlName="email">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput type="password" placeholder="password" formControlName="password">
+                    </mat-form-field>
+                </div>
+                <button mat-flat-button extended [disabled]="!loginForm.valid">Connexion</button>
+            </form>
+        </div>
+        <div>
+            <p>
+                {{message()}}
+            </p>
+
+        </div>
+        <div class="spinner">
+            <mat-spinner *ngIf="_auth_service.loadings()"></mat-spinner>
+        </div>
+    </div>
 </div>

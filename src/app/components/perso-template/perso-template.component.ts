@@ -1,25 +1,26 @@
-import { Component, computed, input, model, OnInit, output, signal, TemplateRef } from '@angular/core';
+import { Component, computed, input, linkedSignal, model, OnInit, output, signal, TemplateRef } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { FormSaisiComponent } from '../form-saisi/form-saisi.component';
 import { KeyValuePipe } from '@angular/common';
 import { FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableComponent } from '../table/table.component';
+import { link } from 'fs';
+import { tab_personnel } from '../../models/modeles';
 
 @Component({
-    selector: 'app-perso-template',
-    imports: [ImportedModule, FormSaisiComponent, TableComponent],
-    templateUrl: './perso-template.component.html',
-    styleUrl: './perso-template.component.scss'
+  selector: 'app-perso-template',
+  imports: [ImportedModule, FormSaisiComponent, TableComponent],
+  templateUrl: './perso-template.component.html',
+  styleUrl: './perso-template.component.scss'
 })
 export class PersoTemplateComponent implements OnInit {
   ngOnInit() {
     this.header_titles = Object.keys(this.displayedColumns());
   }
-  is_open =model<boolean>(false)
+  is_open = model<boolean>(false)
   is_open2 = input<boolean>(false)
   is_update = signal(false)
-  current_row=signal([])
 
   titre = input.required<TemplateRef<any>>();
   pointage = input.required<TemplateRef<any>>();
@@ -29,7 +30,8 @@ export class PersoTemplateComponent implements OnInit {
   dataSource = input<any>()
   className = input<string>()
   action_template = input.required<TemplateRef<any>>();
-
+  clicker = input.required<boolean[]>()
+  current_row=input.required<tab_personnel|undefined>()
 
   newItemEvent = output<any>()
   RechercheEvent = output<any>()
@@ -42,9 +44,8 @@ export class PersoTemplateComponent implements OnInit {
   donnees_table = computed(() => {
     return new MatTableDataSource<any>(this.dataSource())
   })
- 
+
   modifier(row: any, id: string) {
-    this.current_row.update(() => row)
     this.is_open.set(true)
     this.is_update.set(true)
     this.PatchEvent.emit(row)

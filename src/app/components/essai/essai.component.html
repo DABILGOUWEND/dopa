@@ -29,7 +29,7 @@
 
     </ng-container>
 
-    <table mat-table [dataSource]="donnees_table()" class="wen-table">
+    <table mat-table [dataSource]="donnees_table()" class="booktable">
         <ng-container *ngFor="let column of displayedColumns() |keyvalue " matColumnDef="{{column.key}}">
             @if(column.key=='actions')
             {

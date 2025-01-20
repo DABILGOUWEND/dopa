@@ -5,7 +5,8 @@
     [displayedColumns]="displayedColumns" [className]="'personnel'" (newItemEvent)="updateData($event)"
     (RemoveItemEvent)="deleteData($event)" (RechercheEvent)="recherche($event)" (AfficheToutEvent)="afficheTout()"
     [titre]="titre" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()" [action_template]="actiontemplate"
-    [is_open2]="is_open2()" [(is_open)]="is_open" [pointage]="pointages">
+    [is_open2]="is_open2()" [(is_open)]="is_open" [pointage]="pointages"   [clicker]="clicker()" 
+    [current_row]="current_row()">
 </app-perso-template>  
 }
 @placeholder {
@@ -20,11 +21,25 @@
         <h2> {{titre_tableau()}}</h2>
     </div>
 </ng-template>
-<ng-template #actiontemplate let-row="row" let-ind="ind">
-    <div [ngStyle]="{'display':'flex'}">
+<ng-template #actiontemplate let-row="row" let-ind="ind" let-clicker="clicker">
+    @if(!clicker[ind]){
+        <div [ngStyle]="{'display':'flex'}" class="hide-on-med-and-down">
+            <button mat-icon-button type="button" (click)="deleteData(row.id)"> <mat-icon> delete</mat-icon> </button>
+            <button mat-icon-button type="button" (click)="modifier(row,ind)"> <mat-icon> edit</mat-icon> </button>
+            <button mat-flat-button type="button" (click)="pointage(row)"> pointage </button>
+        </div>
+    
+    }@else {
+        <div [ngStyle]="{'display':'flex'}" class="hide-on-med-and-down">
+            <button mat-icon-button type="button" > <mat-icon> save</mat-icon> </button>
+            <button mat-icon-button type="button" (click)="clicker[ind]=!clicker[ind]"> <mat-icon> close</mat-icon> </button>
+        </div>
+
+    }
+    
+    <div class="hide-on-large-only" [ngStyle]="{'display':'flex','margin-left.px':60}">
         <button mat-icon-button type="button" (click)="deleteData(row.id)"> <mat-icon> delete</mat-icon> </button>
-        <button mat-icon-button type="button" (click)="modifier(row)"> <mat-icon> edit</mat-icon> </button>
-        <button mat-flat-button type="button" (click)="pointage(row)"> pointage </button>
+        <button mat-icon-button type="button" (click)="modifier(row,ind)"> <mat-icon> edit</mat-icon> </button>
     </div>
 
 </ng-template>
