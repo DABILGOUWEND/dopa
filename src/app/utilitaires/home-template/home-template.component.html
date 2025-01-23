@@ -1,6 +1,6 @@
-@if(!affiche())
+ @if(!affiche())
 {
-<mat-sidenav-container class="example-container">
+<mat-sidenav-container >
     <mat-sidenav #sidnav>
         <mat-nav-list (click)="sidnav.close()">
             @if(_auth_service.userSignal()?.role=='admin' || _auth_service.userSignal()?.role=='user1')
@@ -90,5 +90,4 @@
 </div>
 
 }
-
-
+ 
