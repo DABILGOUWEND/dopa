@@ -138,28 +138,27 @@
 <ng-template #entetebody>
     <ng-container [ngTemplateOutlet]="titre()">
     </ng-container>
-
-    <ng-content select="courbe">
-
-    </ng-content>
-    <div class="row" >
-        <div class="col s12 l6 center">
-            <div class="icon-block">
-                <mat-form-field>
-                    <mat-label>Rechercher</mat-label>
-                    <input matInput (keyup)="applyFilter($event)" #input placeholder="rechercher">
-                </mat-form-field>
-                <button mat-flat-button (click)="affichertout()" color="primary"> Afficher tout</button>
-            </div>  
-        </div>
-        <div class="col s12 l6 center" >
-            <button (click)="addElement()" mat-flat-button color="primary" matTooltip="Ajouter nouveau"
-                matTooltipPosition="left" aria-label="Ajouter nouveau">
-                <span class="material-icons">
-                    playlist_add
-                </span>
-                Nouveau
-            </button>
+    <div class="section" [ngStyle]="{}"> 
+        <div class="row">
+            <div class="col s12 l6 center">
+                <div class="icon-block" [ngStyle]="{'padding-bottom.rem':1,'border-bottom':'1px solid black'}">
+                    <mat-form-field>
+                        <mat-label>Rechercher</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" #input placeholder="rechercher">
+                    </mat-form-field>
+                    <button mat-flat-button (click)="affichertout()" color="primary"> Afficher tout</button>
+                </div>  
+            </div>
+            <div class="col s12 l6 center" [ngStyle]="{'padding-top.rem':1}">
+                <button (click)="addElement()" mat-flat-button color="primary" matTooltip="Ajouter nouveau"
+                    matTooltipPosition="left" aria-label="Ajouter nouveau">
+                    <span class="material-icons">
+                        playlist_add
+                    </span>
+                    Nouveau
+                </button>
+            </div>
         </div>
     </div>
+    
 </ng-template>

@@ -5,10 +5,8 @@ when personnel_store.isFulfilled()
     [displayedColumns]="displayedColumns" [className]="'personnel'" (newItemEvent)="updateData($event)"
     (RemoveItemEvent)="deleteData($event)" (RechercheEvent)="recherche($event)" (AfficheToutEvent)="afficheTout()"
     [titre]="titre" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()" [action_template]="actiontemplate"
-    (clear_event)="clear_fct()"
-    [is_open2]="is_open2()" [(is_open)]="is_open" [pointage]="pointages" [clicker]="clicker()"
-    [is_update]="is_update()" 
-    [(current_row)]="current_row">
+    (clear_event)="clear_fct()" [is_open2]="is_open2()" [(is_open)]="is_open" [pointage]="pointages"
+    [clicker]="clicker()" [is_update]="is_update()" [(current_row)]="current_row">
 </app-perso-template>
 }
 @placeholder {
@@ -19,8 +17,12 @@ when personnel_store.isFulfilled()
 
 
 <ng-template #titre>
-    <div class="content_head">
-        <h2> {{titre_tableau()}}</h2>
+    <div class="section" [ngStyle]="{'background-color':'#D6D3E2','padding.rem':1}">
+        <div class="row center">
+            <div class="col s12 l12">
+                <h2 > {{titre_tableau()}}</h2>
+            </div>
+        </div>
     </div>
 </ng-template>
 <ng-template #actiontemplate let-row="row" let-ind="ind" let-clicker="clicker">
