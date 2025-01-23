@@ -1,4 +1,4 @@
-import { Component, computed, input, linkedSignal, model, OnInit, output, signal, TemplateRef } from '@angular/core';
+import { Component, computed, effect, input, linkedSignal, model, OnInit, output, signal, TemplateRef } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { FormSaisiComponent } from '../form-saisi/form-saisi.component';
 import { KeyValuePipe } from '@angular/common';
@@ -7,20 +7,32 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TableComponent } from '../table/table.component';
 import { link } from 'fs';
 import { tab_personnel } from '../../models/modeles';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-perso-template',
   imports: [ImportedModule, FormSaisiComponent, TableComponent],
   templateUrl: './perso-template.component.html',
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed,void', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
   styleUrl: './perso-template.component.scss'
 })
 export class PersoTemplateComponent implements OnInit {
+  constructor() {
+    effect(() => {
+    })
+  }
   ngOnInit() {
     this.header_titles = Object.keys(this.displayedColumns());
   }
   is_open = model<boolean>(false)
   is_open2 = input<boolean>(false)
-  is_update = signal(false)
+  is_update = input<boolean>(false)
 
   titre = input.required<TemplateRef<any>>();
   pointage = input.required<TemplateRef<any>>();
@@ -31,7 +43,7 @@ export class PersoTemplateComponent implements OnInit {
   className = input<string>()
   action_template = input.required<TemplateRef<any>>();
   clicker = input.required<boolean[]>()
-  current_row=input.required<tab_personnel|undefined>()
+  current_row = model<tab_personnel>()
 
   newItemEvent = output<any>()
   RechercheEvent = output<any>()
@@ -40,14 +52,14 @@ export class PersoTemplateComponent implements OnInit {
   PatchEvent = output()
   addEvent = output()
   header_titles: string[] = []
+  clear_event = output()
 
   donnees_table = computed(() => {
     return new MatTableDataSource<any>(this.dataSource())
   })
-
+  columnsToDisplayWithExpand = this.header_titles
   modifier(row: any, id: string) {
     this.is_open.set(true)
-    this.is_update.set(true)
     this.PatchEvent.emit(row)
 
   }
@@ -60,10 +72,11 @@ export class PersoTemplateComponent implements OnInit {
   }
 
   annuler() {
-    this.is_open.set(false)
+    this.current_row.set(undefined)
+    if (!this.is_update())
+      this.clear_event.emit()
   }
   addElement() {
-    this.is_open.set(true)
     this.addEvent.emit()
   }
   applyFilter(event: Event) {
@@ -75,5 +88,7 @@ export class PersoTemplateComponent implements OnInit {
   }
   ChangeSelect(data: any, controle_name: any) {
     this.ChangeSelectEvent.emit([data, controle_name])
+  }
+  saisie(element: any) {
   }
 }

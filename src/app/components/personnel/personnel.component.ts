@@ -38,9 +38,11 @@ export class PersonnelComponent implements OnInit {
       }
     })
     effect(() => {
-      console.log(this.personnel_store.isFulfilled())
     })
   }
+  is_valid = computed(() => {
+    return (this.current_row()?.nom != '' && this.current_row()?.prenom != '' && this.current_row()?.fonction != '') || this.current_row() !== undefined
+  })
   is_open = signal(false)
   is_open2 = signal(false)
   tab_expander = signal<boolean[]>([]);
@@ -82,7 +84,7 @@ export class PersonnelComponent implements OnInit {
     'fonction': 'FONCTION',
     'num_phone1': 'NUMERO PHONE 1',
     'num_phone2': 'NUMERO PHONE 2',
-    'email': 'E -MAIL',
+    'email': 'E-MAIL',
     'statut': 'STATUT',
     'actions': ''
   }
@@ -165,7 +167,7 @@ export class PersonnelComponent implements OnInit {
       });
     return donnees
   })
-  dataSource = computed(
+  dataSource = linkedSignal(
     () => {
       let donnees: any = []
       this.personnel_store.donnees_personnel().forEach(element => {
@@ -199,10 +201,11 @@ export class PersonnelComponent implements OnInit {
     this.tab_expander.set(new Array(this.personnel_store.getDates()[1].length).fill(true))
   }
   updateData(data: any) {
-    let valeur = data[0]
-    let mydata: any = []
+    let valeur = data[0];
+    let mydata: any = [];
     if (this.is_update()) {
-      mydata = {
+      mydata = ({
+        ...this.current_row(),
         id: valeur.id,
         nom: valeur.nom,
         prenom: valeur.prenom,
@@ -211,14 +214,10 @@ export class PersonnelComponent implements OnInit {
         num_phone2: valeur.num_phone2,
         email: valeur.email,
         num_matricule: valeur.num_matricule,
-        dates: this.current_row()?.dates,
-        presence: this.current_row()?.presence,
-        heuresN: this.current_row()?.heuresN,
-        heureSup: this.current_row()?.heureSup,
         statut_id: valeur.statut_id
       }
+      )
       this.personnel_store.updatePersonnel(mydata)
-
     }
     else {
       mydata = {
@@ -235,11 +234,10 @@ export class PersonnelComponent implements OnInit {
         dates: [],
         heuresN: [],
         heureSup: []
-
       }
       this.personnel_store.addPersonnel(mydata)
     }
-    this.is_open.set(false)
+    this.current_row.set(undefined)
   }
   deleteData(id: any) {
     if (confirm('voulez-vous supprimer cet élement?'))
@@ -257,21 +255,36 @@ export class PersonnelComponent implements OnInit {
     )
   }
   addEventFct() {
-    this.is_update.set(false)
+    this.is_update.set(false);
+    let newdata: tab_personnel = {
+      id: '',
+      nom: '',
+      prenom: '',
+      fonction: '',
+      num_phone1: '',
+      num_phone2: '',
+      email: '',
+      num_matricule: '',
+      statut_id: '',
+      presence: [],
+      dates: [],
+      heuresN: [],
+      heureSup: []
+
+
+    }
+    this.dataSource.update((data: any) => [newdata, ...data])
+    this.current_row.set(newdata)
     this.table_update_form.reset();
   }
   modifier(row: any, ind: number) {
-    this.clicker.update(x => x.map((y, i) => i == ind ? true : false))
-    this.current_row.set(row)
-/*     this.is_open.set(true)
-    this.is_update.set(true)
-    this.current_row.set(row)
+    this.current_row.set(row);
+    this.is_update.set(true);
     this.table_update_form.patchValue(
       row
-    ) */
+    );
   }
   supprimer(arg0: any) {
-
   }
   pointage(row: tab_personnel) {
     this.current_row.set(row)
@@ -284,7 +297,6 @@ export class PersonnelComponent implements OnInit {
     this.tab_expander.update((tab) => tab.map((x, i) => i == index ? !rep : x))
   }
   afficher(arg0: any) {
-
     this.date_pointage.set(arg0);
     this.personnel_store.filtrebyDate(arg0);
     this.afficher2()
@@ -319,7 +331,6 @@ export class PersonnelComponent implements OnInit {
     this.heurs_w.set(0);
     this.heurs_sup.set(0);
     this.date_pointage.set('');
-
   }
   savepointage() {
     if (this.table_update_form2.valid) {
@@ -372,5 +383,14 @@ export class PersonnelComponent implements OnInit {
     }
     this.afficher2();
 
+  }
+  save() {
+  }
+  annuler() {
+    this.current_row.set(undefined);
+  }
+
+  clear_fct() {
+    this.dataSource.update((data: any) => data.filter((x: any) => x.id != ""))
   }
 }

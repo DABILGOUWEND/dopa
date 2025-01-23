@@ -1,18 +1,20 @@
 @defer (
-    when personnel_store.isFulfilled()
+when personnel_store.isFulfilled()
 ) {
-    <app-perso-template [table]="table()" [table_update_form]="table_update_form" [dataSource]="dataSource()"
+<app-perso-template [table]="table()" [table_update_form]="table_update_form" [dataSource]="dataSource()"
     [displayedColumns]="displayedColumns" [className]="'personnel'" (newItemEvent)="updateData($event)"
     (RemoveItemEvent)="deleteData($event)" (RechercheEvent)="recherche($event)" (AfficheToutEvent)="afficheTout()"
     [titre]="titre" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()" [action_template]="actiontemplate"
-    [is_open2]="is_open2()" [(is_open)]="is_open" [pointage]="pointages"   [clicker]="clicker()" 
-    [current_row]="current_row()">
-</app-perso-template>  
+    (clear_event)="clear_fct()"
+    [is_open2]="is_open2()" [(is_open)]="is_open" [pointage]="pointages" [clicker]="clicker()"
+    [is_update]="is_update()" 
+    [(current_row)]="current_row">
+</app-perso-template>
 }
 @placeholder {
-    <div [ngStyle]="{'padding-top.px':200,'text-align':'center'}">
-      <h2>téléchargement des données.....</h2>
-    </div>
+<div [ngStyle]="{'padding-top.px':200,'text-align':'center'}">
+    <h2>téléchargement des données.....</h2>
+</div>
 }
 
 
@@ -22,26 +24,20 @@
     </div>
 </ng-template>
 <ng-template #actiontemplate let-row="row" let-ind="ind" let-clicker="clicker">
-    @if(!clicker[ind]){
-        <div [ngStyle]="{'display':'flex'}" class="hide-on-med-and-down">
-            <button mat-icon-button type="button" (click)="deleteData(row.id)"> <mat-icon> delete</mat-icon> </button>
-            <button mat-icon-button type="button" (click)="modifier(row,ind)"> <mat-icon> edit</mat-icon> </button>
-            <button mat-flat-button type="button" (click)="pointage(row)"> pointage </button>
-        </div>
-    
-    }@else {
-        <div [ngStyle]="{'display':'flex'}" class="hide-on-med-and-down">
-            <button mat-icon-button type="button" > <mat-icon> save</mat-icon> </button>
-            <button mat-icon-button type="button" (click)="clicker[ind]=!clicker[ind]"> <mat-icon> close</mat-icon> </button>
-        </div>
-
-    }
-    
-    <div class="hide-on-large-only" [ngStyle]="{'display':'flex','margin-left.px':60}">
+    @if(row!=current_row()){
+    <div [ngStyle]="{'display':'flex'}">
         <button mat-icon-button type="button" (click)="deleteData(row.id)"> <mat-icon> delete</mat-icon> </button>
         <button mat-icon-button type="button" (click)="modifier(row,ind)"> <mat-icon> edit</mat-icon> </button>
+        <button mat-flat-button type="button" (click)="pointage(row)" class="hide-on-med-and-down"> pointage </button>
     </div>
 
+    }@else {
+    <div [ngStyle]="{'display':'flex'}">
+        <button mat-icon-button type="button" (click)="save()" [disabled]="!is_valid()"> <mat-icon> save</mat-icon>
+        </button>
+        <button mat-flat-button type="button" (click)="annuler()" color="warn"> annuler </button>
+    </div>
+    }
 </ng-template>
 <ng-template #pointages>
     <div [ngStyle]="{'display':'block','padding.px':20}">
@@ -108,35 +104,36 @@
 
                 <mat-card [ngStyle]="{'margin-top.px':20}">
                     <mat-card-content>
-                        @if ( enregistrement()) {  
-                            <div [ngStyle]="{'padding-top.px':200}">
-                                <mat-spinner [ngStyle]="{'margin-left.%':50}"></mat-spinner>
-                            </div>
+                        @if ( enregistrement()) {
+                        <div [ngStyle]="{'padding-top.px':200}">
+                            <mat-spinner [ngStyle]="{'margin-left.%':50}"></mat-spinner>
+                        </div>
                         }
                         @else {
-                            <form [formGroup]="table_update_form2" (ngSubmit)="savepointage()">
-                                <section>
-                                  <label> Présence:</label>
-                                  <mat-radio-group  formControlName="presence">
-                                      <mat-radio-button class="example-margin" [value]="true">Présent</mat-radio-button>
-                                      <mat-radio-button class="example-margin" [value]="false">Absent</mat-radio-button>
-                                  </mat-radio-group>
-                                </section>
-                                     
-                                  <mat-form-field>
-                                      <mat-label>Heures travaillées</mat-label>
-                                      <input matInput type="number" formControlName="heuresN"  >
-                                  </mat-form-field>
-      
-                                  <mat-form-field>
-                                      <mat-label>Heures supplémentaires</mat-label>
-                                      <input matInput type="number" formControlName="heureSup">
-                                  </mat-form-field>
-                                  <button mat-flat-button type="submit" (click)="savepointage()" [disabled]="!table_update_form2.valid">Enregistrer</button>
-                              </form>
-                          
+                        <form [formGroup]="table_update_form2" (ngSubmit)="savepointage()">
+                            <section>
+                                <label> Présence:</label>
+                                <mat-radio-group formControlName="presence">
+                                    <mat-radio-button class="example-margin" [value]="true">Présent</mat-radio-button>
+                                    <mat-radio-button class="example-margin" [value]="false">Absent</mat-radio-button>
+                                </mat-radio-group>
+                            </section>
+
+                            <mat-form-field>
+                                <mat-label>Heures travaillées</mat-label>
+                                <input matInput type="number" formControlName="heuresN">
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-label>Heures supplémentaires</mat-label>
+                                <input matInput type="number" formControlName="heureSup">
+                            </mat-form-field>
+                            <button mat-flat-button type="submit" (click)="savepointage()"
+                                [disabled]="!table_update_form2.valid">Enregistrer</button>
+                        </form>
+
                         }
-                      
+
                     </mat-card-content>
                 </mat-card>
 
