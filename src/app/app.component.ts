@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     onAuthStateChanged(this._auth, (userCredential) => {
         console.log(userCredential);
         if (userCredential) {
-          //this._auth_service.handleCreateUser(userCredential);
+          this._auth_service.handleCreateUser(userCredential);
         }
       })
   }
