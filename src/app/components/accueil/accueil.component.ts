@@ -22,17 +22,18 @@ import { tab_personnel } from '../../models/modeles';
     styleUrl: './accueil.component.scss'
 })
 export class AccueilComponent implements OnInit {
-
+    _autservice=inject(AuthenService)
+    router = inject(Router);
     clicker = linkedSignal(() => this._personnel_store.donnees_personnel().map(x => false))
     donnees_table = computed(() => {
         return new MatTableDataSource<any>(this._personnel_store.donnees_personnel())
     })
-    selected_row = signal<tab_personnel|undefined>(undefined)
+    selected_row = signal<tab_personnel | undefined>(undefined)
     selected_nom = linkedSignal(() => this.selected_row()?.nom)
     selected_prenom = linkedSignal(() => this.selected_row()?.prenom)
     selected_fonction = linkedSignal(() => this.selected_row()?.fonction)
     selected_num_phone1 = linkedSignal(() => this.selected_row()?.num_phone1)
-    
+
     displayedColumns = ['nom', 'prenom', 'fonction', 'num_phone1', 'actions']
     table_update_form: FormGroup
     constructor(
@@ -47,11 +48,10 @@ export class AccueilComponent implements OnInit {
         )
 
         effect(() => {
-            console.log(this._personnel_store.donnees_personnel())
+            console.log(this._autservice.userSignal())
         })
     }
     ngOnInit(): void {
-        this._personnel_store.loadPersonnel()
     }
 
     _personnel_store = inject(PersonnelStore);
@@ -81,4 +81,20 @@ export class AccueilComponent implements OnInit {
     update(row: any, ind: number) {
         console.log(row)
     }
+
+    logout() {
+        this._autservice.message.set('déconnexion en cours....');
+        this._autservice.logout().subscribe({
+          next: () => {
+            setTimeout(() => {
+              this._autservice.message.set('vous êtes déconnecté');
+              this.router.navigateByUrl('/accueil');
+            }, 2000);
+          },
+          complete: () => {
+            console.log(this._autservice.userSignal());
+          }
+        })
+    
+      }
 }

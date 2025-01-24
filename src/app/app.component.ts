@@ -2,7 +2,8 @@ import { Component, effect, inject, OnDestroy, OnInit, signal } from '@angular/c
 import { RouterOutlet } from '@angular/router';
 import { ImportedModule } from './modules/imported/imported.module';
 import { AuthenService } from './authen.service';
-import { Auth } from '@angular/fire/auth';
+import { Auth, authState, getAuth, onAuthStateChanged } from '@angular/fire/auth';
+import { get } from 'node:http';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,12 @@ import { Auth } from '@angular/fire/auth';
 export class AppComponent implements OnInit {
   ready = false;
   _auth_service = inject(AuthenService);
-  _auth = inject(Auth);
+  _auth = getAuth();
   constructor() {
-    this._auth.onAuthStateChanged(
-      (userCredential) => {
+    onAuthStateChanged(this._auth, (userCredential) => {
+        console.log(userCredential);
         if (userCredential) {
-          this._auth_service.handleCreateUser(userCredential);
+          //this._auth_service.handleCreateUser(userCredential);
         }
       })
   }

@@ -69,7 +69,7 @@ export class AuthenService {
   
     this.loadings.set(true);
     const auth = getAuth();
-    return from(this._auth.setPersistence(browserLocalPersistence).then(() => {
+    return from(this._auth.setPersistence(browserSessionPersistence).then(() => {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;

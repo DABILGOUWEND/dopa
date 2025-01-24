@@ -1,62 +1,120 @@
-<table mat-table [dataSource]="donnees_table()" class="booktable">
-  <ng-container matColumnDef="nom">
-    <th mat-header-cell *matHeaderCellDef> NOM </th>
+<nav>
+  <div class="nav-wrapper">
+    <div class="brand-logo gauche">
+      <h2>
+        SOLUBTP
+      </h2>
+    </div>
+    <div class="brand-logo right hide-on-med-and-down">
+      @if(_autservice.userSignal()){
+      <h2>
+        {{_autservice.userSignal()?.username}}
+      </h2>
+      }@else{
+      <ul>
+        <li>
+          <a routerLink="/login" title="connecter" class="btn waves-light">
+           connecter
+          </a>
+        </li>
+      </ul>
 
-    <td mat-cell *matCellDef="let element;index as ind">
-      @if(!clicker()[ind]){
-      {{element.nom}}
-      } @else {
-      <input type="text" [(ngModel)]="selected_nom">
       }
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="prenom">
-    <th mat-header-cell *matHeaderCellDef> PRENOM </th>
-    <td mat-cell *matCellDef="let element;index as ind">
-      @if(!clicker()[ind]){
-      {{element.prenom}}
-      } @else {
-      <input type="text" [(ngModel)]="selected_prenom">
-      }
-    </td>
-  </ng-container>
 
-  <ng-container matColumnDef="fonction">
-    <th mat-header-cell *matHeaderCellDef> FONCTION</th>
-    <td mat-cell *matCellDef="let element;index as ind">
-      @if(!clicker()[ind]){
-      {{element.fonction}}
-      } @else {
-      <input type="text" [(ngModel)]="selected_fonction">
+    </div>
+    <div class="brand-logo right_ext hide-on-med-and-down">
+      @if(_autservice.userSignal()){
+        <ul>
+          <li>
+            <a (click)="logout()" title="déconnecter">
+              <mat-icon>logout</mat-icon>
+            </a>
+          </li>
+        </ul>
       }
-    </td>
-  </ng-container>
+     
+    </div>
+  </div>
+</nav>
 
-  <ng-container matColumnDef="num_phone1">
-    <th mat-header-cell *matHeaderCellDef> N° TELEPHONE </th>
-    <td mat-cell *matCellDef="let element;index as ind">
-      @if(!clicker()[ind]){
-      {{element.num_phone1}}
-      } @else {
-      <input type="text" [(ngModel)]="selected_num_phone1">
-      }
-    </td>
-  </ng-container>
+<div class="container">
+  <div class="row center">
+    <a routerLink="/home_gestion">
+      <div class="col s12 m6 l4">
+        <div class="card">
+          <div class="card-title">
+            GESTION DES STOCKS ET COMMANDES
+          </div>
+          <div class="card-content">
+            <p>Vous pouvez gérer vos chantiers</p>
+          </div>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> </th>
-    <td mat-cell *matCellDef="let element;index as ind">
-      @if(!clicker()[ind]){
-      <button mat-icon-button (click)="edit(element,ind)"> <mat-icon> edit</mat-icon> </button>
-      <button mat-icon-button (click)="delete(element.id)"> <mat-icon> delete</mat-icon> </button>
-      }@else {
-      <button mat-icon-button (click)="update(element,ind)" title="enregistrer"> <mat-icon> save</mat-icon> </button>
-      <button mat-icon-button (click)="clicker()[ind]=!clicker()[ind]" title="quitter"> <mat-icon> close</mat-icon>
-      </button>
-      }
-    </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;let index = index"
-    [ngStyle]="{'background-color':clicker()[index]==true?'#DCDCDC':''}"></tr>
-</table>
+        </div>
+      </div>
+    </a>
+
+
+    <a routerLink="/home_gestion">
+      <div class="col s12 m6 l4">
+        <div class="card">
+          <div class="card-title ">
+            GESTION MATERIELS ET ENGINS
+          </div>
+          <div class="card-content">
+            <p>Vous pouvez gérer vos chantiers</p>
+          </div>
+
+        </div>
+      </div>
+    </a>
+
+
+    <a routerLink="/home_gestion">
+      <div class="col s12 m6 l4">
+        <div class="card">
+          <div class="card-title ">
+            DEVIS ET BUGDETS TRAVAUX
+          </div>
+          <div class="card-content">
+            <p>Vous pouvez gérer vos chantiers</p>
+          </div>
+
+        </div>
+      </div>
+    </a>
+
+    <a routerLink="/home_gestion">
+      <div class="col s12 m6 l4">
+        <div class="card">
+          <div class="card-title ">
+            FACTURATION CLIENTS
+          </div>
+          <div class="card-image">
+
+          </div>
+          <div class="card-content">
+            <p>Vous pouvez gérer vos chantiers</p>
+          </div>
+
+        </div>
+      </div>
+    </a>
+
+    <a routerLink="/home_gestion">
+      <div class="col s12 m6 l4">
+        <div class="card">
+          <div class="card-title ">
+            FACTURATION PRESTATAIRES
+          </div>
+          <div class="card-image">
+
+          </div>
+          <div class="card-content">
+            <p>Vous pouvez gérer vos chantiers</p>
+          </div>
+
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

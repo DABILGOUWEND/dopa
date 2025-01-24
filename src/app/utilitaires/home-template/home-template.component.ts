@@ -14,7 +14,7 @@ import { set } from 'firebase/database';
 
 @Component({
   selector: 'app-home-template',
-  imports: [NgTemplateOutlet, ImportedModule],
+  imports: [ ImportedModule],
   templateUrl: './home-template.component.html',
   styleUrl: './home-template.component.scss'
 })
