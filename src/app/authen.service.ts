@@ -83,24 +83,24 @@ export class AuthenService {
     }))
   }
   logout(): Observable<any> {
-    const userKey = Object.keys(window.localStorage)
-      .filter(it => it.startsWith('firebase:authUser'))[0];
-    const user = userKey ? JSON.parse(localStorage.getItem(userKey) || '{}') : undefined;
-    if (user) {
-      let promise = signOut(this._auth);
-      return from(promise).pipe(tap(() => {
-        this.userSignal.set(undefined);
-        localStorage.removeItem('user');
+    let promise = signOut(this._auth).then(() => {
+
+    })
+      .catch((error) => {
+        console.log('error', error)
+      })
+
+    return from(promise).pipe(tap({
+      next: () => { 
+        setTimeout(() => {  
+          localStorage.removeItem('user');
+          this.router.navigateByUrl('/login')
+          this.userSignal.set(undefined);
+          this.current_projet_id.set(undefined);
+        }
+          , 2000);
       }
-      ))
-    }
-    else {
-      return of('').pipe(tap(() => {
-        this.userSignal.set(undefined);
-        localStorage.removeItem('user');
-      }
-      ))
-    }
+    }))
   }
 
   autoLogin() {
