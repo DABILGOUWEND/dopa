@@ -83,18 +83,7 @@ export class AccueilComponent implements OnInit {
     }
 
     logout() {
-        this._autservice.message.set('déconnexion en cours....');
-        this._autservice.logout().subscribe({
-          next: () => {
-            setTimeout(() => {
-              this._autservice.message.set('vous êtes déconnecté');
-              this.router.navigateByUrl('/accueil');
-            }, 2000);
-          },
-          complete: () => {
-            console.log(this._autservice.userSignal());
-          }
-        })
+        this._autservice.logout().subscribe()
     
       }
 }

@@ -14,10 +14,10 @@ import { get } from 'node:http';
 export class AppComponent implements OnInit {
   ready = false;
   _auth_service = inject(AuthenService);
-  _auth = getAuth();
+  _auth = inject(Auth);
   constructor() {
-    onAuthStateChanged(this._auth, (userCredential) => {
-        console.log(userCredential);
+    this._auth.onAuthStateChanged(
+      (userCredential) => {
         if (userCredential) {
           this._auth_service.handleCreateUser(userCredential);
         }

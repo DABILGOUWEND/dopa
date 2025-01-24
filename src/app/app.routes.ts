@@ -34,7 +34,7 @@ export const routes: Routes = [
     }
     ,
     {
-        path: 'home', component: HomeComponent
+        path: 'home', component: HomeComponent,canActivate:[homeGuard]
     },
     {
         path: 'login', component: LoginComponent
@@ -154,6 +154,6 @@ export const routes: Routes = [
     ,
     {
         path:"accueil",
-        component:AccueilComponent
+        component:AccueilComponent,canActivate:[homeGuard]
     }
 ];
