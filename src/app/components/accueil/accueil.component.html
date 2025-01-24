@@ -1,0 +1,120 @@
+<nav>
+    <div class="nav-wrapper">
+      <div class="brand-logo gauche">
+        <h2>
+          SOLUBTP
+        </h2>
+      </div>
+      <div class="brand-logo right hide-on-med-and-down">
+        @if(_autservice.userSignal()){
+        <h2>
+          {{_autservice.userSignal()?.username}}
+        </h2>
+        }@else{
+        <ul>
+          <li>
+            <a routerLink="/login" title="connecter" class="btn waves-light">
+             connecter
+            </a>
+          </li>
+        </ul>
+  
+        }
+  
+      </div>
+      <div class="brand-logo right_ext hide-on-med-and-down">
+        @if(_autservice.userSignal()){
+          <ul>
+            <li>
+              <a (click)="logout()" title="déconnecter">
+                <mat-icon>logout</mat-icon>
+              </a>
+            </li>
+          </ul>
+        }
+       
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container">
+    <div class="row center">
+      <a routerLink="/home_gestion">
+        <div class="col s12 m6 l4">
+          <div class="card">
+            <div class="card-title">
+              GESTION DES STOCKS ET COMMANDES
+            </div>
+            <div class="card-content">
+              <p>Vous pouvez gérer vos chantiers</p>
+            </div>
+  
+          </div>
+        </div>
+      </a>
+  
+  
+      <a routerLink="/home_gestion">
+        <div class="col s12 m6 l4">
+          <div class="card">
+            <div class="card-title ">
+              GESTION MATERIELS ET ENGINS
+            </div>
+            <div class="card-content">
+              <p>Vous pouvez gérer vos chantiers</p>
+            </div>
+  
+          </div>
+        </div>
+      </a>
+  
+  
+      <a routerLink="/home_gestion">
+        <div class="col s12 m6 l4">
+          <div class="card">
+            <div class="card-title ">
+              DEVIS ET BUGDETS TRAVAUX
+            </div>
+            <div class="card-content">
+              <p>Vous pouvez gérer vos chantiers</p>
+            </div>
+  
+          </div>
+        </div>
+      </a>
+  
+      <a routerLink="/home_gestion">
+        <div class="col s12 m6 l4">
+          <div class="card">
+            <div class="card-title ">
+              FACTURATION CLIENTS
+            </div>
+            <div class="card-image">
+  
+            </div>
+            <div class="card-content">
+              <p>Vous pouvez gérer vos chantiers</p>
+            </div>
+  
+          </div>
+        </div>
+      </a>
+  
+      <a routerLink="/home_gestion">
+        <div class="col s12 m6 l4">
+          <div class="card">
+            <div class="card-title ">
+              FACTURATION PRESTATAIRES
+            </div>
+            <div class="card-image">
+  
+            </div>
+            <div class="card-content">
+              <p>Vous pouvez gérer vos chantiers</p>
+            </div>
+  
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>

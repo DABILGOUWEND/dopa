@@ -19,5 +19,6 @@ import { EssaiComponent } from "../essai/essai.component";
     styleUrl: './accueil.component.scss'
 })
 export class AccueilComponent  {
+    _autservice=inject(AuthenService);
  
 }
