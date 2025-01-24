@@ -48,16 +48,7 @@ export class HomeTemplateComponent implements OnInit{
   }
   logout() {
     this.affiche.set(true);
-    this._auth_service.message.set('déconnexion en cours....');
-    this._auth_service.logout().subscribe({
-      next: () => {
-        setTimeout(() => {
-          this._auth_service.message.set('vous êtes déconnecté');
-          this.router.navigateByUrl('/login');
-        }, 2000);
-      }
-    })
-
+    this._auth_service.logout().subscribe()
   }
 
   //computed properties
