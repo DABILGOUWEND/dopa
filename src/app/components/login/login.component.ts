@@ -53,7 +53,7 @@ export class LoginComponent{
           setTimeout(() => {
            this.message.set('connexion réussie');
             this.authservice.loadings.set(false);
-            this.router.navigateByUrl('/home');
+            this.router.navigateByUrl('/home_gestion');
             
           }, 2000);
          

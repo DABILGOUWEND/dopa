@@ -9,7 +9,7 @@ import { EnginsStore, GasoilStore, ProjetStore } from '../../store/appstore';
 import { Router } from '@angular/router';
 import { DataLoaderService } from '../../services/data-loader.service';
 import { sign } from 'node:crypto';
-import { tap } from 'rxjs';
+import { concat, tap } from 'rxjs';
 import { set } from 'firebase/database';
 
 @Component({
@@ -35,8 +35,9 @@ export class HomeTemplateComponent implements OnInit{
   router = inject(Router);
   _router = inject((Router));
   selected_projet_id = signal<string | undefined>('');
-
+  end_of_load = signal(true);
   ngOnInit() {
+        
   }
   choix_projet(data: any) {
     this._auth_service.current_projet_id.set(data.value);
@@ -44,11 +45,10 @@ export class HomeTemplateComponent implements OnInit{
     this._loader_service.loadDataInit();
     this._loader_service.Load_gestion_Data();
     this._loader_service.Load_travaux_Data();
-
   }
   logout() {
     this.affiche.set(true);
-    this._auth_service.logout().subscribe()
+    this._auth_service.logout().subscribe();
   }
 
   //computed properties

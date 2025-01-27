@@ -1,39 +1,67 @@
 @defer(on timer(1s);hydrate when !end_of_load()){
-    <app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content">
-    </app-home-template>
+<app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content">
+</app-home-template>
 }
 @placeholder{
-    <div [ngStyle]="{'padding-top.px':200}">
-        <mat-spinner [ngStyle]="{'margin-left.%':50}"></mat-spinner>
-    </div>
+<div [ngStyle]="{'padding-top.px':200}">
+    <mat-spinner [ngStyle]="{'margin-left.%':50}"></mat-spinner>
+</div>
 }
 
 
 <ng-template #nav_liste>
-
+    <li mat-list-item>
+        <a routerLink="gasoil">
+            Gestion Gasoil
+        </a>
+    </li>
+    <li mat-list-item>
+        <a routerLink="pannes">
+            Déclaration des pannes
+        </a>
+    </li>
+    <li mat-list-item>
+        <a routerLink="pointages">
+            Pontage du personnel
+        </a>
+    </li>
+    <li mat-list-item>
+        <a routerLink="personnel">
+            Liste du personnel
+        </a>
+    </li>
+    <li mat-list-item>
+        <a routerLink="engins">
+            Liste des engins
+        </a>
+    </li>
 </ng-template>
 <ng-template #toolbar>
-    <div class="example-spacer2">
-        <button mat-fab type="button" (click)="click_accueil()">
-            <mat-icon>home</mat-icon>
-        </button>
-    </div>
-    <div class="example-spacer3">
-        <button mat-fab extended type="button" (click)="click_gasoil()">
-            GASOIL
-        </button>
-        <button mat-fab extended type="button" (click)="click_pannes()">
-            PANNES ENGINS
-        </button>
-        <button mat-fab extended type="button" (click)="click_pointages()">
-            POINTAGE PERSONNEL
-        </button>
-        <!-- <button mat-fab extended type="button">
-            MAGASIN
-        </button> -->
-    </div>
-   
-
+    <li>
+        <a routerLink="gasoil" class="btn">
+            Gestion Gasoil
+        </a>
+    </li>
+    <li >
+        <a routerLink="pannes" class="btn">
+            Déclarationn de Pannes
+        </a>
+    </li>
+    <li >
+        <a routerLink="pointages" class="btn">
+            Pointages personnel
+        </a>
+    </li>
+    <li >
+        <a routerLink="personnel" class="btn">
+            Liste du personnel
+        </a>
+    </li>
+    <li >
+        <a routerLink="engins" class="btn">
+            Liste des engins
+        </a>
+    </li>
 </ng-template>
 <ng-template #content>
     <router-outlet>

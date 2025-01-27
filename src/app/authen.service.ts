@@ -94,7 +94,7 @@ export class AuthenService {
       next: () => { 
         setTimeout(() => {  
           localStorage.removeItem('user');
-          this.router.navigateByUrl('/login')
+          this.router.navigateByUrl('/accueil')
           this.userSignal.set(undefined);
           this.current_projet_id.set(undefined);
         }

@@ -17,6 +17,7 @@ import { DataLoaderService } from '../../services/data-loader.service';
 export class GestionComponent implements OnInit {
   end_of_load = signal(true);
   ngOnInit() {
+    
     //load data
     this._loader_service.setPath();
     this._loader_service.loadDataInit();

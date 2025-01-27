@@ -91,20 +91,101 @@
 
 }
  -->
-
-<nav>
-    <div class="nav-wrapper">
-        <div class="brand-logo">
-            <h2>
-                SOLUBTP
-            </h2>
+<mat-sidenav-container>
+  <mat-sidenav #sidnav class="sidenav">
+    <mat-nav-list (click)="sidnav.close()">
+      <ul>
+        <ng-container [ngTemplateOutlet]="nav_liste()">
+        </ng-container>
+        <li class="center"> ----------------------- </li>
+        @if(_auth_service.userSignal()){
+        <li class="center" mat-list-item>
+          <a (click)="logout()" title="déconnecter">
+            Déconnecter
+          </a>
+        </li>
+        }@else{
+        <li class="center" mat-list-item>
+          <a routerLink="/login" title="connecter">
+            connecter
+          </a>
+        </li>
+        }
+        <li class="center"> ----------------------- </li>
+        <li class="center"> <button (click)="sidnav.close()" title="fermer"> <mat-icon> close</mat-icon></button> </li>
+      </ul>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <nav role="navigation">
+      <div class="nav-wrapper">
+        <div class="brand-logo gauche">
+          <h2>
+            SOLUBTP
+          </h2>
         </div>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger left"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-            <li><a href="" class="btn-large">Gasoil</a></li>
-            <li><a href="" class="btn-large">Pannes</a></li>
-            <li><a href="" class="btn-large">Personel</a></li>
-            <li><a href=""  class="btn-large">Travaux</a></li>
-        </ul>
-    </div>
-</nav>
+        <div class="brand-logo menu hide-on-large-only">
+          <button mat-icon-button (click)="sidnav.open()">
+            <mat-icon>
+              menu
+            </mat-icon>
+          </button>
+        </div>
+        <div class="brand-logo navig hide-on-med-and-down">
+          <ul>
+            <ng-container [ngTemplateOutlet]="toolbar()">
+            </ng-container>
+          </ul>
+        </div>
+        <div class="brand-logo right">
+          @if(_auth_service.userSignal()){
+          <h2>
+            {{ _auth_service.userSignal()?.username}}
+          </h2>
+          }
+        </div>
+        <div class="brand-logo right_ext hide-on-med-and-down">
+          @if(_auth_service.userSignal()){
+          <button mat-icon-button (click)="logout()" title="déconnecter">
+            <mat-icon> logout</mat-icon>
+          </button>
+          }@else {
+          <a [ngStyle]="{'font-size.rem':1.5,'color':'blue'}" routerLink="/login" title="connecter">
+            se connecter
+          </a>
+          }
+        </div>
+      </div>
+    </nav>
+    <section>
+      <ng-container [ngTemplateOutlet]="content()">
+      </ng-container>
+      
+    </section>
+    <footer>
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Qui sommes nous?</h5>
+          <p class="grey-text text-lighten-4">Nous sommes une équipe d'Ingénieurs en Bâtiments et travaux Publics.
+            Passionnés de nouvelles technologies, nous avons décidé de mettre nos compétences au service des
+            entreprises de BTP.
+            Ainsi, nous avons conçu cette application pour vous aider à gérer vos chantiers.
+            N'hésitez pas à nous contacter pour plus d'informations et pour des suggestions d'amélioration.
+            Ces outils sont gratuits pour le moment et vous pouvez les utiliser sans aucune restriction.
+            Merci de nous faire confiance.
+
+          </p>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Contacts</h5>
+          <ul>
+            <li> DABILGOU Wend-lassida</li>
+            <li> Ingénieur Civil TPE</li>
+            <li>Tél: 00226 78 34 66 45/ 66 41 66 59</li>
+            <li>{{ 'Email: dabilgou10@gmail.com'}}</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

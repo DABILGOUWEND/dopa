@@ -1,43 +1,53 @@
-<nav>
-  <div class="nav-wrapper">
-    <div class="brand-logo gauche">
-      <h2>
-        SOLUBTP
-      </h2>
-    </div>
-    <div class="brand-logo right hide-on-med-and-down">
-      @if(_autservice.userSignal()){
-      <h2>
-        {{_autservice.userSignal()?.username}}
-      </h2>
-      }@else{
-      <ul>
-        <li>
-          <a routerLink="/login" title="connecter" class="btn waves-light">
-           connecter
-          </a>
-        </li>
-      </ul>
+<app-home-template [content]="content" [nav_liste]="nav_liste" [toolbar]="toolbar" />
 
-      }
+<ng-template #nav_liste>
+  @if(_autservice.userSignal())
+  {
+  <li mat-list-item>
+    <a routerLink="/home_gestion">
+      GESTION DES STOCKS ET COMMANDES
+    </a>
+  </li>
+  <li mat-list-item>
+    <a routerLink="/home_gestion">
+      GESTION MATERIELS ET ENGINS
+    </a>
+  </li>
+  <li mat-list-item>
+    <a routerLink="/home_gestion">
+      DEVIS ET BUGDETS TRAVAUX
+    </a>
+  </li>
+  <li mat-list-item>
+    <a routerLink="/home_gestion">
+      FACTURATIONS DES CLIENTS
+    </a>
+  </li>
+  <li mat-list-item>
+    <a routerLink="/home_gestion">
+      FACTURATIONS DES PRESTATAIRES
+    </a>
+  </li>
+  }
+</ng-template>
 
-    </div>
-    <div class="brand-logo right_ext hide-on-med-and-down">
-      @if(_autservice.userSignal()){
-        <ul>
-          <li>
-            <a (click)="logout()" title="déconnecter">
-              <mat-icon>logout</mat-icon>
-            </a>
-          </li>
-        </ul>
-      }
-     
+<ng-template #toolbar>
+</ng-template>
+
+<ng-template #content>
+  <div class="row">
+    <div class="col s12 l12">
+      <h3 class="header center">
+        BIENVENUE SUR SOLUBTP
+      </h3>
     </div>
   </div>
-</nav>
-
-<div class="container">
+  <div class="row">
+    <div class="col s12 l12">
+      <p class="light center ">
+        Nous vous proposons des outils informatiques pour la gestion de votre chantier.</p>
+    </div>
+  </div>
   <div class="row center">
     <a routerLink="/home_gestion">
       <div class="col s12 m6 l4">
@@ -46,7 +56,8 @@
             GESTION DES STOCKS ET COMMANDES
           </div>
           <div class="card-content">
-            <p>Vous pouvez gérer vos chantiers</p>
+            <p>Effectuer des commandes de matériaux pour vos chantiers et gérer vos différents stocks (entrées et
+              sorties)</p>
           </div>
 
         </div>
@@ -61,7 +72,7 @@
             GESTION MATERIELS ET ENGINS
           </div>
           <div class="card-content">
-            <p>Vous pouvez gérer vos chantiers</p>
+            <p>Planifier l'utilisation et la maintenance de vos engins de chantiers. </p>
           </div>
 
         </div>
@@ -76,7 +87,31 @@
             DEVIS ET BUGDETS TRAVAUX
           </div>
           <div class="card-content">
-            <p>Vous pouvez gérer vos chantiers</p>
+
+            <p> Réaliser des devis pour vos clients.</p>
+            <p> Faire des budgets ressources pour vos chantiers.</p>
+            <p> Suivre la mise en oeuvre des budgets et les écarts.</p>
+
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <a routerLink="/home_gestion">
+      <div class="col s12 m6 l4">
+        <div class="card">
+          <div class="card-title ">
+            FACTURATIONS DES CLIENTS
+          </div>
+          <div class="card-image">
+
+          </div>
+          <div class="card-content">
+            <p>
+              Effectuers les constats, attachements et décomptes des travaux réalisés.
+              Editer les factures de vos clients puis suivre les paiements.
+              Effectuer des reportings sur les paiements et les retards de paiements.
+            </p>
           </div>
 
         </div>
@@ -87,34 +122,28 @@
       <div class="col s12 m6 l4">
         <div class="card">
           <div class="card-title ">
-            FACTURATION CLIENTS
+            FACTURATIONS DES PRESTATAIRES
           </div>
           <div class="card-image">
 
           </div>
           <div class="card-content">
-            <p>Vous pouvez gérer vos chantiers</p>
-          </div>
+            <p>
+              Effectuer les constats, attachements et décomptes des travaux réalisés par les prestataires
+            </p>
+            <p>
+              Editer les factures des prestataires et suivre les paiements.
+            </p>
+            <p>
+              Effectuer des reportings sur les paiements et les retards de paiements.
+            </p>
 
-        </div>
-      </div>
-    </a>
-
-    <a routerLink="/home_gestion">
-      <div class="col s12 m6 l4">
-        <div class="card">
-          <div class="card-title ">
-            FACTURATION PRESTATAIRES
-          </div>
-          <div class="card-image">
-
-          </div>
-          <div class="card-content">
-            <p>Vous pouvez gérer vos chantiers</p>
           </div>
 
         </div>
       </div>
     </a>
   </div>
-</div>
+
+
+</ng-template>
