@@ -90,8 +90,8 @@ export class AuthenService {
       })
 
     return from(promise).pipe(tap({
-      next: () => { 
-        setTimeout(() => {  
+      next: () => {
+        setTimeout(() => {
           localStorage.removeItem('user');
           this.router.navigateByUrl('/login')
           this.userSignal.set(undefined);
@@ -113,7 +113,7 @@ export class AuthenService {
       }
     }
   }
-  handleCreateUser(user: any) {
+  handleCreateUser(users: any) {
     let new_user: Users = {
       uid: user.uid,
       email: user.email,
@@ -124,10 +124,9 @@ export class AuthenService {
       current_projet_id: '',
       username: ''
     }
-    this.userSignal.set(new_user);
-    localStorage.setItem('user', JSON.stringify(this.userSignal()));
+
     if (environment.production) {
-      this.getallUsersByUid(user.uid).pipe(
+      this.getallUsersByUid(users.uid).pipe(
         tap(
           (resp: any) => {
             let data = resp.data();
@@ -136,7 +135,9 @@ export class AuthenService {
               (user: any) =>
               (
                 {
-                  ...user,
+                  'uid': users.uid,
+                  'email': users.email,
+                  'token': this.token(),
                   'role': data.role,
                   'username': data.username,
                   'entreprise_id': data.entreprise_id,
