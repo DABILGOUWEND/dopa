@@ -53,7 +53,6 @@ export class AuthenService {
       }
     ).pipe(tap((resp: any) => {
       let userId = resp.localId;
-
       let data = {
         id: userId,
         email: resp.email,
@@ -91,7 +90,6 @@ export class AuthenService {
       return from(promise).pipe(tap(() => {
         this.userSignal.set(undefined);
         localStorage.removeItem('user');
-        this.router.navigateByUrl('/login')
       }
       ))
     }
@@ -99,7 +97,6 @@ export class AuthenService {
       return of('').pipe(tap(() => {
         this.userSignal.set(undefined);
         localStorage.removeItem('user');
-        this.router.navigateByUrl('/login')
       }
       ))
     }

@@ -37,8 +37,8 @@ export class HomeTemplateComponent implements OnInit{
   _router = inject((Router));
   selected_projet_id = signal<string | undefined>('');
   end_of_load = signal(true);
-  ngOnInit() {
-        
+  ngOnInit() { 
+    console.log('home template')
   }
   choix_projet(data: any) {
     this._auth_service.current_projet_id.set(data.value);
@@ -49,7 +49,16 @@ export class HomeTemplateComponent implements OnInit{
   }
   logout() {
     this.affiche.set(true);
-    this._auth_service.logout().subscribe();
+    this._auth_service.logout().subscribe({
+      complete: () => {
+        setTimeout(() => {
+          this.affiche.set(false);
+          this._router.navigateByUrl('/accueil');
+        }, 3000);
+
+        
+      }
+    });
   }
 
   //computed properties

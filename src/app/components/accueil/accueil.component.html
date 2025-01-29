@@ -1,4 +1,9 @@
-<app-home-template [content]="content" [nav_liste]="nav_liste" [toolbar]="toolbar" [title]="title" />
+@defer (hydrate on interaction) {
+  <app-home-template [content]="content" [nav_liste]="nav_liste" [toolbar]="toolbar" [title]="title" />
+}@placeholder {
+
+}
+
 
 <ng-template #nav_liste>
   @if(_autservice.userSignal())
