@@ -1,5 +1,5 @@
 @defer(on timer(1s);hydrate when !end_of_load()){
-<app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content">
+<app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content" [title]="title"> 
 </app-home-template>
 }
 @placeholder{
@@ -38,30 +38,34 @@
 </ng-template>
 <ng-template #toolbar>
     <li>
-        <a routerLink="gasoil" class="btn">
+        <a routerLink="gasoil" class="btn" (click)="titre.set('Gestion Gasoil')">
             Gestion Gasoil
         </a>
     </li>
     <li >
-        <a routerLink="pannes" class="btn">
+        <a routerLink="pannes" class="btn" (click)="titre.set('Déclaration des pannes')">
             Déclarationn de Pannes
         </a>
     </li>
     <li >
-        <a routerLink="pointages" class="btn">
+        <a routerLink="pointages" class="btn" (click)="titre.set('Pointages du personnel')">
             Pointages personnel
         </a>
     </li>
     <li >
-        <a routerLink="personnel" class="btn">
+        <a routerLink="personnel" class="btn" (click)="titre.set('Liste du personnel')">
             Liste du personnel
         </a>
     </li>
     <li >
-        <a routerLink="engins" class="btn">
+        <a routerLink="engins" class="btn"  (click)="titre.set('Liste des engins')">
             Liste des engins
         </a>
     </li>
+</ng-template>
+
+<ng-template #title>
+    {{titre()}}
 </ng-template>
 <ng-template #content>
     <router-outlet>

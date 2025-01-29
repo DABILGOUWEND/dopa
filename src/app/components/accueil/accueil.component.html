@@ -1,4 +1,4 @@
-<app-home-template [content]="content" [nav_liste]="nav_liste" [toolbar]="toolbar" />
+<app-home-template [content]="content" [nav_liste]="nav_liste" [toolbar]="toolbar" [title]="title" />
 
 <ng-template #nav_liste>
   @if(_autservice.userSignal())
@@ -33,19 +33,14 @@
 
 <ng-template #toolbar>
 </ng-template>
-
+<ng-template #title>
+ SOLUBTP
+</ng-template>
 <ng-template #content>
   <div class="row">
     <div class="col s12 l12">
-      <h3 class="header center">
-        BIENVENUE SUR SOLUBTP
-      </h3>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col s12 l12">
       <p class="light center ">
-        Nous vous proposons des outils informatiques pour la gestion de votre chantier.</p>
+          Solutions informatiques pour la gestion de votre chantier.</p>
     </div>
   </div>
   <div class="row center">

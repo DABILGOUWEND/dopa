@@ -1,22 +1,5 @@
-<mat-drawer-container class="wen-table-drawer-container">
-    <mat-drawer class="gasoil_conso" mode="over" position="start" [opened]="is_open()" disableClose="true">
-        <ng-container [ngTemplateOutlet]="Entete">
-        </ng-container>
-    </mat-drawer>
-    <mat-drawer class="gasoil_appro" mode="over" position="end"  [opened]="appro_opened()"
-        disableClose="true">
-        <section class="table-update">
-            <app-approgo (onRowAdd)="retourQuitter()">
-
-            </app-approgo>
-        </section>
-    </mat-drawer>
-    <mat-drawer-content class="gasoil">
-        <ng-container [ngTemplateOutlet]="Corps">
-        </ng-container>
-    </mat-drawer-content> 
-</mat-drawer-container>
-
+<ng-container [ngTemplateOutlet]="Corps">
+</ng-container>
 <ng-template #Entete>
     <section class="table-update">
         <div class="table-update__header">
@@ -29,7 +12,8 @@
                 </ng-container>
             </div>
             <div class="table-update__footer">
-                <ng-container [ngTemplateOutlet]="validation" [ngTemplateOutletContext]="{formGroup:table_update_form()}">
+                <ng-container [ngTemplateOutlet]="validation"
+                    [ngTemplateOutletContext]="{formGroup:table_update_form()}">
                 </ng-container>
             </div>
         </form>
@@ -38,7 +22,7 @@
 <ng-template #Corps>
     <ng-container [ngTemplateOutlet]="entetebody">
     </ng-container>
-    <table mat-table [dataSource]="dataSource()" class="wen-table">
+    <table mat-table [dataSource]="dataSource()" class="booktable" multiTemplateDataRows>
         <ng-container *ngFor="let column of displayedColumns() |keyvalue " matColumnDef="{{column.key}}">
             @if(column.key=='actions')
             {
@@ -77,10 +61,7 @@
     @switch (item.type) {
     @case (
     "text1"
-    ) { <app-form-saisi 
-    label={{item.label}} 
-    type={{item.type}} 
-    control_name={{item.control_name}}
+    ) { <app-form-saisi label={{item.label}} type={{item.type}} control_name={{item.control_name}}
         [parent_FG]="table_update_form()">
     </app-form-saisi>}
     @case (
@@ -107,14 +88,12 @@
     }
 </ng-template>
 <ng-template #entetebody>
-    <ng-container [ngTemplateOutlet]="titre()">
-    </ng-container>
-
     <ng-content select="courbe">
-
     </ng-content>
-    <div class="content_add_button">
-        <div class="AlignGauche">
+
+
+    <div class="row left" [ngStyle]="{'background-color':'gray'}">
+        <div class="col s12 m6 l6 center">
             <button (click)="printElement()" mat-fab extended color="primary" matTooltip="Imprimer rapport"
                 matTooltipPosition="left" aria-label="print">
                 <span class="material-icons">
@@ -123,14 +102,17 @@
                 imprimer rapport
             </button>
         </div>
-        <div class="AlignMilieu">
+        <div class="col s12 m6 l6 center">
             <ng-container [ngTemplateOutlet]="conso()">
             </ng-container>
         </div>
 
-        <div class="AlignDroite">
-            <button (click)="addElement()" mat-flat-button  matTooltip="Ajouter nouveau"
-                matTooltipPosition="left" aria-label="nouvelle conso">
+
+    </div>
+    <div class="row right" >
+        <div class="col s12 m2 l2 center">
+            <button (click)="addElement()" mat-flat-button matTooltip="Ajouter nouveau" matTooltipPosition="left"
+                aria-label="nouvelle conso">
                 <span class="material-icons">
                     playlist_add
                 </span>

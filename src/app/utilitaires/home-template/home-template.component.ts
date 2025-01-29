@@ -30,6 +30,7 @@ export class HomeTemplateComponent implements OnInit{
   nav_liste = input.required<TemplateRef<any>>();
   toolbar = input.required<TemplateRef<any>>();
   content = input.required<TemplateRef<any>>();
+  title = input.required<TemplateRef<any>>();
   _auth_service = inject(AuthenService);
   _projet_store = inject(ProjetStore);
   router = inject(Router);

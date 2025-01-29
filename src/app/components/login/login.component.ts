@@ -51,9 +51,10 @@ export class LoginComponent{
       {
         next: () => {
           setTimeout(() => {
+            
+            this.router.navigateByUrl("/home_gestion");
            this.message.set('connexion réussie');
             this.authservice.loadings.set(false);
-            this.router.navigateByUrl('/home_gestion');
             
           }, 2000);
          

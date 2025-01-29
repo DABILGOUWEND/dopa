@@ -116,7 +116,7 @@
       </ul>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content >
+  <mat-sidenav-content>
     <nav role="navigation">
       <div class="nav-wrapper">
         <div class="brand-logo gauche">
@@ -157,12 +157,19 @@
         </div>
       </div>
     </nav>
-  
-    <footer>
-      sdsd
-    </footer>
+    <article>
+      <div class="row">
+        <div class="col s12 l12" [ngStyle]="{'background-color':'#f5f5f5'}">
+            <h2 class="header" [ngStyle]="{'margin-top.px':0}">
+              <ng-container [ngTemplateOutlet]="title()"> </ng-container>
+            </h2>
+            
+        </div>
+      </div>
+      <ng-container [ngTemplateOutlet]="content()"> </ng-container>
+    </article>
 
-    <!--  <footer>
+    <footer>
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">Qui sommes nous?</h5>
@@ -186,6 +193,6 @@
           </ul>
         </div>
       </div>
-    </footer> -->
+    </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

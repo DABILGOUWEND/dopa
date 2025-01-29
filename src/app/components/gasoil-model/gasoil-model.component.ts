@@ -6,16 +6,19 @@ import { FormSaisiComponent } from '../form-saisi/form-saisi.component';
 import { ModelComponent } from '../model/model.component';
 import { ApprogoComponent } from '../approgo/approgo.component';
 import { EnginsStore, GasoilStore } from '../../store/appstore';
+import { HomeTemplateComponent } from '../../utilitaires/home-template/home-template.component';
+import { AuthenService } from '../../authen.service';
 
 @Component({
     selector: 'app-gasoil-model',
-    imports: [ImportedModule, FormSaisiComponent, ApprogoComponent],
+    imports: [ImportedModule, FormSaisiComponent],
     templateUrl: './gasoil-model.component.html',
     styleUrl: './gasoil-model.component.scss'
 })
 export class GasoilModelComponent implements OnInit {
   _gasoil_store=inject(GasoilStore)
   _engins_store=inject(EnginsStore)
+  _auth_service=inject(AuthenService)
   constructor(){
   }
   appro_opened = input.required<boolean>();
@@ -23,7 +26,6 @@ export class GasoilModelComponent implements OnInit {
   is_open = signal(false);
   current_row = signal([]);
 
-  titre = input.required<TemplateRef<any>>();
   conso = input.required<TemplateRef<any>>();
   table_update_form = input.required<FormGroup>();
   table = input.required<any>();

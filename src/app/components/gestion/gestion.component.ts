@@ -16,6 +16,7 @@ import { DataLoaderService } from '../../services/data-loader.service';
 })
 export class GestionComponent implements OnInit {
   end_of_load = signal(true);
+  titre=signal("Gestion du Gasoil");
   ngOnInit() {
     
     //load data

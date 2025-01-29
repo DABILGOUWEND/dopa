@@ -1,6 +1,6 @@
 <!-- Purpose: This is the main component for the home page of the application. It contains the toolbar and the content of the page. -->
 @defer(on timer(2s);hydrate when !end_of_load()){
-    <app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content">
+    <app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content" [title]="title">
     </app-home-template>    
 }
 @placeholder {
@@ -32,4 +32,7 @@
 <ng-template #content>
     <router-outlet>
     </router-outlet>
+</ng-template>
+<ng-template #title>
+   
 </ng-template>

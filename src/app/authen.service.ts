@@ -42,7 +42,7 @@ export class AuthenService {
   affichage = signal<string | null | undefined>('')
   current_projet_id = signal<string | undefined>("1");
   list_projet = signal<string[]>([]);
-  message=signal('déconnecté')
+  message = signal('déconnecté')
 
 
   register(email: string, password: string, role: string, nom: string, entreprise_id: string, projet_id: string[]): Observable<any> {
@@ -66,10 +66,10 @@ export class AuthenService {
     }))
   };
   loginFirebase(email: string, password: string): Observable<any> {
-  
+
     this.loadings.set(true);
     const auth = getAuth();
-    return from(this._auth.setPersistence(browserSessionPersistence).then(() => {
+    return from(this._auth.setPersistence(browserLocalPersistence).then(() => {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
@@ -91,8 +91,8 @@ export class AuthenService {
       })
 
     return from(promise).pipe(tap({
-      next: () => { 
-        setTimeout(() => {  
+      next: () => {
+        setTimeout(() => {
           localStorage.removeItem('user');
           this.router.navigateByUrl('/accueil')
           this.userSignal.set(undefined);
@@ -106,6 +106,7 @@ export class AuthenService {
   autoLogin() {
     if (this.isBrowser) {
       let data = localStorage.getItem('user');
+      console.log('data', data)
       if (data) {
         const dataparse = JSON.parse(data);
         this.userSignal.set(dataparse);
@@ -113,7 +114,7 @@ export class AuthenService {
       }
     }
   }
-  handleCreateUser(user: any) {
+  handleCreateUser(users: any) {
     let new_user: Users = {
       uid: user.uid,
       email: user.email,
@@ -124,19 +125,20 @@ export class AuthenService {
       current_projet_id: '',
       username: ''
     }
-    this.userSignal.set(new_user);
-    localStorage.setItem('user', JSON.stringify(this.userSignal()));
+    //this.userSignal.set(new_user);
+   
     if (environment.production) {
-      this.getallUsersByUid(user.uid).pipe(
+      this.getallUsersByUid(users.uid).pipe(
         tap(
           (resp: any) => {
             let data = resp.data();
-
             this.userSignal.update(
               (user: any) =>
               (
                 {
-                  ...user,
+                  'uid': users.uid,
+                  'email': users.email,
+                  'token': this.token(),
                   'role': data.role,
                   'username': data.username,
                   'entreprise_id': data.entreprise_id,
