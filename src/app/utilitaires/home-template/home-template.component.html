@@ -165,17 +165,44 @@
                 </div>
             </div>
         </nav>
-        <article >
-            <div class="row">
-                <div class="col s12 l12" >
-                    <h2  class="header center">
-                        <ng-container [ngTemplateOutlet]="title()"/> 
-                    </h2>
+        <div class="partie">
+            <div class="entete">
+                    <ng-container [ngTemplateOutlet]="title()" />
+                
+            </div>
+            <div class="corps">
+                <ng-container [ngTemplateOutlet]="content()"> </ng-container>
+            </div>
+            <div class="piedpage">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Qui sommes nous?</h5>
+                        <p class="grey-text text-lighten-4">Nous sommes une équipe d'Ingénieurs en Bâtiments et travaux
+                            Publics.
+                            Passionnés de nouvelles technologies, nous avons décidé de mettre nos compétences au service des
+                            entreprises de BTP.
+                            Ainsi, nous avons conçu cette application pour vous aider à gérer vos chantiers.
+                            N'hésitez pas à nous contacter pour plus d'informations et pour des suggestions d'amélioration.
+                            Ces outils sont gratuits pour le moment et vous pouvez les utiliser sans aucune restriction.
+                            Merci de nous faire confiance.
+    
+                        </p>
+                    </div>
+                    <div class="col l3 s12">
+                        <h5 class="white-text">Contacts</h5>
+                        <ul>
+                            <li> DABILGOU Wend-lassida</li>
+                            <li> Ingénieur Civil TPE</li>
+                            <li>Tél: 00226 78 34 66 45/ 66 41 66 59</li>
+                            <li>{{ 'Email: dabilgou10@gmail.com'}}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <ng-container [ngTemplateOutlet]="content()"> </ng-container>
-        </article>
-
+            <!-- 
+            <ng-container [ngTemplateOutlet]="content()"> </ng-container> -->
+        </div>
+<!-- 
         <footer>
             <div class="row">
                 <div class="col l6 s12">
@@ -201,7 +228,7 @@
                     </ul>
                 </div>
             </div>
-        </footer>
+        </footer> -->
     </mat-sidenav-content>
 </mat-sidenav-container>
 }
