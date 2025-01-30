@@ -55,7 +55,21 @@ export class LoginComponent{
           setTimeout(() => {
            this.message.set('connexion réussie');
             this.authservice.loadings.set(false);
+            let role=this.authservice.userSignal()?.role
             this.router.navigateByUrl('/home');
+          /*   switch(role)
+            {
+              case 'admin':
+                
+                  this.router.navigateByUrl('/home_gestion');
+                break;
+                case 'user1':
+                  this.router.navigateByUrl('/home_gestion');
+                  break
+                  case 'user2':
+
+            } */
+            
             
           }, 2000);
          
