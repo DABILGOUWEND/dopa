@@ -92,8 +92,8 @@
     </ng-content>
 
 
-    <div class="row left" [ngStyle]="{'background-color':'gray'}">
-        <div class="col s12 m6 l6 center">
+    <div class="row center" >
+        <div class="col s12 m6 l4 center" [ngStyle]="{'padding-top.px':20}">
             <button (click)="printElement()" mat-fab extended color="primary" matTooltip="Imprimer rapport"
                 matTooltipPosition="left" aria-label="print">
                 <span class="material-icons">
@@ -102,15 +102,12 @@
                 imprimer rapport
             </button>
         </div>
-        <div class="col s12 m6 l6 center">
+        <div class="col s12 m6 l4 center">
             <ng-container [ngTemplateOutlet]="conso()">
             </ng-container>
         </div>
 
-
-    </div>
-    <div class="row right" >
-        <div class="col s12 m2 l2 center">
+        <div class="col s12 m2 l4 center" [ngStyle]="{'padding-top.px':20}">
             <button (click)="addElement()" mat-flat-button matTooltip="Ajouter nouveau" matTooltipPosition="left"
                 aria-label="nouvelle conso">
                 <span class="material-icons">

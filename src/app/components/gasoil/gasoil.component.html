@@ -4,8 +4,8 @@
     (addEvent)="addEventFct()" (printEvent)="printgasoil()" [appro_opened]="appro_opened()"
     (appro_openedEmit)="open_appro()" (appro_closedEmit)="close_appro()">
     <div ngProjectAs="courbe">
-        <div class="row center" >
-            <div class="col s12 m6 l6" [ngStyle]="{'height.px':500,
+        <div class="row center">
+            <div class="col s12 m6 l2 " [ngStyle]="{
             'margin-right.px':0,
             'background-color':'#f1f1f1',
             'border':'1px solid gray'}">
@@ -47,8 +47,8 @@
                             </mat-form-field>
                         </form>
                     </div>
-    
-    
+
+
                 </div>
                 <div class="icon-block">
                     <h2 [ngStyle]="{'font-size.px':18}"> Filtre par engins</h2>
@@ -77,17 +77,15 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div class="col s12 m6 l6" [ngStyle]="{'height.px':500,
+            <div class="col s12 m6 l5" [ngStyle]="{'height.px':500,
             'background-color':'#f1f1f1',
             'margin-right.px':0,
             'border':'1px solid gray'}">
                 <canvasjs-chart [options]="chartOptions()" [styles]="{
                     width: '100%', height:'360px'}"></canvasjs-chart>
             </div>
-        </div>
-        <div class="row right">
-            <div class="col s12 m12 l12" [ngStyle]="{
-            'background-color':'#f1f1f1','border':'1px solid gray'}">
+            <div class="col s12 m12 l5" [ngStyle]="{'height.px':200,
+                'background-color':'#f1f1f1','border':'1px solid gray'}">
                 <div class="icon-block">
                     <h2 [ngStyle]="{'font-size.px':22,'font-weight':'bold'}"> Stock gasoil
                         (litre):{{_appro_go.quantite_go()-_gasoil_store.quantite_go()-834}}</h2>
@@ -98,20 +96,21 @@
             </div>
         </div>
     </div>
- 
-
 </app-gasoil-model>
 
 <ng-template #conso>
     <div *ngIf="date_choice()=='date'">
-        <h2 [ngStyle]="{'font-size.px':22,'font-weight':'bold'}"> {{ 'Consommation GO de ce jour '+ madate() +': ' + total_conso() +' litres'}}</h2>
+        <h2 [ngStyle]="{'font-size.px':22,'font-weight':'bold'}"> {{ 'Consommation GO de ce jour '+ madate() +': ' +
+            total_conso() +' litres'}}</h2>
     </div>
     <div *ngIf="date_choice()=='idate'">
-        <h2 [ngStyle]="{'font-size.px':22,'font-weight':'bold'}"> {{ 'Consommation GO entre le '+ _gasoil_store.selectedDate()[0] + ' et le '
+        <h2 [ngStyle]="{'font-size.px':22,'font-weight':'bold'}"> {{ 'Consommation GO entre le '+
+            _gasoil_store.selectedDate()[0] + ' et le '
             +_gasoil_store.selectedDate()[1]+' :'+total_conso()+' litres'}}</h2>
     </div>
     <div *ngIf="date_choice()=='tout'">
-        <h2 [ngStyle]="{'font-size.px':22,'font-weight':'bold'}"> {{ 'Consommation totale de GO : ' + total_conso()+' litres'}}</h2>
+        <h2 [ngStyle]="{'font-size.px':22,'font-weight':'bold'}"> {{ 'Consommation totale de GO : ' + total_conso()+'
+            litres'}}</h2>
     </div>
     <div *ngIf="selectClasseName()!=''">
         <h3 [ngStyle]="{'font-size.px':22,'font-weight':'bold'}"> {{selectClasseName()}}</h3>
