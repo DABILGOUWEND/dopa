@@ -27,6 +27,7 @@ import { MesConstatsComponent } from './components/mes-constats/mes-constats.com
 import { MesAttachementsComponent } from './components/mes-attachements/mes-attachements.component';
 import { AccueilComponent } from './components/accueil/accueil.component';
 import { EssaiComponent } from './components/essai/essai.component';
+import { TestComponent } from './test_components/test/test.component';
 
 export const routes: Routes = [
     {
@@ -34,7 +35,7 @@ export const routes: Routes = [
     }
     ,
     {
-        path: 'home', component: HomeComponent,canActivate:[homeGuard]
+        path: 'home', component: HomeComponent, canActivate: [homeGuard]
     },
     {
         path: 'login', component: LoginComponent
@@ -53,21 +54,27 @@ export const routes: Routes = [
             },
             {
                 path: "constats",
-                component: MesConstatsComponent
+                component: MesConstatsComponent,
+                data: { title: 'Constats de travaux' }
             }
             ,
             {
                 path: "attachements",
-                component: MesAttachementsComponent
+                component: MesAttachementsComponent,
+
+                data: { title: 'Attachements travaux' }
             },
             {
                 path: "decomptes",
-                component: DecomptesComponent
+                component: DecomptesComponent,
+                data: { title: 'Decomptes' }
             }
             ,
             {
                 path: "liste_sstraitants",
-                component: ListeSstraitantsComponent
+                component: ListeSstraitantsComponent,
+                data: { title: 'Liste des sous-traitants' }
+
             }
 
         ]
@@ -77,30 +84,41 @@ export const routes: Routes = [
         component: GestionComponent, canActivate: [gestionGuard],
         children: [
             {
-                path: "", redirectTo: "/home_gestion/gasoil", pathMatch: "full"
+                path: "", redirectTo: "/home_gestion/test", pathMatch: "full"
+            }
+            ,
+            {
+                path: "test",
+                component: TestComponent
             },
             {
                 path: "gasoil",
-                component: GasoilComponent
+                component: GasoilComponent,
+                data: { title: "Gestion de Gasoil" }
+
             },
             {
                 path: "pannes",
-                component: PannesComponent
+                component: PannesComponent,
+                data: { title: "Gestion des pannes" }
             }
             ,
             {
                 path: "pointages",
-                component: PointageComponent
+                component: PointageComponent,
+                data: { title: "Pointages" }
             }
             ,
             {
                 path: "materiel",
-                component: EnginsComponent
+                component: EnginsComponent,
+                data: { title: "Gestion du matériel" }
             }
             ,
             {
                 path: "personnel",
-                component: PersonnelComponent
+                component: PersonnelComponent,
+                data: { title: "Gestion du personnel" }
             }
         ]
     },
@@ -119,7 +137,7 @@ export const routes: Routes = [
                 path: "tableau_bord",
                 component: TableauBordComponent
             },
-            
+
             {
                 path: "devis",
                 component: LignedevisComponent
@@ -139,21 +157,21 @@ export const routes: Routes = [
         component: TelechargerComponent
     },
     {
-        path:"mes_constats",
-        component:MesConstatsComponent
+        path: "mes_constats",
+        component: MesConstatsComponent
     },
     {
-        path:"mes_attachements",
-        component:MesAttachementsComponent
+        path: "mes_attachements",
+        component: MesAttachementsComponent
     },
     {
-        path:"telecharger",
-        component:TelechargerComponent
+        path: "telecharger",
+        component: TelechargerComponent
     }
-    
+
     ,
     {
-        path:"accueil",
-        component:AccueilComponent
+        path: "accueil",
+        component: AccueilComponent
     }
 ];

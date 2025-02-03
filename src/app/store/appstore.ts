@@ -963,7 +963,8 @@ export const PersonnelStore = signalStore(
                 patchState(store, { is_finished: rep })
             },
 
-            filterbyNomPrenom(mot: string) { patchState(store, { selectedNom_prenom: mot }) },
+            filterbyNomPrenom(mot: string) {
+                 patchState(store, { selectedNom_prenom: mot }) },
 
             loadPersonnel: rxMethod<void>(pipe(switchMap(() => {
                 return task_service.getallPersonnel().pipe(

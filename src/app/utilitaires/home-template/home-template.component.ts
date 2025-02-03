@@ -37,8 +37,7 @@ export class HomeTemplateComponent implements OnInit{
   _router = inject((Router));
   selected_projet_id = signal<string | undefined>('');
   end_of_load = signal(true);
-  ngOnInit() { 
-    console.log('home template')
+  ngOnInit() {
   }
   choix_projet(data: any) {
     this._auth_service.current_projet_id.set(data.value);

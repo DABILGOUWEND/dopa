@@ -1,15 +1,31 @@
-<app-essai [table]="table()" [table_update_form]="table_update_form" [dataSource]="dataSource()"
-  [displayedColumns]="displayedColumns"
-    [className]="'engins'"
-     (newItemEvent)="updateData($event)"
-    (RemoveItemEvent)="deleteData($event)" (RechercheEvent)="recherche($event)"
-    (AfficheToutEvent)="afficheTout()" [titre]="titre"
-    (PatchEvent)="PatchEventFct($event)"
-    (addEvent)="addEventFct()">
-</app-essai>
+@defer (
+when personnel_store.isFulfilled()
+) {
+<app-model-template [table]="table()" [table_update_form]="table_update_form" [dataSource]="dataSource()"
+    [displayedColumns]="displayedColumns" [className]="'engins'" (newItemEvent)="updateData($event)"
+    (RemoveItemEvent)="deleteData($event)" (RechercheEvent)="recherche($event)" (AfficheToutEvent)="afficheTout()"
+    [titre]="titre_tableau()" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()" [action_template]="actiontemplate"
+    (clear_event)="clear_fct()" [is_open2]="is_open2()" [(is_open)]="is_open" 
+    [clicker]="clicker()" [is_update]="is_update()" [(current_row)]="current_row">
+</app-model-template>
+}
+@placeholder {
+<div [ngStyle]="{'padding-top.px':200,'text-align':'center'}">
+    <h2>téléchargement des données.....</h2>
+</div>
+}
 
-<ng-template #titre>
-    <div class="content_head">
-        <h2> {{titre_tableau()}}</h2>
+<ng-template #actiontemplate let-row="row" let-ind="ind" let-clicker="clicker">
+    @if(row!=current_row()){
+    <div [ngStyle]="{'display':'flex'}">
+        <button mat-icon-button type="button" (click)="deleteData(row.id)"> <mat-icon> delete</mat-icon> </button>
+        <button mat-icon-button type="button" (click)="modifier(row,ind)"> <mat-icon> edit</mat-icon> </button>
     </div>
+    }@else {
+    <div [ngStyle]="{'display':'flex'}">
+        <button mat-icon-button type="button" (click)="save()" [disabled]="!is_valid()"> <mat-icon> save</mat-icon>
+        </button>
+        <button mat-flat-button type="button" (click)="annuler()" color="warn"> annuler </button>
+    </div>
+    }
 </ng-template>

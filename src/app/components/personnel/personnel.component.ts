@@ -7,17 +7,17 @@ import { tab_personnel } from '../../models/modeles';
 import { ArgumentOutOfRangeError } from 'rxjs';
 import { TaskService } from '../../task.service';
 import { set } from 'firebase/database';
+import { ModelTemplateComponent } from '../model-template/model-template.component';
 
 @Component({
   selector: 'app-personnel',
-  imports: [ImportedModule, PersoTemplateComponent],
+  imports: [ImportedModule, ModelTemplateComponent],
   templateUrl: './personnel.component.html',
   styleUrl: './personnel.component.scss'
 })
 export class PersonnelComponent implements OnInit {
 
   constructor(private _fb: NonNullableFormBuilder) {
-
     this.table_update_form2.get('presence')?.valueChanges.subscribe((presence) => {
       if (!presence) {
         this.presence.set(false);

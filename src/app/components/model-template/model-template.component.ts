@@ -1,21 +1,17 @@
-import { Component, computed, effect, input, linkedSignal, model, OnInit, output, signal, TemplateRef } from '@angular/core';
-import { ImportedModule } from '../../modules/imported/imported.module';
-import { FormSaisiComponent } from '../form-saisi/form-saisi.component';
-import { KeyValuePipe } from '@angular/common';
+import { Component, computed, effect, input, model, OnInit, output, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
-import { TableComponent } from '../table/table.component';
-import { link } from 'fs';
 import { tab_personnel } from '../../models/modeles';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ImportedModule } from '../../modules/imported/imported.module';
+import { FormSaisiComponent } from '../form-saisi/form-saisi.component';
 
 @Component({
-  selector: 'app-perso-template',
-  imports: [ImportedModule, FormSaisiComponent],
-  templateUrl: './perso-template.component.html',
-  styleUrl: './perso-template.component.scss'
+  selector: 'app-model-template',
+  imports: [ImportedModule,FormSaisiComponent],
+  templateUrl: './model-template.component.html',
+  styleUrl: './model-template.component.scss'
 })
-export class PersoTemplateComponent implements OnInit {
+export class ModelTemplateComponent implements OnInit {
   constructor() {
     effect(() => {
     })
@@ -23,12 +19,12 @@ export class PersoTemplateComponent implements OnInit {
   ngOnInit() {
     this.header_titles = Object.keys(this.displayedColumns());
   }
-  is_open = model<boolean>(false)
-  is_open2 = input<boolean>(false)
-  is_update = input<boolean>(false)
+  is_open = model<boolean>(false);
+  is_open2 = input<boolean>(false);
+  is_update = input<boolean>(false);
 
-  titre = input.required<TemplateRef<any>>();
-  pointage = input.required<TemplateRef<any>>();
+  titre = input.required<string>();
+  pointage = input<TemplateRef<any>|undefined>(undefined);
   table_update_form = input.required<FormGroup>();
   table = input()
   displayedColumns = input.required<any>()
@@ -36,7 +32,7 @@ export class PersoTemplateComponent implements OnInit {
   className = input<string>()
   action_template = input.required<TemplateRef<any>>();
   clicker = input.required<boolean[]>()
-  current_row = model<tab_personnel>()
+  current_row = model<any>()
 
   newItemEvent = output<any>()
   RechercheEvent = output<any>()
@@ -73,6 +69,7 @@ export class PersoTemplateComponent implements OnInit {
       this.clear_event.emit()
   }
   addElement() {
+    console.log('add element')
     this.addEvent.emit()
   }
   applyFilter(event: Event) {

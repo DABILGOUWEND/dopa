@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, computed, effect, inject, signal } from '@angular/core';
+import { Component, OnInit, ViewChild, computed, effect, inject, linkedSignal, model, signal } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, NonNullableFormBuilder } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Engins } from '../../models/modeles';
+import { Engins, Gasoil } from '../../models/modeles';
 import { GasoilStore, EnginsStore, ClasseEnginsStore, ApproGasoilStore, CompteStore, PannesStore, PersonnelStore, ProjetStore } from '../../store/appstore';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { SaisiComponent } from '../../utilitaires/saisi/saisi.component';
@@ -15,9 +15,10 @@ import { GasoilModelComponent } from '../gasoil-model/gasoil-model.component';
 import { TaskService } from '../../task.service';
 import { GasoilService } from '../../services/gasoil.service';
 import { sign } from 'node:crypto';
+import { FormSaisiComponent } from '../form-saisi/form-saisi.component';
 @Component({
     selector: 'app-gasoil',
-    imports: [ImportedModule, GasoilModelComponent],
+    imports: [ImportedModule,FormSaisiComponent],
     templateUrl: './gasoil.component.html',
     styleUrl: './gasoil.component.scss'
 })
@@ -52,7 +53,8 @@ export class GasoilComponent  implements OnInit{
   selectedEngin = signal<Engins | undefined>(undefined);
   titre_tableau = signal("Gestion du gasoil");
   appro_opened = signal(false)
-
+  is_update = signal(false);
+  current_row = model<any>()
   //others variables and consts
   formG2: FormGroup;
   displayedColumns: any = {
@@ -77,7 +79,6 @@ export class GasoilComponent  implements OnInit{
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator2: MatPaginator
   @ViewChild(MatSort) sort2: MatSort;
-
 //computed variables
   donnees_enginsByclass = computed(() => {
     if (this.selected_classe_id() === "") {
@@ -162,6 +163,8 @@ export class GasoilComponent  implements OnInit{
     let go = this._gasoil_store.datasource().map((x: any) => x.quantite_go);
     return this._service.somme(go)
   });
+
+  header_titles: string[] = [];
   table_update_form = this.fb.group({
     id: new FormControl(),
     numero: new FormControl(),
@@ -212,14 +215,14 @@ export class GasoilComponent  implements OnInit{
       data:   this.datacourbe()
 
     } })
-  
+    dataSource=linkedSignal(()=>this._gasoil_store.datasource())
   
   ngOnInit() {
     this.default_date.set(new Date());
     this.madate.set(new Date().toLocaleDateString());
     this._gasoil_store.setCurrentDate(this.madate());
 
-    
+      this.header_titles = Object.keys(this.displayedColumns)
    }
   addEvent(event: MatDatepickerInputEvent<any>) {
     this.default_date.set(event.value);
@@ -228,6 +231,9 @@ export class GasoilComponent  implements OnInit{
   }
   annuler() {
     this.table_update_form.reset();
+    this.current_row.set(undefined);
+    if (!this.is_update())
+      this.dataSource.update((data: any) => data.filter((x: any) => x.id != ""))
   }
   choix_date() {
     let cas = this.floatLabelControl.value;
@@ -262,16 +268,14 @@ export class GasoilComponent  implements OnInit{
       }
     }
   }
-  updateData(data: any) {
-    console.log(data)
-    let valeur = data[0];
-    let is_update = data[2];
-    if (is_update) {
+  updateData() {
+    let valeur = this.table_update_form.value;
+    if (this.is_update()) {
       let val_tr =
       {
         id: valeur.id,
         engin_id: valeur.engin_id,
-        date: valeur.date.toLocaleDateString(),
+        date: valeur.date?.toLocaleDateString(),
         quantite_go: Number(valeur.quantite_go),
         diff_work: 0,
         numero:   Number(valeur.numero),
@@ -283,7 +287,7 @@ export class GasoilComponent  implements OnInit{
       let val_tr =
       {
         engin_id: valeur.engin_id,
-        date: valeur.date.toLocaleDateString(),
+        date: valeur.date?.toLocaleDateString(),
         quantite_go: valeur.quantite_go,
         compteur: valeur.compteur ,
         diff_work: 0,
@@ -292,6 +296,7 @@ export class GasoilComponent  implements OnInit{
       this._gasoil_store.addconso(val_tr);
     }
   }
+
   deleteData(id: any) {
     if (confirm('voulez-vous supprimer cet élement?'))
       this._gasoil_store.removeconso(id)
@@ -344,13 +349,29 @@ export class GasoilComponent  implements OnInit{
       row
     )
   }
-  addEventFct() {
-    this.table_update_form.reset();
+  ajout() {
+    this.is_update.set(false);
     this.selected_compteur.set("ok");
     let dates = new Date();
-    this.table_update_form.get("date")?.setValue(dates);
+      let newdata: Gasoil = {
+          id: '',
+          engin_id: '',
+          date: dates.toLocaleDateString(),
+          quantite_go: 0,
+          compteur: 0,
+          diff_work: 0,
+          numero: 0
+        }
+        this.dataSource.update((data: any) => [newdata, ...data])
+        this.current_row.set(newdata)
+        this.table_update_form.reset();
+        this.table_update_form.get("date")?.setValue(dates);
   }
-
+  modif(data: any) {
+    this.is_update.set(true);
+    this.current_row.set(data);
+    this.table_update_form.patchValue(data);
+  }
   selectChangeEngin(data: any) {
     let engin = this._engins_store.donnees_engins().find(x => x.id === data);
     if (engin) {
@@ -385,5 +406,8 @@ export class GasoilComponent  implements OnInit{
   }
   close_appro() {
     this.appro_opened.set(false);
+  }
+  ChangeSelect(data: any, controle_name: any) {
+    
   }
 }

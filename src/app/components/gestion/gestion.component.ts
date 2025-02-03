@@ -2,7 +2,7 @@ import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { HomeTemplateComponent } from '../../utilitaires/home-template/home-template.component';
 import { AuthenService } from '../../authen.service';
-import { Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { EnginsStore, ClasseEnginsStore, PersonnelStore, ProjetStore, CompteStore, PannesStore, GasoilStore, ApproGasoilStore, StatutStore, TachesStore } from '../../store/appstore';
 import { TaskService } from '../../task.service';
 import { DataLoaderService } from '../../services/data-loader.service';
@@ -27,9 +27,15 @@ export class GestionComponent implements OnInit {
         this.end_of_load.set(false);
       }
     });
+    this.route.data.subscribe(data => {
+      this.titre.set(data['title']);
+    }
+    )
     
   }
-  constructor() {
+  constructor(
+    private route: ActivatedRoute
+  ) {
     effect(() => {
     })
   }

@@ -1,27 +1,34 @@
-import { Component, OnInit, computed, effect, inject, signal } from '@angular/core';
+import { Component, OnInit, computed, effect, inject, linkedSignal, signal } from '@angular/core';
 import { FormControl, Validators, NonNullableFormBuilder } from '@angular/forms';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { SaisiComponent } from '../../utilitaires/saisi/saisi.component';
 import { ClasseEnginsStore, CompteStore, EnginsStore, PersonnelStore, StatutStore } from '../../store/appstore';
 import { EssaiComponent } from '../essai/essai.component';
 import { AuthenService } from '../../authen.service';
+import { ModelTemplateComponent } from '../model-template/model-template.component';
+import { Engins } from '../../models/modeles';
 
 
 @Component({
-    selector: 'app-engins',
-    imports: [ImportedModule,EssaiComponent],
-    templateUrl: './engins.component.html',
-    styleUrl: './engins.component.scss'
+  selector: 'app-engins',
+  imports: [ImportedModule, ModelTemplateComponent],
+  templateUrl: './engins.component.html',
+  styleUrl: './engins.component.scss'
 })
 export class EnginsComponent implements OnInit {
   constructor() {
     effect(() => {
-    
+
     })
-   }
+  }
   ngOnInit() {
 
   }
+  current_row = signal<Engins | undefined>(undefined);
+  is_update = signal(false);
+  is_open = signal(false);
+  is_open2 = signal(false);
+
   EnginsStore = inject(EnginsStore);
   personnel_store = inject(PersonnelStore);
   classeEngins_store = inject(ClasseEnginsStore);
@@ -45,6 +52,9 @@ export class EnginsComponent implements OnInit {
     'utilisateur': 'UTILISATEUR',
     'actions': ''
   }
+  is_valid = computed(() => {
+    return (this.current_row()?.designation != '' && this.current_row()?.classe_id != '') || this.current_row() !== undefined
+  })
   titre_tableau = signal('Liste du matériel');
   table = computed(() => {
     let mytable =
@@ -89,6 +99,8 @@ export class EnginsComponent implements OnInit {
     return mytable
   })
 
+  clicker = linkedSignal(() => this.EnginsStore.donnees_engins().map(x => false))
+
   classe_select = computed(() => {
     let donnees: any = []
     this.classeEngins_store.classes_engins()
@@ -117,9 +129,9 @@ export class EnginsComponent implements OnInit {
       });
     return donnees
   })
-  dataSource = computed(
+  dataSource = linkedSignal(
     () => {
-      
+
       let donnees: any = []
       this.EnginsStore.donnees_engins().forEach(element => {
         let classe = this.classeEngins_store.classes_engins().find(x => x.id == element.classe_id)
@@ -140,24 +152,23 @@ export class EnginsComponent implements OnInit {
       return donnees
     }
   )
- 
+
   updateData(data: any) {
     let valeur = data[0]
     let current_row = data[1]
     let is_update = data[2]
     let mydata: any = []
 
-    if (is_update) {
-      mydata = {
+    if (this.is_update()) {
+      mydata = ({
+        ...this.current_row(),
         id: valeur.id,
         designation: valeur.designation,
         code_parc: valeur.code_parc,
         immatriculation: valeur.immatriculation,
         classe_id: valeur.classe_id,
-        utilisateur_id: valeur.utilisateur_id,
-        pannes:current_row.pannes,
-        gasoil:current_row.gasoil,
-      }
+        utilisateur_id: valeur.utilisateur_id
+      })
       this.EnginsStore.updateEngin(mydata);
     }
     else {
@@ -167,11 +178,12 @@ export class EnginsComponent implements OnInit {
         immatriculation: valeur.immatriculation,
         classe_id: valeur.classe_id,
         utilisateur_id: valeur.utilisateur_id,
-        pannes:[],
-        gasoil:[]
+        pannes: [],
+        gasoil: []
       }
       this.EnginsStore.addEngin(mydata);
     }
+    this.current_row.set(undefined);
   }
   deleteData(id: any) {
     if (confirm('voulez-vous supprimer cet élement?'))
@@ -189,6 +201,36 @@ export class EnginsComponent implements OnInit {
     )
   }
   addEventFct() {
+    console.log('addEventFct')
+    this.is_update.set(false);
+    let newdata: Engins = {
+      id: '',
+      designation: '',
+      code_parc: '',
+      immatriculation: '',
+      classe_id: '',
+      utilisateur_id: ''
+    }
+    this.dataSource.update((data: any) => [newdata, ...data])
+    this.current_row.set(newdata)
     this.table_update_form.reset();
+  }
+
+  save() {
+  }
+  annuler() {
+    this.current_row.set(undefined);
+  }
+
+  clear_fct() {
+    this.dataSource.update((data: any) => data.filter((x: any) => x.id != ""))
+  }
+
+  modifier(row: any, ind: number) {
+    this.current_row.set(row);
+    this.is_update.set(true);
+    this.table_update_form.patchValue(
+      row
+    );
   }
 }

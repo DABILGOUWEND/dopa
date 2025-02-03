@@ -1,13 +1,13 @@
 @defer (
 when personnel_store.isFulfilled()
 ) {
-<app-perso-template [table]="table()" [table_update_form]="table_update_form" [dataSource]="dataSource()"
+<app-model-template [table]="table()" [table_update_form]="table_update_form" [dataSource]="dataSource()"
     [displayedColumns]="displayedColumns" [className]="'personnel'" (newItemEvent)="updateData($event)"
     (RemoveItemEvent)="deleteData($event)" (RechercheEvent)="recherche($event)" (AfficheToutEvent)="afficheTout()"
-    [titre]="titre" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()" [action_template]="actiontemplate"
+    [titre]="titre_tableau()" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()" [action_template]="actiontemplate"
     (clear_event)="clear_fct()" [is_open2]="is_open2()" [(is_open)]="is_open" [pointage]="pointages"
     [clicker]="clicker()" [is_update]="is_update()" [(current_row)]="current_row">
-</app-perso-template>
+</app-model-template>
 }
 @placeholder {
 <div [ngStyle]="{'padding-top.px':200,'text-align':'center'}">

@@ -1,9 +1,9 @@
 @defer(on timer(1s);hydrate when !end_of_load()){
-<app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content" [title]="title"> 
+<app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content" [title]="title">
 </app-home-template>
 }
 @placeholder{
-<div [ngStyle]="{'padding-top.px':200}">
+<div class="spinner-container">
     <mat-spinner [ngStyle]="{'margin-left.%':50}"></mat-spinner>
 </div>
 }
@@ -42,30 +42,30 @@
             Gestion Gasoil
         </a>
     </li>
-    <li >
+    <li>
         <a routerLink="pannes" class="btn" (click)="titre.set('Déclaration des pannes')">
             Déclarationn de Pannes
         </a>
     </li>
-    <li >
+    <li>
         <a routerLink="pointages" class="btn" (click)="titre.set('Pointages du personnel')">
             Pointages personnel
         </a>
     </li>
-    <li >
+    <li>
         <a routerLink="personnel" class="btn" (click)="titre.set('Liste du personnel')">
             Liste du personnel
         </a>
     </li>
-    <li >
-        <a routerLink="engins" class="btn"  (click)="titre.set('Liste des engins')">
+    <li>
+        <a routerLink="materiel" class="btn" (click)="titre.set('Liste des engins')">
             Liste des engins
         </a>
     </li>
 </ng-template>
 
 <ng-template #title>
-    {{titre()}}
+    <h2>{{titre()}}</h2>
 </ng-template>
 <ng-template #content>
     <router-outlet>
