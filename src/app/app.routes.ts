@@ -84,7 +84,7 @@ export const routes: Routes = [
         component: GestionComponent, canActivate: [gestionGuard],
         children: [
             {
-                path: "", redirectTo: "/home_gestion/test", pathMatch: "full"
+                path: "", redirectTo: "/home_gestion/gasoil", pathMatch: "full"
             }
             ,
             {
