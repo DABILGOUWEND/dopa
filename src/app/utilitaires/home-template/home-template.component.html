@@ -77,14 +77,46 @@
             <!-- <ng-container [ngTemplateOutlet]="content()"> </ng-container> -->
 
             <div class="enteteG">
-                <div class="brand-logo gauche">
+              
+                <div class="hide-on-large-only">
+                    <button mat-icon-button (click)="sidnav.open()">
+                        <mat-icon>
+                            menu
+                        </mat-icon>
+                    </button>
+                </div>
+                <div class="hide-on-med-and-down">
                     <h2>
                         SOLUBTP
                     </h2>
                 </div>
             </div>
-            <div class="enteteM">
-                Milieu
+            <div class="enteteM ">
+                <div class="hide-on-large-only">
+                    <h2 >
+                        SOLUBTP
+                    </h2>
+                </div>
+                <div class="hide-on-med-and-down">
+                    <a routerLink="gasoil" class="btn" >
+                        Gestion Gasoil
+                    </a>
+                </div>
+                <div class="hide-on-med-and-down">
+                    <a routerLink="gasoil" class="btn" >
+                        Gestion des pannes
+                    </a>
+                </div>
+                <div class="hide-on-med-and-down">
+                    <a routerLink="gasoil" class="btn" >
+                        Liste du personnel
+                    </a>
+                </div>
+                <div class="hide-on-med-and-down">
+                    <a routerLink="gasoil" class="btn" >
+                        Liste des engins
+                    </a>
+                </div>
             </div>
             <div class="enteteD">
                 Droite
