@@ -321,12 +321,13 @@ export class TaskService {
   }
   updateApproGo(data: any): Observable<void> {
     let id = data.id
-    const docRef = doc(this.db, this._auth_service.current_projet_id() + '/appro_go/' + id)
+    const docRef = doc(this.db, 'comptes/' +this._auth_service.current_projet_id() + '/appro_go/' + id)
     const promise = setDoc(docRef, data)
     return from(promise)
   }
   deleteApproGo(id: string): Observable<void> {
-    const docRef = doc(this.db, this._auth_service.current_projet_id() + '/appro_go/' + id);
+    console.log(id)
+    const docRef = doc(this.db, 'comptes/' +this._auth_service.current_projet_id() + '/appro_go/' + id);
     const promise = deleteDoc(docRef)
     return from(promise)
   }

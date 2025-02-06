@@ -18,7 +18,7 @@ import { sign } from 'node:crypto';
 import { FormSaisiComponent } from '../form-saisi/form-saisi.component';
 @Component({
   selector: 'app-gasoil',
-  imports: [ImportedModule, FormSaisiComponent],
+  imports: [ImportedModule, FormSaisiComponent,ApprogoComponent],
   templateUrl: './gasoil.component.html',
   styleUrl: './gasoil.component.scss'
 })
@@ -28,11 +28,7 @@ export class GasoilComponent implements OnInit {
   //injections
   _engins_store = inject(EnginsStore);
   _classe_store = inject(ClasseEnginsStore);
-  _personnel_store = inject(PersonnelStore);
-  _projet_store = inject(ProjetStore);
-  _compte_store = inject(CompteStore);
   _task_service = inject(TaskService);
-  _pannes_store = inject(PannesStore);
   _gasoil_store = inject(GasoilStore);
   _appro_go = inject(ApproGasoilStore);
   _service: WenService = inject(WenService);
@@ -48,7 +44,7 @@ export class GasoilComponent implements OnInit {
   selectClasseName = signal("");
   default_date = signal(new Date());
   is_click_choix = signal(true);
-  floatLabelControl = new FormControl("tout");
+  floatLabelControl = signal("tout");
   date_choice = signal("tout");
   selectedEngin = signal<Engins | undefined>(undefined);
   titre_tableau = signal("Gestion du gasoil");
@@ -57,6 +53,7 @@ export class GasoilComponent implements OnInit {
   current_row = model<any>()
   //others variables and consts
   formG2: FormGroup;
+
   displayedColumns: any = {
     'date': 'DATE',
     'designation': 'DESIGNATION',
@@ -177,6 +174,14 @@ export class GasoilComponent implements OnInit {
   })
   constructor(
   ) {
+    this.formG2 = this.fb.group({
+      date_debut: new FormControl(new Date(), Validators.required),
+      date_fin: new FormControl(new Date(), Validators.required)
+    });
+
+    effect(() => {
+      console.log(this.chartOptions())
+    })
   }
   datacourbe = computed(() => {
     return [{
@@ -186,6 +191,22 @@ export class GasoilComponent implements OnInit {
       dataPoints: this._gasoil_store.historique_consogo()[0]
     }]
   })
+  historique_conso = computed(() => {
+    let unique_dates = [...new Set(this._gasoil_store.datasource().map(x => x.date))].reverse();
+    console.log(unique_dates)
+    let donnees:any=[];
+    unique_dates.forEach(element => {
+      let data = this._gasoil_store.datasource().filter(x => x.date === element)
+      let quantite = data.map(x => Number(x.quantite_go)).reduce((a, b) => a + b)
+      donnees.push({
+        x: this._service.convertDate(element),
+        y: quantite
+      })
+      
+    });
+    return donnees;
+  })
+
   chartOptions = computed(() => {
     return {
       title: {
@@ -230,7 +251,7 @@ export class GasoilComponent implements OnInit {
       this.dataSource.update((data: any) => data.filter((x: any) => x.id != ""))
   }
   choix_date() {
-    let cas = this.floatLabelControl.value;
+    let cas = this.floatLabelControl();
     switch (cas) {
       case "date":
         this.date_choice.set("date");

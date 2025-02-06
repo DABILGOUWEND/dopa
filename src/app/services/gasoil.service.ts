@@ -10,16 +10,6 @@ export class GasoilService {
   _service = inject(WenService);
   _engins_store = inject(EnginsStore);
   _gasoil_store = inject(GasoilStore);
-  datacourbe = computed(()=>{ return [{
-    type: "column", //change type to bar, line, area, pie, etc
-    indexLabel: "{y}", //Shows y value on all Data Points
-    indexLabelFontColor: "#5A5757",
-    dataPoints: this._gasoil_store.historique_consogo()[0]
-  }]})
-
-  constructor() {
-  }
-
   rapport_gasoil(
     choix_date: string,
     mydata: any,
@@ -273,29 +263,4 @@ export class GasoilService {
     doc.save('rapportGo' + new Date().getTime() + '.pdf');
   }
 
-  chartOptions = computed(() => {
-    var mydata = this._gasoil_store.historique_consogo()[0];
-    return {
-      title: {
-        text: "Historique consommation gasoil"
-      },
-      theme: "light2",
-      animationEnabled: true,
-
-      axisX: {
-        title: "Date",
-        gridThickness: 1,
-        tickLength: 10
-      },
-      axisY: {
-        title: "Gasoil(l)",
-        gridThickness: 1,
-        tickLength: 10,
-        includeZero: true
-
-      },
-      data: this.datacourbe()
-    }
-  }
-  )
 } 

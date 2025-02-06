@@ -1,7 +1,7 @@
 <ng-container [ngTemplateOutlet]="Corps">
 </ng-container>
 <ng-template #Corps>
-    <div class="entete">
+    <div class="titre">
         <h2>{{titre()}}</h2>
     </div>
     <div class="corps">
@@ -53,8 +53,9 @@
             <tr mat-row *matRowDef="let row; columns: header_titles;let index = index"
                 [ngStyle]="{'background-color':row==current_row()?'#F5FFFA':'','display':row==current_row()?'none':''}">
             </tr>
-            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row" [ngStyle]="{'display':row!=current_row()?'none':'',
-                'background-color':'gray'
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row" 
+            [ngStyle]="{'display':row!=current_row()?'none':'',
+                'background-color':'#F5FFFA'
             }"></tr>
         </table>
     </div>
@@ -109,7 +110,6 @@
                 <input [ngStyle]="{
                 'border-radius.px':100,
                 'border':'1px solid #00bcd4',
-                'width.%':50,
                 'font-size.px':20,
                 'margin-top':'2.5rem'}"
                  matInput (keyup)="applyFilter($event)" #input placeholder="rechercher">

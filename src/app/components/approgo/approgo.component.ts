@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, computed, inject, input, output, signal } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, computed, inject, input, linkedSignal, output, signal } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -6,6 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ImportedModule } from '../../modules/imported/imported.module';
 import { ApproGasoilStore } from '../../store/appstore';
 import { appro_gasoil } from '../../models/modeles';
+import { WenService } from '../../wen.service';
+import { app } from '../../../../server';
 
 
 @Component({
@@ -16,19 +18,23 @@ import { appro_gasoil } from '../../models/modeles';
 })
 export class ApprogoComponent  implements OnInit{
   
-  readonly approgo_store = inject(ApproGasoilStore);
-  
+  approgo_store = inject(ApproGasoilStore);
   formGroup: FormGroup
   displayedColumns: string[] = ['date', 'quantite', 'reception', 'actions']
-  datasource = computed(
-    () => new MatTableDataSource<appro_gasoil>(this.approgo_store.datasource()),
+  donnees= linkedSignal(
+    () => this.approgo_store.datasource(),
   );
+  datasource = computed(
+    () => new MatTableDataSource<appro_gasoil>(this.donnees()),
+  );
+  current_row= signal<appro_gasoil|undefined>(undefined)
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort;
-  is_new_row_being_added=signal<boolean>(true);
+  is_update=signal<boolean>(true);
   onRowAdd = output()
   default_date = new Date()
   constructor(
+    private _service:WenService,
     fb: FormBuilder
   ) {
     this.formGroup = fb.group({
@@ -43,7 +49,7 @@ export class ApprogoComponent  implements OnInit{
   updateTableData() {
     if (this.formGroup.valid) {
       let valeur = this.formGroup.value;
-      if (this.is_new_row_being_added()) {
+      if (!this.is_update()) {
         let val_tr:appro_gasoil = {
           id:'',
           date: valeur.date.toLocaleDateString(),
@@ -67,28 +73,40 @@ export class ApprogoComponent  implements OnInit{
         quantite:0,
         reception:''
       })
+      this.current_row.set(undefined)
     }
   }
   addappro() {
-    this.is_new_row_being_added.set(true)
+    this.is_update.set(false)
+    let dates = new Date();
+    let newdata:appro_gasoil = {
+      id: '',
+      date: dates.toLocaleDateString(),
+      quantite: 0,
+      reception: ''
+    }
+    this.donnees.update((data:any) => [newdata, ...data])
+    this.current_row.set(newdata)
+    this.formGroup.reset()
+    this.formGroup.get("date")?.setValue(dates);
   }
   editappro(appro: any) {
-    let temp=appro.date
-    const [day,month,year]=temp.split("/")
-    const date= new Date(+year,+month-1,+day)
-    this.is_new_row_being_added.set(false)
-    this.formGroup.patchValue({
-      id:appro.id,
-      date:date,
-      quantite:appro.quantite,
-      reception:appro.reception
-    })
+    this.is_update.set(true)
+    let dates = this._service.convertDate(appro.date);
+    this.formGroup.patchValue({ ...appro, date: dates }
+    )
+    this.current_row.set(appro);
   }
   deleteappro(id: string) {
     if (confirm('voulez-vous supprimer cet élement?'))
     this.approgo_store.removeappro(id)
   }
-  annuler() { }
+  annuler() {
+    this.current_row.set(undefined)
+    this.formGroup.reset()
+    if (!this.is_update())
+      this.donnees.update((data: any) => data.filter((x: any) => x.id != ""))
+   }
   quitter() {
     this.formGroup.patchValue({
       id:'',
