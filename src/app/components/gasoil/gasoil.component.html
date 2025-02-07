@@ -1,5 +1,5 @@
 <div class="titre">
-zezezezzeze
+    <h2> Gestiondu gasoil</h2>
 </div>
 <div class="reste_corps">
     <mat-drawer-container class="wen-table-drawer-container">
@@ -77,7 +77,8 @@ zezezezzeze
                             <mat-label>
                                 Engins
                             </mat-label>
-                            <mat-select [(value)]="selected_engin_id" (selectionChange)="selectChangeEngin($event.value)">
+                            <mat-select [(value)]="selected_engin_id"
+                                (selectionChange)="selectChangeEngin($event.value)">
                                 <mat-option value="">
                                     --tous les engins</mat-option>
                                 <mat-option *ngFor="let row of donnees_enginsByclass()" [value]="row.id">
@@ -90,7 +91,8 @@ zezezezzeze
                     <div class="icon-block">
                         <h2 [ngStyle]="{'font-size.px':22,'font-weight':'bold'}"> Stock gasoil
                             (litre):{{_appro_go.quantite_go()-_gasoil_store.quantite_go()-834}}</h2>
-                        <button mat-flat-button color="primary" (click)="open_appro()" [ngStyle]="{'margin-bottom.px':10}">
+                        <button mat-flat-button color="primary" (click)="open_appro()"
+                            [ngStyle]="{'margin-bottom.px':10}">
                             Nouvel appro gasoil
                         </button>
                     </div>
@@ -107,9 +109,10 @@ zezezezzeze
                     </button>
                 </div>
                 <div class="gasoil6">
-    
+
                     <button [ngStyle]="{'margin-bottom':'1rem','margin-top':'1rem'}" (click)="ajout()" mat-flat-button
-                        color="primary" matTooltip="Ajouter nouveau" matTooltipPosition="left" aria-label="Ajouter nouveau">
+                        color="primary" matTooltip="Ajouter nouveau" matTooltipPosition="left"
+                        aria-label="Ajouter nouveau">
                         <span class="material-icons">
                             playlist_add
                         </span>
@@ -158,26 +161,27 @@ zezezezzeze
                                                 [ngStyle]="{'margin-bottom.px':15,'width.%':60}">annuler</button>
                                         </div>
                                     </div>
-    
+
                                 </form>
-    
+
                             </td>
                         </ng-container>
                         <tr mat-header-row *matHeaderRowDef="header_titles"></tr>
                         <tr mat-row *matRowDef="let row; columns: header_titles;let index = index"
                             [ngStyle]="{'display':row==current_row()?'none':''}"></tr>
-                        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row" [ngStyle]="{'display':row!=current_row()?'none':'',
+                        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"
+                            [ngStyle]="{'display':row!=current_row()?'none':'',
                                 'background-color':'#f5f5f5'
                             }"></tr>
                     </table>
                 </div>
             </div>
         </mat-drawer-content>
-    
+
     </mat-drawer-container>
 </div>
-   
-    
+
+
 
 
 
