@@ -37,31 +37,31 @@
     </li>
 </ng-template>
 <ng-template #toolbar>
-    <li>
+    <div class="hide-on-med-and-down">
         <a routerLink="gasoil" class="btn" (click)="titre.set('Gestion Gasoil')">
             Gestion Gasoil
         </a>
-    </li>
-    <li>
+    </div>
+    <div class="hide-on-med-and-down">
         <a routerLink="pannes" class="btn" (click)="titre.set('Déclaration des pannes')">
             Déclarationn de Pannes
         </a>
-    </li>
-    <li>
+    </div>
+    <div class="hide-on-med-and-down">
         <a routerLink="pointages" class="btn" (click)="titre.set('Pointages du personnel')">
             Pointages personnel
         </a>
-    </li>
-    <li>
+    </div>
+    <div class="hide-on-med-and-down">
         <a routerLink="personnel" class="btn" (click)="titre.set('Liste du personnel')">
             Liste du personnel
         </a>
-    </li>
-    <li>
+    </div>
+    <div class="hide-on-med-and-down">
         <a routerLink="materiel" class="btn" (click)="titre.set('Liste des engins')">
             Liste des engins
         </a>
-    </li>
+    </div>
 </ng-template>
 
 <ng-template #title>
@@ -70,4 +70,4 @@
 <ng-template #content>
     <router-outlet>
     </router-outlet>
-</ng-template>
+</ng-template>  

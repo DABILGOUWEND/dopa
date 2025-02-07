@@ -94,7 +94,7 @@ export const routes: Routes = [
             {
                 path: "gasoil",
                 component: GasoilComponent,
-                data: { title: "Gestion de Gasoil" }
+                data: { title: "Gestion de GasoDDDil" }
 
             },
             {
