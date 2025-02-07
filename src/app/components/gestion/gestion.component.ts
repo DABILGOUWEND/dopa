@@ -28,7 +28,7 @@ export class GestionComponent implements OnInit {
       }
     });
     this.route.data.subscribe(data => {
-      this.titre.set(data['title']);
+      this.titre.set( this.route.snapshot.data['title']);
     }
     )
     

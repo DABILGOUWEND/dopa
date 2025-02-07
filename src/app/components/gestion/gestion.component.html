@@ -65,9 +65,11 @@
 </ng-template>
 
 <ng-template #title>
-    <h2>'kddkk'</h2>
+    <h2>{{titre()}}</h2>
 </ng-template>
 <ng-template #content>
-    <router-outlet>
-    </router-outlet>
+    <div class="corps">
+        <router-outlet>
+        </router-outlet>
+    </div>
 </ng-template>  
