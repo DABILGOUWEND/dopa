@@ -97,9 +97,9 @@
                 <ng-container [ngTemplateOutlet]="toolbar()"> </ng-container>
             </div>
             <div class="entete_droite">
-                <div >
+                <div>
                     @if(_auth_service.userSignal()){
-                    <h2 >
+                    <h2>
                         {{ _auth_service.userSignal()?.username}}
                     </h2>
                     }
@@ -117,11 +117,10 @@
                 </div>
             </div>
             <div class="titre">
-                <ng-container [ngTemplateOutlet]="title()"> </ng-container>
+                <h2> ldldld</h2>
             </div>
-            <div class="corps">
                 <ng-container [ngTemplateOutlet]="content()"> </ng-container>
-            </div>
+           
             <div class="piedpage">
                 <div class="row">
                     <div class="col l6 s12"
