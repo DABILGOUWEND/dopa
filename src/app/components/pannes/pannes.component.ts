@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Engins } from '../../models/modeles';
+import { Engins, Pannes } from '../../models/modeles';
 import { PannesStore, EnginsStore } from '../../store/appstore';
 import { WenService } from '../../wen.service';
 import { ImportedModule } from '../../modules/imported/imported.module';
@@ -30,6 +30,7 @@ export class PannesComponent {
   @ViewChild(MatSort) sort: MatSort;
   engin=signal<Engins|undefined>(undefined);
   open_tab_pannes=signal(false);
+  current_row = signal<Pannes|undefined>(undefined);
   engins_panne: string[] = [];
   engins_panne_en_cours:string[] = [];
   displayedColumns: string[] = ['code_parc', 'designation', 'id', 'actions'];
