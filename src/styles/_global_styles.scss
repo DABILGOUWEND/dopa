@@ -2536,29 +2536,7 @@ wen-table:make-gold {
             background-color: #76b5f4;
           }
 
-          .ligne_expand {
-            display: flex;
-            margin-left: 10%;
-            margin-right: 10%;
-            width: 80%;
-            border-bottom: 2px solid rgb(161, 164, 164);
-
-            h3 {
-              font-size: 14px;
-
-            }
-
-            button {
-              margin-left: 10px;
-              margin-top: 5px;
-            }
-          }
-
-
-          .ligne_expand:hover {
-            background-color: #d2ccc4;
-
-          }
+       
         }
 
       }

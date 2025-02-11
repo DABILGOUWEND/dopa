@@ -12,13 +12,13 @@
                 <div *ngIf="datespointage().includes(madate())">
                     <div *ngFor="let row of personnel_store.no_pointage();let i=index">
                         <mat-checkbox [checked]="row.ischecked" (change)="is_checked2(i)">
-                            <h3> {{row.names.nom +' '+row.names.prenom}} </h3>
+                            <h3 [ngStyle]="{'font-size.px':12}"> {{row.names.nom +' '+row.names.prenom}} </h3>
                         </mat-checkbox>
                     </div>
                     <div class="actions">
                         <button mat-flat-button color="primary" [disabled]="!personnel_store.ischecked().includes(true)"
-                            (click)="ajouter()"> Ajouter au
-                            pointage</button>
+                            (click)="ajouter()">
+                            Ajouter au pointage</button>
                     </div>
 
                 </div>
@@ -35,11 +35,11 @@
                 <div class="lat_bas">
                     <div class="hide-on-med-and-down">
                         <div class="titre">
-                            <h2>POINTAGES EFFECTUES</h2>
+                            <h2>Pointages effectutés</h2>
                         </div>
                         @for(node of personnel_store.getDates()[1];track $index; let index = $index){
                         <div
-                            [style]="{'background-color':'#D2D2D2','display':'flex','width.px':500,'border': '1px solid'}">
+                            [style]="{'background-color':'#D2D2D2','display':'flex','width.%':80,'border': '1px solid'}">
                             <button mat-icon-button (click)="expander(index)"
                                 [ngStyle]="{'margin-left.px':10,'margin-top.px':20}">
                                 @if(tab_expander()[index]){
@@ -58,12 +58,13 @@
                         @for(row of node.children;;track $index){
                         <div (click)="afficher(row.name)"
                             [ngClass]="{'row_hide':tab_expander()[index] ,'ligne_expand':!tab_expander()[index]}"
-                            [ngStyle]="{'margin-left.px':50}">
+                            [ngStyle]="{'border': '1px solid','background-color':'#F5F5F5'}">
                             <h3 [ngStyle]="{'font-size.px':16,'font-weight':'bold','margin-left.px':40}"> {{row.name}}
                             </h3>
                             <button mat-icon-button (click)="deletedate(row.name)"
                                 [ngStyle]="{'margin-left.px':40}"><mat-icon>
-                                    delete</mat-icon> </button>
+                                    delete</mat-icon>
+                            </button>
                         </div>
 
                         }
@@ -153,7 +154,7 @@
                 </div>
                 <div class="barre_haut2">
                     <div class="row ">
-                        <div class="col s12 l2 right">
+                        <div class="col s3 l2 right">
                             <button mat-flat-button color="primary" (click)="ouvriliste()" [ngStyle]="{'width.%':100}">
                                 Ajouter personnel </button>
                         </div>
@@ -181,7 +182,6 @@
                                 {{element.prenom}}
                             </td>
                         </ng-container>
-
                         <ng-container matColumnDef="fonction">
                             <th mat-header-cell *matHeaderCellDef> FONCTION
 
@@ -225,7 +225,7 @@
                         <ng-container matColumnDef="actions">
                             <th mat-header-cell *matHeaderCellDef></th>
                             <td mat-cell *matCellDef="let row;let i=index">
-                                <div *ngIf="row.presence==true">
+                                <div *ngIf="row.Mpresence==true">
                                     <button mat-icon-button (click)="editperso(row)"><mat-icon>edit</mat-icon></button>
                                 </div>
                                 <button mat-icon-button (click)="exclure(row)"><mat-icon>clear</mat-icon></button>
@@ -237,7 +237,7 @@
                                 <form [formGroup]="table_update_form" (ngSubmit)="updateTableData()">
                                     <div class="row center">
                                         <div class="col s12 l12">
-                                            <mat-form-field [ngStyle]="{'width.%':20}">
+                                            <mat-form-field>
                                                 <mat-label>
                                                     Nombre d'heures travaillé
                                                 </mat-label>
@@ -246,7 +246,7 @@
                                             </mat-form-field>
                                         </div>
                                         <div class="col s12 l12">
-                                            <mat-form-field [ngStyle]="{'width.%':20}">
+                                            <mat-form-field>
                                                 <mat-label>
                                                     Nombre d'Heures sup
                                                 </mat-label>
@@ -272,11 +272,8 @@
 
                                     </div>
                                 </form>
-
                             </td>
                         </ng-container>
-
-
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;let i=index;"
                             [ngClass]="{'heuresup':row.heure_sup>0,'absent':row.Mpresence==false}">

@@ -39,7 +39,7 @@ export class PointageComponent implements OnInit {
     effect(() => {
     })
   }
-  //signalsfff
+  //signals
   tab_expander = signal<boolean[]>([]);
   current_expanded = signal(false);
   nbre_hs = signal(0);
@@ -53,11 +53,7 @@ export class PointageComponent implements OnInit {
   ind = signal(0);
   default_date = signal(new Date());
   selectedData = signal<tab_personnel | undefined>(undefined);
-  personnel_data = signal({
-    nom: '',
-    prenom: '',
-    fonction: ''
-  })
+
   current_date = signal(new Date().toLocaleDateString())
   allComplete = signal(false);
   current_pointage=signal<any>(undefined)
@@ -99,10 +95,6 @@ export class PointageComponent implements OnInit {
     return this.personnel_store.getDates()[0];
   })
 
-  datespointageClass = computed(() => {
-    return this._service.classement(this.datespointage())
-  })
-
   node_children = computed(() => {
     if(this.current_pointage()!==undefined){
     return this.current_pointage().children
@@ -114,24 +106,12 @@ export class PointageComponent implements OnInit {
 
   //methods
   ngOnInit() {
-    this.personnel_store.loadPersonnel();
     this.madate.set(this.default_date().toLocaleDateString());
     this.personnel_store.filtrebyDate(this.madate());
     this.tab_expander.set(new Array(this.personnel_store.getDates()[1].length).fill(true))
   }
   editperso(row: tab_personnel) {
     let index=this.personnel_store.data_pointage().map((x:any)=>x.id).indexOf(row.id);
-    this.personnel_data.update(
-      person =>
-      (
-        {
-          ...person,
-          nom: row.nom,
-          prenom: row.prenom,
-          fonction: row.fonction
-        }
-      )
-    );
     this.selectedData.set(row);
     this.ind.set(index);
     this.table_update_form.patchValue({
@@ -181,7 +161,6 @@ export class PointageComponent implements OnInit {
   }
   annuler() {
     this.current_row.set(undefined)
-
   }
   updateTableData() {
     if (this.table_update_form.valid) {
