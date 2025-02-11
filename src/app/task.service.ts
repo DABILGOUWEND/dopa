@@ -142,7 +142,7 @@ export class TaskService {
   removePerson(row: tab_personnel, date: string): Observable<void> {
     let initdate = row.dates
     let ind = initdate.indexOf(date)
-
+console.log(row)
     let initheurenor = row.heuresN
     let initheuresup = row.heureSup
     let initpresence = row.presence

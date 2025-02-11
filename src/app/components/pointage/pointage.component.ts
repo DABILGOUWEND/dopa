@@ -14,6 +14,7 @@ import { ThemePalette } from '@angular/material/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { Console } from 'node:console';
+import { sign } from 'node:crypto';
 
 @Component({
     selector: 'app-pointage',
@@ -58,8 +59,9 @@ export class PointageComponent implements OnInit {
     fonction: ''
   })
   current_date = signal(new Date().toLocaleDateString())
-  allComplete = signal(false)
-
+  allComplete = signal(false);
+  current_pointage=signal<any>(undefined)
+  current_row=signal<any>(undefined)
   table_update_form: FormGroup;
   formG: FormGroup;
   displayedColumns: string[] = ['nom', 'prenom', 'fonction', 'presence', 'nbre_heure', 'heure_sup', 'actions']
@@ -88,7 +90,7 @@ export class PointageComponent implements OnInit {
           (this.personnel_store.data_pointage())
       }
       else {
-        return new MatTableDataSource<tab_personnel>()
+        return new MatTableDataSource<tab_personnel>([])
       }
     }
   );
@@ -101,6 +103,14 @@ export class PointageComponent implements OnInit {
     return this._service.classement(this.datespointage())
   })
 
+  node_children = computed(() => {
+    if(this.current_pointage()!==undefined){
+    return this.current_pointage().children
+    }else
+    {
+      return []
+    }
+  })
 
   //methods
   ngOnInit() {
@@ -109,8 +119,8 @@ export class PointageComponent implements OnInit {
     this.personnel_store.filtrebyDate(this.madate());
     this.tab_expander.set(new Array(this.personnel_store.getDates()[1].length).fill(true))
   }
-  editperso(row: tab_personnel, index: number) {
-    this.is_table_being_updated.set(true);
+  editperso(row: tab_personnel) {
+    let index=this.personnel_store.data_pointage().map((x:any)=>x.id).indexOf(row.id);
     this.personnel_data.update(
       person =>
       (
@@ -128,20 +138,22 @@ export class PointageComponent implements OnInit {
       heureNorm: this.personnel_store.heures_normale()[index],
       heureSup: this.personnel_store.heures_sup()[index]
     })
+    this.current_row.set(row)
   }
   someComplete(): boolean {
-    if (!this.personnel_store.mytasks().subtasks) {
+    let sub =this.personnel_store.data_pointage().map((x:any)=>x.substask)
+    if (!sub) {
       return false;
     }
-    return this.personnel_store.mytasks().subtasks.filter((t: any) => t.completed).length > 0 && !this.allComplete();
+    return sub.filter((t: any) => t.completed).length > 0 && !this.allComplete();
   }
   setAll(completed: boolean) {
     this.allComplete.set(completed);
     this.personnel_store.ModifMultiPersonnel(completed);
   }
-  is_checked(row: tab_personnel, ind: number) {
+  is_checked(row:any, ind: number) {
     this.selectedData.set(row);
-    let a = this.personnel_store.mytasks().subtasks[ind].completed;
+    let a = row.substask.completed;
     let data = this.selectedData();
     let rep = !a;
     if (data) {
@@ -168,7 +180,8 @@ export class PointageComponent implements OnInit {
 
   }
   annuler() {
-    this.is_table_being_updated.set(false);
+    this.current_row.set(undefined)
+
   }
   updateTableData() {
     if (this.table_update_form.valid) {
@@ -582,9 +595,12 @@ export class PointageComponent implements OnInit {
     var rep = this.tab_expander()[index];
     this.tab_expander.update((tab) => tab.map((x, i) => i == index ? !rep : x))
   }
-  print(index: number) {
-    this.debut_date.set(this.personnel_store.getDates()[1][index].debut);
-    this.fin_date.set(this.personnel_store.getDates()[1][index].fin);
+  print(node: any) {
+    this.debut_date.set(node.debut);
+    this.fin_date.set(node.fin);
     this.impression();
+  }
+  change_pointage(){
+   
   }
 }

@@ -36,6 +36,7 @@ import { PassThrough } from "node:stream";
 import { ComptesDateInitService } from "../services/comptes-date-init.service";
 import { error } from "node:console";
 import { setFulfilled, setPending, withRequestStatus } from "./request-status.feature";
+import e from "express";
 const initialGasoilState: gasoilStore = {
     conso_data: [],
     err: null,
@@ -744,16 +745,13 @@ export const PersonnelStore = signalStore(
                     personnel.forEach((element) => {
                         let dates = element.dates;
                         let presence = element.presence;
-
                         let index = dates.indexOf(store.current_date());
-
                         if (index > 0) {
                             data.push({
                                 name: presence[index] ? "présent" : "absent",
                                 completed: element.presence[index],
                             })
                         }
-
                     });
                 }
 
@@ -816,17 +814,50 @@ export const PersonnelStore = signalStore(
 
             data_pointage: computed(() => {
 
+                let date = store.current_date()
                 let donnees = store.personnel_data();
                 let data: tab_personnel[] = [];
+                let mydata: any = []
                 if (store.is_finished()) {
-                    donnees.forEach(element => {
-                        let dates = element.dates;
-                        if (dates.includes(store.current_date()))
-                            data.push(element)
+                    data = donnees.filter(x => x.dates.includes(date))
+                    data.forEach(element => {
+                        
+                        let mydates = element.dates
+                        let heureS = element.heureSup;
+                        let heureN = element.heuresN;
+                        let presenceN = element.presence;
+                        let ind = mydates.lastIndexOf(date)
+                        if (ind != -1) {
+                            mydata.push({
+                                ...element,
+                                heure_normale: heureN[ind],
+                                heure_sup: heureS[ind],
+                                Mpresence: presenceN[ind],
+                                substask: {
+                                    name: presenceN[ind] ? "présent" : "absent",
+                                    completed: presenceN[ind]
+                                }
+                            })
+                        }
+                        else {
+                            mydata.push({
+                                ...element,
+                                heure_normale: 0,
+                                heure_sup: 0,
+                                Mpresence: true
+                                ,
+                                substask: {
+                                    name: presenceN[ind] ? "présent" : "absent",
+                                    completed: presenceN[ind]
+                                }
+    
+                            })
+                        }
                     });
+    
                 }
-
-                return data
+               
+                return mydata
             }),
             donnees_personnelById: computed(() => {
                 var ind = store.selectedId
@@ -1178,11 +1209,11 @@ export const GasoilStore = signalStore(
                 var madate = store.selectedDate();
                 let donnees_gasoil: Gasoil[];
                 let unique_dates = classement(store.conso_data().map(x => x.date).filter((value, index, self) => self.indexOf(value) === index))
-               let dates= unique_dates.filter(x => {
+                let dates = unique_dates.filter(x => {
                     return convertDate(x).setHours(0, 0, 0, 0) >= convertDate(unique_dates[9]).setHours(0, 0, 0, 0)
-                }  )
+                })
                 if (madate[0] === '') {
-                    donnees_gasoil = myconso2.filter(x=>dates.includes(x.date));
+                    donnees_gasoil = myconso2.filter(x => dates.includes(x.date));
                 }
                 else {
                     if (madate.length === 1) {

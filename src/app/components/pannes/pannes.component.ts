@@ -1,4 +1,4 @@
-import { Component, ViewChild, computed, effect, inject, signal } from '@angular/core';
+import { Component, ViewChild, computed, effect, inject, linkedSignal, signal } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -12,33 +12,64 @@ import { PannesService } from '../../services/pannes.service';
 
 
 @Component({
-    selector: 'app-pannes',
-    imports: [ImportedModule, TablePanneComponent],
-    templateUrl: './pannes.component.html',
-    styleUrl: './pannes.component.scss'
+  selector: 'app-pannes',
+  imports: [ImportedModule, TablePanneComponent],
+  templateUrl: './pannes.component.html',
+  styleUrl: './pannes.component.scss'
 })
 export class PannesComponent {
   _pannestore = inject(PannesStore);
   _enginStore = inject(EnginsStore);
   _app_service = inject(WenService);
-  _pannes_service=inject(PannesService)
+  _pannes_service = inject(PannesService)
   datasource = computed(
-    () => new MatTableDataSource<Engins>(this._enginStore.donnees_engins()),
+    () => new MatTableDataSource<Engins>(this.heure_pannes()),
   );
+  heure_pannes = computed(() => {
+    let donnees = this._enginStore.donnees_engins();
+    let engins_id = this._pannestore.donnees_pannes().map(x => x.engin_id);
+    let h_pannes: any = [];
+    donnees.forEach(element => {
+      if (engins_id.includes(element.id)) {
+        let filtre1 = this._pannestore.donnees_pannes().filter(x => x.engin_id === element.id);
+        let rep1 = filtre1.find(x => x.situation === 'garage');
+        if (rep1) {
+          h_pannes.push(
+            {
+              ...element,
+              h_panne: this._app_service.calculateDiff1(this._app_service.convertDate(rep1.debut_panne), rep1.heure_debut)
+            }
+          );
+        }
+        else {
+          h_pannes.push({
+            ...element,
+            h_panne: ""
+          });
+        }
+      }
+      else {
 
+        h_pannes.push({
+          ...element,
+          h_panne: 0
+        });
+      }
+    });
+    return h_pannes
+  })
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort;
-  engin=signal<Engins|undefined>(undefined);
-  open_tab_pannes=signal(false);
-  current_row = signal<Pannes|undefined>(undefined);
-  engins_panne: string[] = [];
-  engins_panne_en_cours:string[] = [];
+  engin = signal<Engins | undefined>(undefined);
+  open_tab_pannes = signal(false);
+  current_row = signal<Pannes | undefined>(undefined);
+  engins_panne = linkedSignal(() => this._pannestore.donnees_pannes().map(x => x.engin_id));
+  engins_panne_en_cours = linkedSignal(() => this._pannestore.donnees_pannes().filter(x => x.situation == "garage").map(x => x.engin_id));
   displayedColumns: string[] = ['code_parc', 'designation', 'id', 'actions'];
   constructor(
   ) {
     effect(() => {
-      this.engins_panne = this._pannestore.donnees_pannes().map(x => x.engin_id)
-      this.engins_panne_en_cours = this._pannestore.donnees_pannes().filter(x => x.situation == "garage").map(x => x.engin_id);
+
     })
   }
   ngOnInit() {

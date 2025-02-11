@@ -114,21 +114,15 @@
                                 <div class="col s12 l12">
                                     <mat-radio-group aria-label="situation de la panne"
                                         formControlName="situation" (change)="choix_situation()">
-                                        <mat-radio-button [value]="1" [checked]="true">Panne en
+                                        <mat-radio-button [value]="1" [checked]="selected()==='1'">Panne en
                                             cours</mat-radio-button>
-                                        <mat-radio-button [value]="2">Engin
+                                        <mat-radio-button [value]="2" [checked]="selected()==='2'">Engin
                                             dépanné</mat-radio-button>
                                     </mat-radio-group>
                                 </div>
-                                <div>
-                                    {{element.situation}}
-                                    {{formG.get('heure_debut')?.valid}}
-                                    {{formG.get('fin_panne')?.valid}}
-                                    {{formG.get('heure_fin')?.valid}}
-                                </div>
                             </div>
                             <div class="row">
-                                <div class="col s12 l6" [hidden]="element.situation=='garage'">
+                                <div class="col s12 l6" [hidden]="selected()=='1'">
                                     <mat-form-field>
                                         <mat-label> DATE FIN PANNE</mat-label>
                                         <input matInput [matDatepicker]="datepicker2" formControlName="fin_panne"
@@ -145,7 +139,7 @@
                                         </mat-datepicker>
                                     </mat-form-field>
                                 </div>
-                                <div class="col s12 l6" [hidden]="element.situation=='garage'">
+                                <div class="col s12 l6"  [hidden]="selected()=='1'">
                                     <mat-form-field>
                                         <mat-label> HEURE FIN PANNE</mat-label>
                                         <input matInput formControlName="heure_fin" [format]="24"
@@ -157,8 +151,8 @@
                             </div>
                             <div class="row" >
                                 <div class="col s3 l3" [ngStyle]="{'margin-bottom':'10px'}">
-                                    <button mat-flat-button type="submit" color="primary"
-                                         >{{modif()?'Modifer':'Enregistrer'}}</button>
+                                    <button mat-flat-button type="submit" color="primary" [disabled]="!formG.valid"
+                                             >{{modif()?'Modifer':'Enregistrer'}}</button>
                                 </div>
                                 <div class="col s3 l3">
                                     <button class="wen-table__action-button" mat-flat-button color="warn"

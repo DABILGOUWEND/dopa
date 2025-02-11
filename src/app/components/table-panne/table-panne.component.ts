@@ -27,7 +27,7 @@ export class TablePanneComponent implements OnInit{
   close = output();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  selected = signal("1");
+  selected = signal("");
   modif = signal(false);
   selectedRow = signal(0);
   current_row = signal<Pannes | undefined>(undefined);
@@ -45,7 +45,7 @@ export class TablePanneComponent implements OnInit{
         heure_fin: new FormControl(''),
         fin_panne: new FormControl((new Date())),
         motif_panne: new FormControl(''),
-        situation: new FormControl('1'),
+        situation: new FormControl(''),
       }
     )
     effect(() => {
@@ -54,7 +54,7 @@ export class TablePanneComponent implements OnInit{
   
 
   ngOnInit() {
-    this.formG.valueChanges.subscribe(resp=>console.log(resp.situation))
+   
    
   }
   UpdatePanne() {
@@ -111,17 +111,16 @@ export class TablePanneComponent implements OnInit{
 
   choix_situation() {
     let value=this.formG.value
-    console.log(value.situation)
     let sit=this.formG.value.situation
     this.selected.set(sit);
-    console.log(sit)
-    if (sit == "2") {
-      console.log('ok')
-      this.formG.get('heure_fin')?.setValidators([Validators.required,Validators.minLength(1)]);
+    if (this.selected() == "2") {
+      this.formG.get('heure_fin')?.setValidators(Validators.required);
       this.formG.get('fin_panne')?.setValidators(Validators.required);
+      console.log('og')
       this.update();
+
     }
-    if (sit == "1") {
+    if (this.selected() == "1") {
       this.formG.get('fin_panne')?.clearValidators();
       this.formG.get('heure_fin')?.clearValidators();
       this.update();
@@ -141,7 +140,7 @@ export class TablePanneComponent implements OnInit{
 
 
     let temp_debut = panne.debut_panne;
-    let temp_fin = panne.fin_panne;
+    let temp_fin =panne.situation ==='garage'? new Date().toLocaleDateString()   :panne.fin_panne ;
     const [day1, month1, year1] = temp_debut.split("/");
     const [day2, month2, year2] = temp_fin.split("/");
     const date1 = new Date(+year1, +month1 - 1, +day1);
@@ -154,9 +153,11 @@ export class TablePanneComponent implements OnInit{
         heure_debut: panne.heure_debut,
         heure_fin: panne.heure_fin,
         motif_panne: panne.motif_panne,
-        situation:panne.situation === 'garage'?"1":"2"
+        situation:panne.situation ==='garage'?"1":"2"
       }
     )
+
+  this.selected.set(panne.situation ==='garage'?"1":"2")
   }
   addpanne() {
     this.is_update.set(false);
