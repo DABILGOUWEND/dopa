@@ -263,7 +263,6 @@ export class MesConstatsComponent implements OnInit {
   }
   ligne_click(node: ExampleFlatNode2) {
     let ind=this.treeControl.dataNodes.indexOf(node);
-    console.log(ind)
     this.clicked_index.set(ind);
     this.is_table_opened.set(true);
     this.table_update_form.reset();

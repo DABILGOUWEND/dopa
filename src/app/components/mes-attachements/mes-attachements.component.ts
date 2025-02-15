@@ -163,52 +163,60 @@ export class MesAttachementsComponent implements OnInit {
         'titre_precedent': 'DECOMPTE BRUT',
         'montant_precedent': this.totaux().montant_prec,
         'montant_periode': this.totaux().montant_periode,
-        'montant_cumul': this.totaux().montant_cumul
+        'montant_cumul': this.totaux().montant_cumul,
+        'ind':0
       },
       {
         'titre_precedent': 'RETENUES DE GARANTIES',
         'montant_precedent': retenue_gar_prec,
         'montant_periode': retenue_gar_periode,
-        'montant_cumul': retenue_gar_periode + retenue_gar_prec
+        'montant_cumul': retenue_gar_periode + retenue_gar_prec,
+        'ind':1
       },
       {
         'titre_precedent': 'REMBOURSEMENTS AVANCE DEMARRAGE',
         'montant_precedent': rembours_avance_prec,
         'montant_periode': rembours_avance_periode,
-        'montant_cumul': rembours_avance_periode + rembours_avance_prec
+        'montant_cumul': rembours_avance_periode + rembours_avance_prec,
+        'ind':2
       },
       {
         'titre_precedent': 'AUTRES RETENUES',
         'montant_precedent': autres_ret_prec,
         'montant_periode': autres_ret_periode,
-        'montant_cumul': autres_ret_prec + autres_ret_periode
+        'montant_cumul': autres_ret_prec + autres_ret_periode,
+        'ind':3
       },
       {
         'titre_precedent': 'TOTAL DES RETENUES',
         'montant_precedent': total_ret_prec,
         'montant_periode': total_ret_period,
-        'montant_cumul': total_ret_cum
+        'montant_cumul': total_ret_cum,
+        'ind':4
       }
       ,
       {
         'titre_precedent': 'MONTANT APRES RETENUES',
         'montant_precedent': montant_net_prec,
         'montant_periode': montant_net_periode,
-        'montant_cumul': montant_net_cumul
+        'montant_cumul': montant_net_cumul,
+        'ind':5
       }
       ,
       {
         'titre_precedent': 'RETENUE AIB',
         'montant_precedent': this.totaux().montant_prec * 0.01,
         'montant_periode': this.totaux().montant_periode * 0.01,
-        'montant_cumul': this.totaux().montant_cumul * 0.01
+        'montant_cumul': this.totaux().montant_cumul * 0.01,
+        'ind':6
       }
       ,
       {
         'titre_precedent': 'NET A PAYER',
         'montant_precedent': montant_net_prec - this.totaux().montant_prec * 0.01,
         'montant_periode': montant_net_periode - this.totaux().montant_periode * 0.01,
-        'montant_cumul': montant_net_cumul - this.totaux().montant_cumul * 0.01
+        'montant_cumul': montant_net_cumul - this.totaux().montant_cumul * 0.01,
+        'ind':7
       }
     )
     return donnees;
@@ -1740,7 +1748,8 @@ export class MesAttachementsComponent implements OnInit {
     this.is_changed.set(false);
     this.ligne_cliquer.set(0);
   }
-  clicker(ind: number) {
+  clicker(element:any) {
+    let ind = this.donnees_decompte().indexOf(element);
     this.ligne_cliquer.set(ind)
   }
   Annuler() {
