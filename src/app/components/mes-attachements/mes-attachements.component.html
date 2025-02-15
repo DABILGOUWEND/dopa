@@ -134,13 +134,9 @@
           <button mat-flat-button (click)="Annuler()" color="warn" [disabled]="!is_changed()">
             Annuler
           </button>
-
           <button mat-flat-button (click)="saveDp()" [disabled]="!is_changed()" color="primary">
             {{is_dp_exist()?"Modifier":"Enregistrer"}}
           </button>
-
-
-
         </div>
         <div class="table-update__footer2">
           <button mat-fab extended type="button" title="imprimer décompte" (click)="printDecompte()"
