@@ -217,7 +217,7 @@ export class PersonnelComponent implements OnInit {
         statut_id: valeur.statut_id
       }
       )
-      this.personnel_store.updatePersonnel(mydata)
+      //this.personnel_store.updatePersonnel(mydata)
     }
     else {
       mydata = {
@@ -235,9 +235,10 @@ export class PersonnelComponent implements OnInit {
         heuresN: [],
         heureSup: []
       }
-      this.personnel_store.addPersonnel(mydata)
+      //this.personnel_store.addPersonnel(mydata)
     }
     this.current_row.set(undefined)
+    console.log(mydata)
   }
   deleteData(id: any) {
     if (confirm('voulez-vous supprimer cet élement?'))

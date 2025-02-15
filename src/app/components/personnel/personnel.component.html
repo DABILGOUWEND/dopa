@@ -4,9 +4,11 @@ when personnel_store.isFulfilled()
 <app-model-template [table]="table()" [table_update_form]="table_update_form" [dataSource]="dataSource()"
     [displayedColumns]="displayedColumns" [className]="'personnel'" (newItemEvent)="updateData($event)"
     (RemoveItemEvent)="deleteData($event)" (RechercheEvent)="recherche($event)" (AfficheToutEvent)="afficheTout()"
-    [titre]="titre_tableau()" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()" [action_template]="actiontemplate"
-    (clear_event)="clear_fct()" [is_open2]="is_open2()" [(is_open)]="is_open" [pointage]="pointages"
-    [clicker]="clicker()" [is_update]="is_update()" [(current_row)]="current_row">
+    [titre]="titre_tableau()" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()"
+    [action_template]="actiontemplate" (clear_event)="clear_fct()" [is_open2]="is_open2()" [(is_open)]="is_open"
+    [pointage]="pointages" [clicker]="clicker()" [is_update]="is_update()" [(current_row)]="current_row"
+    [mes_saisies]="saisie"
+    >
 </app-model-template>
 }
 @placeholder {
@@ -20,7 +22,7 @@ when personnel_store.isFulfilled()
     <div class="section" [ngStyle]="{'background-color':'#D6D3E2','padding.rem':1}">
         <div class="row center">
             <div class="col s12 l12">
-                <h2 > {{titre_tableau()}}</h2>
+                <h2> {{titre_tableau()}}</h2>
             </div>
         </div>
     </div>
@@ -148,4 +150,87 @@ when personnel_store.isFulfilled()
     </div>
 
 
+</ng-template>
+
+
+<ng-template #saisie>
+    <div class="myrow" [formGroup]="table_update_form">
+        <div class="item l1">
+            <mat-form-field>
+                <mat-label>
+                    NOM
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='nom' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+        <div class="item l1">
+            <mat-form-field>
+                <mat-label>
+                    PRENOM
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='prenom' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+        <div class="item l1">
+            <mat-form-field>
+                <mat-label>
+                    NUMERO DE PHONE1
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='num_phone1' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+        <div class="item l1">
+            <mat-form-field>
+                <mat-label>
+                    NUMERO DE PHONE2
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='num_phone2' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+        <div class="item l1">
+            <mat-form-field>
+                <mat-label>
+                    EMAIL
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='num_phone2' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+        <div class="item l1">
+            <mat-form-field>
+                <mat-label>
+                    FONCTION
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='fonction' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+
+        <div class="item  l1">
+            <mat-form-field>
+                <mat-label>
+                     NUMERO MATRICULE
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='num_matricule' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+        <div class="item l1">
+            <mat-form-field>
+                <mat-label>
+                    STATUT
+                </mat-label>
+                <span aria-hidden="true" class="placeholder-required"> *</span>
+                <mat-select formControlName="statut_id">
+                    <mat-option *ngFor="let row of statut_select()" [value]="row.id">
+                        {{row.valeur}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+        </div>
+    </div>
 </ng-template>

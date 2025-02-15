@@ -47,9 +47,9 @@
   </mat-drawer>
 
   <mat-drawer-content class="default">
-    <div class="content_head">
-      <h2>CONSTATS DE TRAVAUX</h2>
-    </div>
+    <div class="titre">
+      <h2> Constats de travaux</h2>
+  </div>
     <div class="content_soushead">
       <div class="table-col1">
         <mat-form-field>
@@ -68,7 +68,6 @@
           Imprimer constat
         </button>
       </div>
-      
     </div>
     <div class="titre_constats">
       @if(numero_decompte()>0)
@@ -100,9 +99,8 @@
         </span>
       </button>
     </div>
-
     <div class="content_body">
-      <table mat-table [dataSource]="dataSource()" class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource()" class="booktable" multiTemplateDataRows>
         <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef> DATE </th>
           <td mat-cell *matCellDef="let element">

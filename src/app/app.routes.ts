@@ -4,8 +4,6 @@ import { GasoilComponent } from './components/gasoil/gasoil.component';
 import { LoginComponent } from './components/login/login.component';
 import { PannesComponent } from './components/pannes/pannes.component';
 import { PersonnelComponent } from './components/personnel/personnel.component';
-import { ConstatsComponent } from './components/constats/constats.component';
-import { AttachementsComponent } from './components/attachements/attachements.component';
 import { DecomptesComponent } from './components/decomptes/decomptes.component';
 import { RegisterComponent } from './components/register/register.component';
 import { travauxGuard } from './travaux.guard';
@@ -28,10 +26,14 @@ import { MesAttachementsComponent } from './components/mes-attachements/mes-atta
 import { AccueilComponent } from './components/accueil/accueil.component';
 import { EssaiComponent } from './components/essai/essai.component';
 import { TestComponent } from './test_components/test/test.component';
+import { Essai2Component } from './components/essai2/essai2.component';
 
 export const routes: Routes = [
     {
         path: "", redirectTo: "/accueil", pathMatch: "full"
+    },
+    {
+        path: 'essai2', component: Essai2Component,
     }
     ,
     {

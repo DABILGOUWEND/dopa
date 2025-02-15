@@ -1,47 +1,41 @@
-<div class="container">
-    <div class="backbox">
-        <div class="loginMsg">
-            <div class="logo">
-                <h3>SOLUBTP</h3>
-                <h4>by Wen</h4>
+<div class="login_container">
+    <div class="login-header">
+        <h1>BIENVENU A SOLUBTP</h1>
+        <h2> Solutions informatiques pour gestion de chantiers de BTP</h2>
+    </div>
+    <div class="login-subheader">
+        <h1>LOGIN</h1>
+    </div>
+    <div class="login-form">
+        <form [formGroup]="loginForm" (ngSubmit)="sumitlogin()" class="login-form ">
+            <div class="row">
+                <div class=" col s12 l12">
+
+                    <input matInput placeholder="email" formControlName="email">
+
+                </div>
+                <div class="col s12 l12">
+                    <input matInput type="password" placeholder="password" formControlName="password">
+
+                </div>
             </div>
-            <div class="textcontent">
-                <p class="sstitle">Solutions Informatiques pour chantiers de BTP.</p>
+
+            <div class="row center">
+                <div class="col s12 l12">
+                    <button mat-flat-button extended [disabled]="!loginForm.valid">Connexion</button>
+                </div>
             </div>
-        </div>
-        <div class="signupMsg visibility">
-            <div class="textcontent">
-                <p class="title">Have an account?</p>
-                <p>Log in to see all your collection.</p>
-                <button id="switch2">LOG IN</button>
+        </form>
+    </div>
+    <div class="login-footer">
+        <div class="row">
+            <div class="col s12 l12">
+                   <p>   {{message()}}</p>    
+                 
             </div>
         </div>
     </div>
-    <!-- backbox -->
-
-    <div class="frontbox">
-        <div class="login">
-            <h2>LOGIN</h2>
-            <form [formGroup]="loginForm" (ngSubmit)="sumitlogin()" class="login-form ">
-                <div class="inputbox">
-                    <mat-form-field>
-                        <input matInput placeholder="email" formControlName="email">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput type="password" placeholder="password" formControlName="password">
-                    </mat-form-field>
-                </div>
-                <button mat-flat-button extended [disabled]="!loginForm.valid">Connexion</button>
-            </form>
-        </div>
-        <div>
-            <p>
-                {{message()}}
-            </p>
-
-        </div>
-        <div class="spinner">
-            <mat-spinner *ngIf="_auth_service.loadings()"></mat-spinner>
-        </div>
+    <div class="login-spinner">
+        <mat-spinner *ngIf="_auth_service.loadings()"></mat-spinner>
     </div>
 </div>

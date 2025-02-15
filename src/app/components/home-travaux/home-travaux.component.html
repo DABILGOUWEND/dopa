@@ -1,7 +1,7 @@
 <!-- Purpose: This is the main component for the home page of the application. It contains the toolbar and the content of the page. -->
 @defer(on timer(2s);hydrate when !end_of_load()){
-    <app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content" [title]="title">
-    </app-home-template>    
+<app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content" [title]="title">
+</app-home-template>
 }
 @placeholder {
     <div [ngStyle]="{'padding-top.px':200}">
@@ -12,27 +12,50 @@
 
 
 <ng-template #nav_liste>
+    <li mat-list-item>
+        <a routerLink="gasoil">
+            Devis des prestataires
+        </a>
+    </li>
+    <li mat-list-item>
+        <a routerLink="pannes">
+            Constats de travaux
+        </a>
+    </li>
+    <li mat-list-item>
+        <a routerLink="pointages">
+          Listes des sous-traitants
+        </a>
+    </li>
+
 </ng-template>
 <ng-template #toolbar>
-    <div class="example-spacer2">
-        <button mat-fab type="button" (click)="accueil()">
-            <mat-icon>home</mat-icon>
-        </button>
-    </div>
-    <div class="example-spacer3">
-        <button mat-fab extended type="button" (click)="click_constats()" >
-            CONSTATS 
-        </button>
-        <button mat-fab extended type="button"  (click)="click_attachements()">
-            ATTACHEMENTS
-        </button>
+    <div class="m_liens hide-on-med-and-down">
+        <div>
+            <a routerLink="devis" class="btn" >
+                Devis des prestataires
+            </a>
+        </div>
+        <div >
+            <a routerLink="Constats" class="btn" >
+                Constats de travaux
+            </a>
+        </div>
+        <div >
+            <a routerLink="pointages" class="btn" >
+                Listes des sous-traitants
+            </a>
+        </div>
+        
     </div>
 
 </ng-template>
 <ng-template #content>
-    <router-outlet>
-    </router-outlet>
+    <div class="corps">
+        <router-outlet>
+        </router-outlet>
+    </div>
 </ng-template>
 <ng-template #title>
-   
+    <h2>{{titre()}}</h2>
 </ng-template>

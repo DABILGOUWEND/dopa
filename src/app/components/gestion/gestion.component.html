@@ -37,30 +37,32 @@
     </li>
 </ng-template>
 <ng-template #toolbar>
-    <div class="hide-on-med-and-down">
-        <a routerLink="gasoil" class="btn" (click)="titre.set('Gestion Gasoil')">
-            Gestion Gasoil
-        </a>
-    </div>
-    <div class="hide-on-med-and-down">
-        <a routerLink="pannes" class="btn" (click)="titre.set('Déclaration des pannes')">
-            Déclarationn de Pannes
-        </a>
-    </div>
-    <div class="hide-on-med-and-down">
-        <a routerLink="pointages" class="btn" (click)="titre.set('Pointages du personnel')">
-            Pointages personnel
-        </a>
-    </div>
-    <div class="hide-on-med-and-down">
-        <a routerLink="personnel" class="btn" (click)="titre.set('Liste du personnel')">
-            Liste du personnel
-        </a>
-    </div>
-    <div class="hide-on-med-and-down">
-        <a routerLink="materiel" class="btn" (click)="titre.set('Liste des engins')">
-            Liste des engins
-        </a>
+    <div class="m_liens hide-on-med-and-down">
+        <div>
+            <a routerLink="gasoil" class="btn" (click)="titre.set('Gestion Gasoil')">
+                Gestion Gasoil
+            </a>
+        </div>
+        <div >
+            <a routerLink="pannes" class="btn" (click)="titre.set('Déclaration des pannes')">
+                 Pannes
+            </a>
+        </div>
+        <div >
+            <a routerLink="pointages" class="btn" (click)="titre.set('Pointages du personnel')">
+                Pointages personnel
+            </a>
+        </div>
+        <div >
+            <a routerLink="personnel" class="btn" (click)="titre.set('Liste du personnel')">
+                Liste du personnel
+            </a>
+        </div>
+        <div >
+            <a routerLink="materiel" class="btn" (click)="titre.set('Liste des engins')">
+                Liste des engins
+            </a>
+        </div>
     </div>
 </ng-template>
 <ng-template #title>

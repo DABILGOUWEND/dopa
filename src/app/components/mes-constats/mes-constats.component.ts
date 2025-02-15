@@ -261,7 +261,9 @@ export class MesConstatsComponent implements OnInit {
     }
     return this.constats;
   }
-  ligne_click(node: ExampleFlatNode2, ind: number) {
+  ligne_click(node: ExampleFlatNode2) {
+    let ind=this.treeControl.dataNodes.indexOf(node);
+    console.log(ind)
     this.clicked_index.set(ind);
     this.is_table_opened.set(true);
     this.table_update_form.reset();
@@ -389,6 +391,7 @@ export class MesConstatsComponent implements OnInit {
         this.clicked_qte_periode.set(periode);
         let constats = element.constat.filter(x => x.numero_decompte == this.current_decompte());
         this.current_constat.set(constats.length > 0 ? Math.max(...constats.map(x => x.numero)) : 0);
+        console.log(element)
         this.constats_decompte.set(constats.map(x => {
           let date = x.date ? x.date : new Date().toLocaleDateString();
           return {

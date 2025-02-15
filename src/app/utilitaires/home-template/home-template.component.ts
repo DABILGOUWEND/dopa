@@ -54,8 +54,6 @@ export class HomeTemplateComponent implements OnInit{
           this.affiche.set(false);
           this._router.navigateByUrl('/accueil');
         }, 3000);
-
-        
       }
     });
   }

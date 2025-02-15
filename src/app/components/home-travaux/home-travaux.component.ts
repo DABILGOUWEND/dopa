@@ -15,7 +15,7 @@ import { sign } from 'crypto';
 })
 export class HomeTravauxComponent implements OnInit {
 
-
+  titre=signal('');
   _auth_service = inject(AuthenService);
   _loader_service = inject(DataLoaderService);
   _router = inject(Router);

@@ -35,36 +35,39 @@
         <div class="ensemble">
             <div class="entete">
                 <div class="entete_gauche">
-                    <div class="hide-on-large-only">
+                    <div class="home">
+                        <a routerLink="/accueil" title="accueil">
+                            <button mat-icon-button>
+                                <mat-icon>
+                                    home
+                                </mat-icon>
+                            </button>
+                        </a>
+                    </div>
+                    <div class="menu hide-on-large-only">
                         <button mat-icon-button (click)="sidnav.open()">
                             <mat-icon>
                                 menu
                             </mat-icon>
                         </button>
                     </div>
-                    <div class="hide-on-med-and-down">
-                        <h2>
-                            SOLUBTP
-                        </h2>
+                    <div class="logo hide-on-med-and-down">
+                        SOLUBTP
                     </div>
                 </div>
                 <div class="entete_milieu ">
-                    <div class="hide-on-large-only">
-                        <h2>
-                            SOLUBTP
-                        </h2>
+                    <div class="m_logo hide-on-large-only">
+                        SOLUBTP
                     </div>
                     <ng-container [ngTemplateOutlet]="toolbar()"> </ng-container>
                 </div>
                 <div class="entete_droite">
-                    <div>
+                    <div class="m_user">
                         @if(_auth_service.userSignal()){
-                        <h2>
-                            {{ _auth_service.userSignal()?.username}}
-                        </h2>
+                        {{ _auth_service.userSignal()?.username}}
                         }
                     </div>
-                    <div class="hide-on-med-and-down">
+                    <div class="m_button hide-on-med-and-down">
                         @if(_auth_service.userSignal()){
                         <button mat-icon-button (click)="logout()" title="déconnecter">
                             <mat-icon> logout</mat-icon>
@@ -77,8 +80,8 @@
                     </div>
                 </div>
             </div>
-                <ng-container [ngTemplateOutlet]="content()"> </ng-container>
-           
+            <ng-container [ngTemplateOutlet]="content()"> </ng-container>
+
             <div class="piedpage">
                 <div class="row">
                     <div class="col l6 s12"

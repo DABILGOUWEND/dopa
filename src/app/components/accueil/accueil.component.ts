@@ -23,13 +23,13 @@ import { HomeTemplateComponent } from '../../utilitaires/home-template/home-temp
     styleUrl: './accueil.component.scss'
 })
 export class AccueilComponent implements OnInit {
-    _autservice=inject(AuthenService)
+    _autservice = inject(AuthenService)
     router = inject(Router);
-  
+
     constructor(
         private _fb: FormBuilder
     ) {
-        
+
     }
     ngOnInit(): void {
     }
@@ -37,6 +37,6 @@ export class AccueilComponent implements OnInit {
 
     logout() {
         this._autservice.logout().subscribe()
-    
-      }
+
+    }
 }

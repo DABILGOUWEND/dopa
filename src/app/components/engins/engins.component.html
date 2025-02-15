@@ -4,9 +4,9 @@ when personnel_store.isFulfilled()
 <app-model-template [table]="table()" [table_update_form]="table_update_form" [dataSource]="dataSource()"
     [displayedColumns]="displayedColumns" [className]="'engins'" (newItemEvent)="updateData($event)"
     (RemoveItemEvent)="deleteData($event)" (RechercheEvent)="recherche($event)" (AfficheToutEvent)="afficheTout()"
-    [titre]="titre_tableau()" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()" [action_template]="actiontemplate"
-    (clear_event)="clear_fct()" [is_open2]="is_open2()" [(is_open)]="is_open" 
-    [clicker]="clicker()" [is_update]="is_update()" [(current_row)]="current_row">
+    [titre]="titre_tableau()" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()"
+    [action_template]="actiontemplate" (clear_event)="clear_fct()" [is_open2]="is_open2()" [(is_open)]="is_open"
+    [clicker]="clicker()" [is_update]="is_update()" [(current_row)]="current_row" [mes_saisies]="saisie">
 </app-model-template>
 }
 @placeholder {
@@ -28,4 +28,64 @@ when personnel_store.isFulfilled()
         <button mat-flat-button type="button" (click)="annuler()" color="warn"> annuler </button>
     </div>
     }
+</ng-template>
+
+<ng-template #saisie>
+    <div class="myrow" [formGroup]="table_update_form">
+        <div class="item l2">
+            <mat-form-field>
+                <mat-label>
+                    CLASSE ENGINS
+                </mat-label>
+                <span aria-hidden="true" class="placeholder-required"> *</span>
+                <mat-select formControlName="classe_id">
+                    <mat-option *ngFor="let row of classe_select()" [value]="row.id">
+                        {{row.valeur}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="item l2">
+            <mat-form-field>
+                <mat-label>
+                    DESIGNATION
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='designation' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+
+        <div class="item l2">
+            <mat-form-field>
+                <mat-label>
+                    CODE PARC
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='code_parc' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+
+        <div class="item l2">
+            <mat-form-field>
+                <mat-label>
+                    IMMATRICULATION
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='immatriculation' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+
+        <div class="item l2">
+            <mat-form-field>
+                <mat-label>
+                    UTILISATEUR
+                </mat-label>
+                <span aria-hidden="true" class="placeholder-required"> *</span>
+                <mat-select formControlName="utilisateur_id">
+                    <mat-option *ngFor="let row of utilisateur_select()" [value]="row.id">
+                        {{row.valeur}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+    </div>
 </ng-template>

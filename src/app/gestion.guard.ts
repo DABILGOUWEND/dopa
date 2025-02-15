@@ -10,7 +10,6 @@ export const gestionGuard: CanActivateFn = (route, state) => {
   if (_auth_service.userSignal() && (_auth_service.userSignal()?.role == "admin" ||_auth_service.userSignal()?.role == "user1")) {
     return true;
   } else {
-
     return false;
   }
 };

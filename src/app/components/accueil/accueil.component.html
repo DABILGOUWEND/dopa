@@ -1,10 +1,4 @@
-@defer (hydrate on interaction) {
 <app-home-template [content]="content" [nav_liste]="nav_liste" [toolbar]="toolbar" [title]="title" />
-}@placeholder {
-
-}
-
-
 <ng-template #nav_liste>
   @if(_autservice.userSignal())
   {
@@ -51,10 +45,10 @@
         Solutions informatiques pour la gestion de votre chantier.</p>
     </div>
     <div class="reste_corps">
-      <div class="row center">
+      <div class="myrow">
         <a routerLink="/home_gestion">
-          <div class="col s12 m6 l4">
-            <div class="card" [ngStyle]="{'border-color': 'blue'}">
+          <div class="item l4">
+            <div class="ma_card" [ngStyle]="{'border-color': 'blue'}">
               <div class="card-image">
                 <mat-icon> store</mat-icon>
               </div>
@@ -70,8 +64,8 @@
           </div>
         </a>
         <a routerLink="/home_gestion">
-          <div class="col s12 m6 l4">
-            <div class="card" [ngStyle]="{'border-color': 'yellow'}">
+          <div class="item l4">
+            <div class="ma_card" [ngStyle]="{'border-color': 'yellow'}">
               <div class="card-image">
                 <mat-icon>settings</mat-icon>
               </div>
@@ -86,8 +80,8 @@
           </div>
         </a>
         <a routerLink="/home_gestion">
-          <div class="col s12 m6 l4">
-            <div class="card" [ngStyle]="{'border-color': 'cyan'}">
+          <div class="item l4">
+            <div class="ma_card" [ngStyle]="{'border-color': 'cyan'}">
               <div class="card-image">
                 <mat-icon> people</mat-icon>
               </div>
@@ -105,9 +99,9 @@
           </div>
         </a>
 
-        <a routerLink="/home_gestion">
-          <div class="col s12 m6 l4">
-            <div class="card" [ngStyle]="{'border-color': 'red'}">
+        <a routerLink="/home_travaux">
+          <div class="item l4">
+            <div class="ma_card" [ngStyle]="{'border-color': 'red'}">
               <div class="card-image">
                 <mat-icon> money</mat-icon>
               </div>
@@ -125,9 +119,9 @@
           </div>
         </a>
 
-        <a routerLink="/home_gestion">
-          <div class="col s12 m6 l4">
-            <div class="card" [ngStyle]="{'border-color': 'green'}">
+        <a routerLink="/home_travaux">
+          <div class="item l4">
+            <div class="ma_card" [ngStyle]="{'border-color': 'green'}">
               <div class="card-image">
                 <mat-icon> people</mat-icon>
               </div>
@@ -139,7 +133,7 @@
               </div>
               <div class="card-content">
                 <p>
-                  Effectuers les constats, attachements et décomptes des travaux réalisés.
+                  Effectuer les constats, attachements et décomptes des travaux réalisés.
                   Editer les factures de vos clients puis suivre les paiements.
                   Effectuer des reportings sur les paiements et les retards de paiements.
                 </p>
@@ -149,9 +143,9 @@
           </div>
         </a>
 
-        <a routerLink="/home_gestion">
-          <div class="col s12 m6 l4">
-            <div class="card">
+        <a routerLink="/home_travaux">
+          <div class="item l4">
+            <div class="ma_card">
               <div class="card-image">
                 <mat-icon> business</mat-icon>
               </div>

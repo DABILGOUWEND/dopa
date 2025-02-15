@@ -28,27 +28,8 @@ interface ExampleFlatNode {
     styleUrl: './essai2.component.scss'
 })
 export class Essai2Component implements OnInit {
-  _devis_store = inject(DevisStore);
-  _auth_service = inject(AuthenService);
-  _router = inject(Router);
-  _loader_service = inject(DataLoaderService);
-  devis_ids=signal<string[]>([]);
-  ind=signal<number>(0);  
   ngOnInit() {
-    this._loader_service.setPath();
-    this._devis_store.loadDevis()
   }
-  constructor() {
-    effect(() => {
-    
-      console.log('selected_devis store',this._devis_store.donnees_currentDevis())
-
-    })
-  }
-
-  buttonClick() { 
-    this._devis_store.setCurrentDevisId(this._devis_store.devisIds()[this.ind()])
-    this.ind.update(x=>x+1)
-  }
+  
 
 }

@@ -7,7 +7,7 @@ import { FormSaisiComponent } from '../form-saisi/form-saisi.component';
 
 @Component({
   selector: 'app-model-template',
-  imports: [ImportedModule,FormSaisiComponent],
+  imports: [ImportedModule, FormSaisiComponent],
   templateUrl: './model-template.component.html',
   styleUrl: './model-template.component.scss'
 })
@@ -22,9 +22,9 @@ export class ModelTemplateComponent implements OnInit {
   is_open = model<boolean>(false);
   is_open2 = input<boolean>(false);
   is_update = input<boolean>(false);
-
+  mes_saisies = input<TemplateRef<any> | null>(null);
   titre = input.required<string>();
-  pointage = input<TemplateRef<any>|undefined>(undefined);
+  pointage = input<TemplateRef<any> | undefined>(undefined);
   table_update_form = input.required<FormGroup>();
   table = input()
   displayedColumns = input.required<any>()

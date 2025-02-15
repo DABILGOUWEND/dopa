@@ -180,7 +180,6 @@ export class GasoilComponent implements OnInit {
     });
 
     effect(() => {
-      console.log(this.chartOptions())
     })
   }
   datacourbe = computed(() => {
