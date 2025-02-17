@@ -27,13 +27,14 @@ import { AccueilComponent } from './components/accueil/accueil.component';
 import { EssaiComponent } from './components/essai/essai.component';
 import { TestComponent } from './test_components/test/test.component';
 import { Essai2Component } from './components/essai2/essai2.component';
+import { MyessaisComponent } from './components/myessais/myessais.component';
 
 export const routes: Routes = [
     {
-        path: "", redirectTo: "/accueil", pathMatch: "full"
+        path: "", redirectTo: "/essai2", pathMatch: "full"
     },
     {
-        path: 'essai2', component: Essai2Component,
+        path: 'essai2', component: MyessaisComponent,
     }
     ,
     {
@@ -86,13 +87,14 @@ export const routes: Routes = [
         component: GestionComponent, canActivate: [gestionGuard],
         children: [
             {
-                path: "", redirectTo: "/home_gestion/gasoil", pathMatch: "full"
+                path: "", redirectTo: "/home_gestion/essai2", pathMatch: "full"
             }
             ,
             {
                 path: "test",
                 component: TestComponent
             },
+            { path: 'essai2', component: MyessaisComponent },
             {
                 path: "gasoil",
                 component: GasoilComponent,

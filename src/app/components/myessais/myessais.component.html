@@ -1,1 +1,10 @@
-<p>myessais works!</p>
+<form [formGroup]="recherch">
+    <input type="text" placeholder="Search..." [matAutocomplete]="auto" (keyup)="search()"
+       formControlName="recherche" />
+    <button type="submit"> </button>
+</form>
+<mat-autocomplete #auto="matAutocomplete" (closed)="fermer()">
+    @for (shoe of designation_search(); track $index) {
+
+    <mat-option [value]="shoe.designation">{{shoe.designation}} </mat-option>}
+</mat-autocomplete>

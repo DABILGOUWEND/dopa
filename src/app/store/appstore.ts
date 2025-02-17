@@ -23,7 +23,13 @@ import {
     tab_pointage_travauxStore,
     pointage_travaux,
     comptes,
-    Task
+    Task,
+    Tab_classeArticesStore,
+    tab_categories,
+    tab_familles,
+    tab_commandesStore,
+    tab_sorties_articlesStore,
+    tab_entrees_articlesStore
 } from "../models/modeles"
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -278,6 +284,34 @@ const initialPointageTrvxState: tab_pointage_travauxStore =
     selectedDate: '',
     selectedProjetId: '',
     pointage_mach: []
+}
+const initialClassesArticlesState: Tab_classeArticesStore =
+{
+    classes_articles: [],
+    message: '',
+    selectedId: '',
+    path_string: ''
+}
+const initialCommandesState: tab_commandesStore =
+{
+    commandes_data: [],
+    message: '',
+    selectedId: '',
+    path_string: ''
+}
+const initialSortiesArticlesState: tab_sorties_articlesStore =
+{
+    sorties_articles_data: [],
+    message: '',
+    selectedId: '',
+    path_string: ''
+}
+const initialEntreesArticlesState: tab_entrees_articlesStore =
+{
+    entrees_articles_data: [],
+    message: '',
+    selectedId: '',
+    path_string: ''
 }
 const initialCompte: comptes =
 {
@@ -821,7 +855,7 @@ export const PersonnelStore = signalStore(
                 if (store.is_finished()) {
                     data = donnees.filter(x => x.dates.includes(date))
                     data.forEach(element => {
-                        
+
                         let mydates = element.dates
                         let heureS = element.heureSup;
                         let heureN = element.heuresN;
@@ -850,13 +884,13 @@ export const PersonnelStore = signalStore(
                                     name: presenceN[ind] ? "présent" : "absent",
                                     completed: presenceN[ind]
                                 }
-    
+
                             })
                         }
                     });
-    
+
                 }
-               
+
                 return mydata
             }),
             donnees_personnelById: computed(() => {
@@ -3796,6 +3830,505 @@ export const SstraitantStore = signalStore(
                 })
             )),
 
+        }
+    ))
+)
+export const ClassesArticlesStore = signalStore(
+    { providedIn: 'root' },
+    withState(initialClassesArticlesState),
+    withComputed((store) => (
+        {
+            taille: computed(() => store.classes_articles().length),
+            donnees_classes_articles: computed(() => {
+                return store.classes_articles()
+            })
+        }
+    )
+    ),
+    withMethods((store,
+        _task_service = inject(TaskService),
+        snackbar = inject(MatSnackBar)) =>
+    (
+        {
+            setPathString(path: string) {
+                patchState(store, { path_string: path })
+            },
+            filtrebyId(id: string) {
+                patchState(store, { selectedId: id })
+            },
+            loadClasses_articles: rxMethod<void>(pipe(switchMap(() => {
+                return _task_service.getallModels(store.path_string()).pipe(
+                    tap((data) => {
+                        patchState(store, { classes_articles: data })
+                    })
+                )
+            }
+            ))),
+            addClasses_articles: rxMethod<sous_traitant>(pipe(
+                switchMap((classes_article) => {
+                    return _task_service.addModel(store.path_string(), classes_article).pipe(
+                        tap({
+                            next: () => {
+
+                                Showsnackerbaralert('ajouté avec succes', 'pass', snackbar)
+                            }, error: () => { Showsnackerbaralert('échoué', 'fail', snackbar) }
+                        }
+                        )
+                    )
+                })
+            )),
+            removeClasses_articles: rxMethod<string>(pipe(
+                switchMap((id) => {
+                    return _task_service.deleteModel(store.path_string(), id).pipe(tap({
+                        next: () => {
+
+                            Showsnackerbaralert('élément supprimé', 'pass', snackbar)
+                        }, error: () => {
+                            Showsnackerbaralert('échoué', 'fail', snackbar)
+                        }
+                    }
+
+                    ))
+                }))),
+            updateSstraitant: rxMethod<sous_traitant>(pipe(
+                switchMap((sstraitant) => {
+                    return _task_service.updateModel(store.path_string(), sstraitant).pipe(
+                        tap({
+                            next: () => {
+                                Showsnackerbaralert('modifié avec succès', 'pass', snackbar)
+                            },
+                            error: () => {
+                                Showsnackerbaralert('échoué', 'fail', snackbar)
+                            }
+                        }
+                        )
+                    )
+                })
+            )),
+
+        }
+    ))
+)
+export const RessourcesStore = signalStore(
+    { providedIn: 'root' },
+    withState(initialResourcesState),
+    withComputed((store) => (
+        {
+            taille: computed(() => store.ressources_data().length),
+            all_ressources: computed(() => {
+                return store.ressources_data()
+            })
+        }
+    )
+    ),
+    withMethods((store, _task_service = inject(TaskService), snackbar = inject(MatSnackBar), _auth = inject(Auth)) =>
+    (
+        {
+
+            loadRessources: rxMethod<void>(pipe(switchMap(() => {
+                return _task_service.getallModels("ressources").pipe(
+                    tap((data) => {
+                        patchState(store, { ressources_data: data })
+                    })
+                )
+            }
+            ))),
+            addRessource: rxMethod<any>(pipe(
+                switchMap((ress) => {
+                    return _task_service.addModel("ressources", ress).pipe(
+                        tap({
+                            next: () => {
+                                Showsnackerbaralert('ajouté avec succes', 'pass', snackbar)
+                            },
+                            error: () => {
+                                patchState(store, { message: 'echoué' });
+                                Showsnackerbaralert('échoué', 'fail', snackbar)
+                            }
+                        }
+                        )
+                    )
+                })
+            )),
+            removeRessource: rxMethod<string>(pipe(
+                switchMap((id) => {
+                    return _task_service.deleteModel("ressources", id).pipe(tap({
+                        next: () => {
+
+                            Showsnackerbaralert('élément supprimé', 'pass', snackbar)
+                        },
+                        error: () => {
+                            patchState(store, { message: 'echoué' });
+                            Showsnackerbaralert('échoué', 'fail', snackbar)
+                        }
+                    }
+                    ))
+                }))),
+            updateRessource: rxMethod<tab_personnel>(pipe(
+                switchMap((ress) => {
+                    return _task_service.updateModel("ressources", ress).pipe(
+                        tap({
+                            next: () => {
+
+                                Showsnackerbaralert('modifié avec succes', 'pass', snackbar)
+                            },
+                            error: () => {
+                                patchState(store, { message: 'echoué' });
+                                Showsnackerbaralert('échoué', 'fail', snackbar)
+                            }
+                        }
+                        )
+                    )
+                })
+            )),
+
+        }
+    ))
+)
+export const CategoriesStore = signalStore(
+    { providedIn: 'root' },
+    withState(initialCategorieState),
+    withComputed((store) => (
+        {
+            taille: computed(() => store.categories_data().length),
+            all_categories: computed(() => {
+                return store.categories_data()
+            })
+            ,
+            articles_catIds: computed(() => {
+                let cat = store.categories_data().filter(cat =>
+                    ['ETkRFJmj3qI3g9LkzKiQ', 'vxdyIYVTw0BhnnGkJM6x', 'WeSTSyKjWnD8ldUx0ZdK'].includes(cat.famille_id))
+                return cat.map(x => x.id)
+            })
+        }
+    )
+    ),
+    withMethods((store, _task_service = inject(TaskService), snackbar = inject(MatSnackBar), _auth = inject(Auth)) =>
+    (
+        {
+            loadCategories: rxMethod<void>(pipe(switchMap(() => {
+                return _task_service.getallModels("categories").pipe(
+                    tap((data) => {
+                        patchState(store, { categories_data: data })
+                    })
+                )
+            }
+            ))),
+            addCategorie: rxMethod<any>(pipe(
+                switchMap((cathe) => {
+                    return _task_service.addModel("categories", cathe).pipe(
+                        tap({
+                            next: () => {
+                                Showsnackerbaralert('ajouté avec succes', 'pass', snackbar)
+                            },
+                            error: () => {
+                                patchState(store, { message: 'echoué' });
+                                Showsnackerbaralert('échoué', 'fail', snackbar)
+                            }
+                        }
+                        )
+                    )
+                })
+            )),
+            removeCategorie: rxMethod<string>(pipe(
+                switchMap((id) => {
+                    return _task_service.deleteModel("categories", id).pipe(tap({
+                        next: () => {
+
+                            Showsnackerbaralert('élément supprimé', 'pass', snackbar)
+                        },
+                        error: () => {
+                            patchState(store, { message: 'echoué' });
+                            Showsnackerbaralert('échoué', 'fail', snackbar)
+                        }
+                    }
+                    ))
+                }))),
+            updateCategorie: rxMethod<tab_categories>(pipe(
+                switchMap((cath) => {
+                    return _task_service.updateModel("categories", cath).pipe(
+                        tap({
+                            next: () => {
+
+                                Showsnackerbaralert('modifié avec succes', 'pass', snackbar)
+                            },
+                            error: () => {
+                                patchState(store, { message: 'echoué' });
+                                Showsnackerbaralert('échoué', 'fail', snackbar)
+                            }
+                        }
+                        )
+                    )
+                })
+            )),
+
+        }
+    ))
+)
+export const FamillesStore = signalStore(
+    { providedIn: 'root' },
+    withState(initialFamillesState),
+    withComputed((store) => (
+        {
+            taille: computed(() => store.familles_data().length),
+            all_categories: computed(() => {
+                return store.familles_data().map(x => x.designation)
+            })
+        }
+    )
+    ),
+    withMethods((store, _task_service = inject(TaskService), snackbar = inject(MatSnackBar), _auth = inject(Auth)) =>
+    (
+        {
+            loadFamilles: rxMethod<void>(pipe(switchMap(() => {
+                return _task_service.getallModels("familles").pipe(
+                    tap((data) => {
+                        patchState(store, { familles_data: data })
+                    })
+                )
+            }
+            ))),
+            addFamille: rxMethod<any>(pipe(
+                switchMap((cathe) => {
+                    return _task_service.addModel("familles", cathe).pipe(
+                        tap({
+                            next: () => {
+                                Showsnackerbaralert('ajouté avec succes', 'pass', snackbar)
+                            },
+                            error: () => {
+                                patchState(store, { message: 'echoué' });
+                                Showsnackerbaralert('échoué', 'fail', snackbar)
+                            }
+                        }
+                        )
+                    )
+                })
+            )),
+            removeFamille: rxMethod<string>(pipe(
+                switchMap((id) => {
+                    return _task_service.deleteModel("familles", id).pipe(tap({
+                        next: () => {
+
+                            Showsnackerbaralert('élément supprimé', 'pass', snackbar)
+                        },
+                        error: () => {
+                            patchState(store, { message: 'echoué' });
+                            Showsnackerbaralert('échoué', 'fail', snackbar)
+                        }
+                    }
+                    ))
+                }))),
+            updateFamille: rxMethod<tab_familles>(pipe(
+                switchMap((fam) => {
+                    return _task_service.updateModel("familles", fam).pipe(
+                        tap({
+                            next: () => {
+
+                                Showsnackerbaralert('modifié avec succes', 'pass', snackbar)
+                            },
+                            error: () => {
+                                patchState(store, { message: 'echoué' });
+                                Showsnackerbaralert('échoué', 'fail', snackbar)
+                            }
+                        }
+                        )
+                    )
+                })
+            )),
+
+        }
+    ))
+)
+export const CommandeStore = signalStore(
+    { providedIn: 'root' },
+    withState(initialCommandesState),
+    withComputed((store) => (
+        {
+            taille: computed(() => {
+                return store.commandes_data().length
+            }),
+            commandes: computed(() => {
+                return store.commandes_data()
+            })
+        }
+    )),
+    withMethods((store,
+        _task_service = inject(TaskService),
+        snackbar = inject(MatSnackBar)) =>
+    ({
+        setPathString(path: string) {
+            patchState(store, { path_string: path })
+        },
+        loadCommandes: rxMethod<void>(pipe(switchMap(() => {
+            return _task_service.getallModels(store.path_string()).pipe(
+                tap({
+                    next: (data) => {
+                        patchState(store, { commandes_data: data })
+                    },
+                    error: () => {
+                        Showsnackerbaralert('impossible de charger les données', 'fail', snackbar)
+                    }
+                }))
+        })))
+        ,
+        addCommande: rxMethod<Devis>(pipe(
+            switchMap((commande) => {
+                return _task_service.addModel(store.path_string(), commande).pipe(tap({
+                    next: () => {
+                        Showsnackerbaralert('ajouté avec succes', 'pass', snackbar);
+                    }
+                }))
+
+            })
+        )),
+        removeCommande: rxMethod<string>(pipe(
+            switchMap((id) => {
+                return _task_service.deleteModel(store.path_string(), id).pipe(tap({
+                    next: () => {
+                        Showsnackerbaralert('élément supprimé', 'pass', snackbar)
+                    }, error: () => {
+                        Showsnackerbaralert('échoué', 'fail', snackbar)
+                    }
+                }
+
+                ))
+            }))),
+        updateCommande: rxMethod<Devis>(pipe(
+            switchMap((commande) => {
+                return _task_service.updateModel(store.path_string(), commande).pipe(
+                )
+            })
+        ))
+    }
+    ))
+)
+export const SortiesArticlesStore = signalStore(
+    { providedIn: 'root' },
+    withState(initialSortiesArticlesState),
+    withComputed((store) => (
+        {
+            taille: computed(() => {
+                return store.sorties_articles_data().length
+            }),
+            sorties_articles: computed(() => {
+                return store.sorties_articles_data()
+            })
+        }
+    )),
+    withMethods((store,
+        _task_service = inject(TaskService),
+        snackbar = inject(MatSnackBar)) =>
+    (
+
+        {
+
+            setPathString(path: string) {
+                patchState(store, { path_string: path })
+            },
+            loadSortiesArticles: rxMethod<void>(pipe(switchMap(() => {
+                return _task_service.getallModels(store.path_string()).pipe(
+                    tap({
+                        next: (data) => {
+                            patchState(store, { sorties_articles_data: data })
+                        },
+                        error: () => {
+                            Showsnackerbaralert('impossible de charger les données', 'fail', snackbar)
+                        }
+                    }))
+            })))
+            ,
+            addSortiesArticles: rxMethod<Devis>(pipe(
+                switchMap((sortie) => {
+                    return _task_service.addModel(store.path_string(), sortie).pipe(tap({
+                        next: () => {
+                            Showsnackerbaralert('ajouté avec succes', 'pass', snackbar);
+                        }
+                    }))
+
+                })
+            )),
+            removeSortieArticle: rxMethod<string>(pipe(
+                switchMap((id) => {
+                    return _task_service.deleteModel(store.path_string(), id).pipe(tap({
+                        next: () => {
+                            Showsnackerbaralert('élément supprimé', 'pass', snackbar)
+                        }, error: () => {
+                            Showsnackerbaralert('échoué', 'fail', snackbar)
+                        }
+                    }
+
+                    ))
+                }))),
+            updateSortieArticle: rxMethod<Devis>(pipe(
+                switchMap((sortie) => {
+                    return _task_service.updateModel(store.path_string(), sortie).pipe(
+                    )
+                })
+            ))
+        }
+    ))
+)
+export const EntreesArticlesStore = signalStore(
+    { providedIn: 'root' },
+    withState(initialEntreesArticlesState),
+    withComputed((store) => (
+        {
+            taille: computed(() => {
+                return store.entrees_articles_data().length
+            }),
+            entrees_articles: computed(() => {
+                return store.entrees_articles_data()
+            })
+        }
+    )),
+    withMethods((store,
+        _task_service = inject(TaskService),
+        snackbar = inject(MatSnackBar)) =>
+    (
+
+        {
+
+            setPathString(path: string) {
+                patchState(store, { path_string: path })
+            },
+            loadEntreeArticles: rxMethod<void>(pipe(switchMap(() => {
+                return _task_service.getallModels(store.path_string()).pipe(
+                    tap({
+                        next: (data) => {
+                            patchState(store, { entrees_articles_data: data })
+                        },
+                        error: () => {
+                            Showsnackerbaralert('impossible de charger les données', 'fail', snackbar)
+                        }
+                    }))
+            })))
+            ,
+            addEntreeArticles: rxMethod<Devis>(pipe(
+                switchMap((entree) => {
+                    return _task_service.addModel(store.path_string(), entree).pipe(tap({
+                        next: () => {
+                            Showsnackerbaralert('ajouté avec succes', 'pass', snackbar);
+                        }
+                    }))
+
+                })
+            )),
+            removeEntreeArticle: rxMethod<string>(pipe(
+                switchMap((id) => {
+                    return _task_service.deleteModel(store.path_string(), id).pipe(tap({
+                        next: () => {
+                            Showsnackerbaralert('élément supprimé', 'pass', snackbar)
+                        }, error: () => {
+                            Showsnackerbaralert('échoué', 'fail', snackbar)
+                        }
+                    }
+                    ))
+                }))),
+            updateEntreeArticle: rxMethod<Devis>(pipe(
+                switchMap((entree) => {
+                    return _task_service.updateModel(store.path_string(), entree).pipe(
+                    )
+                })
+            ))
         }
     ))
 )

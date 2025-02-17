@@ -1,5 +1,5 @@
 import { effect, inject, Injectable } from '@angular/core';
-import { EnginsStore, ClasseEnginsStore, PersonnelStore, ProjetStore, PannesStore, GasoilStore, ApproGasoilStore, StatutStore, TachesEnginsStore, EntrepriseStore, DevisStore, ConstatStore, LigneDevisStore, SstraitantStore, AttachementStore, DecompteStore, UserStore, UnitesStore, TachesStore } from '../store/appstore';
+import { EnginsStore, ClasseEnginsStore, PersonnelStore, ProjetStore, PannesStore, GasoilStore, ApproGasoilStore, StatutStore, TachesEnginsStore, EntrepriseStore, DevisStore, ConstatStore, LigneDevisStore, SstraitantStore, AttachementStore, DecompteStore, UserStore, UnitesStore, TachesStore, CommandeStore, SortiesArticlesStore, EntreesArticlesStore, RessourcesStore, FamillesStore, CategoriesStore } from '../store/appstore';
 import { AuthenService } from '../authen.service';
 import { Observable, of, tap } from 'rxjs';
 import e from 'express';
@@ -29,6 +29,12 @@ export class DataLoaderService {
   _attachements_store = inject(AttachementStore)
   _decomptes_store = inject(DecompteStore)
   _users_store = inject(UserStore);
+  _commandes_store = inject(CommandeStore);
+  _sorties_articles_store = inject(SortiesArticlesStore);
+  _entrees_articles_store = inject(EntreesArticlesStore);
+  _ressources_store = inject(RessourcesStore);
+  _familles_store = inject(FamillesStore);
+  _categories_store = inject(CategoriesStore); 
 
 
 
@@ -58,6 +64,9 @@ export class DataLoaderService {
     this._decomptes_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/decomptes');
     this._unit_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/unites');
     this._taches.setPathString('comptes/' + this._auth_service.current_projet_id() + '/taches');
+    this._entrees_articles_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/entrees_articles');
+    this._sorties_articles_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/sorties_articles');
+    this._commandes_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/commandes');
 
   }
   Load_gestion_Data(): Observable<any> {
@@ -70,6 +79,12 @@ export class DataLoaderService {
         this._consogo_store.loadconso();
         this._approgo_store.loadappro();
         this._statuts_personnel_store.loadstatut();
+        this._sorties_articles_store.loadSortiesArticles();
+        this._entrees_articles_store.loadEntreeArticles();
+        this._commandes_store.loadCommandes();
+        this._ressources_store.loadRessources();
+        this._familles_store.loadFamilles();
+        this._categories_store.loadCategories();
 
       }))
     } else {

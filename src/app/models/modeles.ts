@@ -603,3 +603,68 @@ export interface Task {
     completed: boolean;
     subtasks?: Task[];
 }
+export interface classes_articles{
+    'id':string,
+    'designation':string,
+    'createur_id':string
+}
+export interface Tab_classeArticesStore {
+    classes_articles: classes_articles[],
+    message: string,
+    selectedId: string,
+    path_string: string
+}
+
+export interface articles{
+    'id':string,
+    'designation':string,
+    'code':string,
+    'categorie_id':string,
+    'unite':string,
+}
+export interface commandes{
+    'id':string,
+    'fournisseur_id':string,
+    'date_commande':string,
+    'date_livraison':string,
+    'article_id':string,
+    'quantite':number,
+    'projet_id':string,
+    'utilisateur_id':string
+}
+export interface tab_commandesStore {
+    commandes_data: commandes[],
+    message: string,
+    selectedId: string,
+    path_string: string
+}
+export interface sorties_articles {
+    'id':string,
+    'date':string,
+    'quantite':number,
+    'projet_id':string,
+    'article_id':string,
+    'destinataire_id':string,
+    'utilisateur_id':string
+}
+export interface tab_sorties_articlesStore {
+    sorties_articles_data: sorties_articles[],
+    message: string,
+    selectedId: string,
+    path_string: string
+}
+export interface entrees_articles{
+    'id':string,
+    'date':string,
+    'quantite':number,
+    'projet_id':string,
+    'article_id':string,
+    'fournisseur_id':string,
+    'utilisateur_id':string
+}
+export interface tab_entrees_articlesStore {
+    entrees_articles_data: entrees_articles[],
+    message: string,
+    selectedId: string,
+    path_string: string
+}
