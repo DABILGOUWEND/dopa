@@ -29,7 +29,9 @@ import {
     tab_familles,
     tab_commandesStore,
     tab_sorties_articlesStore,
-    tab_entrees_articlesStore
+    tab_entrees_articlesStore,
+    tab_fournisseursStore,
+    fournisseurs
 } from "../models/modeles"
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -309,6 +311,13 @@ const initialSortiesArticlesState: tab_sorties_articlesStore =
 const initialEntreesArticlesState: tab_entrees_articlesStore =
 {
     entrees_articles_data: [],
+    message: '',
+    selectedId: '',
+    path_string: ''
+}
+const initialFournisseursState: tab_fournisseursStore =
+{
+    fournisseurs_data: [],
     message: '',
     selectedId: '',
     path_string: ''
@@ -4331,6 +4340,80 @@ export const EntreesArticlesStore = signalStore(
             ))
         }
     ))
+)
+export const fournisseursStore = signalStore(
+    { providedIn
+        : 'root' },
+    withState(initialFournisseursState),
+    withComputed((store) => (
+        {
+            taille: computed(() => store.fournisseurs_data().length),
+            all_fournisseurs: computed(() => {
+                return store.fournisseurs_data()
+            })
+        }
+    )
+    ),
+    withMethods((store,
+        _task_service = inject(TaskService),
+        snackbar = inject(MatSnackBar)) =>
+    (
+        {
+            setPathString(path: string) {
+                patchState(store, { path_string: path })
+            },
+            loadFournisseurs: rxMethod<void>(pipe(switchMap(() => {
+                return _task_service.getallModels(store.path_string()).pipe(
+                    tap((data) => {
+                        patchState(store, { fournisseurs_data: data })
+                    })
+                )
+            }
+            ))),
+            addFournisseur: rxMethod<any>(pipe(
+                switchMap((fournisseur) => {
+                    return _task_service.addModel(store.path_string(), fournisseur).pipe(
+                        tap({
+                            next: () => {
+                                Showsnackerbaralert('ajouté avec succes', 'pass', snackbar)
+                            }, error: () => { Showsnackerbaralert('échoué', 'fail', snackbar) }
+                        }
+                        )
+                    )
+                })
+            )),
+            removeFournisseur: rxMethod<string>(pipe(
+                switchMap((id) => {
+                    return _task_service.deleteModel(store.path_string(), id).pipe(tap({
+                        next: () => {
+
+                            Showsnackerbaralert('élément supprimé', 'pass', snackbar)
+                        }, error: () => {
+                            Showsnackerbaralert('échoué', 'fail', snackbar)
+                        }
+                    }
+
+                    ))
+                }))),
+            updateFournisseur: rxMethod<fournisseurs>(pipe(
+                switchMap((fournisseur) => {
+                    return _task_service.updateModel(store.path_string(), fournisseur).pipe(
+                        tap({
+                            next: () => {
+
+                                Showsnackerbaralert('modifié avec succes', 'pass', snackbar)
+                            }, error: () => {
+                                Showsnackerbaralert('échoué', 'fail', snackbar)
+                            }
+                        }
+                        )
+                    )
+                })
+            )),
+
+        }
+    ))
+
 )
 function convertDate(strdate: string): Date {
     const [day1, month1, year1] = strdate.split("/")

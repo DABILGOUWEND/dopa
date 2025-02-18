@@ -18,7 +18,7 @@ import { sign } from 'node:crypto';
 import { FormSaisiComponent } from '../form-saisi/form-saisi.component';
 @Component({
   selector: 'app-gasoil',
-  imports: [ImportedModule, FormSaisiComponent,ApprogoComponent],
+  imports: [ImportedModule, FormSaisiComponent, ApprogoComponent],
   templateUrl: './gasoil.component.html',
   styleUrl: './gasoil.component.scss'
 })
@@ -156,6 +156,7 @@ export class GasoilComponent implements OnInit {
     })
 
   })
+  engins_select = signal<any>([])
   total_conso = computed(() => {
     let go = this._gasoil_store.datasource().map((x: any) => x.quantite_go);
     return this._service.somme(go)
@@ -193,7 +194,7 @@ export class GasoilComponent implements OnInit {
   historique_conso = computed(() => {
     let unique_dates = [...new Set(this._gasoil_store.datasource().map(x => x.date))].reverse();
     console.log(unique_dates)
-    let donnees:any=[];
+    let donnees: any = [];
     unique_dates.forEach(element => {
       let data = this._gasoil_store.datasource().filter(x => x.date === element)
       let quantite = data.map(x => Number(x.quantite_go)).reduce((a, b) => a + b)
@@ -201,7 +202,7 @@ export class GasoilComponent implements OnInit {
         x: this._service.convertDate(element),
         y: quantite
       })
-      
+
     });
     return donnees;
   })
@@ -317,6 +318,7 @@ export class GasoilComponent implements OnInit {
       this._gasoil_store.removeconso(id)
   }
   changeSelect(data: any, controle_names: any) {
+  
     let controle_name = controle_names;
     this.selectedEngin.set(undefined);
     let ind = this.table().findIndex(x => x.control_name === "engin_id")
@@ -329,6 +331,7 @@ export class GasoilComponent implements OnInit {
             'valeur': x.code_parc
           }
         })
+        this.engins_select.set(tab);
         this.table()[ind].tableau = tab;
         this.table_update_form.get("designation")?.setValue('');
         break
@@ -358,7 +361,7 @@ export class GasoilComponent implements OnInit {
       }
       )
     this.table()[ind].tableau = tab;
- 
+
     let dates = this._service.convertDate(row.date);
     this.table_update_form.patchValue({ ...row, date: dates }
     )

@@ -180,8 +180,8 @@
                                                     CODE PARC
                                                 </mat-label>
                                                 <mat-select formControlName="engin_id" (selectionChange)="changeSelect($event.value,'engin_id')">
-                                                    <mat-option *ngFor="let row of _engins_store.donnees_engins()" [value]="row.id">
-                                                        {{row.designation}}</mat-option>
+                                                    <mat-option *ngFor="let row of engins_select()" [value]="row.id">
+                                                        {{row.valeur}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>

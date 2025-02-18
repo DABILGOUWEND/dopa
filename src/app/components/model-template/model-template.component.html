@@ -10,7 +10,8 @@
             </ng-container>
             <table mat-table [dataSource]="donnees_table()" class="booktable" multiTemplateDataRows>
                 <ng-container *ngFor="let column of displayedColumns() |keyvalue " matColumnDef="{{column.key}}">
-                    @if(column.key=='actions')
+                    @switch (column.key) {
+                    @case ('actions')
                     {
                     <th mat-header-cell *matHeaderCellDef>
                     </th>
@@ -19,6 +20,21 @@
                             [ngTemplateOutletContext]="{row:element,ind:ind,clicker:clicker()}">
                         </ng-container>
                     </td>
+                    }
+                    @default {
+                    <th mat-header-cell *matHeaderCellDef> {{column.value}}
+                    </th>
+                    <td mat-cell *matCellDef="let element; let ind=index">
+                        <span class="mobile-label"> 
+                            {{column.value}}
+                        </span>
+                        {{element[""+column.key]}}
+                    </td>
+                    }
+
+                    }
+                    @if(column.key=='actions')
+                    {
                     }@else {
                     <th mat-header-cell *matHeaderCellDef> {{column.value}}
                     </th>

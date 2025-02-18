@@ -5,6 +5,5 @@
 </form>
 <mat-autocomplete #auto="matAutocomplete" (closed)="fermer()">
     @for (shoe of designation_search(); track $index) {
-
     <mat-option [value]="shoe.designation">{{shoe.designation}} </mat-option>}
 </mat-autocomplete>

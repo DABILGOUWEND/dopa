@@ -1,5 +1,5 @@
 import { effect, inject, Injectable } from '@angular/core';
-import { EnginsStore, ClasseEnginsStore, PersonnelStore, ProjetStore, PannesStore, GasoilStore, ApproGasoilStore, StatutStore, TachesEnginsStore, EntrepriseStore, DevisStore, ConstatStore, LigneDevisStore, SstraitantStore, AttachementStore, DecompteStore, UserStore, UnitesStore, TachesStore, CommandeStore, SortiesArticlesStore, EntreesArticlesStore, RessourcesStore, FamillesStore, CategoriesStore } from '../store/appstore';
+import { EnginsStore, ClasseEnginsStore, PersonnelStore, ProjetStore, PannesStore, GasoilStore, ApproGasoilStore, StatutStore, TachesEnginsStore, EntrepriseStore, DevisStore, ConstatStore, LigneDevisStore, SstraitantStore, AttachementStore, DecompteStore, UserStore, UnitesStore, TachesStore, CommandeStore, SortiesArticlesStore, EntreesArticlesStore, RessourcesStore, FamillesStore, CategoriesStore, fournisseursStore } from '../store/appstore';
 import { AuthenService } from '../authen.service';
 import { Observable, of, tap } from 'rxjs';
 import e from 'express';
@@ -35,6 +35,7 @@ export class DataLoaderService {
   _ressources_store = inject(RessourcesStore);
   _familles_store = inject(FamillesStore);
   _categories_store = inject(CategoriesStore); 
+  _fournisseurs_store = inject(fournisseursStore);
 
 
 
@@ -67,6 +68,7 @@ export class DataLoaderService {
     this._entrees_articles_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/entrees_articles');
     this._sorties_articles_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/sorties_articles');
     this._commandes_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/commandes');
+    this._fournisseurs_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/fournisseurs');
 
   }
   Load_gestion_Data(): Observable<any> {
@@ -85,6 +87,7 @@ export class DataLoaderService {
         this._ressources_store.loadRessources();
         this._familles_store.loadFamilles();
         this._categories_store.loadCategories();
+        this._fournisseurs_store.loadFournisseurs();
 
       }))
     } else {

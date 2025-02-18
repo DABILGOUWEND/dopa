@@ -48,7 +48,6 @@ export class ModelTemplateComponent implements OnInit {
   })
   columnsToDisplayWithExpand = this.header_titles;
 
-
   modifier(row: any, id: string) {
     this.is_open.set(true)
     this.PatchEvent.emit(row)

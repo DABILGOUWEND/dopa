@@ -28,6 +28,9 @@ import { EssaiComponent } from './components/essai/essai.component';
 import { TestComponent } from './test_components/test/test.component';
 import { Essai2Component } from './components/essai2/essai2.component';
 import { MyessaisComponent } from './components/myessais/myessais.component';
+import { fournisseursStore } from './store/appstore';
+import { FournisseursComponent } from './components/fournisseurs/fournisseurs.component';
+import { CommandesComponent } from './components/commandes/commandes.component';
 
 export const routes: Routes = [
     {
@@ -93,6 +96,14 @@ export const routes: Routes = [
             {
                 path: "test",
                 component: TestComponent
+            },
+            {
+                path: "fournisseurs",
+                component: FournisseursComponent     
+            },
+            {
+                path: "commandes",
+                component: CommandesComponent     
             },
             { path: 'essai2', component: MyessaisComponent },
             {
