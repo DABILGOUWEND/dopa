@@ -8,61 +8,51 @@
 </div>
 }
 
-
 <ng-template #nav_liste>
     <li mat-list-item>
-        <a routerLink="gasoil">
-            Gestion Gasoil
+        <a routerLink="entrees_materiaux">
+            entrées
         </a>
     </li>
     <li mat-list-item>
-        <a routerLink="pannes">
-            Déclaration des pannes
+        <a routerLink="sorties_materiaux">
+            sorties
         </a>
     </li>
     <li mat-list-item>
-        <a routerLink="pointages">
-            Pontage du personnel
+        <a routerLink="fournisseurs">
+           fournisseurs
         </a>
     </li>
     <li mat-list-item>
-        <a routerLink="personnel">
-            Liste du personnel
-        </a>
-    </li>
-    <li mat-list-item>
-        <a routerLink="materiel">
-            Liste des engins
+        <a routerLink="commandes">
+            commandes
         </a>
     </li>
 </ng-template>
 <ng-template #toolbar>
     <div class="m_liens hide-on-med-and-down">
+        <div >
+            <a routerLink="commandes" class="btn" >
+               commandes
+            </a>
+        </div>
+        <div >
+            <a routerLink="fournisseurs" class="btn" >
+                fournisseurs
+            </a>
+        </div>
         <div>
-            <a routerLink="gasoil" class="btn" (click)="titre.set('Gestion Gasoil')">
-                Gestion Gasoil
+            <a routerLink="entrees_materiaux" class="btn" >
+                sorties
             </a>
         </div>
         <div >
-            <a routerLink="pannes" class="btn" (click)="titre.set('Déclaration des pannes')">
-                 Pannes
+            <a routerLink="sorties_materiaux" class="btn" >
+                 entrées
             </a>
         </div>
-        <div >
-            <a routerLink="pointages" class="btn" (click)="titre.set('Pointages du personnel')">
-                Pointages personnel
-            </a>
-        </div>
-        <div >
-            <a routerLink="personnel" class="btn" (click)="titre.set('Liste du personnel')">
-                Liste du personnel
-            </a>
-        </div>
-        <div >
-            <a routerLink="materiel" class="btn" (click)="titre.set('Liste des engins')">
-                Liste des engins
-            </a>
-        </div>
+        
     </div>
 </ng-template>
 <ng-template #title>

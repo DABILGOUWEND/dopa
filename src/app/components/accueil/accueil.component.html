@@ -1,33 +1,6 @@
 <app-home-template [content]="content" [nav_liste]="nav_liste" [toolbar]="toolbar" [title]="title" />
 <ng-template #nav_liste>
-  @if(_autservice.userSignal())
-  {
-  <li mat-list-item>
-    <a routerLink="/home_gestion">
-      GESTION DES STOCKS ET COMMANDES
-    </a>
-  </li>
-  <li mat-list-item>
-    <a routerLink="/home_gestion">
-      GESTION MATERIELS ET ENGINS
-    </a>
-  </li>
-  <li mat-list-item>
-    <a routerLink="/home_gestion">
-      DEVIS ET BUGDETS TRAVAUX
-    </a>
-  </li>
-  <li mat-list-item>
-    <a routerLink="/home_gestion">
-      FACTURATIONS DES CLIENTS
-    </a>
-  </li>
-  <li mat-list-item>
-    <a routerLink="/home_gestion">
-      FACTURATIONS DES PRESTATAIRES
-    </a>
-  </li>
-  }
+  
 </ng-template>
 
 <ng-template #toolbar>
@@ -46,40 +19,23 @@
     </div>
     <div class="reste_corps">
       <div class="myrow">
-        <a routerLink="/home_gestion">
-          <div class="item l4">
-            <div class="ma_card" [ngStyle]="{'border-color': 'blue'}">
-              <div class="card-image">
-                <mat-icon> store</mat-icon>
-              </div>
-              <div class="card-title">
-                GESTION DES STOCKS ET COMMANDES
-              </div>
-              <div class="card-content">
-                <p>Effectuer des commandes de matériaux pour vos chantiers et gérer vos différents stocks (entrées et
-                  sorties)</p>
-              </div>
 
-            </div>
-          </div>
-        </a>
-        <a routerLink="/home_gestion">
+        <a routerLink="/home_materiel">
           <div class="item l4">
-            <div class="ma_card" [ngStyle]="{'border-color': 'yellow'}">
+            <div class="ma_card" [ngStyle]="{'border-color': 'red'}">
               <div class="card-image">
                 <mat-icon>settings</mat-icon>
               </div>
               <div class="card-title ">
-                GESTION MATERIELS ET ENGINS
+                GESTION MATERIEL
               </div>
               <div class="card-content">
                 <p>Planifier l'utilisation et la maintenance de vos engins de chantiers. </p>
               </div>
-
             </div>
           </div>
         </a>
-        <a routerLink="/home_gestion">
+        <a routerLink="/home_personnel">
           <div class="item l4">
             <div class="ma_card" [ngStyle]="{'border-color': 'cyan'}">
               <div class="card-image">
@@ -89,56 +45,10 @@
                 GESTION DU PERSONNEL
               </div>
               <div class="card-content">
-
                 <p>Planifier les affectations du personnel sur les chantiers.</p>
                 <p> Suivre les heures de travail et les absences.</p>
                 <p> Gérer les congés et les primes.</p>
-
               </div>
-            </div>
-          </div>
-        </a>
-
-        <a routerLink="/home_travaux">
-          <div class="item l4">
-            <div class="ma_card" [ngStyle]="{'border-color': 'red'}">
-              <div class="card-image">
-                <mat-icon> money</mat-icon>
-              </div>
-              <div class="card-title ">
-                DEVIS ET BUGDETS TRAVAUX
-              </div>
-              <div class="card-content">
-
-                <p> Réaliser des devis pour vos clients.</p>
-                <p> Faire des budgets ressources pour vos chantiers.</p>
-                <p> Suivre la mise en oeuvre des budgets et les écarts.</p>
-
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a routerLink="/home_travaux">
-          <div class="item l4">
-            <div class="ma_card" [ngStyle]="{'border-color': 'green'}">
-              <div class="card-image">
-                <mat-icon> people</mat-icon>
-              </div>
-              <div class="card-title ">
-                FACTURATIONS DES CLIENTS
-              </div>
-              <div class="card-image">
-
-              </div>
-              <div class="card-content">
-                <p>
-                  Effectuer les constats, attachements et décomptes des travaux réalisés.
-                  Editer les factures de vos clients puis suivre les paiements.
-                  Effectuer des reportings sur les paiements et les retards de paiements.
-                </p>
-              </div>
-
             </div>
           </div>
         </a>
@@ -166,6 +76,24 @@
                   Effectuer des reportings sur les paiements et les retards de paiements.
                 </p>
 
+              </div>
+
+            </div>
+          </div>
+        </a>
+        
+        <a routerLink="/home_gestion">
+          <div class="item l4">
+            <div class="ma_card" [ngStyle]="{'border-color': 'blue'}">
+              <div class="card-image">
+                <mat-icon> store</mat-icon>
+              </div>
+              <div class="card-title">
+                GESTION DES STOCKS ET COMMANDES
+              </div>
+              <div class="card-content">
+                <p>Effectuer des commandes de matériaux pour vos chantiers et gérer vos différents stocks (entrées et
+                  sorties)</p>
               </div>
 
             </div>

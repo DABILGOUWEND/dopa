@@ -31,10 +31,14 @@ import { MyessaisComponent } from './components/myessais/myessais.component';
 import { fournisseursStore } from './store/appstore';
 import { FournisseursComponent } from './components/fournisseurs/fournisseurs.component';
 import { CommandesComponent } from './components/commandes/commandes.component';
+import { GestMaterielComponent } from './components/gest-materiel/gest-materiel.component';
+import { GestPersonnelComponent } from './components/gest-personnel/gest-personnel.component';
+import { EntreesMatComponent } from './components/entrees-mat/entrees-mat.component';
+import { SortiesMatComponent } from './components/sorties-mat/sorties-mat.component';
 
 export const routes: Routes = [
     {
-        path: "", redirectTo: "/essai2", pathMatch: "full"
+        path: "", redirectTo: "/accueil", pathMatch: "full"
     },
     {
         path: 'essai2', component: MyessaisComponent,
@@ -47,8 +51,28 @@ export const routes: Routes = [
         path: 'login', component: LoginComponent
     },
     {
-        path: "home_compta",
-        component: HomeComptaComponent,
+        path: "home_materiel",
+        component: GestMaterielComponent,canActivate: [gestionGuard],
+        children: [
+
+            {
+                path: "", redirectTo: "/home_materiel/gasoil", pathMatch: "full"
+            },
+            {
+                path: "gasoil",
+                component: GasoilComponent
+            }
+            ,
+            {
+                path: "pannes",
+                component: PannesComponent
+            },
+            {
+                path: "materiel",
+                component: EnginsComponent
+            }
+
+        ]
     },
     {
         path: "home_travaux",
@@ -85,37 +109,13 @@ export const routes: Routes = [
 
         ]
     },
+    
     {
-        path: "home_gestion",
-        component: GestionComponent, canActivate: [gestionGuard],
+        path: "home_personnel",
+        component: GestPersonnelComponent,canActivate: [gestionGuard],
         children: [
             {
-                path: "", redirectTo: "/home_gestion/essai2", pathMatch: "full"
-            }
-            ,
-            {
-                path: "test",
-                component: TestComponent
-            },
-            {
-                path: "fournisseurs",
-                component: FournisseursComponent     
-            },
-            {
-                path: "commandes",
-                component: CommandesComponent     
-            },
-            { path: 'essai2', component: MyessaisComponent },
-            {
-                path: "gasoil",
-                component: GasoilComponent,
-                data: { title: "Gestion de GasoDDDil" }
-
-            },
-            {
-                path: "pannes",
-                component: PannesComponent,
-                data: { title: "Gestion des pannes" }
+                path: "", redirectTo: "/home_personnel/pointages", pathMatch: "full"
             }
             ,
             {
@@ -125,15 +125,38 @@ export const routes: Routes = [
             }
             ,
             {
-                path: "materiel",
-                component: EnginsComponent,
-                data: { title: "Gestion du matériel" }
-            }
-            ,
-            {
                 path: "personnel",
                 component: PersonnelComponent,
                 data: { title: "Gestion du personnel" }
+            }
+        ]
+    },
+    {
+        path: "home_gestion",
+        component: GestionComponent,  canActivate: [adminGuard],
+        children: [
+            {
+                path: "", redirectTo: "/home_gestion/commandes", pathMatch: "full"
+            }
+            ,
+            {
+                path: "fournisseurs",
+                component: FournisseursComponent
+            },
+            {
+                path: "commandes",
+                component: CommandesComponent
+            }
+            ,
+            {
+                path: "entrees_materiaux",
+                component: EntreesMatComponent
+            }
+            
+            ,
+            {
+                path: "sorties_materiaux",
+                component: SortiesMatComponent
             }
         ]
     },
