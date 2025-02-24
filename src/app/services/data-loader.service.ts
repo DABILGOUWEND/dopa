@@ -88,6 +88,7 @@ export class DataLoaderService {
         this._familles_store.loadFamilles();
         this._categories_store.loadCategories();
         this._fournisseurs_store.loadFournisseurs();
+        this._users_store.loadUsers();
 
       }))
     } else {

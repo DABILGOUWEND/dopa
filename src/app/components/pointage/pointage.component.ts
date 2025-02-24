@@ -579,7 +579,5 @@ export class PointageComponent implements OnInit {
     this.fin_date.set(node.fin);
     this.impression();
   }
-  change_pointage(){
-   
-  }
+
 }

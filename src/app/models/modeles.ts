@@ -624,17 +624,21 @@ export interface articles{
 }
 export interface commandes{
     'id':string,
-    'fournisseur_id':string,
     'date_commande':string|undefined,
-    'date_livraison':string|undefined,
+    'demandeur':string|undefined,
+    'articles_commandes':article_commande[],
+    'projet_id':string,
+    'numero_commande':string,
+    'validation':'validé'|'non validé',
+    'livraison':'livré'|'non livré'
+}
+export interface article_commande{
     'article_id':string,
     'quantite':number,
-    'projet_id':string,
-    'utilisateur_id':string|undefined,
-    'validation':'validé'|'non validé',
-    'livraison':'livré'|'non livré',
-
+    'fournisseur_id':string,
+    'date_livraison':string
 }
+
 export interface tab_commandesStore {
     commandes_data: commandes[],
     message: string,
@@ -663,7 +667,8 @@ export interface entrees_articles{
     'projet_id':string,
     'article_id':string,
     'fournisseur_id':string,
-    'utilisateur_id':string
+    'utilisateur_id':string,
+    'site_id':string
 }
 export interface tab_entrees_articlesStore {
     entrees_articles_data: entrees_articles[],
@@ -682,6 +687,16 @@ export interface fournisseurs{
 }
 export interface tab_fournisseursStore {
     fournisseurs_data: fournisseurs[],
+    message: string,
+    selectedId: string,
+    path_string: string
+}
+export interface sites{
+    'id':string,
+    'designation':string
+}
+export interface tab_sitesStore {
+    sites_data: sites[],
     message: string,
     selectedId: string,
     path_string: string

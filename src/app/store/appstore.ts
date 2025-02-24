@@ -31,7 +31,10 @@ import {
     tab_sorties_articlesStore,
     tab_entrees_articlesStore,
     tab_fournisseursStore,
-    fournisseurs
+    fournisseurs,
+    tab_sitesStore,
+    sites,
+    commandes
 } from "../models/modeles"
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -318,6 +321,13 @@ const initialEntreesArticlesState: tab_entrees_articlesStore =
 const initialFournisseursState: tab_fournisseursStore =
 {
     fournisseurs_data: [],
+    message: '',
+    selectedId: '',
+    path_string: ''
+}
+const initialSitesState: tab_sitesStore =
+{
+    sites_data: [],
     message: '',
     selectedId: '',
     path_string: ''
@@ -4179,7 +4189,7 @@ export const CommandeStore = signalStore(
                 }))
         })))
         ,
-        addCommande: rxMethod<Devis>(pipe(
+        addCommande: rxMethod<any>(pipe(
             switchMap((commande) => {
                 return _task_service.addModel(store.path_string(), commande).pipe(tap({
                     next: () => {
@@ -4201,7 +4211,7 @@ export const CommandeStore = signalStore(
 
                 ))
             }))),
-        updateCommande: rxMethod<Devis>(pipe(
+        updateCommande: rxMethod<any>(pipe(
             switchMap((commande) => {
                 return _task_service.updateModel(store.path_string(), commande).pipe(
                 )
@@ -4398,6 +4408,79 @@ export const fournisseursStore = signalStore(
             updateFournisseur: rxMethod<fournisseurs>(pipe(
                 switchMap((fournisseur) => {
                     return _task_service.updateModel(store.path_string(), fournisseur).pipe(
+                        tap({
+                            next: () => {
+
+                                Showsnackerbaralert('modifié avec succes', 'pass', snackbar)
+                            }, error: () => {
+                                Showsnackerbaralert('échoué', 'fail', snackbar)
+                            }
+                        }
+                        )
+                    )
+                })
+            )),
+
+        }
+    ))
+
+)
+export const SitesStore = signalStore(
+    { providedIn: 'root' },
+    withState(initialSitesState),
+    withComputed((store) => (
+        {
+            taille: computed(() => store.sites_data().length),
+            all_sites: computed(() => {
+                return store.sites_data()
+            })
+        }
+    )
+    ),
+    withMethods((store,
+        _task_service = inject(TaskService),
+        snackbar = inject(MatSnackBar)) =>
+    (
+        {
+            setPathString(path: string) {
+                patchState(store, { path_string: path })
+            },
+            loadSites: rxMethod<void>(pipe(switchMap(() => {
+                return _task_service.getallModels(store.path_string()).pipe(
+                    tap((data) => {
+                        patchState(store, { sites_data: data })
+                    })
+                )
+            }
+            ))),
+            addSite: rxMethod<any>(pipe(
+                switchMap((site) => {
+                    return _task_service.addModel(store.path_string(), site).pipe(
+                        tap({
+                            next: () => {
+                                Showsnackerbaralert('ajouté avec succes', 'pass', snackbar)
+                            }, error: () => { Showsnackerbaralert('échoué', 'fail', snackbar) }
+                        }
+                        )
+                    )
+                })
+            )),
+            removeSite: rxMethod<string>(pipe(
+                switchMap((id) => {
+                    return _task_service.deleteModel(store.path_string(), id).pipe(tap({
+                        next: () => {
+
+                            Showsnackerbaralert('élément supprimé', 'pass', snackbar)
+                        }, error: () => {
+                            Showsnackerbaralert('échoué', 'fail', snackbar)
+                        }
+                    }
+
+                    ))
+                }))),
+            updateSite: rxMethod<sites>(pipe(
+                switchMap((site) => {
+                    return _task_service.updateModel(store.path_string(), site).pipe(
                         tap({
                             next: () => {
 

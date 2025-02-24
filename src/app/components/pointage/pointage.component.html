@@ -83,7 +83,7 @@
                                     <mat-label>
                                         pointages
                                     </mat-label>
-                                    <mat-select [(value)]="current_pointage" (selectionChange)="change_pointage()">
+                                    <mat-select [(value)]="current_pointage" >
                                         <mat-option
                                             [ngStyle]="{'font-weight':'bold','font-size':'20px','text-align':'center','border-bottom':'1px solid red'}"
                                             *ngFor="let node of personnel_store.getDates()[1]" [value]="node">
