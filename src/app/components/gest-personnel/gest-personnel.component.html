@@ -1,0 +1,46 @@
+@defer(on timer(1s);hydrate when !end_of_load()){
+    <app-home-template [nav_liste]="nav_liste" [toolbar]="toolbar" [content]="content" [title]="title">
+    </app-home-template>
+    }
+    @placeholder{
+    <div class="spinner-container">
+        <mat-spinner [ngStyle]="{'margin-left.%':50}"></mat-spinner>
+    </div>
+    }
+    
+    <ng-template #nav_liste>
+        <li mat-list-item>
+            <a routerLink="pointages">
+                Pontage du personnel
+            </a>
+        </li>
+        <li mat-list-item>
+            <a routerLink="personnel">
+                Liste du personnel
+            </a>
+        </li>
+   
+    </ng-template>
+    <ng-template #toolbar>
+        <div class="m_liens hide-on-med-and-down">
+            <div >
+                <a routerLink="pointages" class="btn" (click)="titre.set('Pointages du personnel')">
+                    Pointages personnel
+                </a>
+            </div>
+            <div >
+                <a routerLink="personnel" class="btn" (click)="titre.set('Liste du personnel')">
+                    Liste du personnel
+                </a>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #title>
+        <h2>{{titre()}}</h2>
+    </ng-template>
+    <ng-template #content>
+        <div class="corps">
+            <router-outlet>
+            </router-outlet>
+        </div>
+    </ng-template>  

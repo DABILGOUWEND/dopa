@@ -1,0 +1,96 @@
+@defer (
+when true
+) {
+<app-model-template [table]="table()" [table_update_form]="table_fournisseur" [dataSource]="dataSource()"
+    [displayedColumns]="displayedColumns" [className]="'engins'" (newItemEvent)="updateData($event)"
+    (RemoveItemEvent)="deleteData($event)" (RechercheEvent)="recherche($event)" (AfficheToutEvent)="afficheTout()"
+    [titre]="titre_tableau()" (PatchEvent)="PatchEventFct($event)" (addEvent)="addEventFct()"
+    [action_template]="actiontemplate" (clear_event)="clear_fct()" [is_open2]="is_open2()" [(is_open)]="is_open"
+    [clicker]="clicker()" [is_update]="is_update()" [(current_row)]="current_row" [mes_saisies]="saisie">
+</app-model-template>
+}
+@placeholder {
+<div [ngStyle]="{'padding-top.px':200,'text-align':'center'}">
+    <h2>téléchargement des données.....</h2>
+</div>
+}
+
+<ng-template #actiontemplate let-row="row" let-ind="ind" let-clicker="clicker">
+    @if(row!=current_row()){
+    <div [ngStyle]="{'display':'flex'}">
+        <button mat-icon-button type="button" (click)="deleteData(row.id)"> <mat-icon> delete</mat-icon> </button>
+        <button mat-icon-button type="button" (click)="modifier(row,ind)"> <mat-icon> edit</mat-icon> </button>
+    </div>
+    }@else {
+    <div [ngStyle]="{'display':'flex'}">
+        <button mat-icon-button type="button" (click)="save()" [disabled]="!is_valid()"> <mat-icon> save</mat-icon>
+        </button>
+        <button mat-flat-button type="button" (click)="annuler()" color="warn"> annuler </button>
+    </div>
+    }
+</ng-template>
+
+<ng-template #saisie>
+    <div class="myrow" [formGroup]="table_fournisseur">
+        <div class="item s12 m12 l2">
+            <mat-form-field>
+                <mat-label>
+                    DESIGNATION
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='designation' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+
+        <div class="item s12 m12 l2">
+            <mat-form-field>
+                <mat-label>
+                    ADRESSE
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='adresse' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+
+        <div class="item s12 m12 l2">
+            <mat-form-field>
+                <mat-label>
+                    TELEPHONE
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='phone' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+
+        <div class="item s12 m12 l2">
+            <mat-form-field>
+                <mat-label>
+                    EMAIL
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='email' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+
+        <div class="item s12 m12 l2">
+            <mat-form-field>
+                <mat-label>
+                    IFU
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='ifu' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+
+        <div class="item s12 m12 l2">
+            <mat-form-field>
+                <mat-label>
+                    RCCM
+                    <span aria-hidden="true" class="placeholder-required"> *</span>
+                </mat-label>
+                <input matInput formControlName='rccm' [attr.maxlength]="50" type="text">
+            </mat-form-field>
+        </div>
+
+    </div>
+</ng-template>
