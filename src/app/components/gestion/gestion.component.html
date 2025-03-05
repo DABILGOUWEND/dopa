@@ -3,9 +3,12 @@
 </app-home-template>
 }
 @placeholder{
-<div class="spinner-container">
-    <mat-spinner [ngStyle]="{'margin-left.%':50}"></mat-spinner>
-</div>
+    <div [ngStyle]="{'margin-top':'20px',
+    'display':'flex',
+    'justify-content':'center',
+    'align-items':'center'}">
+        <mat-spinner [ngStyle]="{'width':'50%'}"></mat-spinner>
+    </div>
 }
 
 <ng-template #nav_liste>
@@ -37,30 +40,28 @@
                commandes
             </a>
         </div>
+       
+        <div>
+            <a routerLink="entrees_materiaux" class="btn" >
+                entrées
+            </a>
+        </div>
+        <div >
+            <a routerLink="sorties_materiaux" class="btn" >
+                 sorties
+            </a>
+        </div>
         <div >
             <a routerLink="fournisseurs" class="btn" >
                 fournisseurs
             </a>
         </div>
-        <div>
-            <a routerLink="entrees_materiaux" class="btn" >
-                sorties
-            </a>
-        </div>
-        <div >
-            <a routerLink="sorties_materiaux" class="btn" >
-                 entrées
-            </a>
-        </div>
-        
     </div>
 </ng-template>
 <ng-template #title>
     <h2>{{titre()}}</h2>
 </ng-template>
 <ng-template #content>
-    <div class="corps">
         <router-outlet>
         </router-outlet>
-    </div>
 </ng-template>  

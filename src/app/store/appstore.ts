@@ -1,4 +1,4 @@
-import { computed, inject } from "@angular/core";
+import { computed, inject, signal } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Observable, concat, forkJoin, map, of, pipe, switchMap, tap } from "rxjs";
 import {
@@ -34,7 +34,8 @@ import {
     fournisseurs,
     tab_sitesStore,
     sites,
-    commandes
+    commandes,
+    tab_beneficiairesStore
 } from "../models/modeles"
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -343,6 +344,13 @@ const initialCompte: comptes =
     current_user: undefined,
     selected_engin: '',
     selected_personnel: ''
+}
+const initialBeneficaireState: tab_beneficiairesStore =
+{
+    beneficiaires_data: [],
+    message: '',
+    selectedId: '',
+    path_string: ''
 }
 /*************************** */
 export const UserStore = signalStore(
@@ -1054,19 +1062,21 @@ export const PersonnelStore = signalStore(
             loadPersonnel: rxMethod<void>(pipe(switchMap(() => {
                 return task_service.getallPersonnel().pipe(
                     tap(data => {
-                        patchState(store, setPending());
-                        patchState(store, { personnel_data: classePersonnel(data) }, setFulfilled())
+                        patchState(store, setPending())
+                        setTimeout(() => {
+                            patchState(store, setFulfilled())
+                            patchState(store, { personnel_data: classePersonnel(data) })
+                        }, 1000);
                     })
                 )
             }
             ))),
             addPersonnel: rxMethod<any>(pipe(
                 switchMap((personnel) => {
+                    console.log(personnel)
                     return task_service.addModel(store.path_string(), personnel).pipe(
                         tap({
                             next: () => {
-                                const updatedonnes = [...store.personnel_data(), personnel]
-                                patchState(store, { personnel_data: updatedonnes })
                                 Showsnackerbaralert('ajouté avec succes', 'pass', snackbar)
                             },
                             error: () => {
@@ -1101,8 +1111,11 @@ export const PersonnelStore = signalStore(
                             obs.push(task_service.removePerson(row, date))
                     }
                     return forkJoin(obs).pipe(tap({
+                        next: () => {
+                            patchState(store, setPending())
+                        },
                         complete: () => {
-                            patchState(store, { is_finished: true })
+                            patchState(store, setFulfilled)
                         }
                     }))
                 }
@@ -1112,11 +1125,7 @@ export const PersonnelStore = signalStore(
                     return task_service.updateModel(store.path_string(), personnel).pipe(
                         tap({
                             next: () => {
-                                var data = store.personnel_data()
-                                var index = data.findIndex(x => x.id == personnel.id)
-                                data[index] = personnel
-                                patchState(store, { personnel_data: data })
-                                Showsnackerbaralert('modifié avec succes', 'pass', snackbar)
+
                             },
                             error: () => {
                                 patchState(store, { message: 'echoué' });
@@ -4255,7 +4264,7 @@ export const SortiesArticlesStore = signalStore(
                     }))
             })))
             ,
-            addSortiesArticles: rxMethod<Devis>(pipe(
+            addSortiesArticles: rxMethod<any>(pipe(
                 switchMap((sortie) => {
                     return _task_service.addModel(store.path_string(), sortie).pipe(tap({
                         next: () => {
@@ -4277,7 +4286,7 @@ export const SortiesArticlesStore = signalStore(
 
                     ))
                 }))),
-            updateSortieArticle: rxMethod<Devis>(pipe(
+            updateSortieArticle: rxMethod<any>(pipe(
                 switchMap((sortie) => {
                     return _task_service.updateModel(store.path_string(), sortie).pipe(
                     )
@@ -4321,7 +4330,7 @@ export const EntreesArticlesStore = signalStore(
                     }))
             })))
             ,
-            addEntreeArticles: rxMethod<Devis>(pipe(
+            addEntreeArticles: rxMethod<any>(pipe(
                 switchMap((entree) => {
                     return _task_service.addModel(store.path_string(), entree).pipe(tap({
                         next: () => {
@@ -4342,7 +4351,7 @@ export const EntreesArticlesStore = signalStore(
                     }
                     ))
                 }))),
-            updateEntreeArticle: rxMethod<Devis>(pipe(
+            updateEntreeArticle: rxMethod<any>(pipe(
                 switchMap((entree) => {
                     return _task_service.updateModel(store.path_string(), entree).pipe(
                     )
@@ -4352,8 +4361,10 @@ export const EntreesArticlesStore = signalStore(
     ))
 )
 export const fournisseursStore = signalStore(
-    { providedIn
-        : 'root' },
+    {
+        providedIn
+            : 'root'
+    },
     withState(initialFournisseursState),
     withComputed((store) => (
         {
@@ -4478,7 +4489,7 @@ export const SitesStore = signalStore(
 
                     ))
                 }))),
-            updateSite: rxMethod<sites>(pipe(
+            updateSite: rxMethod<any>(pipe(
                 switchMap((site) => {
                     return _task_service.updateModel(store.path_string(), site).pipe(
                         tap({
@@ -4497,6 +4508,78 @@ export const SitesStore = signalStore(
         }
     ))
 
+)
+export const beneficiairesStore = signalStore(
+    { providedIn: 'root' },
+    withState(initialBeneficaireState),
+    withComputed((store) => (
+        {
+            taille: computed(() => store.beneficiaires_data().length),
+            all_beneficiaires: computed(() => {
+                return store.beneficiaires_data()
+            })
+        }
+    )
+    ),
+    withMethods((store,
+        _task_service = inject(TaskService),
+        snackbar = inject(MatSnackBar)) =>
+    (
+        {
+            setPathString(path: string) {
+                patchState(store, { path_string: path })
+            },
+            loadBeneficiaires: rxMethod<void>(pipe(switchMap(() => {
+                return _task_service.getallModels(store.path_string()).pipe(
+                    tap((data) => {
+                        patchState(store, { beneficiaires_data: data })
+                    })
+                )
+            }
+            ))),
+            addBeneficiaire: rxMethod<any>(pipe(
+                switchMap((benef) => {
+                    return _task_service.addModel(store.path_string(), benef).pipe(
+                        tap({
+                            next: () => {
+                                Showsnackerbaralert('ajouté avec succes', 'pass', snackbar)
+                            }, error: () => { Showsnackerbaralert('échoué', 'fail', snackbar) }
+                        }
+                        )
+                    )
+                })
+            )),
+            removeBeneficiaire: rxMethod<string>(pipe(
+                switchMap((id) => {
+                    return _task_service.deleteModel(store.path_string(), id).pipe(tap({
+                        next: () => {
+
+                            Showsnackerbaralert('élément supprimé', 'pass', snackbar)
+                        }, error: () => {
+                            Showsnackerbaralert('échoué', 'fail', snackbar)
+                        }
+                    }
+
+                    ))
+                }))),
+            updateBeneficiaire: rxMethod<any>(pipe(
+                switchMap((benef) => {
+                    return _task_service.updateModel(store.path_string(), benef).pipe(
+                        tap({
+                            next: () => {
+
+                                Showsnackerbaralert('modifié avec succes', 'pass', snackbar)
+                            }, error: () => {
+                                Showsnackerbaralert('échoué', 'fail', snackbar)
+                            }
+                        }
+                        )
+                    )
+                })
+            )),
+
+        }
+    ))
 )
 function convertDate(strdate: string): Date {
     const [day1, month1, year1] = strdate.split("/")

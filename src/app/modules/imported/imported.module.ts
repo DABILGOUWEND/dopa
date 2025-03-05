@@ -35,7 +35,6 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { QrCodeModule } from 'ng-qrcode';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-
 const MATERIAL_COMPONENTS = [
   CommonModule,
   MatTabsModule,
@@ -76,7 +75,7 @@ const MATERIAL_COMPONENTS = [
   NgxMatTimepickerModule,
   MatFormFieldModule,
   QrCodeModule,
-  QRCodeModule,
+  QRCodeModule
 ];
 
 

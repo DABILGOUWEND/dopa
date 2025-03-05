@@ -1,5 +1,5 @@
 import { effect, inject, Injectable } from '@angular/core';
-import { EnginsStore, ClasseEnginsStore, PersonnelStore, ProjetStore, PannesStore, GasoilStore, ApproGasoilStore, StatutStore, TachesEnginsStore, EntrepriseStore, DevisStore, ConstatStore, LigneDevisStore, SstraitantStore, AttachementStore, DecompteStore, UserStore, UnitesStore, TachesStore, CommandeStore, SortiesArticlesStore, EntreesArticlesStore, RessourcesStore, FamillesStore, CategoriesStore, fournisseursStore } from '../store/appstore';
+import { EnginsStore, ClasseEnginsStore, PersonnelStore, ProjetStore, PannesStore, GasoilStore, ApproGasoilStore, StatutStore, TachesEnginsStore, EntrepriseStore, DevisStore, ConstatStore, LigneDevisStore, SstraitantStore, AttachementStore, DecompteStore, UserStore, UnitesStore, TachesStore, CommandeStore, SortiesArticlesStore, EntreesArticlesStore, RessourcesStore, FamillesStore, CategoriesStore, fournisseursStore, SitesStore } from '../store/appstore';
 import { AuthenService } from '../authen.service';
 import { Observable, of, tap } from 'rxjs';
 import e from 'express';
@@ -36,6 +36,7 @@ export class DataLoaderService {
   _familles_store = inject(FamillesStore);
   _categories_store = inject(CategoriesStore); 
   _fournisseurs_store = inject(fournisseursStore);
+  _sites_store = inject(SitesStore);
 
 
 
@@ -69,6 +70,8 @@ export class DataLoaderService {
     this._sorties_articles_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/sorties_articles');
     this._commandes_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/commandes');
     this._fournisseurs_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/fournisseurs');
+    this._sites_store.setPathString('comptes/' + this._auth_service.current_projet_id() + '/sites');
+    
 
   }
   Load_gestion_Data(): Observable<any> {
@@ -89,6 +92,7 @@ export class DataLoaderService {
         this._categories_store.loadCategories();
         this._fournisseurs_store.loadFournisseurs();
         this._users_store.loadUsers();
+        this._sites_store.loadSites();
 
       }))
     } else {

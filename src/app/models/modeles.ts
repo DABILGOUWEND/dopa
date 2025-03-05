@@ -630,7 +630,8 @@ export interface commandes{
     'projet_id':string,
     'numero_commande':string,
     'validation':'validé'|'non validé',
-    'livraison':'livré'|'non livré'
+    'livraison':'livré'|'non livré',
+    'time':number
 }
 export interface article_commande{
     'article_id':string,
@@ -651,7 +652,8 @@ export interface sorties_articles {
     'quantite':number,
     'projet_id':string,
     'article_id':string,
-    'destinataire_id':string,
+    'motif':string,
+    'beneficiaire_id':string,
     'utilisateur_id':string
 }
 export interface tab_sorties_articlesStore {
@@ -667,8 +669,11 @@ export interface entrees_articles{
     'projet_id':string,
     'article_id':string,
     'fournisseur_id':string,
-    'utilisateur_id':string,
-    'site_id':string
+    'utilisateur_id':string|undefined,
+    'receptionniste_id':string,
+    'site_id':string,
+    'time':number,
+    'num_bc'    :string
 }
 export interface tab_entrees_articlesStore {
     entrees_articles_data: entrees_articles[],
@@ -697,6 +702,17 @@ export interface sites{
 }
 export interface tab_sitesStore {
     sites_data: sites[],
+    message: string,
+    selectedId: string,
+    path_string: string
+}
+
+export interface beneficiaires{
+    'id':string,
+    'personnel_id':string
+}
+export interface tab_beneficiairesStore {
+    beneficiaires_data: beneficiaires[],
     message: string,
     selectedId: string,
     path_string: string

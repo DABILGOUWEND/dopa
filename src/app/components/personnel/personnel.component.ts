@@ -38,6 +38,7 @@ export class PersonnelComponent implements OnInit {
       }
     })
     effect(() => {
+      console.log(this.personnel_store.isFulfilled())
     })
   }
   is_valid = computed(() => {
@@ -51,11 +52,12 @@ export class PersonnelComponent implements OnInit {
   is_update = signal(false);
   is_click = signal<boolean | undefined>(false);
   is_pointed = signal<boolean | undefined>(false);
+  message = signal('données en cours de chargement...');
   presence = model<boolean | undefined>(undefined);
   heurs_w = model<number | undefined>(0);
   heurs_sup = model<number | undefined>(0);
-  EnginsStore = inject(EnginsStore)
-  personnel_store = inject(PersonnelStore)
+  EnginsStore = inject(EnginsStore);
+  personnel_store = inject(PersonnelStore);
   classeEngins_store = inject(ClasseEnginsStore)
   statut_store = inject(StatutStore)
   fb = inject(NonNullableFormBuilder)
@@ -204,6 +206,7 @@ export class PersonnelComponent implements OnInit {
     let valeur = data[0];
     let mydata: any = [];
     if (this.is_update()) {
+      this.message.set('Modification en cours...')
       mydata = ({
         ...this.current_row(),
         id: valeur.id,
@@ -217,9 +220,10 @@ export class PersonnelComponent implements OnInit {
         statut_id: valeur.statut_id
       }
       )
-      //this.personnel_store.updatePersonnel(mydata)
+      this.personnel_store.updatePersonnel(mydata)
     }
     else {
+      this.message.set('Ajout en cours...')
       mydata = {
         id: '',
         nom: valeur.nom,
@@ -235,10 +239,9 @@ export class PersonnelComponent implements OnInit {
         heuresN: [],
         heureSup: []
       }
-      //this.personnel_store.addPersonnel(mydata)
+      this.personnel_store.addPersonnel(mydata)
     }
     this.current_row.set(undefined)
-    console.log(mydata)
   }
   deleteData(id: any) {
     if (confirm('voulez-vous supprimer cet élement?'))

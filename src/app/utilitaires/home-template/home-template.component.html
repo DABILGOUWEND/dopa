@@ -44,22 +44,21 @@
                             </button>
                         </a>
                     </div>
-                    <div class="menu hide-on-large-only">
+                    <div class="menu">
                         <button mat-icon-button (click)="sidnav.open()">
                             <mat-icon>
                                 menu
                             </mat-icon>
                         </button>
                     </div>
-                    <div class="logo hide-on-med-and-down">
+                    <div class="logo">
                         SOLUBTP
                     </div>
                 </div>
                 <div class="entete_milieu ">
-                    <div class="m_logo hide-on-large-only">
-                        SOLUBTP
+                    <div class="m_liens ">
+                        <ng-container [ngTemplateOutlet]="toolbar()"> </ng-container>
                     </div>
-                    <ng-container [ngTemplateOutlet]="toolbar()"> </ng-container>
                 </div>
                 <div class="entete_droite">
                     <div class="m_user">
@@ -80,8 +79,9 @@
                     </div>
                 </div>
             </div>
-            <ng-container [ngTemplateOutlet]="content()"> </ng-container>
-
+            <div class="corps">
+                <ng-container [ngTemplateOutlet]="content()"> </ng-container>
+            </div>
             <div class="piedpage">
                 <div class="row">
                     <div class="col l6 s12"

@@ -10,17 +10,8 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
 import { AuthenService } from '../../authen.service';
 import { DataLoaderService } from '../../services/data-loader.service';
 import { Router } from '@angular/router';
+import mapboxgl from 'mapbox-gl'
 
-
-interface Family {
-  name: string;
-  children?: Family[];
-}
-interface ExampleFlatNode {
-  expandable: boolean;
-  name: string;
-  level: number;
-}
 @Component({
     selector: 'app-essai2',
     imports: [ImportedModule],
@@ -28,8 +19,10 @@ interface ExampleFlatNode {
     styleUrl: './essai2.component.scss'
 })
 export class Essai2Component implements OnInit {
+  options: any;
   ngOnInit() {
-  }
+    
+}
   
 
 }

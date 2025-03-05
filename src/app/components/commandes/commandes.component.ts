@@ -116,13 +116,34 @@ export class CommandesComponent {
 
   })
   commande_recentes = computed(() => {
-    return this._commandesStore.commandes().sort((a, b) => {
-      let date1 = this._service.convertDate(a.date_commande ? a.date_commande : '').getTime();
-      let date2 = this._service.convertDate(b.date_commande ? b.date_commande : '').getTime();
-      return date2 - date1;
-    }
-    ).slice(0, 5)
+    let uniques_dates = this._commandesStore.commandes().sort((a, b) => b.time - a.time).slice(0, 10).map((e: commandes) => e.date_commande).filter((value, index, self) => self.indexOf(value) === index);
+    let donnees: any = [];
+  uniques_dates.forEach(element => {
+    let filtre = this._commandesStore.commandes().filter((e: commandes) => e.date_commande == element);
+    donnees.push({
+      'date': element,
+      'commandes': filtre.map((a: commandes) => ({
+        'articles': a.articles_commandes.map((x: any) => ({
+          quantite:x.quantite,
+          unite:this.liste_articles().find((ar: articles) => ar.id == x.article_id)?.unite,
+          article_id:x.article_id,
+          date_livraison:x.date_livraison,
+          fournisseur_id:x.fournisseur_id,
+          designation:this.liste_articles().find((ar: articles) => ar.id == x.article_id)?.designation
+        })),
+        'id': a.id,
+        'numero_commande': a.numero_commande,
+        'projet': a.projet_id,
+        'demandeur': this._users.users().find((u: any) => u.id == a.demandeur)?.username,
+        'validation': a.validation,
+        'livraison': a.livraison,
+        'time': a.time
+      
+    }))
   })
+});
+return donnees
+})
 
   deleteData(row: any) {
     if (confirm('Voulez-vous vraiment supprimer cette commande?'))
@@ -228,12 +249,14 @@ export class CommandesComponent {
       date_commande: new Date().toLocaleDateString(),
       articles_commandes: [],
       validation: 'non validé',
-      livraison: 'non livré'
+      livraison: 'non livré',
+      time: new Date().getTime()
     })
 
   }
   new_article() {
     this.table_article_commande.reset();
+    this.table_article_commande.get('date_livraison')?.setValue(new Date());
     this.is_update_article.set(false);
     this.is_new_article.set(true);
     let numero = 1;
@@ -294,7 +317,7 @@ export class CommandesComponent {
           numero_commande: com.numero_commande,
           projet_id: projet_id ? projet_id : '',
           demandeur: com.demandeur,
-          date_commande: com.date_commande,
+          date_commande: new Date().toLocaleDateString(),
           articles_commandes: this.articles_commande().map((x: any) => ({
             'article_id': x.article_id,
             'quantite': x.quantite,
@@ -304,7 +327,8 @@ export class CommandesComponent {
             'livraison': com.livraison
           })),
           'validation': 'non validé',
-          'livraison': 'non livré'
+          'livraison': 'non livré',
+          'time': new Date().getTime()
         }
         this._commandesStore.updateCommande(commande)
       }
@@ -323,7 +347,8 @@ export class CommandesComponent {
           'livraison': 'non livré'
         })),
         'livraison': 'non livré',
-        'validation': 'non validé'
+        'validation': 'non validé',
+        'time': new Date().getTime()
       }
       this._commandesStore.addCommande(commande)
     }
@@ -345,20 +370,31 @@ export class CommandesComponent {
       }
     }
   }
-  get_details(com: commandes) {
-    this.current_commande.set(com)
-    let user = this._users.users().find((x: any) => x.id == com.demandeur)
-    this.table_commande.patchValue({
-      numero_commande: com.numero_commande,
-      demandeur: user?.username,
-      projet_id: com.projet_id
+  get_details(com: any,row: any) {
+    this.current_commande.set({
+      id:row.id,
+      date_commande:com.date,
+      projet_id:row.projet,
+      demandeur:row.demandeur,
+      numero_commande:row.numero_commande,
+      validation:row.validation,
+      livraison:row.livraison,
+      articles_commandes:row.articles,
+      time:row.time
+
     })
-    this.articles_commande.set(com.articles_commandes.map((x, index) => {
+    let user = this._users.users().find((x: any) => x.id == row.demandeur)
+    this.table_commande.patchValue({
+      numero_commande: row.numero_commande,
+      demandeur: row.demandeur,
+      projet_id: row.projet
+    })
+    this.articles_commande.set(row.articles.map((x:any, index:number) => {
       let article = this.liste_articles().find((y: any) => y.id == x.article_id)
       return {
         numero: index + 1,
         article_id: x.article_id,
-        unite: article?.unite,
+        unite: x.unite,
         quantite: x.quantite,
         date_livraison: x.date_livraison,
         fournisseur_id: x.fournisseur_id
