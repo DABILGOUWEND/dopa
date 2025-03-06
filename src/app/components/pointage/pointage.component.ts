@@ -49,6 +49,7 @@ export class PointageComponent implements OnInit {
   is_table_being_updated = signal(false);
   is_new_row_being_added = signal(false);
   is_table_list_open = signal(false);
+  is_print = signal(false);
   madate = signal('');
   ind = signal(0);
   default_date = signal(new Date());
