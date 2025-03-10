@@ -1,5 +1,5 @@
 <mat-drawer-container class="wen-table-drawer-container">
-    <mat-drawer class="pointage" mode="over" position="end" #table_update_drawer [opened]="is_print()">
+    <mat-drawer class="pointage" mode="over" position="start" #table_update_drawer [opened]="is_print()">
         <section class="table-update">
             <div class="table-update__header">
                 <h3>Pointages effectutés</h3>
@@ -48,7 +48,7 @@
             </div>
         </section>
     </mat-drawer>
-    <mat-drawer-content>
+    <mat-drawer-content [ngStyle]="{'padding':'0px'}">
         <div class="section_pointage">
             <div class="lateral_gauche">
                 <div class="lat_bas">
@@ -141,43 +141,32 @@
                         </div> -->
             </div>
             <div class="lateral_droit">
-                <div class="barre_haut1">
-                    <div class="bh_gauche">
-                        <div class="myrow">
-                            <div class="item">
-                                <mat-form-field>
-                                    <mat-label>Choisir une date</mat-label>
-                                    <input matInput [matDatepicker]="datepicker" (dateInput)="addEvent( $event)"
-                                        [ngModel]="default_date()" placeholder="DATE">
-                                    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
-                                    <mat-datepicker #datepicker>
-                                        <mat-datepicker-actions>
-                                            <button mat-button matDatepickerCancel>Annuler</button>
-                                            <button mat-raised-button color="primary"
-                                                matDatepickerApply>Appliquer</button>
-                                        </mat-datepicker-actions>
-                                    </mat-datepicker>
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <div class="myrow">
-                            <div class="item">
-                                <button mat-flat-button (click)="commencerPoint()"
-                                    [disabled]="datespointage().includes(madate())" color="primary">Commencer pointage
-                                </button>
-                            </div>
-                        </div>
+                <div class="barre_haut">
+                    <div class="bh1">
+                        <mat-form-field>
+                            <mat-label>Choisir une date</mat-label>
+                            <input matInput [matDatepicker]="datepicker" (dateInput)="addEvent( $event)"
+                                [ngModel]="default_date()" placeholder="DATE">
+                            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #datepicker>
+                                <mat-datepicker-actions>
+                                    <button mat-button matDatepickerCancel>Annuler</button>
+                                    <button mat-raised-button color="primary" matDatepickerApply>Appliquer</button>
+                                </mat-datepicker-actions>
+                            </mat-datepicker>
+                        </mat-form-field>
                     </div>
-                    <div class="bh_droite">
-                        <div class="myrow">
-                            <div class="item">
-
-                            </div>
-                        </div>
+                    <div class="bh2">
+                        <button mat-flat-button (click)="commencerPoint()"
+                            [disabled]="datespointage().includes(madate())" color="primary">Commencer pointage
+                        </button>
                     </div>
-                    <div class="bh_impression">
+                    <div class="bh3">
                         <button mat-icon-button (click)="is_print.set(true)"> <mat-icon>print</mat-icon></button>
                     </div>
+                    <!-- <div class="bh_impression">
+                        <button mat-icon-button (click)="is_print.set(true)"> <mat-icon>print</mat-icon></button>
+                    </div>  -->
                 </div>
                 <div class="barre_milieu">
                     <h2> {{'Pointage du '+madate()}} </h2>
@@ -302,6 +291,8 @@
                                                 Enregistrer
                                             </button>
                                         </div>
+                                    </div>
+                                    <div class="myrow">
                                         <div class="item l12">
                                             <button mat-flat-button (click)="annuler()" color="warn" type="button">
                                                 Annuler
@@ -314,10 +305,10 @@
                         </ng-container>
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;let i=index;"
-                            [ngClass]="{'heuresup':row.heure_sup>0,'absent':row.Mpresence==false}">
+                            [ngStyle]="{'background-color': row==current_row()?'#FFA07A':''}">
                         </tr>
                         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"
-                            [ngStyle]="{'display':row!=current_row()?'none':'',
+                            [ngStyle]="{'display':row!=current_row()?'none':'','border': row==current_row()?'5px solid #FFA07A':'none',
                                     'background-color':'#f5f5f5'
                                 }"></tr>
                     </table>
@@ -347,4 +338,4 @@
                         </mat-form-field>
                     </form>
                     <button mat-flat-button (click)="impression()" color="primary" [disabled]="!formG.valid">
-                        Imprimer pointage</button> --> -->
+                        Imprimer pointage</button> -->

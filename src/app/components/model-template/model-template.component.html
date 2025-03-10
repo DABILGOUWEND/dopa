@@ -1,83 +1,81 @@
 <ng-container [ngTemplateOutlet]="Corps">
 </ng-container>
 <ng-template #Corps>
-        <div class="titre">
-            <h2>{{titre()}}</h2>
-        </div>
-        <div class="reste_corps">
-            <ng-container [ngTemplateOutlet]="entetebody">
-            </ng-container>
-            <table mat-table [dataSource]="donnees_table()" class="booktable" multiTemplateDataRows>
-                <ng-container *ngFor="let column of displayedColumns() |keyvalue " matColumnDef="{{column.key}}">
-                    @switch (column.key) { 
-                    @case ('actions')
-                    {
-                    <th mat-header-cell *matHeaderCellDef>
-                    </th>
-                    <td mat-cell *matCellDef="let element;let ind=index">
-                        <ng-container [ngTemplateOutlet]="action_template()"
-                            [ngTemplateOutletContext]="{row:element,ind:ind,clicker:clicker()}">
-                        </ng-container>
-                    </td>
-                    }
-                    @default {
-                    <th mat-header-cell *matHeaderCellDef> {{column.value}}
-                    </th>
-                    <td mat-cell *matCellDef="let element; let ind=index">
-                        <span class="mobile-label"> 
-                            {{column.value}}
-                        </span>
-                        {{element[""+column.key]}}
-                    </td>
-                    }
+    <div class="titre">
+        <h2>{{titre()}}</h2>
+    </div>
+    <div class="reste_corps">
+        <ng-container [ngTemplateOutlet]="entetebody">
+        </ng-container>
+        <table mat-table [dataSource]="donnees_table()" class="mytable" multiTemplateDataRows>
+            <ng-container *ngFor="let column of displayedColumns() |keyvalue " matColumnDef="{{column.key}}">
+                @switch (column.key) {
+                @case ('actions')
+                {
+                <th mat-header-cell *matHeaderCellDef>
+                </th>
+                <td mat-cell *matCellDef="let element;let ind=index"  [ngStyle]="{'justify-content':'left','padding.px':10}">
+                    <ng-container [ngTemplateOutlet]="action_template()"
+                        [ngTemplateOutletContext]="{row:element,ind:ind,clicker:clicker()}">
+                    </ng-container>
+                </td>
+                }
+                @default {
+                <th mat-header-cell *matHeaderCellDef> {{column.value}}
+                </th>
+                <td mat-cell *matCellDef="let element; let ind=index" [ngStyle]="{'justify-content':'left','padding.px':10}">
+                    <span class="mobile-label">
+                        {{column.value}}
+                    </span>
+                    {{element[""+column.key]}}
+                </td>
+                }
 
-                    }
-                    @if(column.key=='actions')
-                    {
-                    }@else {
-                    <th mat-header-cell *matHeaderCellDef> {{column.value}}
-                    </th>
-                    <td mat-cell *matCellDef="let element; let ind=index">
-                        {{element[""+column.key]}}
-                    </td>
-                    }
-                </ng-container>
-                <ng-container matColumnDef="expandedDetail">
-                    <td mat-cell *matCellDef="let element;let ind=index" [attr.colspan]="header_titles.length">
-                        <form [formGroup]="table_update_form()" (ngSubmit)="addNewItem()">
-                            @if(current_row()==element)
-                            {
-                            <ng-container [ngTemplateOutlet]="mes_saisies()">
-                            </ng-container>
-                            }
-                            @if(current_row()==element)
-                            {
-                            <div class="myrow">
-                                <div class="item ">
-                                    <button mat-flat-button type="submit"
-                                        [disabled]="!table_update_form().valid">{{is_update()?'Modifier':'Enregistrer'}}
-                                    </button>
-                                </div>
+                }
+                @if(column.key=='actions')
+                {
+                }@else {
+                <th mat-header-cell *matHeaderCellDef> {{column.value}}
+                </th>
+                <td mat-cell *matCellDef="let element; let ind=index">
+                    {{element[""+column.key]}}
+                </td>
+                }
+            </ng-container>
+            <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element;let ind=index" [attr.colspan]="header_titles.length" >
+                    <form [formGroup]="table_update_form()" (ngSubmit)="addNewItem()">
+                        @if(current_row()==element)
+                        {
+                        <ng-container [ngTemplateOutlet]="mes_saisies()">
+                        </ng-container>
+                        }
+                        @if(current_row()==element)
+                        {
+                        <div class="myrow">
+                            <div class="item s12 m12 l6">
+                                <button mat-flat-button type="submit"
+                                    [disabled]="!table_update_form().valid">{{is_update()?'Modifier':'Enregistrer'}}
+                                </button>
                             </div>
-                            <div class="myrow">
-                                <div class="item">
-                                    <button mat-flat-button type="button" (click)="annuler()" color="warn">annuler
-                                    </button>
-                                </div>
+                            <div class="item s12 m12 l6">
+                                <button mat-flat-button type="button" (click)="annuler()" color="warn">annuler
+                                </button>
                             </div>
-                            }
-                        </form>
-                    </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="header_titles"></tr>
-                <tr mat-row *matRowDef="let row; columns: header_titles;let index = index"
-                    [ngStyle]="{'background-color':row==current_row()?'#F5FFFA':'','display':row==current_row()?'none':''}">
-                </tr>
-                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row" [ngStyle]="{'display':row!=current_row()?'none':'',
+                        </div>
+                        }
+                    </form>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="header_titles"></tr>
+            <tr mat-row *matRowDef="let row; columns: header_titles;let index = index"
+                [ngStyle]="{'background-color':row==current_row()?'#F5FFFA':'','display':row==current_row()?'none':''}">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row" [ngStyle]="{'display':row!=current_row()?'none':'',
                     'background-color':'#F5FFFA'
                 }"></tr>
-            </table>
-        </div>
+        </table>
+    </div>
 </ng-template>
 
 <ng-template #validation let-formGroup="formGroup">
