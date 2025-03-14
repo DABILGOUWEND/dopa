@@ -24,8 +24,22 @@ export class MesConstatsComponent implements OnInit {
   _devis_store = inject(DevisStore);
   _ssTraitance_store = inject(SstraitantStore);
   _unit_store = inject(UnitesStore);
+
   //signals properties
   current_devis_id = signal('');
+
+
+  clicked_qte_periode = signal(0);
+  clicked_qte_cumul = signal(0);
+  modif_constat = signal<any>(undefined)
+  is_updated = signal(false);
+  clicked_index = signal<number | null>(null)
+  flatenode = signal<ExampleFlatNode2 | undefined>(undefined)
+  ligne_clicked = signal(Infinity);
+  is_table_opened = signal(false)
+  datas = signal<element_devis[] | undefined>(undefined)
+
+  //computed properties
   current_constat = linkedSignal(() => {
     let num_constat = 0;
     let index = this.clicked_index();
@@ -39,29 +53,16 @@ export class MesConstatsComponent implements OnInit {
     }
     return num_constat
   })
-
-  clicked_qte_periode = signal(0);
-  clicked_qte_cumul = signal(0);
-  modif_constat = signal<any>(undefined)
-  is_updated = signal(false);
-  clicked_index = signal<number | null>(null)
-  flatenode = signal<ExampleFlatNode2 | undefined>(undefined)
-  ligne_clicked = signal(Infinity);
-  is_table_opened = signal(false)
-  datas = signal<element_devis[] | undefined>(undefined)
-  //computed properties
-   
   selected_entreprise = computed(() => {
-    let entreprise = this._ssTraitance_store.donnees_sstraitant().find(e => e.id == this._devis_store.donnees_currentDevis()?.entreprise_id);
+    let entreprise = this._ssTraitance_store.donnees_sstraitant().
+    find(e => e.id == this._devis_store.donnees_currentDevis()?.entreprise_id);
     return {
       'entreprise': entreprise ? entreprise.enseigne : '',
-
       'id': entreprise ? entreprise.id : ''
     }
   })
 
   data_loaded = computed(() => this._devis_store.donnees_currentDevis()?.data)
-
   liste_devis = computed(() => {
     return this._devis_store.donnees_devis().map(ent => {
       let entreprise = this._ssTraitance_store.donnees_sstraitant().find(e => e.id == ent.entreprise_id);
@@ -71,9 +72,7 @@ export class MesConstatsComponent implements OnInit {
         'travaux': ent.reference
       });
     })
-
   })
-
   montant_total = computed(() => {
     let data = this.data_loaded();
     this.constats = []
@@ -111,11 +110,9 @@ export class MesConstatsComponent implements OnInit {
     }
 
   })
-
   current_decompte = linkedSignal(() => {
     return this.num_decompte()
   })
-
   database_constat = computed(
     () => new MatTableDataSource<any>(this.constats_decompte()),
   );
@@ -135,7 +132,7 @@ export class MesConstatsComponent implements OnInit {
   table_update_form: FormGroup;
   displayedColumns = ['poste', 'designation', 'unite', 'prix_u', 'quantite', 'quantite_prec', 'quantite_periode', 'quantite_cumul', 'actions'];
   displayedColumnsConstat = ['numero', 'date', 'quantite', 'description', 'actions'];
-  row_color = ['#5094D8', '#93B3BF', 'white', 'white', 'lightyellow', 'lightcoral', 'lightcyan'];
+  row_color = ['#A9A9A9', '#E6E6FA', 'white', 'white', 'lightyellow', 'lightcoral', 'lightcyan'];
   nestedNodeMap = new Map<element_devis, ExampleFlatNode2>();
   flatNodeMap = new Map<ExampleFlatNode2, element_devis>();
   transformer = (node: element_devis, level: number) => {
@@ -181,7 +178,7 @@ export class MesConstatsComponent implements OnInit {
     this.table_update_form = _fb.group({
       'quantite_mois': new FormControl('', Validators.required),
       'description': new FormControl(''),
-      'date': new FormControl(new Date().toLocaleDateString(), Validators.required)
+      'date': new FormControl(new Date(), Validators.required)
 
     })
     effect(() => {

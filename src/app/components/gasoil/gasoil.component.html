@@ -8,11 +8,11 @@
         </mat-drawer>
         <mat-drawer-content>
             <div class="section_gasoil">
-                <div class="gasoil1" [ngStyle]="{'padding.px':10}">
+                <div class="gasoil1" >
                     <canvasjs-chart [options]="chartOptions()" [styles]="{
                                 width: '100%', height:'360px'}"></canvasjs-chart>
                 </div>
-                <div class="gasoil2" [ngStyle]="{'padding-left.px':10,'padding-right.px':10}">
+                <div class="gasoil2" >
                     <div>
                         <div class="icon-block">
                             <h2 [ngStyle]="{'font-size.px':18}"> Affichage</h2>
@@ -98,10 +98,13 @@
                     </div>
                 </div>
                 <div class="gasoil4">
-                    <div class="col s12 m6 l4 center">
-                        <ng-container [ngTemplateOutlet]="conso">
-                        </ng-container>
+                    <div class="myrow">
+                        <div class="item">
+                            <ng-container [ngTemplateOutlet]="conso">
+                            </ng-container>
+                        </div>
                     </div>
+                    
                 </div>
                 <div class="gasoil5 center">
                     <button (click)="printgasoil()" mat-icon-button>
@@ -109,131 +112,180 @@
                     </button>
                 </div>
                 <div class="gasoil6">
+                    <div class="button">
+                        <button [ngStyle]="{'margin-bottom':'1rem','margin-top':'1rem'}" (click)="ajout()"
+                            mat-flat-button color="primary" matTooltip="Ajouter nouveau" matTooltipPosition="left"
+                            aria-label="Ajouter nouveau">
+                            <span class="material-icons">
+                                playlist_add
+                            </span>
+                            Nouveau
+                        </button>
+                    </div>
 
-                    <button [ngStyle]="{'margin-bottom':'1rem','margin-top':'1rem'}" (click)="ajout()" mat-flat-button
-                        color="primary" matTooltip="Ajouter nouveau" matTooltipPosition="left"
-                        aria-label="Ajouter nouveau">
-                        <span class="material-icons">
-                            playlist_add
-                        </span>
-                        Nouveau
-                    </button>
+                    <div class="camera">
+                        @if (!videoStream) {
+                        <button (click)="openCamera()"
+                            class="bg-blue-600 w-full py-4 text-center text-white"><mat-icon>camera_alt</mat-icon></button>
+                        }
+                    </div>
+
+
                 </div>
                 <div class="tab_gasoil">
-                    <table mat-table [dataSource]="dataSource()" class="booktable" multiTemplateDataRows>
-                        <ng-container *ngFor="let column of displayedColumns |keyvalue " matColumnDef="{{column.key}}">
-                            @if(column.key=='actions')
-                            {
-                            <th mat-header-cell *matHeaderCellDef>
-                            </th>
-                            <td mat-cell *matCellDef="let element;index as ind">
-                                <button mat-icon-button type="button" (click)="deleteData(element.id)"> <mat-icon>
-                                        delete</mat-icon>
-                                </button>
-                                <button mat-icon-button type="button" (click)="PatchEventFct(element)"> <mat-icon>
-                                        edit</mat-icon>
-                                </button>
-                            </td>
-                            }@else {
-                            <th mat-header-cell *matHeaderCellDef> {{column.value}}
-                            </th>
-                            <td mat-cell *matCellDef="let element">
-                                {{element[""+column.key]}}
-                            </td>
-                            }
-                        </ng-container>
-                        <ng-container matColumnDef="expandedDetail">
-                            <td mat-cell *matCellDef="let element;let ind=index" [attr.colspan]="header_titles.length">
-                                <form [formGroup]="table_update_form" (ngSubmit)="updateData()">
-                                    @if(element==current_row())
-                                    {
-                                    <div class="myrow" [formGroup]="table_update_form">
-                                        <div class="item s12 l1">
-                                            <mat-form-field>
-                                                <mat-label>
-                                                    DATE
-                                                </mat-label>
-                                                <input matInput formControlName='date' [matDatepicker]="datepicker"
-                                                     placeholder="date">
-                                                <mat-datepicker-toggle matSuffix
-                                                    [for]="datepicker"></mat-datepicker-toggle>
-                                                <mat-datepicker #datepicker>
-                                                </mat-datepicker>
-                                            </mat-form-field>
-                                        </div>
+                    <div class="qrcode">
+                        @if(is_new_camera())
+                        {
+                        <div [ngStyle]="{'border':'3px dashed blue' ,'padding.px':10}">
+                            <div class="flex flex-col">
+                                <!-- This will hold the custom camera view -->
+                                <div class="w-52 h-52 bg-gray-600 relative">
+                                    <video [ngClass]="{ 'invisible': !videoStream}" #videoElement mute
+                                        class="absolute w-full h-full" [ngStyle]="{'width':'80%'}">
+                                    </video>
+                                </div>
 
-                                        <div class="item s12 l1">
-                                            <mat-form-field>
-                                                <mat-label>
-                                                    CLASSE MATERIEL
-                                                </mat-label>
-                                                <mat-select formControlName="classe_id" (selectionChange)="changeSelect($event.value,'classe_id')">
-                                                    <mat-option *ngFor="let row of classe_select()" [value]="row.id">
-                                                        {{row.valeur}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="item s12 l1">
-                                            <mat-form-field>
-                                                <mat-label>
-                                                    CODE PARC
-                                                </mat-label>
-                                                <mat-select formControlName="engin_id" (selectionChange)="changeSelect($event.value,'engin_id')">
-                                                    <mat-option *ngFor="let row of engins_select()" [value]="row.id">
-                                                        {{row.valeur}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-                                        <div class="item s12 l1">
-                                            <mat-form-field>
-                                                <mat-label>
-                                                    DESIGNATION
-                                                </mat-label>
-                                                <input matInput formControlName='designation' type="text">
-                                            </mat-form-field>
-                                        </div>
-                                        <div class="item s12 l1">
-                                            <mat-form-field>
-                                                <mat-label>
-                                                    QUANTITE GO
-                                                </mat-label>
-                                                <input matInput formControlName='quantite_go' type="number">
-                                            </mat-form-field>
-                                        </div>
-                                        <div class="item s12 l1">
-                                            <mat-form-field>
-                                                <mat-label>
-                                                    COMPTEUR
-                                                </mat-label>
-                                                <input matInput formControlName='compteur' type="number">
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-                                    <div class="myrow " >
-                                        <div class="item s12 m12 l6">
-                                            <button mat-flat-button type="submit"
-                                                [disabled]="!table_update_form.valid">{{is_update()?'Modifier':'Enregistrer'}}</button>
-                                        </div>
-                                        <div class="item s12 m12 l6">
-                                            <button mat-flat-button type="button" (click)="annuler()"
-                                                color="warn">annuler</button>
-                                        </div>
-                                    </div>
+                                <!-- This will control the camera -->
+                                <div>
+                                    @if (videoStream) {
+                                    <button (click)="closeCamera()"
+                                        class="bg-red-600 w-full py-4 text-center text-white">Close
+                                        camera</button>
                                     }
-                                </form>
+                                </div>
+                            </div>
 
-                            </td>
-                        </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="header_titles"></tr>
-                        <tr mat-row *matRowDef="let row; columns: header_titles;let index = index"
-                            [ngStyle]="{'display':row==current_row()?'none':''}"></tr>
-                        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"
-                            [ngStyle]="{'display':row!=current_row()?'none':'',
-                                'background-color':'#f5f5f5'
-                            }"></tr>
-                    </table>
+                        </div>
+                        }
+                    </div>
+
+                    <div class="tableau">
+                        <table mat-table [dataSource]="dataSource()" class="mytable" multiTemplateDataRows>
+                            <ng-container *ngFor="let column of displayedColumns |keyvalue "
+                                matColumnDef="{{column.key}}">
+                                @if(column.key=='actions')
+                                {
+                                <th mat-header-cell *matHeaderCellDef>
+                                </th>
+                                <td mat-cell *matCellDef="let element;index as ind"
+                                    [ngStyle]="{'justify-content':'left','padding.px':10}">
+                                    <button mat-icon-button type="button" (click)="deleteData(element.id)"> <mat-icon>
+                                            delete</mat-icon>
+                                    </button>
+                                    <button mat-icon-button type="button" (click)="PatchEventFct(element)"> <mat-icon>
+                                            edit</mat-icon>
+                                    </button>
+                                </td>
+                                }@else {
+                                <th mat-header-cell *matHeaderCellDef> {{column.value}}
+                                </th>
+                                <td mat-cell *matCellDef="let element"
+                                    [ngStyle]="{'justify-content':'left','padding.px':10}">
+                                    <span class="mobile-label">
+                                        {{column.value}}
+                                    </span>
+                                    {{element[""+column.key]}}
+                                </td>
+                                }
+                            </ng-container>
+                            <ng-container matColumnDef="expandedDetail">
+                                <td mat-cell *matCellDef="let element;let ind=index"
+                                    [attr.colspan]="header_titles.length">
+                                    <form [formGroup]="table_update_form" (ngSubmit)="updateData()">
+                                        @if(element==current_row())
+                                        {
+                                        <div class="myrow" [formGroup]="table_update_form">
+                                            <div class="item s12 l1">
+                                                <mat-form-field>
+                                                    <mat-label>
+                                                        DATE
+                                                    </mat-label>
+                                                    <input matInput formControlName='date' [matDatepicker]="datepicker"
+                                                        placeholder="date">
+                                                    <mat-datepicker-toggle matSuffix
+                                                        [for]="datepicker"></mat-datepicker-toggle>
+                                                    <mat-datepicker #datepicker>
+                                                    </mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="item s12 l1">
+                                                <mat-form-field>
+                                                    <mat-label>
+                                                        CLASSE MATERIEL
+                                                    </mat-label>
+                                                    <mat-select formControlName="classe_id"
+                                                        (selectionChange)="changeSelect($event.value,'classe_id')">
+                                                        <mat-option *ngFor="let row of classe_select()"
+                                                            [value]="row.id">
+                                                            {{row.valeur}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="item s12 l1">
+                                                <mat-form-field>
+                                                    <mat-label>
+                                                        CODE PARC
+                                                    </mat-label>
+                                                    <mat-select formControlName="engin_id"
+                                                        (selectionChange)="changeSelect($event.value,'engin_id')">
+                                                        <mat-option *ngFor="let row of engins_select()"
+                                                            [value]="row.id">
+                                                            {{row.valeur}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="item s12 l1">
+                                                <mat-form-field>
+                                                    <mat-label>
+                                                        DESIGNATION
+                                                    </mat-label>
+                                                    <input matInput formControlName='designation' type="text">
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="item s12 l1">
+                                                <mat-form-field>
+                                                    <mat-label>
+                                                        QUANTITE GO
+                                                    </mat-label>
+                                                    <input matInput formControlName='quantite_go' type="number">
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="item s12 l1">
+                                                <mat-form-field>
+                                                    <mat-label>
+                                                        COMPTEUR
+                                                    </mat-label>
+                                                    <input matInput formControlName='compteur' type="number">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+
+                                        <div class="myrow ">
+                                            <div class="item s12 m12 l6">
+                                                <button mat-flat-button type="submit"
+                                                    [disabled]="!table_update_form.valid">{{is_update()?'Modifier':'Enregistrer'}}</button>
+                                            </div>
+                                            <div class="item s12 m12 l6">
+                                                <button mat-flat-button type="button" (click)="annuler()"
+                                                    color="warn">annuler</button>
+                                            </div>
+                                        </div>
+                                        }
+                                    </form>
+
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="header_titles"></tr>
+                            <tr mat-row *matRowDef="let row; columns: header_titles;let index = index"
+                                [ngStyle]="{'display':row==current_row()?'none':''}"></tr>
+                            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"
+                                [ngStyle]="{'display':row!=current_row()?'none':'',
+                                    'background-color':'#f5f5f5','border':row==current_row()?'5px dashed red':''
+                                }"></tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </mat-drawer-content>

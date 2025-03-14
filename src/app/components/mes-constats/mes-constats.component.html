@@ -3,7 +3,8 @@
 </div>
 <div class="reste_corps">
   <mat-drawer-container class="wen-table-drawer-container">
-    <mat-drawer class="m_constats" mode="over" position="end" #table_update_drawer [opened]="is_table_opened()" disableClose="true">
+    <mat-drawer class="constats" mode="over" position="end" #table_update_drawer [opened]="is_table_opened()"
+      disableClose="true">
       <section class="table-update">
         <div class="table-update__header">
           <h2> {{'Poste: ' + (current_clicked()?current_clicked()?.poste:'')}}</h2>
@@ -15,36 +16,50 @@
           <h3> {{'Quantité marché: ' +(current_clicked()?current_clicked()?.quantite:'')}}</h3>
           <h3> {{'Quantité période: ' + clicked_qte_periode()}}</h3>
           <h3> {{'Quantité cumulée: ' + clicked_qte_cumul()}}</h3>
+        </div>
+        <div class="table-update__body">
           @if(constats_decompte().length>0)
           {
-          <table mat-table [dataSource]="database_constat()" class="booktable" multiTemplateDataRows>
+          <table mat-table [dataSource]="database_constat()" >
             <ng-container matColumnDef="numero">
               <th mat-header-cell *matHeaderCellDef> NUMERO</th>
-              <td mat-cell *matCellDef="let data; let ind=index">
+              <td mat-cell *matCellDef="let data; let ind=index" [ngStyle]="{'justify-content':'left','padding.px':10}">
+                <span class="mobile-label">
+                  NUMERO
+                </span>
                 {{data.numero}}
               </td>
             </ng-container>
             <ng-container matColumnDef="date">
               <th mat-header-cell *matHeaderCellDef> DATE</th>
-              <td mat-cell *matCellDef="let data; let ind=index">
+              <td mat-cell *matCellDef="let data; let ind=index" [ngStyle]="{'justify-content':'left','padding.px':10}">
+                <span class="mobile-label">
+                  DATE
+                </span>
                 {{data.date}}
               </td>
             </ng-container>
             <ng-container matColumnDef="quantite">
               <th mat-header-cell *matHeaderCellDef> QUANTITE PERIODE</th>
-              <td mat-cell *matCellDef="let data; let ind=index">
+              <td mat-cell *matCellDef="let data; let ind=index" [ngStyle]="{'justify-content':'left','padding.px':10}">
+                <span class="mobile-label">
+                  QUANTITE
+                </span>
                 {{data.quantite}}
               </td>
             </ng-container>
             <ng-container matColumnDef="description">
               <th mat-header-cell *matHeaderCellDef> DESCRIPTION</th>
-              <td mat-cell *matCellDef="let data; let ind=index">
+              <td mat-cell *matCellDef="let data; let ind=index" [ngStyle]="{'justify-content':'left','padding.px':10}">
+                <span class="mobile-label">
+                 DESCRIPTION
+                </span>
                 {{data.description}}
               </td>
             </ng-container>
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef> </th>
-              <td mat-cell *matCellDef="let data; let ind=index">
+              <td mat-cell *matCellDef="let data; let ind=index" [ngStyle]="{'justify-content':'left','padding.px':10}">
                 <button mat-icon-button (click)="modifier(data)">
                   <mat-icon> edit</mat-icon>
                 </button>
@@ -62,31 +77,40 @@
 
         <form [formGroup]="table_update_form" (ngSubmit)="updateTableData()">
           <div class="table-update__body">
-            <mat-form-field>
-              <mat-label> DATE</mat-label>
-              <input matInput [matDatepicker]="datepicker1" formControlName="date" placeholder="date">
-              <mat-datepicker-toggle matIconSuffix [for]="datepicker1"></mat-datepicker-toggle>
-              <mat-datepicker #datepicker1>
-                <mat-datepicker-actions>
-                  <button mat-flat-button matDatepickerCancel color="warn" type="button">Annuler</button>
-                  <button mat-flat-button color="primary" matDatepickerApply type="button">Appliquer</button>
-                </mat-datepicker-actions>
-              </mat-datepicker>
-            </mat-form-field>
+            <div class="myrow">
+              <div class="item s12 m12 l12"> 
+                <mat-form-field>
+                  <mat-label> DATE</mat-label>
+                  <input matInput [matDatepicker]="datepicker1" formControlName="date" placeholder="date">
+                  <mat-datepicker-toggle matIconSuffix [for]="datepicker1"></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker1>
+                    <mat-datepicker-actions>
+                      <button mat-flat-button matDatepickerCancel color="warn" type="button">Annuler</button>
+                      <button mat-flat-button color="primary" matDatepickerApply type="button">Appliquer</button>
+                    </mat-datepicker-actions>
+                  </mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="item s12 m12 l12">
+                <mat-form-field>
+                  <mat-label>
+                    QUANTITE MOIS
+                  </mat-label>
+                  <input matInput formControlName="quantite_mois" type="number" placeholder="QUANTITE">
+                </mat-form-field>
+              </div>
+                         
+              <div class="item s12 m12 l12">
+                <mat-form-field>
+                  <mat-label>
+                    DESCRIPTION
+                  </mat-label>
+                  <textarea matInput formControlName="description" placeholder="description"></textarea>
+                </mat-form-field>
+              </div>  
 
-            <mat-form-field>
-              <mat-label>
-                QUANTITE MOIS
-              </mat-label>
-              <input matInput formControlName="quantite_mois" type="number" placeholder="QUANTITE">
-            </mat-form-field>
-
-            <mat-form-field>
-              <mat-label>
-                DESCRIPTION
-              </mat-label>
-              <textarea matInput formControlName="description" placeholder="description"></textarea>
-            </mat-form-field>
+            </div>
+  
           </div>
           <div class="table-update__footer">
             <button mat-flat-button type="submit" color="primary" [disabled]="!table_update_form.valid">
@@ -103,23 +127,13 @@
 
       </section>
     </mat-drawer>
-    <mat-drawer-content>
+    <mat-drawer-content class="constats">
       <div class="content_head">
         <h3 [ngStyle]="{'font-size.px':26,'text-align':'center'}">{{selected_entreprise().entreprise}}</h3>
       </div>
-      <div [ngStyle]="{'width.%':100, 'display':'block'}">
-        <div [ngStyle]="{
-          'width.%':40,
-          'margin-top.px':20,
-          'margin-bottom.px':20,
-          'margin-left.%':30,
-          'background-color':'#BFCDC7'}">
-          <mat-form-field [ngStyle]="{
-            'text-align':'center',
-            'width.%':90,
-            'margin-top.px':20,
-            'margin-left.%':5
-            }">
+      <div class="content_body">
+        <div class="head">
+          <mat-form-field >
             <mat-label> ---SELECTIONNER ENTREPRISE </mat-label>
             <mat-select [(value)]="current_devis_id" (selectionChange)="selecteDevis($event.value)">
               <mat-option [ngStyle]="{'font-weight':'bold','text-align':'center','border-bottom':'1px solid red'}"
@@ -128,132 +142,128 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
-        <div [ngStyle]="{'margin-left.%':40,'width.%':20,'padding-top.px':20,'display':'block','text-align':'center'}">
+          <div
+            [ngStyle]="{'margin-left.%':40,'width.%':20,'padding-top.px':20,'display':'block','text-align':'center'}">
 
-          <div>
-            <h4 [ngStyle]="{'font-size.px':18,'font-weight':'bold'}"> {{'DECOMPTE N°
-              '+(current_decompte()!=0?current_decompte()
-              +'/'
-              +num_decompte():'')}}</h4>
-          </div>
-          <div [ngStyle]="{'display':'flex', 'justify-content':'center'}">
-            <button mat-icon-button color="primary" (click)="previous_decompte()" [disabled]="current_decompte()<=1">
-              <mat-icon>
-                navigate_before </mat-icon> </button>
-            <button mat-icon-button color="primary" (click)="next_decompte()"
-              [disabled]="current_decompte()==num_decompte()">
-              <mat-icon> navigate_next </mat-icon> </button>
-          </div>
-
-          <div [ngStyle]="{'display':'flex','justify-content':'center'}">
-            <button mat-icon-button title="supprimer décompte" color="primary" (click)="delete_decompte()"
-              [disabled]="current_decompte()==0 || current_decompte()<num_decompte()">
-              <mat-icon> delete</mat-icon> </button>
             <div>
-              <button mat-icon-button title="nouveau décompte" (click)="new_decompte()"
-                [disabled]="current_devis_id()==''">
-                <mat-icon> add</mat-icon> </button>
+              <h4 [ngStyle]="{'font-size.px':18,'font-weight':'bold'}"> {{'DECOMPTE N°
+                '+(current_decompte()!=0?current_decompte()
+                +'/'
+                +num_decompte():'')}}</h4>
+            </div>
+            <div [ngStyle]="{'display':'flex', 'justify-content':'center'}">
+              <button mat-icon-button color="primary" (click)="previous_decompte()" [disabled]="current_decompte()<=1">
+                <mat-icon>
+                  navigate_before </mat-icon> </button>
+              <button mat-icon-button color="primary" (click)="next_decompte()"
+                [disabled]="current_decompte()==num_decompte()">
+                <mat-icon> navigate_next </mat-icon> </button>
+            </div>
+
+            <div [ngStyle]="{'display':'flex','justify-content':'center'}">
+              <button mat-icon-button title="supprimer décompte" color="primary" (click)="delete_decompte()"
+                [disabled]="current_decompte()==0 || current_decompte()<num_decompte()">
+                <mat-icon> delete</mat-icon> </button>
+              <div>
+                <button mat-icon-button title="nouveau décompte" (click)="new_decompte()"
+                  [disabled]="current_devis_id()==''">
+                  <mat-icon> add</mat-icon> </button>
+              </div>
+            </div>
+            <div>
+              <button mat-icon-button (click)="printConstat()"
+                [disabled]="!_devis_store.donnees_currentDevis() || montant_total().montant_periode==0"
+                title="imprimer constat"> <mat-icon> print</mat-icon></button>
             </div>
           </div>
-          <div>
-            <button mat-icon-button (click)="printConstat()"
-              [disabled]="!_devis_store.donnees_currentDevis() || montant_total().montant_periode==0"
-              title="imprimer constat"> <mat-icon> print</mat-icon></button>
-          </div>
+        </div>
+        <div class="content">
+          <table mat-table [dataSource]="dataSource" class="mytable" multiTemplateDataRows>
+            <ng-container matColumnDef="poste">
+              <th mat-header-cell *matHeaderCellDef>
+                <span [style.paddingLeft.px]="40"> POSTE </span>
+              </th>
+
+              <td mat-cell *matCellDef="let data;let ind=index" [ngStyle]="{'justify-content':'left'}">
+                <div [ngStyle]="{'display':'flex','width.%':100,'margin-left.px':data.level*25}">
+                  <div [ngStyle]="{'margin-top.px':12.5,'width.%':70,'margin-left.px':12.5}">
+                    <span class="mobile-label"> poste </span> {{data.poste}}
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="designation">
+              <th mat-header-cell *matHeaderCellDef> DESIGNATION </th>
+              <td mat-cell *matCellDef="let data;let ind=index" [ngStyle]="{'justify-content':'left'}">
+                <span class="mobile-label" *ngIf="!data.expandable"> désignation </span>
+                {{data.designation}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="unite">
+              <th mat-header-cell *matHeaderCellDef> UNITE </th>
+              <td mat-cell *matCellDef="let data;let ind=index" [ngStyle]="{'justify-content':'left'}">
+                <span class="mobile-label" *ngIf="!data.expandable"> unité </span>
+                {{data.unite|unites:_unit_store.unites_data()}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="prix_u">
+              <th mat-header-cell *matHeaderCellDef> PRIX UNITAIRE </th>
+              <td mat-cell *matCellDef="let data;let ind=index" [ngStyle]="{'justify-content':'left'}">
+                <span class="mobile-label" *ngIf="!data.expandable"> prix u. </span>
+                {{data.prix_u|currency: 'FR-fr':'':'1.0-0'}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="quantite">
+              <th mat-header-cell *matHeaderCellDef> QUANTITE MARCHE</th>
+              <td mat-cell *matCellDef="let data; let ind=index" [ngStyle]="{'justify-content':'left'}">
+                <span class="mobile-label" *ngIf="!data.expandable"> quantité marché: </span>
+                {{data.quantite| number:'1.0-2'}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantite_prec">
+              <th mat-header-cell *matHeaderCellDef> QUANTITE PRECEDENTE </th>
+              <td mat-cell *matCellDef="let data; let ind=index" [ngStyle]="{'justify-content':'left'}">
+                <span class="mobile-label" *ngIf="!data.expandable"> quantité préc. </span>
+                {{data.quantite_prec| number:'1.0-2'}}
+
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="quantite_periode">
+              <th mat-header-cell *matHeaderCellDef> QUANTITE PERIODE </th>
+              <td mat-cell *matCellDef="let data; let ind=index" [ngStyle]="{'justify-content':'left'}">
+                <span class="mobile-label" *ngIf="!data.expandable"> quantité période. </span>
+                {{data.quantite_periode| number:'1.0-2'}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantite_cumul">
+              <th mat-header-cell *matHeaderCellDef> QUANTITE CUMULEE </th>
+              <td mat-cell *matCellDef="let data; let ind=index" [ngStyle]="{'justify-content':'left'}">
+                <span class="mobile-label" *ngIf="!data.expandable"> quantité cumulée. </span>
+                {{data.quantite_cumul| number:'1.0-2'}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let data;let ind=index" [ngStyle]="{'justify-content':'left'}">
+                @if(!data.expandable)
+                {
+                <button mat-icon-button (click)="ligne_click(data)" [disabled]="num_decompte()==0">
+                  <mat-icon>
+                    edit</mat-icon> </button>
+                }
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;let ind=index " [ngStyle]="{  
+          'font-size.px':'11', 
+          'font-weight':row.expandable==true?'bold':'normal',
+          'background-color':row_color[row.level]}"></tr>
+          </table>
         </div>
       </div>
-      <div>
-
-      </div>
-
-      <div class="content_body">
-        <table mat-table [dataSource]="dataSource" class="booktable" multiTemplateDataRows>
-          <ng-container matColumnDef="poste">
-            <th mat-header-cell *matHeaderCellDef>
-              <span [style.paddingLeft.px]="40"> POSTE </span>
-            </th>
-
-            <td mat-cell *matCellDef="let data;let ind=index">
-              <div [ngStyle]="{'display':'flex','width.%':100,'margin-left.px':data.level*25}">
-                <div [ngStyle]="{'margin-top.px':12.5,'width.%':70,'margin-left.px':12.5}">
-                  <span class="mobile-label"> poste </span> {{data.poste}}
-                </div>
-              </div>
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="designation">
-            <th mat-header-cell *matHeaderCellDef> DESIGNATION </th>
-            <td mat-cell *matCellDef="let data;let ind=index">
-              <span class="mobile-label" *ngIf="!data.expandable"> désignation </span>
-              {{data.designation}}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="unite">
-            <th mat-header-cell *matHeaderCellDef> UNITE </th>
-            <td mat-cell *matCellDef="let data;let ind=index">
-              <span class="mobile-label" *ngIf="!data.expandable"> unité </span>
-              {{data.unite|unites:_unit_store.unites_data()}}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="prix_u">
-            <th mat-header-cell *matHeaderCellDef> PRIX UNITAIRE </th>
-            <td mat-cell *matCellDef="let data;let ind=index">
-              <span class="mobile-label" *ngIf="!data.expandable"> prix u. </span>
-              {{data.prix_u|currency: 'FR-fr':'':'1.0-0'}}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="quantite">
-            <th mat-header-cell *matHeaderCellDef> QUANTITE MARCHE</th>
-            <td mat-cell *matCellDef="let data; let ind=index">
-              <span class="mobile-label" *ngIf="!data.expandable"> quantité marché: </span>
-              {{data.quantite| number:'1.0-2'}}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="quantite_prec">
-            <th mat-header-cell *matHeaderCellDef> QUANTITE PRECEDENTE </th>
-            <td mat-cell *matCellDef="let data; let ind=index">
-              <span class="mobile-label" *ngIf="!data.expandable"> quantité préc. </span>
-              {{data.quantite_prec| number:'1.0-2'}}
-
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="quantite_periode">
-            <th mat-header-cell *matHeaderCellDef> QUANTITE PERIODE </th>
-            <td mat-cell *matCellDef="let data; let ind=index">
-              <span class="mobile-label" *ngIf="!data.expandable"> quantité période. </span>
-              {{data.quantite_periode| number:'1.0-2'}}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="quantite_cumul">
-            <th mat-header-cell *matHeaderCellDef> QUANTITE CUMULEE </th>
-            <td mat-cell *matCellDef="let data; let ind=index">
-              <span class="mobile-label" *ngIf="!data.expandable"> quantité cumulée. </span>
-              {{data.quantite_cumul| number:'1.0-2'}}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let data;let ind=index">
-              @if(!data.expandable)
-              {
-              <button mat-icon-button (click)="ligne_click(data)" [disabled]="num_decompte()==0">
-                <mat-icon>
-                  edit</mat-icon> </button>
-              }
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;let ind=index " [ngStyle]="{  
-            'font-size.px':'11', 
-            'font-weight':row.expandable==true?'bold':'normal',
-            'background-color':row_color[row.level]}"></tr>
-        </table>
-      </div>
-
     </mat-drawer-content>
   </mat-drawer-container>
 </div>

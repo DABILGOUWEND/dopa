@@ -248,7 +248,7 @@ export class GasoilService {
     doc.setFontSize(8)
     var img = new Image();
     img.src = 'assets/images/logo_index.png';
-    doc.setLineWidth(0.25)
+    doc.setLineWidth(0.25) 
     for (let i = 1; i <= totalPages; i++) {
       doc.line(10, doc.internal.pageSize.getHeight() - 10, doc.internal.pageSize.getWidth() - 10, doc.internal.pageSize.getHeight() - 10);
       //pdfDoc.addImage(img, 'png', 180, 3, 15, 10)

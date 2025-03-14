@@ -15,13 +15,13 @@
             </section>
         </mat-drawer>
         <mat-drawer-content >
-            <table mat-table [dataSource]="datasource()" class="booktable" multiTemplateDataRows>
+            <table mat-table [dataSource]="datasource()" class="mytable" multiTemplateDataRows>
     
                 <ng-container matColumnDef="code_parc">
                     <th mat-header-cell *matHeaderCellDef> CODE PARC
     
                     </th>
-                    <td mat-cell *matCellDef="let element">
+                    <td mat-cell *matCellDef="let element" [ngStyle]="{'justify-content':'left','padding.px':10}">
                         {{element.code_parc}}
                     </td>
                 </ng-container>
@@ -30,7 +30,7 @@
                     <th mat-header-cell *matHeaderCellDef> DESIGNATION
     
                     </th>
-                    <td mat-cell *matCellDef="let element">
+                    <td mat-cell *matCellDef="let element" [ngStyle]="{'justify-content':'left','padding.px':10}">
                         {{element.designation }}
     
                     </td>
@@ -39,14 +39,14 @@
                     <th mat-header-cell *matHeaderCellDef> DUREE PANNE EN COURS
     
                     </th>
-                    <td mat-cell *matCellDef="let element; let i=index">
+                    <td mat-cell *matCellDef="let element; let i=index" [ngStyle]="{'justify-content':'left','padding.px':10}">
                         <div class="circle" *ngIf="engins_panne_en_cours().includes(element.id)"> {{
                            element.h_panne}}</div>
                     </td>
                 </ng-container>
-                <ng-container matColumnDef="actions">
+                <ng-container matColumnDef="actions" >
                     <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let row">
+                    <td mat-cell *matCellDef="let row" [ngStyle]="{'justify-content':'left','padding.px':10}">
                         <button mat-icon-button (click)="editpanne(row)"><mat-icon>edit</mat-icon></button>
                     </td>
                 </ng-container>

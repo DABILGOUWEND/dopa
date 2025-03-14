@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
-import { Observable, from, switchMap, of, concatMap, forkJoin, map, tap, BehaviorSubject } from 'rxjs';
+import { Observable, from, switchMap, of, concatMap, forkJoin, map, tap, BehaviorSubject, Subject } from 'rxjs';
 import { Engins, classe_engins, Gasoil, appro_gasoil, tab_personnel, Pannes, travaux, nature_travaux, Users, pointage, tab_ressources, tab_familles, tab_categories, datesPointages, tab_composites, Contrats, Projet, sous_traitant, tab_Essais, Statuts, Devis, Ligne_devis, Constats, ModelAttachement, ModelDecompte, unites, taches, pointage_machine, taches_engins, taches_projet, Entreprise, pointage_travaux } from './models/modeles';
 import jsPDF from 'jspdf'
 import autoTable, { Styles } from 'jspdf-autotable';
@@ -10,10 +10,13 @@ import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updat
 import { sign } from 'crypto';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TaskService } from './task.service';
+import jsQR from 'jsqr';
 @Injectable({
   providedIn: 'root'
 })
 export class WenService {
+  private _qrValue = new Subject<string | null>();
+  public qrValue = this._qrValue.asObservable();
   constructor() {
     this.user$.pipe(takeUntilDestroyed()).subscribe((x: any) => {
       if (x) {
@@ -2471,5 +2474,39 @@ export class WenService {
       return strin.toUpperCase();
     }
 
+  }
+
+  captureFrame(videoElement: HTMLVideoElement): void {
+    try {
+      // Create a canvas to draw image
+      const canvas = document.createElement("canvas");
+      const context: CanvasRenderingContext2D  = canvas.getContext("2d") || {} as CanvasRenderingContext2D ;
+
+      // Start drawing the image
+      canvas.width = videoElement.videoWidth;
+      canvas.height = videoElement.videoHeight;
+      context?.drawImage(videoElement, 0, 0);
+      const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+      // scan the image created
+      const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+      if (code) {
+        console.log("Decoded QR code:", code.data);
+        
+        this._qrValue.next(code.data);
+        // Stop capturing frames (implementation omitted for brevity)
+      }
+      
+    } catch (error) {
+      
+    }
+  }
+  playAudio(){
+    let audio = new Audio();
+    audio.src = 'assets/sounds/store-scanner-beep-90395.mp3';
+    audio.load();
+    audio.play();
+    
   }
 }

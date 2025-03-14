@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, computed, effect, inject, linkedSignal, model, signal } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, computed, effect, inject, linkedSignal, model, signal, viewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, NonNullableFormBuilder } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatPaginator } from '@angular/material/paginator';
@@ -16,6 +16,9 @@ import { TaskService } from '../../task.service';
 import { GasoilService } from '../../services/gasoil.service';
 import { sign } from 'node:crypto';
 import { FormSaisiComponent } from '../form-saisi/form-saisi.component';
+import { Subscription } from 'rxjs';
+import { CameraPreviewServiceService } from '../../camera-preview-service.service';
+import { set } from 'firebase/database';
 @Component({
   selector: 'app-gasoil',
   imports: [ImportedModule, FormSaisiComponent, ApprogoComponent],
@@ -23,7 +26,15 @@ import { FormSaisiComponent } from '../form-saisi/form-saisi.component';
   styleUrl: './gasoil.component.scss'
 })
 export class GasoilComponent implements OnInit {
+  videoElement = viewChild<ElementRef>('videoElement');
 
+  videoStream: MediaStream | null = null;
+  is_new_camera = signal(false);
+
+  videoSubscription?: Subscription;
+  qrCodeSubscription?: Subscription;
+
+  timeInterval: any = null;
 
   //injections
   _engins_store = inject(EnginsStore);
@@ -51,6 +62,7 @@ export class GasoilComponent implements OnInit {
   appro_opened = signal(false)
   is_update = signal(false);
   current_row = model<any>()
+  qr_code = signal<string | null>("")
   //others variables and consts
   formG2: FormGroup;
 
@@ -163,6 +175,7 @@ export class GasoilComponent implements OnInit {
   });
 
   header_titles: string[] = [];
+
   table_update_form = this.fb.group({
     id: new FormControl(),
     numero: new FormControl(),
@@ -174,6 +187,8 @@ export class GasoilComponent implements OnInit {
     quantite_go: new FormControl(0, [Validators.required, Validators.min(1)])
   })
   constructor(
+    private cameraPreviewService: CameraPreviewServiceService,
+    private barcodeService: WenService
   ) {
     this.formG2 = this.fb.group({
       date_debut: new FormControl(new Date(), Validators.required),
@@ -181,6 +196,7 @@ export class GasoilComponent implements OnInit {
     });
 
     effect(() => {
+      console.log(this.qr_code())
     })
   }
   datacourbe = computed(() => {
@@ -237,7 +253,8 @@ export class GasoilComponent implements OnInit {
     this.madate.set(new Date().toLocaleDateString());
     this._gasoil_store.setCurrentDate(this.madate());
 
-    this.header_titles = Object.keys(this.displayedColumns)
+    this.header_titles = Object.keys(this.displayedColumns);
+    this.listenForChanges();
   }
   addEvent(event: MatDatepickerInputEvent<any>) {
     this.default_date.set(event.value);
@@ -318,7 +335,7 @@ export class GasoilComponent implements OnInit {
       this._gasoil_store.removeconso(id)
   }
   changeSelect(data: any, controle_names: any) {
-  
+
     let controle_name = controle_names;
     this.selectedEngin.set(undefined);
     let ind = this.table().findIndex(x => x.control_name === "engin_id")
@@ -426,4 +443,99 @@ export class GasoilComponent implements OnInit {
   ChangeSelect(data: any, controle_name: any) {
 
   }
+  ///*code barre methods
+
+
+  openCamera(): void {
+    this.cameraPreviewService.openCamera();
+    this.is_new_camera.set(true);
+    this.annuler()
+  }
+
+  closeCamera(): void {
+    this.cameraPreviewService.closeCamera();
+    this.stopPeriodicalScan();
+    this.is_new_camera.set(false);
+  }
+
+  private listenForChanges(): void {
+    this.videoSubscription = this.cameraPreviewService.stream.subscribe({
+      next: (stream) => {
+        this.videoStream = stream;
+        this.displayCamera();
+      }
+    });
+
+    this.qrCodeSubscription = this.barcodeService.qrValue.subscribe({
+      next: (code) => {
+        this.barcodeService.playAudio();
+        this.qr_code.set(code);
+        let engin = this._engins_store.donnees_engins().find(x => x.id === code);
+        if (engin) {
+          this.is_update.set(false);
+          this.selected_compteur.set("ok");
+          let dates = new Date();
+          let newdata: Gasoil = {
+            id: '',
+            engin_id: '',
+            date: dates.toLocaleDateString(),
+            quantite_go: 0,
+            compteur: 0,
+            diff_work: 0,
+            numero: 0
+          }
+          this.dataSource.update((data: any) => [newdata, ...data])
+          this.current_row.set(newdata)
+          this.changeSelect(engin.classe_id, 'classe_id')
+          this.table_update_form.patchValue({
+             classe_id: engin.classe_id, 
+             engin_id: engin.id,
+             designation: engin.designation, 
+             date: dates });
+          this.table_update_form.get("date")?.setValue(dates);;
+        }
+
+        this.closeCamera();
+      }
+    })
+  }
+
+  private displayCamera() {
+    const ele = this.videoElement()?.nativeElement as HTMLVideoElement;
+
+    if (!this.videoStream || !ele) {
+      this.closeCamera();
+      return;
+    }
+
+    ele.srcObject = this.videoStream;
+    ele.onloadedmetadata = () => {
+      ele.play();
+    }
+
+    this.beginPeriodicalScan(ele);
+  }
+
+  private beginPeriodicalScan(ele: HTMLVideoElement): void {
+    ele.addEventListener('pause', () => ele.play());
+    this.timeInterval = setInterval(() => {
+      this.barcodeService.captureFrame(ele);
+    }, 1000)
+  }
+
+  private stopPeriodicalScan(): void {
+    if (this.timeInterval) { clearInterval(this.timeInterval); }
+
+    const ele = this.videoElement()?.nativeElement as HTMLVideoElement;
+    if (ele) {
+      ele.removeEventListener('pause', () => { });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.videoSubscription?.unsubscribe();
+    this.qrCodeSubscription?.unsubscribe();
+    this.closeCamera();
+  }
+
 }

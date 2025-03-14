@@ -1,26 +1,27 @@
 <app-home-template [content]="content" [nav_liste]="nav_liste" [toolbar]="toolbar" [title]="title" />
 <ng-template #nav_liste>
-  
-</ng-template>
 
+</ng-template>
 <ng-template #toolbar>
 </ng-template>
 <ng-template #title>
-
 </ng-template>
 <ng-template #content>
+  <div class="section_accueil">
     <div class="titre">
       <h2> SOLUBTP
       </h2>
-     
+      <p>Solutions informatiques pour la gestion de chantiers</p>
     </div>
     <div class="reste_corps">
+
       <div class="myrow">
         <a routerLink="/home_materiel">
-          <div class="item s12 l4">
+          <div class="item s12 l3">
             <div class="ma_card" [ngStyle]="{'border-color': 'red'}">
               <div class="card-image">
                 <mat-icon>settings</mat-icon>
+                
               </div>
               <div class="card-title ">
                 GESTION MATERIEL
@@ -32,7 +33,7 @@
           </div>
         </a>
         <a routerLink="/home_personnel">
-          <div class="item s12 l4">
+          <div class="item s12 l3">
             <div class="ma_card" [ngStyle]="{'border-color': '#4CAF50'}">
               <div class="card-image">
                 <mat-icon> people</mat-icon>
@@ -50,7 +51,7 @@
         </a>
 
         <a routerLink="/home_travaux">
-          <div class="item s12 l4">
+          <div class="item s12 l3">
             <div class="ma_card">
               <div class="card-image">
                 <mat-icon> business</mat-icon>
@@ -77,9 +78,9 @@
             </div>
           </div>
         </a>
-        
+
         <a routerLink="/home_gestion">
-          <div class="item s12 l4">
+          <div class="item s12 l3">
             <div class="ma_card" [ngStyle]="{'border-color': 'blue'}">
               <div class="card-image">
                 <mat-icon> store</mat-icon>
@@ -97,4 +98,5 @@
         </a>
       </div>
     </div>
+  </div>
 </ng-template>
