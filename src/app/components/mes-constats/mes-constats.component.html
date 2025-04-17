@@ -11,7 +11,7 @@
         </div>
         <div class="table-update__titres">
           <h3> {{'Désignation: ' + (current_clicked()?current_clicked()?.designation:'')}}</h3>
-          <h3> {{'Prix untaire: ' + (current_clicked()?((current_clicked()?.prix_u)|currency:'F CFA':true:'2.0'):'')}}
+          <h3> {{'Prix untaire: ' + (current_clicked()?((current_clicked()?.prix_u)|currency:'F CFA':'code':'2.0'):'')}}
           </h3>
           <h3> {{'Quantité marché: ' +(current_clicked()?current_clicked()?.quantite:'')}}</h3>
           <h3> {{'Quantité période: ' + clicked_qte_periode()}}</h3>
@@ -20,7 +20,7 @@
         <div class="table-update__body">
           @if(constats_decompte().length>0)
           {
-          <table mat-table [dataSource]="database_constat()" >
+          <table mat-table [dataSource]="database_constat()" class="mytable" multiTemplateDataRows>
             <ng-container matColumnDef="numero">
               <th mat-header-cell *matHeaderCellDef> NUMERO</th>
               <td mat-cell *matCellDef="let data; let ind=index" [ngStyle]="{'justify-content':'left','padding.px':10}">

@@ -5069,7 +5069,8 @@ wen-table:make-gold {
 }
 
 .class_panne {
-  background-color: rgb(173, 182, 108) !important;
+  background-color: #8d968c !important;
+
 }
 
 
@@ -5331,14 +5332,14 @@ a:active {
   width: 100px;
   height: 70px;
   border-radius: 50px;
-  font-size: 12.5px;
+  font-size: 14px;
+  font-weight: bold;
   color: #fff;
-  line-height: 50px;
-  text-align: center;
-  align-items: center;;
-  background: #648786;
-
-
+  line-height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
 }
 
 .zone {

@@ -196,7 +196,6 @@ export class GasoilComponent implements OnInit {
     });
 
     effect(() => {
-      console.log(this.qr_code())
     })
   }
   datacourbe = computed(() => {

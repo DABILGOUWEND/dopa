@@ -263,6 +263,7 @@ export class MesConstatsComponent implements OnInit {
     this.clicked_index.set(ind);
     this.is_table_opened.set(true);
     this.table_update_form.reset();
+    this.table_update_form.get('date')?.setValue(new Date());
     this.setTable();
   }
   delete_decompte() {
@@ -387,7 +388,6 @@ export class MesConstatsComponent implements OnInit {
         this.clicked_qte_periode.set(periode);
         let constats = element.constat.filter(x => x.numero_decompte == this.current_decompte());
         this.current_constat.set(constats.length > 0 ? Math.max(...constats.map(x => x.numero)) : 0);
-        console.log(element)
         this.constats_decompte.set(constats.map(x => {
           let date = x.date ? x.date : new Date().toLocaleDateString();
           return {

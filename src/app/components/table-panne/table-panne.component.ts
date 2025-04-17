@@ -15,7 +15,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   templateUrl: './table-panne.component.html',
   styleUrl: './table-panne.component.scss'
 })
-export class TablePanneComponent implements OnInit{
+export class TablePanneComponent implements OnInit {
   readonly PanneStore = inject(PannesStore)
   formG: FormGroup;
   displayedColumns: string[] = ['debut_panne', 'fin_panne', 'motif_panne', 'situation', 'nbre_heure', 'actions']
@@ -45,17 +45,16 @@ export class TablePanneComponent implements OnInit{
         heure_fin: new FormControl(''),
         fin_panne: new FormControl((new Date())),
         motif_panne: new FormControl(''),
-        situation: new FormControl(''),
+        situation: new FormControl('1'),
       }
     )
     effect(() => {
+
     })
   }
-  
+
 
   ngOnInit() {
-   
-   
   }
   UpdatePanne() {
     if (this.formG.valid) {
@@ -110,13 +109,11 @@ export class TablePanneComponent implements OnInit{
   }
 
   choix_situation() {
-    let value=this.formG.value
-    let sit=this.formG.value.situation
+    let sit = this.formG.value.situation
     this.selected.set(sit);
     if (this.selected() == "2") {
       this.formG.get('heure_fin')?.setValidators(Validators.required);
       this.formG.get('fin_panne')?.setValidators(Validators.required);
-      console.log('og')
       this.update();
 
     }
@@ -132,15 +129,17 @@ export class TablePanneComponent implements OnInit{
     this.formG.get('debut_panne')?.updateValueAndValidity();
     this.formG.get('heure_debut')?.updateValueAndValidity();
   }
-  modif_panne(panne: any, index: any) {
-    this.current_row.set(panne);
-    this.selectedRow = index;
+  modif_panne(panne: any) {
+    this.formG.reset();
+    this.selected.set(panne.situation =='garage'?"1":"2")
+    this.formG.get('situation')?.setValue(panne.situation =='garage'?"1":"2")
+    let index = this.donnees().findIndex(x => x.id === panne.id);
+    this.current_row.set(panne)
+    this.selectedRow.set(index);
     this.is_update.set(true);
     this.modif.set(true);
-
-
     let temp_debut = panne.debut_panne;
-    let temp_fin =panne.situation ==='garage'? new Date().toLocaleDateString()   :panne.fin_panne ;
+    let temp_fin = panne.situation === 'garage' ? new Date().toLocaleDateString() : panne.fin_panne;
     const [day1, month1, year1] = temp_debut.split("/");
     const [day2, month2, year2] = temp_fin.split("/");
     const date1 = new Date(+year1, +month1 - 1, +day1);
@@ -153,11 +152,12 @@ export class TablePanneComponent implements OnInit{
         heure_debut: panne.heure_debut,
         heure_fin: panne.heure_fin,
         motif_panne: panne.motif_panne,
-        situation:panne.situation ==='garage'?"1":"2"
+        situation: panne.situation == 'garage' ? "1" : "2"
       }
     )
+     this.selected.set(panne.situation =='garage'?"1":"2")
+     this.choix_situation()
 
-  this.selected.set(panne.situation ==='garage'?"1":"2")
   }
   addpanne() {
     this.is_update.set(false);
@@ -178,6 +178,7 @@ export class TablePanneComponent implements OnInit{
     this.donnees.update((data: any) => [newdata, ...data])
     this.formG.get("debut_panne")?.setValue(dates);
     this.formG.get("fin_panne")?.setValue(dates);
+    this.formG.get("situation")?.setValue('2');
     this.current_row.set(newdata);
   }
   delete(row: any) {
